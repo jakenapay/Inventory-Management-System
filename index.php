@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Home</title>
 
-    <!-- Bootstrap CDN -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Headers and other attachments/CDN -->
+    <?php include_once 'includes/headers.inc.php'; ?>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>"> <!-- There's a PHP code to remove the Cache -->
+    <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>"> <!-- Theres a PHP code to remove the Cache -->
     <link rel="stylesheet" href="assets/css/login.css?v=<?php echo time(); ?>">
 
 </head>
@@ -18,17 +18,23 @@
     <!-- Beginning of the code -->
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center vh-100">
-            <div class="col-md-5">
+            <div class="col-md-8 col-lg-4 col-sm-12">
                 <div id="login-box">
                     <img id="image-devcon" src="https://uploads-ssl.webflow.com/6492dd5d65d1855cb14a6692/6494571343918c14057fe090_DEVCON%20Kids%20Logo%20Horizontal.png" alt="DevCon Kids Image" loading="lazy">
                     <p class="main-title">Inventory Management</p>
                     <hr>
-                    <form action="">
-                        <!-- <p class="labels">Login</p> -->
+                    <form action="includes/login.inc.php" method="post">
+                        <p class="msg"><?php include 'includes/message.inc.php';?></p>
                         <p class="labels">Email Address</p>
                         <input class="userInput" id="email" name="email" type="email">
                         <p class="labels">Password</p>
                         <input class="userInput" id="password" name="password" type="password">
+                        <div class="mb-3">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="toggle-password" name="" onclick="showHidePassword()">
+                                <label id="label-toggle" class="custom-control-label" for="toggle-password">Show password</label>
+                            </div>
+                        </div>
                         <button id="login-btn" class="button" name="login-btn" type="submit">login</button>
                     </form>
                 </div>
@@ -36,6 +42,7 @@
         </div>
     </div>
 
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

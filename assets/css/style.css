@@ -4,8 +4,10 @@
     --mainFont: 'Inter', sans-serif;
     --white: #fff;
     --gray: #f8f8f8;
+    --darkGray: #818181;
     --black: #121212;
-
+   
+    --border: 1px solid #c4c4c4;
     --boxShadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
 
@@ -20,3 +22,12 @@ body {
     font-family: var(--mainFont);
 }
 
+.msg {
+    background-color: #ffc0c0;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 200;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #db0e0e;
+}

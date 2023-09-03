@@ -1,0 +1,58 @@
+.mainnav {
+  box-shadow: var(--boxShadow);
+}
+
+.row {
+  margin: 0;
+}
+
+nav {
+  margin: 10px 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  width: 150px;
+}
+
+.links ul {
+  margin: 0;
+  display: flex;
+  
+}
+
+.links ul li {
+  text-decoration: none;
+  list-style-type: none;
+  margin: 0 10px;
+}
+
+.links ul li a {
+  text-decoration: none;
+  color: var(--darkGray);
+  font-size: 0.9rem;
+
+  transition: all 0.3s ease;
+}
+
+.links ul li a.active {
+  color: var(--black);
+}
+
+.links ul li a:hover {
+  color: var(--black);
+}
+
+/* ------------------------------------------- */
+/* For name */
+
+#name {
+  border: var(--border);
+  border-radius: 5px;
+  
+  padding: 2px 5px;
+  text-transform: capitalize;
+}
