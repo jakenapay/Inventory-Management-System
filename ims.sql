@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 11, 2023 at 01:04 PM
+-- Generation Time: Sep 11, 2023 at 06:59 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -85,7 +85,8 @@ CREATE TABLE `items` (
 
 INSERT INTO `items` (`item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`) VALUES
 (1, 'Galaxy Tab A Tablet', 1, 3, 3, 1),
-(2, 'A4 Bond Paper', 3, 2, 10, 2);
+(2, 'A4 Bond Paper', 3, 2, 10, 2),
+(3, 'Nature Spring Bottled Water 250ml', 2, 3, 20, 1);
 
 -- --------------------------------------------------------
 
@@ -149,7 +150,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `user_firstname`, `user_lastname`, `user_email`, `user_password`, `user_category`, `user_chapter`) VALUES
 (1, 'jake', 'napay', 'jakemantesnapay@gmail.com', '$2y$10$RIQWqDTz88hS713D1XbPIOAiicKGkmTpUr4FJnMSquvh4SbuGUj5S', 1, 1),
-(2, 'john moren', 'dinela', 'jmdinela@gmail.com', 'user@123', 0, 1);
+(2, 'john moren', 'dinela', 'jmdinela@gmail.com', 'user@123', 0, 2);
 
 --
 -- Indexes for dumped tables
@@ -216,7 +217,7 @@ ALTER TABLE `chapters`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `items_category`
