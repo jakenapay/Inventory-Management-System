@@ -6,9 +6,16 @@
     --gray: #f8f8f8;
     --darkGray: #818181;
     --black: #121212;
+
+    /* Main color */
+    --green: #71b406;
+    --purple: #7808ff;
+    --orange: #ea641d;
+    --yellow: #e8ca04;
    
-    --border: 1px solid #c4c4c4;
+    /* --border: 1px solid #c4c4c4; */
     --boxShadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    --boxShadowTable: rgba(0, 0, 0, 0.014) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
 }
 
 *, body, html {

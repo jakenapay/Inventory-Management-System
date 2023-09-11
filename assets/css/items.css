@@ -33,3 +33,34 @@
 .box:nth-child(3) {
     background-color: #7808ff;
 }
+
+/* TABLES */
+.table-responsive {
+    background-color: var(--white);
+    padding: 2rem 2rem;
+
+    border: var(--border);
+    border-radius: 20px;
+    box-shadow: var(--boxShadowTable);
+    /* padding: 40px 30px 30px; */
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.actions a{
+    padding: 0px 3px;
+}
+
+.actions a:first-of-type {
+    color: var(--green);
+}
+
+.actions a:nth-child(2) {
+    color: var(--orange);
+}
+
+.actions a:last-child {
+    color: var(--purple);
+}

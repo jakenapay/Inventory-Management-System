@@ -32,6 +32,7 @@ if (isset($_POST['login-btn'])) {
                 $_SESSION['LN'] = $row['user_lastname'];
                 $_SESSION['EM'] = $row['user_email'];
                 $_SESSION['CT'] = $row['user_category'];
+                $_SESSION['CH'] = $row['user_chapter'];
 
                 // Redirect to the home page, and exit this file
                 header("location: ../home.php");
