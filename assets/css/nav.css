@@ -1,5 +1,13 @@
 .mainnav {
   box-shadow: var(--boxShadow);
+
+  /* To stay on top even when user scroll */
+  top: 0;
+  position: sticky;
+  background-color: var(--white);
+
+  /* To stay on top above all elements */
+  z-index: 99;
 }
 
 .row {

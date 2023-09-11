@@ -15,11 +15,14 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 body {
     /* font-family: Helvetica, Arial, sans-serif; */
     font-family: var(--mainFont);
+    height: 100%;
+    margin: 0;
 }
 
 .msg {
@@ -30,4 +33,11 @@ body {
     font-size: 0.9rem;
     font-style: italic;
     color: #db0e0e;
+}
+
+#wrapper {
+    min-height: 100vh;
+    background-color: var(--gray);
+    height: 100%;
+    margin: 0;
 }

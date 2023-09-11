@@ -1,0 +1,35 @@
+.box {
+    background-color: #d3d3d3;
+    margin: 5px;
+    padding: 10px 20px;
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.box i {
+    color: var(--white);
+}
+
+.box p {
+    font-weight: 600;
+    color: var(--white);
+}
+
+.icon::before {
+    font-size: 1.5rem;
+}
+
+.box:first-of-type {
+    background-color: #71b406;
+}
+
+.box:nth-child(2) {
+    background-color: #ea641d;
+}
+
+.box:nth-child(3) {
+    background-color: #7808ff;
+}

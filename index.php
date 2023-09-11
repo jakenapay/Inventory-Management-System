@@ -18,7 +18,7 @@
     <!-- Beginning of the code -->
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center vh-100">
-            <div class="col-md-8 col-lg-4 col-sm-12">
+            <div class="col-md-8 col-lg-6 col-sm-12">
                 <div id="login-box">
                     <img id="image-devcon" src="https://uploads-ssl.webflow.com/6492dd5d65d1855cb14a6692/6494571343918c14057fe090_DEVCON%20Kids%20Logo%20Horizontal.png" alt="DevCon Kids Image" loading="lazy">
                     <p class="main-title">Inventory Management</p>

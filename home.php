@@ -31,7 +31,12 @@ $_SESSION['active_tab'] = 'home';
 
 <body>
 
+    <!-- Navigation Bar -->
     <?php include 'nav.php';?>
+
+    <div id="wrapper">
+        <div class="section"></div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
