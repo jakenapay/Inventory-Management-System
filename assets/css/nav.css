@@ -54,13 +54,13 @@ nav {
   color: var(--black);
 }
 
-/* ------------------------------------------- */
-/* For name */
-
-#name {
+#btn-more-action {
   border: var(--border);
   border-radius: 5px;
-  
   padding: 2px 5px;
   text-transform: capitalize;
+}
+
+#more-action-menu .dropdown-item {
+  font-size: 0.9rem;
 }

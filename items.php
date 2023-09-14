@@ -10,7 +10,7 @@ if (!isset($_SESSION['ID']) and ($_SESSION['ID'] == '')) {
 }
 
 // To determine which is active page in nav bar
-$_SESSION['active_tab'] = 'items';
+$_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +49,7 @@ $_SESSION['active_tab'] = 'items';
         <div class="section px-5 pt-4">
             <div class="row justify-content-center align-items-center">
                 <!-- TECHNOLOGY -->
-                <div class="box col-sm-12 col-md-2 col-lg-2">
+                <div class="box col-sm-12 col-md-3 col-lg-3">
                     <i class="fa-solid fa-computer icon"></i>
                     <p class="m-0">Technology</p>
                     <?php 
@@ -69,7 +69,7 @@ $_SESSION['active_tab'] = 'items';
                     ?>
                 </div>
                 <!-- CONSUMABLE -->
-                <div class="box col-sm-12 col-md-2 col-lg-2">
+                <div class="box col-sm-12 col-md-3 col-lg-3">
                     <i class="fa-solid fa-glass-water icon"></i>
                     <p class="m-0">Consumable</p>
                     <?php 
@@ -89,32 +89,30 @@ $_SESSION['active_tab'] = 'items';
                     ?>
                 </div>
                 <!-- OFFICE SUPPLY -->
-                <div class="box col-sm-12 col-md-2 col-lg-2">
-                    <div class="d-flex justify-content-center align-items-center">
-                        <i class="fa-solid fa-stapler icon"></i>
-                        <p class="m-0 px-2">Office Supply</p>
-                        <?php 
-                            // Prepare and execute the query
-                            $query = "SELECT COUNT(item_category) FROM items WHERE item_category = 3";
-                            $stmt = $pdo->query($query);
+                <div class="box col-sm-12 col-md-3 col-lg-3">
+                    <i class="fa-solid fa-stapler icon"></i>
+                    <p class="m-0 px-2">Office Supply</p>
+                    <?php 
+                        // Prepare and execute the query
+                        $query = "SELECT COUNT(item_category) FROM items WHERE item_category = 3";
+                        $stmt = $pdo->query($query);
 
-                            // Fetch the count
-                            $count = $stmt->fetchColumn();
+                        // Fetch the count
+                        $count = $stmt->fetchColumn();
 
-                            // Check if the count was successfully fetched
-                            if ($count !== false) {
-                                echo '<p class="m-0">'.$count.'</p>'; // Output the count
-                            } else {
-                                echo "Error fetching count"; // Handle the error if fetch failed
-                            }
-                        ?>
-                    </div>
+                        // Check if the count was successfully fetched
+                        if ($count !== false) {
+                            echo '<p class="m-0">'.$count.'</p>'; // Output the count
+                        } else {
+                            echo "Error fetching count"; // Handle the error if fetch failed
+                        }
+                    ?>
                 </div>
             </div>
             <br>
 
             <div class="row justify-content-center align-items-center">
-                <div class="col-12 col-sm-12 col-md-12 col-lg-10">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-11">
                     <div class="table-responsive">
                         <table class="table table-hover table-sm table-striped">
                             <thead>
@@ -123,6 +121,8 @@ $_SESSION['active_tab'] = 'items';
                                     <th>Name</th>
                                     <th>Category</th>
                                     <th>Measurement</th>
+                                    
+                                    
 
                                     <!-- CONDITIONAL FOR ADMINS OR USERS -->
                                     <?php
@@ -131,7 +131,7 @@ $_SESSION['active_tab'] = 'items';
                                             <th scope="col">Chapter</th>
                                             <th scope="col">Actions</th>';
                                         } else { // IF USERS
-                                            echo '<th scope="col"></th>'; 
+                                            echo '<th scope="col">Actions</th>'; 
                                         };
                                     ?>
                                 </tr>
@@ -139,18 +139,34 @@ $_SESSION['active_tab'] = 'items';
                             <tbody>
 
                                 <?php
-                                    if (isset($_SESSION['CT']) && ($_SESSION['CT'] != 0)) { // IF ADMIN
+                                    if (isset($_SESSION['CT'])) { // If the session category is set
                                         try{
-                                            $query = "SELECT items.item_id AS ID,\n"
-                                            . "items.item_name AS Name,\n"
-                                            . "items_category.item_category_name AS Category,\n"
-                                            . "items_unit_of_measure.item_uom_name AS Measurement,\n"
-                                            . "items.item_quantity AS Quantity,\n"
-                                            . "chapters.chapter_name AS Chapter\n"
-                                            . "FROM items\n"
-                                            . "INNER JOIN items_category ON items.item_category = items_category.item_category_id\n"
-                                            . "INNER JOIN items_unit_of_measure ON items.item_measure = items_unit_of_measure.item_uom_id\n"
-                                            . "INNER JOIN chapters ON items.item_chapter = chapters.chapter_id;";
+
+                                            // If chapter is Manila and Admin
+                                            if(($_SESSION['CH'] === 1) && ($_SESSION['CT'] === 1)) {
+                                                // Run this code below
+                                                $query = "SELECT items.item_id AS ID,\n"
+                                                . "items.item_name AS Name,\n"
+                                                . "items_category.item_category_name AS Category,\n"
+                                                . "items_unit_of_measure.item_uom_name AS Measurement,\n"
+                                                . "items.item_quantity AS Quantity,\n"
+                                                . "chapters.chapter_name AS Chapter\n"
+                                                . "FROM items\n"
+                                                . "INNER JOIN items_category ON items.item_category = items_category.item_category_id\n"
+                                                . "INNER JOIN items_unit_of_measure ON items.item_measure = items_unit_of_measure.item_uom_id\n"
+                                                . "INNER JOIN chapters ON items.item_chapter = chapters.chapter_id;";
+                                            } else {
+                                                $user_chapter = $_SESSION['CH'];
+                                                $query = "SELECT 
+                                                            items.item_id AS ID,
+                                                            items.item_name AS Name,
+                                                            items_category.item_category_name AS Category,
+                                                            items_unit_of_measure.item_uom_name AS Measurement
+                                                        FROM items
+                                                        INNER JOIN items_category ON items.item_category = items_category.item_category_id
+                                                        INNER JOIN items_unit_of_measure ON items.item_measure = items_unit_of_measure.item_uom_id
+                                                        WHERE items.item_chapter = $user_chapter;";
+                                            }
                                             
                                             // Prepare the query
                                             $stmt = $pdo->query($query);
@@ -171,8 +187,12 @@ $_SESSION['active_tab'] = 'items';
                                                     <td><?php echo $row['Name']; ?></td>
                                                     <td><?php echo $row['Category']; ?></td>
                                                     <td><?php echo $row['Measurement']; ?></td>
-                                                    <td><?php echo $row['Quantity']; ?></td>
-                                                    <td><?php echo $row['Chapter']; ?></td>
+                                                    <?php
+                                                        if (isset($_SESSION['CT']) && ($_SESSION['CT']) !== 0) {
+                                                            echo '<td>' . $row['Quantity'] . '</td>';
+                                                            echo '<td>' . $row['Chapter'] . '</td>';
+                                                        }
+                                                    ?>
                                                     <td class="actions">
                                                         <a href="http://" target="" rel="noopener noreferrer"><i class="fa-solid fa-eye"></i></a>
                                                         <a href="http://" target="" rel="noopener noreferrer"><i class="fa-solid fa-pen-to-square"></i></a>

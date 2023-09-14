@@ -26,7 +26,7 @@
                     <form action="includes/login.inc.php" method="post">
                         <p class="msg"><?php include 'includes/message.inc.php';?></p>
                         <p class="labels">Email Address</p>
-                        <input class="userInput" id="email" name="email" type="email">
+                        <input class="userInput" id="email" name="email" type="email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/">
                         <p class="labels">Password</p>
                         <input class="userInput" id="password" name="password" type="password">
                         <div class="mb-3">
@@ -44,7 +44,7 @@
 
     
 
-    <!-- Optional JavaScript
+    <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
