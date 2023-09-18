@@ -32,11 +32,18 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
 
-    
     <!-- Javascript for Datatables.net  -->
     <script>
         $(document).ready(function() {
             $('table').DataTable();
+        });
+
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+
+        $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
         });
     </script>
 </head>
@@ -121,19 +128,14 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                     <th>Name</th>
                                     <th>Category</th>
                                     <th>Measurement</th>
-                                    
-                                    
-
                                     <!-- CONDITIONAL FOR ADMINS OR USERS -->
                                     <?php
                                         if (isset($_SESSION['CT']) && ($_SESSION['CT']) != 0) { // IF ADMIN
-                                            echo '<th scope="col">Quantity</th>
-                                            <th scope="col">Chapter</th>
-                                            <th scope="col">Actions</th>';
-                                        } else { // IF USERS
-                                            echo '<th scope="col">Actions</th>'; 
-                                        };
+                                            echo '<th scope="col">Quantity</th>';
+                                            echo ($_SESSION['CH'] == 1) ? '<th scope="col">Chapter</th>' : '';
+                                        }
                                     ?>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -143,7 +145,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                         try{
 
                                             // If chapter is Manila and Admin
-                                            if(($_SESSION['CH'] === 1) && ($_SESSION['CT'] === 1)) {
+                                            if(($_SESSION['CH'] == 1) && ($_SESSION['CT'] == 1)) {
                                                 // Run this code below
                                                 $query = "SELECT items.item_id AS ID,\n"
                                                 . "items.item_name AS Name,\n"
@@ -155,9 +157,24 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                 . "INNER JOIN items_category ON items.item_category = items_category.item_category_id\n"
                                                 . "INNER JOIN items_unit_of_measure ON items.item_measure = items_unit_of_measure.item_uom_id\n"
                                                 . "INNER JOIN chapters ON items.item_chapter = chapters.chapter_id;";
-                                            } else {
+                                            } else if (($_SESSION['CH'] != 1) && ($_SESSION['CT'] == 1)) {
+                                                // Run this code below
                                                 $user_chapter = $_SESSION['CH'];
                                                 $query = "SELECT 
+                                                            items.item_id AS ID,
+                                                            items.item_name AS Name,
+                                                            items_category.item_category_name AS Category,
+                                                            items_unit_of_measure.item_uom_name AS Measurement,
+                                                            items.item_quantity AS Quantity,
+                                                            chapters.chapter_name AS Chapter
+                                                        FROM items
+                                                        INNER JOIN items_category ON items.item_category = items_category.item_category_id
+                                                        INNER JOIN items_unit_of_measure ON items.item_measure = items_unit_of_measure.item_uom_id
+                                                        INNER JOIN chapters ON items.item_chapter = chapters.chapter_id
+                                                        WHERE items.item_chapter = $user_chapter;";
+                                            } else {
+                                                $user_chapter = $_SESSION['CH'];
+                                                $query = "SELECT
                                                             items.item_id AS ID,
                                                             items.item_name AS Name,
                                                             items_category.item_category_name AS Category,
@@ -188,15 +205,30 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                     <td><?php echo $row['Category']; ?></td>
                                                     <td><?php echo $row['Measurement']; ?></td>
                                                     <?php
-                                                        if (isset($_SESSION['CT']) && ($_SESSION['CT']) !== 0) {
+                                                        if (isset($_SESSION['CT']) && ($_SESSION['CT']) != 0) { // If admin
                                                             echo '<td>' . $row['Quantity'] . '</td>';
-                                                            echo '<td>' . $row['Chapter'] . '</td>';
+
+                                                            // If admin and from Manila
+                                                            
+                                                            echo ($_SESSION['CH'] == 1) ? '<td>'.$row['Chapter'].'</td>' : '';
                                                         }
                                                     ?>
-                                                    <td class="actions">
-                                                        <a href="http://" target="" rel="noopener noreferrer"><i class="fa-solid fa-eye"></i></a>
-                                                        <a href="http://" target="" rel="noopener noreferrer"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                        <a href="http://" target="" rel="noopener noreferrer"><i class="fa-solid fa-trash"></i></i></a>
+                                                    <td>
+                                                        <?php if ($_SESSION['CT'] == 1) {
+                                                            echo '
+                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="View"><i class="fa-solid fa-eye"></i></a>
+                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash"></i></i></a>
+                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Request"><i class="fa-solid fa-truck-arrow-right"></i></a>
+                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Return"><i class="fa-solid fa-rotate-left"></i></a>
+                                                            ';
+                                                        } else {
+                                                            echo '
+                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Return"><i class="fa-solid fa-truck-arrow-right"></i></a>
+                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Return"><i class="fa-solid fa-rotate-left"></i></a>
+                                                            ';
+                                                        }
+                                                        ?>
                                                     </td>
                                                 </tr>
                                             <?php    
@@ -216,12 +248,149 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
         </div>
     </div>
 
+    <!-- Add modal for new item -->
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <form action="includes/items.inc.php" method="POST" enctype="multipart/form-data">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title font-weight-bold" id="exampleModalLabel">New Item</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <!-- Name -->
+                            <div class="col-md-12 py-1">
+                                <label for="item_name">Name</label>
+                                <input type="text" class="form-control form-control-sm" id="item_name" name="item_name" placeholder="Name" required>
+                            </div>
+                            <!-- Category -->   
+                            <div class="col-md-6 py-1">
+                                <label for="item_category">Category</label>
+                                <select name="item_category" id="item_category" class="form-control form-control-sm" required>
+                                    <option value="" disabled selected>Category</option>
+                                    <?php 
+                                        try{
+                                            $query = "SELECT * FROM items_category;";
+                                            // Prepare the query
+                                            $stmt = $pdo->query($query);
+
+                                            // Execute the query
+                                            $stmt->execute();
+
+                                            // Fetch all rows as an associative array
+                                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);    
+                                                                                
+                                            // Process the result (e.g., display it)
+                                            foreach ($result as $row) {
+                                                // Access columns by their names, e.g., $row['column_name']
+                                                echo '<option value="'.$row['item_category_id'].'">'.$row['item_category_name'].'</option>';
+                                            }
+                                        } catch (PDOException $e) {
+                                            // Handle database connection or query errors
+                                            echo "Error: " . $e->getMessage();
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            <!-- Measurement -->
+                            <div class="col-md-6 py-1">
+                                <label for="item_measure">Measurement</label>
+                                <select name="item_measure" id="item_measure" class="form-control form-control-sm" required>
+                                    <option value="" disabled selected>Measurement</option>
+                                    <?php 
+                                        try{
+                                            $query = "SELECT * FROM items_unit_of_measure;";
+                                            // Prepare the query
+                                            $stmt = $pdo->query($query);
+
+                                            // Execute the query
+                                            $stmt->execute();
+
+                                            // Fetch all rows as an associative array
+                                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);    
+                                                                                
+                                            // Process the result (e.g., display it)
+                                            foreach ($result as $row) {
+                                                // Access columns by their names, e.g., $row['column_name']
+                                                echo '<option value="'.$row['item_uom_id'].'">'.$row['item_uom_name'].'</option>';
+                                            }
+                                        } catch (PDOException $e) {
+                                            // Handle database connection or query errors
+                                            echo "Error: " . $e->getMessage();
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            <!-- Quantity -->
+                            <div class="col-md-6 py-1">
+                                <label for="item_quantity">Quantity</label>
+                                <input type="number" min="0" class="form-control form-control-sm" id="item_quantity" name="item_quantity" placeholder="Quantity" required>
+                            </div>
+                            <!-- Chapter -->
+                            <div class="col-md-6 py-1">
+                                <label for="item_chapter">Chapter</label>
+                                <select name="item_chapter" id="item_chapter" class="form-control form-control-sm" required>
+                                    <option value="" disabled selected>Chapter</option>
+                                    <?php 
+                                        try{
+                                            $query = "SELECT * FROM `chapters` ORDER BY `chapters`.`chapter_name` ASC;";
+                                            // Prepare the query
+                                            $stmt = $pdo->query($query);
+
+                                            // Execute the query
+                                            $stmt->execute();
+
+                                            // Fetch all rows as an associative array
+                                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);    
+                                                                                
+                                            // Process the result (e.g., display it)
+                                            foreach ($result as $row) {
+                                                // Access columns by their names, e.g., $row['column_name']
+                                                echo '<option value="'.$row['chapter_id'].'">'.$row['chapter_name'].'</option>';
+                                            }
+                                        } catch (PDOException $e) {
+                                            // Handle database connection or query errors
+                                            echo "Error: " . $e->getMessage();
+                                        }
+                                    ?>
+                                </select>
+                            </div>
+                            <!-- Description -->
+                            <div class="col-md-12 py-1">
+                                <label for="item_description">Description</label>
+                                <textarea name="item_description" id="item_description" cols="3" rows="1" class="form-control form-control-sm" placeholder="Description"></textarea>
+                            </div>
+                            <div class="mb-2 mt-2"></div>
+                            <hr class="hr" />
+                            <!-- Image -->
+                            <div class="col-md-12 py-1">
+                                <label for="item_image" class="pb-1">Image</label>
+                                <input class="form-control form-control-sm" type="file" accept="image/*" name="item_image" id="item_image" required>
+                            </div>
+                            <!-- User's ID: Who is going to add the new item -->
+                            <!-- For history/log purposes -->
+                            <input type="hidden" value="<?php echo $_SESSION['ID']; ?>" name="user_id" id="user_id">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm btnRed" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-sm btnGreen text-light" name="add-item-btn" value="Add item">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
+                                    
 </body>
 
 </html>

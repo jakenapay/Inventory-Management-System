@@ -48,3 +48,29 @@ body {
     height: 100%;
     margin: 0;
 }
+
+.btnRed {
+    border: 1px solid var(--orange);
+    background-color: var(--orange);
+}
+
+.btnRed:hover {
+    border: 1px solid var(--orange);
+    background-color: #d35b1b;
+}
+
+.btnGreen {
+    border: 1px solid var(--green);
+    background-color: var(--green);
+    font-size: 0.9rem;
+    padding: 2px 5px;
+}
+
+.btnGreen:hover {
+    border: 1px solid var(--green);
+    background-color: #629b05;
+}
+
+.btn:focus {
+    box-shadow: none;
+}

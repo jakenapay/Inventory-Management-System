@@ -48,6 +48,7 @@ nav {
 
 .links ul li a.active {
   color: var(--black);
+  font-weight: 500;
 }
 
 .links ul li a:hover {
@@ -63,4 +64,20 @@ nav {
 
 #more-action-menu .dropdown-item {
   font-size: 0.9rem;
+}
+
+.fa-solid {
+  padding: 5px;
+  border-radius: 5px;
+  color: var(--white);
+}
+
+.fa-user-tie, .fa-user, .fa-arrow-right-from-bracket {
+  color: var(--black);
+}
+
+ .logout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

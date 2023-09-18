@@ -33,17 +33,31 @@
                         <!-- Dropdown -->
                         <div class="btn-group">
                             <button type="button" id="btn-more-action" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <?php echo $_SESSION['FN']; ?>
+                                
+                                <?php 
+                                    // echo ($_SESSION['CT'] == 1) ? '<i class="fa-solid fa-user-tie"></i>' : '<i class="fa-solid fa-user"></i>';
+                                    echo $_SESSION['FN']; 
+                                ?>
                             </button>
                             <div id="more-action-menu" class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Profile</a>
                                 <a class="dropdown-item" href="#">About</a>
                                 <a class="dropdown-item" href="#">FAQs</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="includes/logout.inc.php">Log out</a>
+                                <div class="">
+                                    <a class="dropdown-item logout" href="includes/logout.inc.php"><span>Log out</span><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                                </div>
                             </div>
                         </div>
                     </ul>
+
+                    <!-- For items.php -->
+                    <?php
+                        if ($_SESSION['active_tab'] == 'items.php') {
+                            echo '<ul><button type="button" class="btn btn-success btnGreen btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-plus addIcon"></i>New item
+                                </button></ul>';
+                        }
+                    ?>
                 </div>
             </nav>
         </div>
