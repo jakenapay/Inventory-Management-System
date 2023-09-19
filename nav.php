@@ -54,8 +54,10 @@
                     <!-- For items.php -->
                     <?php
                         if ($_SESSION['active_tab'] == 'items.php') {
-                            echo '<ul><button type="button" class="btn btn-success btnGreen btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-plus addIcon"></i>New item
+                            if(!empty($_SESSION['ID']) && ($_SESSION['CT'] == 1)) { // If you're logged in and an admin you can add item
+                                echo '<ul><button type="button" class="btn btn-success btnGreen btn-sm" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-plus addIcon"></i>New item
                                 </button></ul>';
+                            }
                         }
                     ?>
                 </div>

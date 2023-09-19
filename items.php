@@ -224,6 +224,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                             ';
                                                         } else {
                                                             echo '
+                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="View"><i class="fa-solid fa-eye"></i></a>
                                                             <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Return"><i class="fa-solid fa-truck-arrow-right"></i></a>
                                                             <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Return"><i class="fa-solid fa-rotate-left"></i></a>
                                                             ';
@@ -265,7 +266,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                             <!-- Name -->
                             <div class="col-md-12 py-1">
                                 <label for="item_name">Name</label>
-                                <input type="text" class="form-control form-control-sm" id="item_name" name="item_name" placeholder="Name" required>
+                                <input type="text" class="form-control form-control-sm text-capitalize" id="item_name" name="item_name" placeholder="Name" required>
                             </div>
                             <!-- Category -->   
                             <div class="col-md-6 py-1">
@@ -337,7 +338,12 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                     <option value="" disabled selected>Chapter</option>
                                     <?php 
                                         try{
-                                            $query = "SELECT * FROM `chapters` ORDER BY `chapters`.`chapter_name` ASC;";
+                                            if($_SESSION['CH'] == 1) { // If admin's chapter is manila, it can choose different chapters
+                                                $query = "SELECT * FROM `chapters` ORDER BY `chapters`.`chapter_name` ASC;";
+                                            } else {
+                                                $chapter = $_SESSION['CH'];
+                                                $query = "SELECT * FROM `chapters` WHERE `chapter_id` = $chapter;";
+                                            }
                                             // Prepare the query
                                             $stmt = $pdo->query($query);
 
