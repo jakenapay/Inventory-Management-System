@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 11, 2023 at 06:59 PM
+-- Generation Time: Sep 19, 2023 at 02:15 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -76,17 +76,28 @@ CREATE TABLE `items` (
   `item_category` int(11) NOT NULL,
   `item_measure` int(11) NOT NULL,
   `item_quantity` int(11) NOT NULL,
-  `item_chapter` int(11) NOT NULL
+  `item_chapter` int(11) NOT NULL,
+  `item_description` varchar(255) NOT NULL,
+  `item_image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`) VALUES
-(1, 'Galaxy Tab A Tablet', 1, 3, 3, 1),
-(2, 'A4 Bond Paper', 3, 2, 10, 2),
-(3, 'Nature Spring Bottled Water 250ml', 2, 3, 20, 1);
+INSERT INTO `items` (`item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_description`, `item_image`) VALUES
+(1, 'Galaxy Tab A Tablet', 1, 3, 3, 1, '4gb 256gb color black', ''),
+(2, 'A4 Bond Paper', 3, 2, 10, 2, 'A4 Hardcopy', ''),
+(3, 'Bottled Water', 2, 3, 20, 1, 'Nature Spring 500ml', ''),
+(4, 'ID Lace version 5', 3, 3, 80, 3, 'Version 5, Black & Orange', ''),
+(5, 'Jumping wires long', 3, 1, 30, 4, 'Rainbow colors', ''),
+(6, 'Gel Ink Pen', 3, 1, 24, 5, 'Black', ''),
+(7, 'Gel Ink Pen', 3, 1, 24, 5, 'Black', ''),
+(8, 'Jungle Juice', 2, 2, 13, 2, '350ml Mango, Apple, Grapes, & Orange', 'IMG_650896c28445b9.58710873.jpg'),
+(9, 'Sunglasses', 3, 3, 20, 1, 'Rayban, Black Frame', 'IMG_6508975f56a452.42876042.jpg'),
+(10, 'Sunglasses', 3, 3, 13, 1, 'Rayband, Black frame', 'IMG_650898af7e3799.65129257.jpg'),
+(11, 'Hotdog', 2, 1, 22, 1, 'Jumbo, Tender Juicy, Pure Foods, 12pcs per pack', 'IMG_650899879ba091.62117593.png'),
+(12, 'wireless mouse', 1, 3, 10, 1, 'Wireless, Hp, Color Black', 'IMG_65098bc3db97d8.82832936.jpg');
 
 -- --------------------------------------------------------
 
@@ -106,7 +117,7 @@ CREATE TABLE `items_category` (
 INSERT INTO `items_category` (`item_category_id`, `item_category_name`) VALUES
 (1, 'Technology'),
 (2, 'Consumable'),
-(3, 'Office Supply');
+(3, 'Supply');
 
 -- --------------------------------------------------------
 
@@ -150,7 +161,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `user_firstname`, `user_lastname`, `user_email`, `user_password`, `user_category`, `user_chapter`) VALUES
 (1, 'jake', 'napay', 'jakemantesnapay@gmail.com', '$2y$10$RIQWqDTz88hS713D1XbPIOAiicKGkmTpUr4FJnMSquvh4SbuGUj5S', 1, 1),
-(2, 'john moren', 'dinela', 'jmdinela@gmail.com', 'user@123', 0, 2);
+(2, 'john moren', 'dinela', 'jmdinela@gmail.com', '$2y$10$1o24hhJ6ibvCFNhaoD9jaeQW9PS59s7lDV3f2MtS3Uv3bLNhLqtJm', 0, 2),
+(4, 'Jay Ar', 'De Guzman', 'jdeguzman@gmail.com', '$2y$10$wk28/l2eJqickXsyQR6tZO43Dj279xxm.8otU9pPbeE7Bk/stzjxq', 1, 4),
+(5, 'Lee Angelo', 'Mollo', 'lamollo@gmail.com', '$2y$10$pzhfiX1L7fC723q5n6/xReHRBUrVLbdy2yuiOUsNG6Ay9Wjvr21Ey', 0, 1);
 
 --
 -- Indexes for dumped tables
@@ -217,7 +230,7 @@ ALTER TABLE `chapters`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `items_category`
@@ -235,7 +248,7 @@ ALTER TABLE `items_unit_of_measure`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables
