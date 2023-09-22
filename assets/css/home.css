@@ -15,6 +15,7 @@
 .box p {
     font-weight: 600;
     color: var(--white);
+    font-size: 0.9rem;
 }
 
 .icon::before {

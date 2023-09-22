@@ -12,6 +12,11 @@
     <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>"> <!-- Theres a PHP code to remove the Cache -->
     <link rel="stylesheet" href="assets/css/login.css?v=<?php echo time(); ?>">
 
+    <script>
+        setTimeout(function(){ 
+            document.getElementById("msg").style.display = "none"; // hide the element after 3 seconds
+        }, 5000);
+    </script>
 </head>
 <body>
 
@@ -24,7 +29,7 @@
                     <p class="main-title">Inventory Management</p>
                     <hr>
                     <form action="includes/login.inc.php" method="post">
-                        <p class="msg"><?php include 'includes/message.inc.php';?></p>
+                        <?php include 'includes/message.inc.php';?>
                         <p class="labels">Email Address</p>
                         <input class="userInput" id="email" name="email" type="email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/">
                         <p class="labels">Password</p>

@@ -1,40 +1,42 @@
 <?php
 // Error messages or messages
 $message = "";
+define('msg', 'msg');
+define('msgOk', 'msgOk');
 
 if(isset($_GET['m'])) {
 
     // If the "m" is set then do the switch case
     switch ($_GET['m']) {
         case "ef":
-            echo "Empty fields";
+            echo "<p id='msg' class='msg'>Empty fields</p>";
             break;
         case "unf":
-            echo "User not found";
+            echo "<p id='msg' class='msg'>User not found</p>";
             break;
         case "wp";
-            echo "Wrong password";
+            echo "<p id='msg' class='msg'>Wrong password</p>";
             break;
         case "ln":
-            echo "Login needed";
+            echo "<p id='msg' class='msg'>Login needed</p>";
             break;
         case "itd":
-            echo "Upload image only";
+            echo "<p id='msg' class='msg'>Upload image only</p>";
             break;
         case "is":
-            echo "Upload image less than 2MB";
+            echo "<p id='msg' class='msg'>Upload image less than 2MB</p>";
             break;
         case "ie":
-            echo "Upload image with no error";
+            echo "<p id='msg' class='msg'>Upload image with no error</p>";
             break;
         case "ue":
-            echo "Error adding item";
+            echo "<p id='msg' class='msg'>Error adding item</p>";
             break;
         case "ia":
-            echo "Item added successfully";
+            echo "<p id='msg' class='msgOk'>Item added successfully</p>";
             break;
         default:
-            echo "Unknown error occured";
+            echo "<p id='msg' class='msg'>Unknown error occured</p>";
             break;
     }
 }

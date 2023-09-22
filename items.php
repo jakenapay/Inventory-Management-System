@@ -45,6 +45,10 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
         $('#myModal').on('shown.bs.modal', function () {
             $('#myInput').trigger('focus')
         });
+
+        setTimeout(function(){ 
+            document.getElementById("msg").style.display = "none"; // hide the element after 3 seconds
+        }, 5000);
     </script>
 </head>
 
@@ -116,7 +120,12 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                     ?>
                 </div>
             </div>
-            <br>
+
+            <div class="row justify-content-center align-items-center mt-3">
+                <div class="col-12 col-sm-12 col-md-10 col-lg-10">
+                    <?php include 'includes/message.inc.php';?>
+                </div>
+            </div>
 
             <div class="row justify-content-center align-items-center">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-11">
