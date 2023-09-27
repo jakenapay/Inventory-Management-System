@@ -1,8 +1,6 @@
 <?php
 // Error messages or messages
 $message = "";
-define('msg', 'msg');
-define('msgOk', 'msgOk');
 
 if(isset($_GET['m'])) {
 

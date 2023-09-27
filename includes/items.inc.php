@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+// Adding new item
 if (isset($_POST['add-item-btn'])) {
     include 'config.inc.php';
 
@@ -75,4 +76,78 @@ if (isset($_POST['add-item-btn'])) {
     }
     
 }
+
+// View existing item
+if (isset($_POST['check_view'])) {
+    include 'config.inc.php';
+
+    $itemId = $_POST['item_id'];
+
+    $stmt  = $pdo->prepare("SELECT items.item_id, 
+    items.item_name, 
+    items_category.item_category_name, 
+    items_unit_of_measure.item_uom_name, 
+    items.item_quantity, 
+    chapters.chapter_name, 
+    items.item_description, 
+    items.item_image 
+    FROM items 
+    INNER JOIN items_category ON items.item_category = items_category.item_category_id 
+    INNER JOIN items_unit_of_measure ON items.item_measure = items_unit_of_measure.item_uom_id
+    INNER JOIN chapters ON items.item_chapter = chapters.chapter_id
+    WHERE item_id = :param_value");
+    $stmt->bindParam(':param_value', $itemId, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Loop through the results
+    foreach ($result as $row) {
+        $id = $row['item_id'];
+        $name = $row['item_name'];
+        $category = $row['item_category_name'];
+        $measure = $row['item_uom_name'];
+        $quantity = $row['item_quantity'];
+        $chapter = $row['chapter_name'];
+        $description = $row['item_description'];
+        $image = $row['item_image'];
+
+        $return = '
+        <div class="col-md-6 py-1">
+            <div row>
+                <input type="hidden" class="form-control form-control-sm text-capitalize" id="item_id" name="item_id" placeholder="item_id" readonly value="'.$id.'">
+                <div class="col-md-12 py-1">
+                    <label for="item_name">Name</label>
+                    <input type="text" class="form-control form-control-sm text-capitalize" id="item_name" name="item_name" placeholder="Name" readonly value="'.$name.'">
+                </div>
+                <div class="col-md-12 py-1">
+                    <label for="item_category">Category</label>
+                    <input type="text" class="form-control form-control-sm text-capitalize" id="item_category" name="item_category" placeholder="Category" readonly value="'.$category.'">
+                </div>
+                <div class="col-md-12 py-1">
+                    <label for="item_measure">Measurement</label>
+                    <input type="text" class="form-control form-control-sm text-capitalize" id="item_measure" name="item_measure" placeholder="Measurement" readonly value="'.$measure.'">
+                </div>
+                <div class="col-md-12 py-1">
+                    <label for="item_quantity">Quantity</label>
+                    <input type="text" class="form-control form-control-sm text-capitalize" id="item_quantity" name="item_quantity" placeholder="Quantity" readonly value="'.$quantity.'">
+                </div>
+                <div class="col-md-12 py-1">
+                    <label for="item_chapter">Chapter</label>
+                    <input type="text" class="form-control form-control-sm text-capitalize" id="item_chapter" name="item_chapter" placeholder="Chapter" readonly value="'.$chapter.'">
+                </div>
+                <div class="col-md-12 py-1">
+                    <label for="item_description">Description</label>
+                    <textarea name="item_description" id="item_description" cols="3" rows="3" class="form-control form-control-sm" placeholder="Description" readonly>'.$description.'</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 py-1">
+            <img src="images/items/'.$image.'" loading="lazy" class="img-thumbnail img-fluid" alt="Image">
+        </div>
+        ';
+
+        echo $return;
+    }
+}
+
 ?>

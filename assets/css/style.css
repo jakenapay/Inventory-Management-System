@@ -62,6 +62,8 @@ body {
 .btnRed {
     border: 1px solid var(--orange);
     background-color: var(--orange);
+    font-size: 0.9rem;
+    padding: 2px 5px;
 }
 
 .btnRed:hover {

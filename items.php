@@ -225,7 +225,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                     <td>
                                                         <?php if ($_SESSION['CT'] == 1) {
                                                             echo '
-                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="View"><i class="fa-solid fa-eye"></i></a>
+                                                            <a href="http://" class="view-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#viewModal" data-item-id="'.$row['ID'].'" title="View"><i class="fa-solid fa-eye"></i></a>
                                                             <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
                                                             <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash"></i></i></a>
                                                             <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Request"><i class="fa-solid fa-truck-arrow-right"></i></a>
@@ -392,7 +392,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary btn-sm btnRed" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-sm btnRed btn-secondary btn-sm btnRed" data-dismiss="modal">Close</button>
                         <input type="submit" class="btn btn-sm btnGreen text-light" name="add-item-btn" value="Add item">
                     </div>
                 </div>
@@ -400,12 +400,58 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
         </form>
     </div>
 
+    <!-- View modal for specific item -->
+    <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form action="includes/items.inc.php" method="POST" enctype="multipart/form-data">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title font-weight-bold" id="exampleModalLabel">View Item</h6>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row justify-content-center align-items-center item-view">
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm btnRed" data-bs-dismiss="modal">Close</button>
+                        <!-- <input type="submit" class="btn btn-sm btnGreen text-light" name="" value="Get"> -->
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('table').on('click', '.view-btn', function(e) {
+                e.preventDefault();
+                var itemId = $(this).data('item-id');
+                $.ajax({
+                    type: 'POST',
+                    url: 'includes/items.inc.php',
+                    data: {
+                        'check_view': true,
+                        'item_id': itemId
+                    },
+                    success: function(response) {
+                        $('.item-view').html(response);
+                        $('#viewModal').modal('show');
+                    }
+                });
+            });
+        });
+    </script>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-                                    
+                                  
 </body>
 
 </html>
