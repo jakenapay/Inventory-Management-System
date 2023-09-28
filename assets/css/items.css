@@ -80,10 +80,15 @@
 }
 
 .close {
+    background-color: transparent;
     padding: 2px 5px;
     border-radius: 5px;
     box-shadow: none;
-    border: var(--border);
+    border: none;
+}
+
+.close:hover {
+    background-color: #d3d3d3;    
 }
 
 .form-group label {

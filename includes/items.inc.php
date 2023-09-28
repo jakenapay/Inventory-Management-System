@@ -150,4 +150,52 @@ if (isset($_POST['check_view'])) {
     }
 }
 
+if (isset($_POST['req-item-btn'])) {
+    include 'config.inc.php';
+    
+    if (empty($_POST['user_id']) && ($_POST['item_id'])) {
+        header("location: ../items.php?m=ic");
+    }
+
+    $userId = $_POST['user_id'];
+    $itemId = $_POST['item_id'];
+    $reqQuantity = $_POST['req-quantity']; // The quantity of item that the user is about to request
+    $currentQuantity = $_POST['item_quantity']; // The current or existing quantity of the item
+
+    if (empty($reqQuantity) || empty($currentQuantity)) { // If both quantities are empty, go back to items.php
+        header("location: ../items.php?m=nq");
+    }
+
+    // Computations
+    // Requesting qty minus to the qty of item and store in a variable
+    $leftQuantity = $currentQuantity - $reqQuantity; // Example: 20 = 30 - 10;
+    if ($leftQuantity < 0) { // If insufficient quantity, for example: -1 (leftQuantity)= 30(currentQuantity) - 31(reqQuantity)
+        header("location: ../items.php?m=ifs");
+        exit();
+    }
+
+    
+    // try {
+    //     // Prepare an INSERT statement with placeholders
+    //     $stmt = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (:name, :email, :password)");
+
+    //     // Bind parameters to placeholders
+    //     $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+    //     $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    //     $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+
+    //     // Execute the prepared statement
+    //     if ($stmt->execute()) {
+    //         echo "User registered successfully!";
+    //     } else {
+    //         echo "Error registering user.";
+    //     }
+    // } catch (PDOException $e) {
+    //     echo "Database Error: " . $e->getMessage();
+    // }
 ?>
+
+
+    
+}
+

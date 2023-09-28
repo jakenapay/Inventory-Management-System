@@ -226,7 +226,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                         <?php if ($_SESSION['CT'] == 1) {
                                                             echo '
                                                             <a href="http://" class="view-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#viewModal" data-item-id="'.$row['ID'].'" title="View"><i class="fa-solid fa-eye"></i></a>
-                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                            <a href="http://" target="" rel="noopener noreferrer" data-bs-toggle="tooltip" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
                                                             <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash"></i></i></a>
                                                             <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Request"><i class="fa-solid fa-truck-arrow-right"></i></a>
                                                             <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Return"><i class="fa-solid fa-rotate-left"></i></a>
@@ -412,13 +412,18 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="row justify-content-center align-items-center item-view">
-
+                        <div class="row justify-content-between align-items-center item-view">
+                            <!-- This is where data being fetch from items.inc.php -->
                         </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer d-flex justify-content-between align-items-center">
+                        <!-- To get the user's ID and record it for history (log) -->
+                        <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['ID']; ?>">
                         <button type="button" class="btn btn-secondary btn-sm btnRed" data-bs-dismiss="modal">Close</button>
-                        <!-- <input type="submit" class="btn btn-sm btnGreen text-light" name="" value="Get"> -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <input type="number" class="form-control form-control-sm mx-1" name="req-quantity" id="req-quantity" placeholder="1-1000" min="1" max="1000" required>
+                            <input type="submit" class="btn btn-sm btnGreen text-light mx-1" name="req-item-btn" value="Request">
+                        </div>
                     </div>
                 </div>
             </div>
