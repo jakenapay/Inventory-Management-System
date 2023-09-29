@@ -193,9 +193,8 @@ if (isset($_POST['req-item-btn'])) {
     // } catch (PDOException $e) {
     //     echo "Database Error: " . $e->getMessage();
     // }
-?>
 
-
-    
 }
+
+?>
 
