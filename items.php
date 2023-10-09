@@ -130,7 +130,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             <div class="row justify-content-center align-items-center">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-11">
                     <div class="table-responsive">
-                        <table class="table table-hover table-sm table-striped">
+                        <table class="table table-hover table-sm">
                             <thead>
                                 <tr>
                                     <th>ID</th>   
@@ -226,7 +226,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                         <?php if ($_SESSION['CT'] == 1) {
                                                             echo '
                                                             <a href="http://" class="view-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#viewModal" data-item-id="'.$row['ID'].'" title="View"><i class="fa-solid fa-eye"></i></a>
-                                                            <a href="http://" target="" rel="noopener noreferrer" data-bs-toggle="tooltip" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                            <a href="http://" class="edit-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#editModal" data-item-id="'.$row['ID'].'" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
                                                             <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash"></i></i></a>
                                                             <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Request"><i class="fa-solid fa-truck-arrow-right"></i></a>
                                                             <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Return"><i class="fa-solid fa-rotate-left"></i></a>
@@ -430,8 +430,39 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
         </form>
     </div>
 
+    <!-- Edit modal for specific item -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <form action="includes/items.inc.php" method="POST" enctype="multipart/form-data">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title font-weight-bold" id="exampleModalLabel">Edit Item</h6>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row justify-content-between align-items-center item-view">
+                            <!-- This is where data being fetch from items.inc.php -->
+                        </div>
+                        <a href="http://" target="_blank" rel="noopener noreferrer"></a>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-between align-items-center">
+                        <!-- To get the user's ID and record it for history (log) -->
+                        <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['ID']; ?>">
+                        <button type="button" class="btn btn-secondary btn-sm btnRed" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-sm btnGreen text-light mx-1" name="save-edit-item-btn" value="Save">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
     <script>
         $(document).ready(function() {
+
+            // Shows modal and specific item for View button
             $('table').on('click', '.view-btn', function(e) {
                 e.preventDefault();
                 var itemId = $(this).data('item-id');
@@ -445,6 +476,24 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                     success: function(response) {
                         $('.item-view').html(response);
                         $('#viewModal').modal('show');
+                    }
+                });
+            });
+
+            // Showing modal and editable contents of specific item for Edit button
+            $('table').on('click', '.edit-btn', function(e) {
+                e.preventDefault();
+                var itemId = $(this).data('item-id');
+                $.ajax({
+                    type: 'POST',
+                    url: 'includes/items.inc.php',
+                    data: {
+                        'edit_view': true,
+                        'item_id': itemId
+                    },
+                    success: function(response) {
+                        $('.item-view').html(response);
+                        $('#editModal').modal('show');
                     }
                 });
             });

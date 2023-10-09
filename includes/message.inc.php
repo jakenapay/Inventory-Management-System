@@ -33,6 +33,9 @@ if(isset($_GET['m'])) {
         case "ia":
             echo "<p id='msg' class='msgOk'>Item added successfully</p>";
             break;
+        case "ss":
+            echo "<p id='msg' class='msgOk'>Requested successfully</p>";
+            break;
         case "ifs":
             echo "<p id='msg' class='msg'>Insufficient quantity</p>";
             break;
