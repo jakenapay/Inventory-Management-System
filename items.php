@@ -142,6 +142,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                         if (isset($_SESSION['CT']) && ($_SESSION['CT']) != 0) { // IF ADMIN
                                             echo '<th scope="col">Quantity</th>';
                                             echo ($_SESSION['CH'] == 1) ? '<th scope="col">Chapter</th>' : '';
+                                            echo '<th scope="col">Status</th>';
                                         }
                                     ?>
                                     <th>Actions</th>
@@ -161,12 +162,13 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                 . "items_category.item_category_name AS Category,\n"
                                                 . "items_unit_of_measure.item_uom_name AS Measurement,\n"
                                                 . "items.item_quantity AS Quantity,\n"
-                                                . "chapters.chapter_name AS Chapter\n"
+                                                . "chapters.chapter_name AS Chapter,\n"
+                                                . "items.item_status AS Status\n"
                                                 . "FROM items\n"
                                                 . "INNER JOIN items_category ON items.item_category = items_category.item_category_id\n"
                                                 . "INNER JOIN items_unit_of_measure ON items.item_measure = items_unit_of_measure.item_uom_id\n"
-                                                . "INNER JOIN chapters ON items.item_chapter = chapters.chapter_id;";
-                                            } else if (($_SESSION['CH'] != 1) && ($_SESSION['CT'] == 1)) {
+                                                . "INNER JOIN chapters ON items.item_chapter = chapters.chapter_id AND items.item_quantity > 0;";
+                                            } else if (($_SESSION['CH'] != 1) && ($_SESSION['CT'] == 1)) { // If chapter is not Manila, but admin
                                                 // Run this code below
                                                 $user_chapter = $_SESSION['CH'];
                                                 $query = "SELECT 
@@ -175,13 +177,15 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                             items_category.item_category_name AS Category,
                                                             items_unit_of_measure.item_uom_name AS Measurement,
                                                             items.item_quantity AS Quantity,
-                                                            chapters.chapter_name AS Chapter
+                                                            chapters.chapter_name AS Chapter,
+                                                            items.item_status AS Status
                                                         FROM items
                                                         INNER JOIN items_category ON items.item_category = items_category.item_category_id
                                                         INNER JOIN items_unit_of_measure ON items.item_measure = items_unit_of_measure.item_uom_id
                                                         INNER JOIN chapters ON items.item_chapter = chapters.chapter_id
-                                                        WHERE items.item_chapter = $user_chapter;";
-                                            } else {
+                                                        WHERE items.item_chapter = $user_chapter
+                                                        AND items.item_quantity > 0;";
+                                            } else { // Users only and show items according to their chapter
                                                 $user_chapter = $_SESSION['CH'];
                                                 $query = "SELECT
                                                             items.item_id AS ID,
@@ -191,7 +195,8 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                         FROM items
                                                         INNER JOIN items_category ON items.item_category = items_category.item_category_id
                                                         INNER JOIN items_unit_of_measure ON items.item_measure = items_unit_of_measure.item_uom_id
-                                                        WHERE items.item_chapter = $user_chapter;";
+                                                        WHERE items.item_chapter = $user_chapter
+                                                        AND items.item_quantity > 0;";
                                             }
                                             
                                             // Prepare the query
@@ -218,8 +223,12 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                             echo '<td>' . $row['Quantity'] . '</td>';
 
                                                             // If admin and from Manila
-                                                            
                                                             echo ($_SESSION['CH'] == 1) ? '<td>'.$row['Chapter'].'</td>' : '';
+
+                                                            // Show status of items
+                                                            if ($row['Status'] == 'enabled') {
+                                                                echo '<td class="text-success text-capitalize text-sm">' . $row['Status'] . '</td>';
+                                                            }
                                                         }
                                                     ?>
                                                     <td>
@@ -227,15 +236,15 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                             echo '
                                                             <a href="http://" class="view-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#viewModal" data-item-id="'.$row['ID'].'" title="View"><i class="fa-solid fa-eye"></i></a>
                                                             <a href="http://" class="edit-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#editModal" data-item-id="'.$row['ID'].'" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Delete"><i class="fa-solid fa-trash"></i></i></a>
+                                                            <a href="http://" class="delete-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#deleteModal" data-item-id="'.$row['ID'].'" title="Delete"><i class="fa-solid fa-trash"></i></i></a>
                                                             <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Request"><i class="fa-solid fa-truck-arrow-right"></i></a>
-                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Return"><i class="fa-solid fa-rotate-left"></i></a>
+                                                            <!-- <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Return"><i class="fa-solid fa-rotate-left"></i></a> -->
                                                             ';
                                                         } else {
                                                             echo '
-                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="View"><i class="fa-solid fa-eye"></i></a>
-                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Return"><i class="fa-solid fa-truck-arrow-right"></i></a>
-                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Return"><i class="fa-solid fa-rotate-left"></i></a>
+                                                            <a href="http://" class="view-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#viewModal" data-item-id="'.$row['ID'].'" title="View"><i class="fa-solid fa-eye"></i></a>
+                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Request"><i class="fa-solid fa-truck-arrow-right"></i></a>
+                                                            <!-- <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Return"><i class="fa-solid fa-rotate-left"></i></a> -->
                                                             ';
                                                         }
                                                         ?>
@@ -458,6 +467,31 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
         </form>
     </div>
 
+    <!-- Delete item Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form action="includes/items.inc.php" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title font-weight-bold" id="exampleModalLabel">Delete Item</h6>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" name="del_id" id="del_id">
+                        <h6>Are you sure you want to delete this item?</h6>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-between">
+                        <input type="text" name="user_id" id="user_id" value="<?php echo $_SESSION['ID']; ?>">
+                        <button type="button" class="btn btn-light px-2" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-default px-2" name="delete-item-btn" value="Delete">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
     <script>
         $(document).ready(function() {
@@ -494,6 +528,24 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                     success: function(response) {
                         $('.item-view').html(response);
                         $('#editModal').modal('show');
+                    }
+                });
+            });
+
+            // Delete the item from modal
+            $('table').on('click', '.delete-btn', function(e) {
+                e.preventDefault();
+                var itemId = $(this).data('item-id');
+                $.ajax({
+                    type: 'POST',
+                    url: 'includes/items.inc.php',
+                    data: {
+                        'delete-item-btn': true,
+                        'item_id': itemId
+                    },
+                    success: function(response) {
+                        $('#del_id').val(itemId);
+                        $('#deleteModal').modal('show');
                     }
                 });
             });

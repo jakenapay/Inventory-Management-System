@@ -36,8 +36,14 @@ if(isset($_GET['m'])) {
         case "ss":
             echo "<p id='msg' class='msgOk'>Requested successfully</p>";
             break;
+        case "us":
+            echo "<p id='msg' class='msgOk'>Updated successfully</p>";
+            break;
         case "ifs":
             echo "<p id='msg' class='msg'>Insufficient quantity</p>";
+            break;
+        case "ds":
+            echo "<p id='msg' class='msgOk'>Deleted successfully</p>";
             break;
         default:
             echo "<p id='msg' class='msg'>Unknown error occured</p>";
