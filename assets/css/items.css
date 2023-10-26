@@ -1,0 +1,91 @@
+.box {
+    background-color: #d3d3d3;
+    margin: 5px;
+    padding: 10px 20px;
+    border-radius: 5px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.box i {
+    color: var(--white);
+}
+
+.box p {
+    font-weight: 600;
+    color: var(--white);
+}
+
+.icon::before {
+    font-size: 1.5rem;
+}
+
+.box:first-of-type {
+    background-color: var(--green);
+}
+
+.box:nth-child(2) {
+    background-color: var(--yellow);
+}
+
+.box:nth-child(3) {
+    background-color: var(--orange);
+}
+
+/* TABLES */
+.table-responsive {
+    background-color: var(--white);
+    padding: 2rem 2rem;
+
+    border: var(--border);
+    border-radius: 20px;
+    box-shadow: var(--boxShadowTable);
+    /* padding: 40px 30px 30px; */
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.actions a{
+    padding: 0px 3px;
+}
+
+.table .fa-solid {
+    padding: 5px;
+    border-radius: 5px;
+    color: var(--white);
+}
+
+.table .fa-eye {
+    background-color: var(--green);
+}
+
+.table .fa-pen-to-square {
+    background-color: var(--yellow);
+}
+
+.table .fa-trash {
+    background-color: var(--orange);
+}
+
+.table .fa-rotate-left { 
+    background-color: var(--green);
+}
+
+.table .fa-truck-arrow-right {
+    background-color: var(--purple);
+}
+
+.close {
+    padding: 2px 5px;
+    border-radius: 5px;
+    box-shadow: none;
+    border: var(--border);
+}
+
+.form-group label {
+    padding-left: 5px;
+}

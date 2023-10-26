@@ -1,0 +1,83 @@
+.mainnav {
+  box-shadow: var(--boxShadow);
+
+  /* To stay on top even when user scroll */
+  top: 0;
+  position: sticky;
+  background-color: var(--white);
+
+  /* To stay on top above all elements */
+  z-index: 99;
+}
+
+.row {
+  margin: 0;
+}
+
+nav {
+  margin: 10px 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  width: 150px;
+}
+
+.links ul {
+  margin: 0;
+  display: flex;
+  
+}
+
+.links ul li {
+  text-decoration: none;
+  list-style-type: none;
+  margin: 0 10px;
+}
+
+.links ul li a {
+  text-decoration: none;
+  color: var(--darkGray);
+  font-size: 0.9rem;
+
+  transition: all 0.3s ease;
+}
+
+.links ul li a.active {
+  color: var(--black);
+  font-weight: 500;
+}
+
+.links ul li a:hover {
+  color: var(--black);
+}
+
+#btn-more-action {
+  border: var(--border);
+  border-radius: 5px;
+  padding: 2px 5px;
+  text-transform: capitalize;
+}
+
+#more-action-menu .dropdown-item {
+  font-size: 0.9rem;
+}
+
+.fa-solid {
+  padding: 5px;
+  border-radius: 5px;
+  color: var(--white);
+}
+
+.fa-user-tie, .fa-user, .fa-arrow-right-from-bracket {
+  color: var(--black);
+}
+
+ .logout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --mainFont: 'Inter', sans-serif;
+    --white: #fff;
+    --gray: #f8f8f8;
+    --darkGray: #818181;
+    --black: #121212;
+
+    /* Main color */
+    --green: #71b406;
+    --purple: #7808ff;
+    --orange: #ea641d;
+    --yellow: #e8ca04;
+   
+    --border: 1px solid #c4c4c4;
+    --boxShadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    --boxShadowTable: rgba(0, 0, 0, 0.014) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+}
+
+*, body, html {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    /* font-family: Helvetica, Arial, sans-serif; */
+    font-family: var(--mainFont);
+    height: 100%;
+    margin: 0;
+}
+
+.msg {
+    background-color: #ffc0c0;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 200;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #db0e0e;
+}
+
+#wrapper {
+    min-height: 100vh;
+    background-color: var(--gray);
+    height: 100%;
+    margin: 0;
+}
+
+.btnRed {
+    border: 1px solid var(--orange);
+    background-color: var(--orange);
+}
+
+.btnRed:hover {
+    border: 1px solid var(--orange);
+    background-color: #d35b1b;
+}
+
+.btnGreen {
+    border: 1px solid var(--green);
+    background-color: var(--green);
+    font-size: 0.9rem;
+    padding: 2px 5px;
+}
+
+.btnGreen:hover {
+    border: 1px solid var(--green);
+    background-color: #629b05;
+}
+
+.btn:focus {
+    box-shadow: none;
+}
