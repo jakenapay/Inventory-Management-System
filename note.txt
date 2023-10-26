@@ -1,0 +1,34 @@
+home
+-dashboard
+-landing page
+-slideshow of chapters
+--no. of users of each chapters
+-with picture of chapter
+
+items
+-single page
+--Item list
+--Request list (admin, hide for users)
+--add item (wag muna hahahaha)
+--mga modal wag muna galawin
+
+requests
+-baka isama lang din sa item
+
+-chapters
+-pov ng manila admins:
+--kita lahat ng chapters; clickable
+---each chapters may list ng users depend on the chapter
+-pov ng admin ng ibang chapter (iligan, davao, etc):
+--kita nila ka same chapter nila at list ng users nila but not outside ng kanilang chapt
+-users pov:
+--wala
+
+logs
+-lahat ng ibang history
+-probably returns of items
+-
+
+:jake
+:updated: 10/26/23
+	
