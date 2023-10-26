@@ -191,11 +191,13 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                             items.item_id AS ID,
                                                             items.item_name AS Name,
                                                             items_category.item_category_name AS Category,
-                                                            items_unit_of_measure.item_uom_name AS Measurement
+                                                            items_unit_of_measure.item_uom_name AS Measurement,
+                                                            items.item_status AS Status
                                                         FROM items
                                                         INNER JOIN items_category ON items.item_category = items_category.item_category_id
                                                         INNER JOIN items_unit_of_measure ON items.item_measure = items_unit_of_measure.item_uom_id
                                                         WHERE items.item_chapter = $user_chapter
+                                                        AND items.item_status = 'enabled'
                                                         AND items.item_quantity > 0;";
                                             }
                                             
@@ -227,28 +229,31 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 
                                                             // Show status of items
                                                             if ($row['Status'] == 'enabled') {
-                                                                echo '<td class="text-success text-capitalize text-sm">' . $row['Status'] . '</td>';
+                                                                echo '<td class="text-success text-capitalize small">' . $row['Status'] . '</td>';
+                                                            } else if ($row['Status'] == 'disabled') {
+                                                                echo '<td class="text-danger text-capitalize small">' . $row['Status'] . '</td>';
                                                             }
                                                         }
                                                     ?>
                                                     <td>
-                                                        <?php if ($_SESSION['CT'] == 1) {
-                                                            echo '
-                                                            <a href="http://" class="view-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#viewModal" data-item-id="'.$row['ID'].'" title="View"><i class="fa-solid fa-eye"></i></a>
-                                                            <a href="http://" class="edit-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#editModal" data-item-id="'.$row['ID'].'" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                            <a href="http://" class="delete-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#deleteModal" data-item-id="'.$row['ID'].'" title="Delete"><i class="fa-solid fa-trash"></i></i></a>
-                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Request"><i class="fa-solid fa-truck-arrow-right"></i></a>
-                                                            <!-- <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Return"><i class="fa-solid fa-rotate-left"></i></a> -->
-                                                            ';
+                                                        <?php if ($_SESSION['CT'] == 1) { // If category is admin then  buttons show below
+                                                            echo '<a href="http://" class="view-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#viewModal" data-item-id="' . $row['ID'] . '" title="View"><i class="fa-solid fa-eye"></i></a>';
+                                                            echo '<a href="http://" class="edit-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#editModal" data-item-id="' . $row['ID'] . '" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>';
+
+                                                            if ($row['Status'] == 'enabled') { // If enable status of the item then show the disable button, vice versa
+                                                                echo '<a href="http://" class="disabled-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#disabledModal" data-item-id="' . $row['ID'] . '" title="Disable"><i class="fa-solid fa-ban"></i></a>';
+                                                            } else if ($row['Status'] == 'disabled') {
+                                                                echo '<a href="http://" class="enabled-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#enabledModal" data-item-id="' . $row['ID'] . '" title="Enable"><i class="fa-solid fa-check"></i></a>';
+                                                            }
+
+                                                            echo '<a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Request"><i class="fa-solid fa-truck-arrow-right"></i></a>';
                                                         } else {
-                                                            echo '
-                                                            <a href="http://" class="view-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#viewModal" data-item-id="'.$row['ID'].'" title="View"><i class="fa-solid fa-eye"></i></a>
-                                                            <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Request"><i class="fa-solid fa-truck-arrow-right"></i></a>
-                                                            <!-- <a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Return"><i class="fa-solid fa-rotate-left"></i></a> -->
-                                                            ';
+                                                            echo '<a href="http://" class="view-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#viewModal" data-item-id="' . $row['ID'] . '" title="View"><i class="fa-solid fa-eye"></i></a>';
+                                                            echo '<a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Request"><i class="fa-solid fa-truck-arrow-right"></i></a>';
                                                         }
                                                         ?>
                                                     </td>
+
                                                 </tr>
                                             <?php    
                                             }
@@ -467,25 +472,50 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
         </form>
     </div>
 
-    <!-- Delete item Modal -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+    <!-- Disabling item Modal -->
+    <div class="modal fade" id="disabledModal" tabindex="-1" role="dialog" aria-labelledby="disabledModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form action="includes/items.inc.php" method="post">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title font-weight-bold" id="exampleModalLabel">Delete Item</h6>
+                        <h6 class="modal-title font-weight-bold" id="exampleModalLabel">Disable Item</h6>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input type="text" name="del_id" id="del_id">
-                        <h6>Are you sure you want to delete this item?</h6>
+                        <input type="hidden" name="del_id" id="del_id">
+                        <h6>Are you sure you want to disable this item?</h6>
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
-                        <input type="text" name="user_id" id="user_id" value="<?php echo $_SESSION['ID']; ?>">
-                        <button type="button" class="btn btn-light px-2" data-bs-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btn-default px-2" name="delete-item-btn" value="Delete">
+                        <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['ID']; ?>">
+                        <button type="button" class="btn btn-secondary btnRed btn-sm px-2" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btnGreen text-light btn-sm mx-1" name="disable-item-btn" value="Disable">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Enabling item Modal -->
+    <div class="modal fade" id="enabledModal" tabindex="-1" role="dialog" aria-labelledby="enabledModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form action="includes/items.inc.php" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title font-weight-bold" id="exampleModalLabel">Enable Item</h6>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="enbl_id" id="enbl_id">
+                        <h6>Are you sure you want to enable this item?</h6>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-between">
+                        <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['ID']; ?>">
+                        <button type="button" class="btn btn-secondary btnRed btn-sm px-2" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btnGreen text-light btn-sm mx-1" name="enable-item-btn" value="Enable">
                     </div>
                 </div>
             </form>
@@ -532,20 +562,38 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                 });
             });
 
-            // Delete the item from modal
-            $('table').on('click', '.delete-btn', function(e) {
+            // Disable the item from modal
+            $('table').on('click', '.disabled-btn', function(e) {
                 e.preventDefault();
                 var itemId = $(this).data('item-id');
                 $.ajax({
                     type: 'POST',
                     url: 'includes/items.inc.php',
                     data: {
-                        'delete-item-btn': true,
+                        'disable-item-btn': true,
                         'item_id': itemId
                     },
                     success: function(response) {
                         $('#del_id').val(itemId);
-                        $('#deleteModal').modal('show');
+                        $('#disabledModal').modal('show');
+                    }
+                });
+            });
+
+            // Enable the item from modal
+            $('table').on('click', '.enabled-btn', function(e) {
+                e.preventDefault();
+                var itemId = $(this).data('item-id');
+                $.ajax({
+                    type: 'POST',
+                    url: 'includes/items.inc.php',
+                    data: {
+                        'enabled-item-btn': true,
+                        'item_id': itemId
+                    },
+                    success: function(response) {
+                        $('#enbl_id').val(itemId);
+                        $('#enabledModal').modal('show');
                     }
                 });
             });

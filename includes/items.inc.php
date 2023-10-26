@@ -509,18 +509,49 @@ else if (isset($_POST['save-edit-item-btn'])) { // For saving edit item btn
         exit();
     }
 }
-else if (isset($_POST['delete-item-btn'])) { // For deleting item
+else if (isset($_POST['disable-item-btn'])) { // For disabling item
     include 'config.inc.php';
 
-    $itemId = $_POST['del_id']; // Get the item's ID that is about to delete
+    $itemId = $_POST['del_id']; // Get the item's ID that is about to disable
     $userId = $_POST['user_id']; // Get the users' ID
 
-    if (empty($itemId) && empty($userId)) { // Check if the delete itemID and userID is empty para pag wala to, babalik sila sa item.php
+    if (empty($itemId) && empty($userId)) { // Check if the disable itemID and userID is empty para pag wala to, babalik sila sa item.php
         header("location: ../items.php?m=404"); // Wala akong maisip na error Code HAHAH
         exit();
     }
 
-    $sql = "DELETE FROM items WHERE item_id = :itemId";
+    $sql = "UPDATE items SET item_status = 'disabled' WHERE item_id = :itemId";
+    // Probably dadagdagan dito para sa logs table
+    try {
+        $stmt = $pdo->prepare($sql);
+        // Bind the parameter
+        $stmt->bindParam(':itemId', $itemId, PDO::PARAM_INT);
+        // Execute the statement
+        $stmt->execute();
+
+        // Updated successfully
+        header("location: ../items.php?m=ds");
+        exit();
+    } catch (PDOException $e) {
+        // Get error message if failed
+        echo "Error: " . $e->getMessage();
+        header("location: ../items.php?m=".$e->getMessage().""); // Failed
+        exit();
+    }
+} 
+else if (isset($_POST['enable-item-btn'])) { // For enabling item
+    include 'config.inc.php';
+
+    $itemId = $_POST['enbl_id']; // Get the item's ID that is about to enable
+    $userId = $_POST['user_id']; // Get the users' ID
+
+    if (empty($itemId) && empty($userId)) { // Check if the enable itemID and userID is empty para pag wala to, babalik sila sa item.php
+        header("location: ../items.php?m=404"); // Wala akong maisip na error Code HAHAH
+        exit();
+    }
+
+    $sql = "UPDATE items SET item_status = 'enabled' WHERE item_id = :itemId";
+    // Probably dadagdagan dito para sa logs table
     try {
         $stmt = $pdo->prepare($sql);
         // Bind the parameter

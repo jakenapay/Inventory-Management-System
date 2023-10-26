@@ -37,7 +37,7 @@
 /* TABLES */
 .table-responsive {
     background-color: var(--white);
-    padding: 2rem 2rem;
+    padding: 1rem 1rem;
 
     border: var(--border);
     border-radius: 20px;
@@ -67,7 +67,7 @@
     background-color: var(--yellow);
 }
 
-.table .fa-trash {
+.table .fa-ban, .table .fa-check {
     background-color: var(--orange);
 }
 
@@ -77,6 +77,14 @@
 
 .table .fa-truck-arrow-right {
     background-color: var(--purple);
+}
+
+.table td {
+    font-size: 0.9rem;
+}
+
+.table i {
+    font-size: 1rem;
 }
 
 .close {
