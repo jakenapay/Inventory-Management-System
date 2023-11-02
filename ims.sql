@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2023 at 02:15 PM
+-- Generation Time: Oct 27, 2023 at 12:11 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -67,6 +67,35 @@ INSERT INTO `chapters` (`chapter_id`, `chapter_name`, `chapter_address`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `history`
+--
+
+CREATE TABLE `history` (
+  `history_id` int(11) NOT NULL,
+  `history_item_id` int(11) NOT NULL,
+  `history_quantity` int(11) NOT NULL,
+  `history_user_id` int(11) NOT NULL,
+  `history_status` enum('approved','declined','pending','') NOT NULL,
+  `history_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `history`
+--
+
+INSERT INTO `history` (`history_id`, `history_item_id`, `history_quantity`, `history_user_id`, `history_status`, `history_date`) VALUES
+(1, 11, 2, 1, 'pending', '2023-10-09'),
+(2, 11, 20, 1, 'pending', '2023-10-09'),
+(3, 2, 1, 2, 'pending', '2023-10-16'),
+(4, 1, 1, 1, 'pending', '2023-10-22'),
+(5, 7, 3, 1, 'pending', '2023-10-22'),
+(6, 1, 2, 1, 'pending', '2023-10-26'),
+(7, 14, 2, 1, 'pending', '2023-10-26'),
+(8, 10, 2, 5, 'pending', '2023-10-27');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `items`
 --
 
@@ -77,6 +106,7 @@ CREATE TABLE `items` (
   `item_measure` int(11) NOT NULL,
   `item_quantity` int(11) NOT NULL,
   `item_chapter` int(11) NOT NULL,
+  `item_status` enum('enabled','disabled','','') NOT NULL,
   `item_description` varchar(255) NOT NULL,
   `item_image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -85,19 +115,16 @@ CREATE TABLE `items` (
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_description`, `item_image`) VALUES
-(1, 'Galaxy Tab A Tablet', 1, 3, 3, 1, '4gb 256gb color black', ''),
-(2, 'A4 Bond Paper', 3, 2, 10, 2, 'A4 Hardcopy', ''),
-(3, 'Bottled Water', 2, 3, 20, 1, 'Nature Spring 500ml', ''),
-(4, 'ID Lace version 5', 3, 3, 80, 3, 'Version 5, Black & Orange', ''),
-(5, 'Jumping wires long', 3, 1, 30, 4, 'Rainbow colors', ''),
-(6, 'Gel Ink Pen', 3, 1, 24, 5, 'Black', ''),
-(7, 'Gel Ink Pen', 3, 1, 24, 5, 'Black', ''),
-(8, 'Jungle Juice', 2, 2, 13, 2, '350ml Mango, Apple, Grapes, & Orange', 'IMG_650896c28445b9.58710873.jpg'),
-(9, 'Sunglasses', 3, 3, 20, 1, 'Rayban, Black Frame', 'IMG_6508975f56a452.42876042.jpg'),
-(10, 'Sunglasses', 3, 3, 13, 1, 'Rayband, Black frame', 'IMG_650898af7e3799.65129257.jpg'),
-(11, 'Hotdog', 2, 1, 22, 1, 'Jumbo, Tender Juicy, Pure Foods, 12pcs per pack', 'IMG_650899879ba091.62117593.png'),
-(12, 'wireless mouse', 1, 3, 10, 1, 'Wireless, Hp, Color Black', 'IMG_65098bc3db97d8.82832936.jpg');
+INSERT INTO `items` (`item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_status`, `item_description`, `item_image`) VALUES
+(1, 'Galaxy Tab A Tablet', 1, 3, 3, 3, 'enabled', '4gb 256gb color black', 'IMG_6534f168034980.13451291.'),
+(2, 'A4 Bond Paper', 3, 2, 10, 2, 'disabled', 'A4 Hardcopy', ''),
+(4, 'ID Lace version 5', 3, 3, 80, 3, 'disabled', 'Version 5, Black & Orange', ''),
+(5, 'Jumping wires long', 3, 1, 30, 4, 'enabled', 'Rainbow colors', ''),
+(7, 'Gel Ink Pen about to delete', 3, 1, 24, 5, 'enabled', 'Black', 'IMG_65350cc0dbc2f1.96755226.'),
+(8, 'Jungle Juice', 2, 2, 13, 2, 'disabled', '350ml Mango, Apple, Grapes, & Orange', 'IMG_650896c28445b9.58710873.jpg'),
+(10, 'Sunglasses', 3, 3, 13, 1, 'enabled', 'Rayband, Black frame', 'IMG_650898af7e3799.65129257.jpg'),
+(11, 'Hotdog', 2, 1, 22, 1, 'enabled', 'Jumbo, Tender Juicy, Pure Foods, 12pcs per pack', 'IMG_650899879ba091.62117593.png'),
+(14, 'yoon', 1, 1, 2, 2, 'enabled', 'grdg', 'IMG_653a616ec49414.50592574.jpg');
 
 -- --------------------------------------------------------
 
@@ -142,6 +169,19 @@ INSERT INTO `items_unit_of_measure` (`item_uom_id`, `item_uom_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `logs`
+--
+
+CREATE TABLE `logs` (
+  `log_id` int(11) NOT NULL,
+  `log_user` int(11) NOT NULL,
+  `log_type` enum('modify','return','request','add','') NOT NULL,
+  `log_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -182,6 +222,14 @@ ALTER TABLE `chapters`
   ADD PRIMARY KEY (`chapter_id`);
 
 --
+-- Indexes for table `history`
+--
+ALTER TABLE `history`
+  ADD PRIMARY KEY (`history_id`),
+  ADD KEY `history_user_id` (`history_user_id`),
+  ADD KEY `history_ibfk_1` (`history_item_id`);
+
+--
 -- Indexes for table `items`
 --
 ALTER TABLE `items`
@@ -201,6 +249,13 @@ ALTER TABLE `items_category`
 --
 ALTER TABLE `items_unit_of_measure`
   ADD PRIMARY KEY (`item_uom_id`);
+
+--
+-- Indexes for table `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`log_id`),
+  ADD KEY `log_user` (`log_user`);
 
 --
 -- Indexes for table `users`
@@ -227,10 +282,16 @@ ALTER TABLE `chapters`
   MODIFY `chapter_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `history`
+--
+ALTER TABLE `history`
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `items_category`
@@ -245,6 +306,12 @@ ALTER TABLE `items_unit_of_measure`
   MODIFY `item_uom_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -255,12 +322,25 @@ ALTER TABLE `users`
 --
 
 --
+-- Constraints for table `history`
+--
+ALTER TABLE `history`
+  ADD CONSTRAINT `history_ibfk_1` FOREIGN KEY (`history_item_id`) REFERENCES `items` (`item_id`),
+  ADD CONSTRAINT `history_ibfk_2` FOREIGN KEY (`history_user_id`) REFERENCES `users` (`user_id`);
+
+--
 -- Constraints for table `items`
 --
 ALTER TABLE `items`
   ADD CONSTRAINT `items_ibfk_1` FOREIGN KEY (`item_category`) REFERENCES `items_category` (`item_category_id`),
   ADD CONSTRAINT `items_ibfk_2` FOREIGN KEY (`item_measure`) REFERENCES `items_unit_of_measure` (`item_uom_id`),
   ADD CONSTRAINT `items_ibfk_3` FOREIGN KEY (`item_chapter`) REFERENCES `chapters` (`chapter_id`);
+
+--
+-- Constraints for table `logs`
+--
+ALTER TABLE `logs`
+  ADD CONSTRAINT `logs_ibfk_1` FOREIGN KEY (`log_user`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `users`
