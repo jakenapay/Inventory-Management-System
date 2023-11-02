@@ -1,0 +1,9 @@
+.table .fa-check {
+    background-color: var(--green);
+}
+
+.table .fa-x, .table .fa-xmark {
+    background-color: var(--orange);
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+}

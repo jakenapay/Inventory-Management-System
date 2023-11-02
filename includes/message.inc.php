@@ -45,6 +45,12 @@ if(isset($_GET['m'])) {
         case "ds":
             echo "<p id='msg' class='msgOk'>Deleted successfully</p>";
             break;
+        case "dcs":
+            echo "<p id='msg' class='msgOk'>Declined successfully</p>";
+            break;
+        case "as":
+            echo "<p id='msg' class='msgOk'>Approved successfully</p>";
+            break;
         default:
             echo "<p id='msg' class='msg'>Unknown error occured</p>";
             break;
