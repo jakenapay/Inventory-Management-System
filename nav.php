@@ -40,9 +40,9 @@
                                 ?>
                             </button>
                             <div id="more-action-menu" class="dropdown-menu">
-                                <a class="dropdown-item" href="#">Profile</a>
-                                <a class="dropdown-item" href="#">About</a>
-                                <a class="dropdown-item" href="#">FAQs</a>
+                                <a class="dropdown-item" href="profile.php">Profile</a>
+                                <a class="dropdown-item" href="about.php">About</a>
+                                <a class="dropdown-item" href="faqs.php">FAQs</a>
                                 <div class="dropdown-divider"></div>
                                 <div class="">
                                     <a class="dropdown-item logout" href="includes/logout.inc.php"><span>Log out</span><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
