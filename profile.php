@@ -88,9 +88,56 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                         <label for="user_email">Email Address</label>
                                         <input type="email" class="form-control form-control-sm" id="user_email" name="user_email" placeholder="Email Address" required value="<?php echo $_SESSION['EM'];?>">
                                     </div>
+
+                                    <!-- Select the session category from database -->
+                                    <?php
+                                    try {
+                                        $sql = "SELECT item_category_name FROM items_category WHERE item_category_id = {$_SESSION['CT']}";
+
+                                        // Prepare the query
+                                        $stmt = $pdo->prepare($sql);
+                                        $stmt->execute();
+
+                                        // Fetch the no. of session category but in category name
+                                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                        // Process the result
+                                        foreach($result as $row) {
+                                            $category_name = $row['item_category_name'];
+                                        }
+                                    } catch (PDOException $e) {
+                                        // Handle database connection or query errors
+                                        echo "Error: " . $e->getMessage();
+                                    }
+                                    ?>
                                     <div class="col-12 col-md-12 col-lg-12 py-1">
-                                        <label for="user_email">Category</label>
-                                        <input type="email" class="form-control form-control-sm" id="user_email" name="user_email" placeholder="Email Address" required value="<?php echo $_SESSION['CT'];?>">
+                                        <label for="item_category">Category</label>
+                                        <select name="item_category" id="item_category" class="form-control form-control-sm" required>
+                                        <option value="'.$cat_value.'" selected><?php echo $category_name;?> (Current)</option>';
+
+                                        <?php
+                                        // To show the other option of the measurement
+                                        try {
+                                            $sql = "SELECT * FROM items_category";
+                                            // Prepare the query
+                                            $stmt = $pdo->prepare($sql);
+                                            $stmt->execute();
+                                            
+                                            // Fetch all rows as an associative array
+                                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);    
+                                            
+                                            // Process the result (e.g., display it)
+                                            foreach ($result as $row) {
+                                                // Access columns by their names
+                                                echo '<option value="' . $row["item_category_id"] . '">' . $row['item_category_name'] . '</option>';
+                                            }
+                                        } catch (PDOException $e) {
+                                            // Handle database connection or query errors
+                                            echo "Error: " . $e->getMessage();
+                                        }
+                                        ?>
+                        
+                                        </select>
                                     </div>
                                     <div class="col-12 col-md-12 col-lg-12 py-1">
                                         <label for="user_email">Chapter</label>
