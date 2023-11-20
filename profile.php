@@ -171,7 +171,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                             echo "Error: " . $e->getMessage();
                                         }
                                         ?>
-                                        <div class="col-12 col-md-12 col-lg-12 py-1">
+                                        <div class="col-12 col-md-12 col-lg-12 py-1">   
                                             <label for="chapter">Chapter</label>
                                             <select name="chapter" id="chapter" class="text-capitalize form-control form-control-sm" required>
                                             <option value="<?php echo $chapter_id; ?>" selected><?php echo $chapter_name;?> (Current)</option>';
