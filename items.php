@@ -123,29 +123,35 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 
 
 
-            <?php include './components/ActionComponent.php' ?>
+
 
 
             <div class="container">
                 <?php
 
-                $userChapter = $_SESSION["CH"];
-                $query = $pdo->prepare("SELECT * FROM `items` WHERE item_chapter = :itemChapter ");
-                $query->bindParam(':itemChapter', $userChapter, PDO::PARAM_INT);
-                $query->execute();
+                if ($_SESSION['CT'] == "0") {
 
-                // set the resulting array to associative
-                $result = $query->fetchAll(PDO::FETCH_ASSOC);
-                foreach ($result as $row) { ?>
-                    <div class="card" style="width: 18rem;">
-                        <img src="./images/items/<?php echo $row['item_image']?>" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><?php echo $row['item_name']?></h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                    $userChapter = $_SESSION["CH"];
+                    $query = $pdo->prepare("SELECT * FROM `items` WHERE item_chapter = :itemChapter ");
+                    $query->bindParam(':itemChapter', $userChapter, PDO::PARAM_INT);
+                    $query->execute();
+
+                    // set the resulting array to associative
+                    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($result as $row) { ?>
+                        <div class="card" style="width: 18rem;">
+                            <img src="./images/items/<?php echo $row['item_image'] ?>" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo $row['item_name'] ?></h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
                         </div>
-                    </div>
-                <?php } ?>
+                <?php }
+                } else {
+
+                    include './components/ActionComponent.php';
+                } ?>
 
 
             </div>
