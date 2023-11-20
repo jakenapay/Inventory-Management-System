@@ -11,6 +11,12 @@ items
 --Request list (admin, hide for users)
 --add item (wag muna hahahaha)
 --mga modal wag muna galawin
+Viewing
+-Remove request function
+Borrowing
+-fetch the user details
+-give them input for their return date
+-
 
 requests
 -baka isama lang din sa item (DONEEEEEEEE)
@@ -28,6 +34,10 @@ requests
 logs
 -lahat ng ibang history
 -probably returns of items
+-
+
+profile.php
+-add image
 -
 
 :jake

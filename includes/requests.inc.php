@@ -23,7 +23,7 @@ if(isset($_POST['approve-request-item-btn'])) { // For approving a request
         $stmt->execute();
 
         // Updated successfully
-        header("location: ../requests.php?m=as");
+        header("location: ../profile.php?m=us");
         exit();
     } catch (PDOException $e) {
         // Get error message if failed

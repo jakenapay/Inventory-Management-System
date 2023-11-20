@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2023 at 12:11 AM
+-- Generation Time: Nov 20, 2023 at 11:55 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -84,14 +84,16 @@ CREATE TABLE `history` (
 --
 
 INSERT INTO `history` (`history_id`, `history_item_id`, `history_quantity`, `history_user_id`, `history_status`, `history_date`) VALUES
-(1, 11, 2, 1, 'pending', '2023-10-09'),
-(2, 11, 20, 1, 'pending', '2023-10-09'),
-(3, 2, 1, 2, 'pending', '2023-10-16'),
-(4, 1, 1, 1, 'pending', '2023-10-22'),
-(5, 7, 3, 1, 'pending', '2023-10-22'),
-(6, 1, 2, 1, 'pending', '2023-10-26'),
-(7, 14, 2, 1, 'pending', '2023-10-26'),
-(8, 10, 2, 5, 'pending', '2023-10-27');
+(1, 11, 2, 1, 'approved', '2023-10-09'),
+(2, 11, 20, 1, 'approved', '2023-10-09'),
+(3, 2, 1, 2, 'approved', '2023-10-16'),
+(4, 1, 1, 1, 'declined', '2023-10-22'),
+(5, 7, 3, 1, 'declined', '2023-10-22'),
+(6, 1, 2, 1, 'declined', '2023-10-26'),
+(7, 14, 2, 1, 'declined', '2023-10-26'),
+(8, 10, 2, 5, 'approved', '2023-10-27'),
+(9, 14, 1, 1, 'declined', '2023-11-20'),
+(10, 1, 1, 1, 'pending', '2023-11-20');
 
 -- --------------------------------------------------------
 
@@ -116,15 +118,16 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_status`, `item_description`, `item_image`) VALUES
-(1, 'Galaxy Tab A Tablet', 1, 3, 3, 3, 'enabled', '4gb 256gb color black', 'IMG_6534f168034980.13451291.'),
-(2, 'A4 Bond Paper', 3, 2, 10, 2, 'disabled', 'A4 Hardcopy', ''),
-(4, 'ID Lace version 5', 3, 3, 80, 3, 'disabled', 'Version 5, Black & Orange', ''),
+(1, 'Galaxy Tab A Tablet', 1, 3, 3, 3, 'enabled', '4gb 256gb color black', 'IMG_655b0bd9ca75e0.52208310.png'),
+(2, 'A4 Bond Paper', 3, 2, 10, 2, 'enabled', 'A4 Hardcopy', 'IMG_6550d3fd29acb7.76590013.jpg'),
+(4, 'ID Lace version 5', 3, 3, 80, 4, 'enabled', 'Version 5, Black & Orange', 'IMG_6543bb326ab0b1.55477099.'),
 (5, 'Jumping wires long', 3, 1, 30, 4, 'enabled', 'Rainbow colors', ''),
-(7, 'Gel Ink Pen about to delete', 3, 1, 24, 5, 'enabled', 'Black', 'IMG_65350cc0dbc2f1.96755226.'),
+(7, 'Gel Ink Pen about to delete', 3, 1, 24, 5, 'disabled', 'Black', 'IMG_65350cc0dbc2f1.96755226.'),
 (8, 'Jungle Juice', 2, 2, 13, 2, 'disabled', '350ml Mango, Apple, Grapes, & Orange', 'IMG_650896c28445b9.58710873.jpg'),
 (10, 'Sunglasses', 3, 3, 13, 1, 'enabled', 'Rayband, Black frame', 'IMG_650898af7e3799.65129257.jpg'),
 (11, 'Hotdog', 2, 1, 22, 1, 'enabled', 'Jumbo, Tender Juicy, Pure Foods, 12pcs per pack', 'IMG_650899879ba091.62117593.png'),
-(14, 'yoon', 1, 1, 2, 2, 'enabled', 'grdg', 'IMG_653a616ec49414.50592574.jpg');
+(14, 'yoon', 1, 1, 2, 2, 'enabled', 'grdg', 'IMG_655bde39680e92.12512540.jpg'),
+(15, 'wa ', 1, 1, 2321, 3, 'enabled', 'dasdasda', 'IMG_655b09bf1c7bc7.78434158.png');
 
 -- --------------------------------------------------------
 
@@ -192,18 +195,19 @@ CREATE TABLE `users` (
   `user_email` varchar(255) NOT NULL,
   `user_password` varchar(255) NOT NULL,
   `user_category` int(11) NOT NULL,
-  `user_chapter` int(11) NOT NULL
+  `user_chapter` int(11) NOT NULL,
+  `user_image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_firstname`, `user_lastname`, `user_email`, `user_password`, `user_category`, `user_chapter`) VALUES
-(1, 'jake', 'napay', 'jakemantesnapay@gmail.com', '$2y$10$RIQWqDTz88hS713D1XbPIOAiicKGkmTpUr4FJnMSquvh4SbuGUj5S', 1, 1),
-(2, 'john moren', 'dinela', 'jmdinela@gmail.com', '$2y$10$1o24hhJ6ibvCFNhaoD9jaeQW9PS59s7lDV3f2MtS3Uv3bLNhLqtJm', 0, 2),
-(4, 'Jay Ar', 'De Guzman', 'jdeguzman@gmail.com', '$2y$10$wk28/l2eJqickXsyQR6tZO43Dj279xxm.8otU9pPbeE7Bk/stzjxq', 1, 4),
-(5, 'Lee Angelo', 'Mollo', 'lamollo@gmail.com', '$2y$10$pzhfiX1L7fC723q5n6/xReHRBUrVLbdy2yuiOUsNG6Ay9Wjvr21Ey', 0, 1);
+INSERT INTO `users` (`user_id`, `user_firstname`, `user_lastname`, `user_email`, `user_password`, `user_category`, `user_chapter`, `user_image`) VALUES
+(1, 'jakez', 'napay', 'jakemantesnapay@gmail.com', '$2y$10$RIQWqDTz88hS713D1XbPIOAiicKGkmTpUr4FJnMSquvh4SbuGUj5S', 1, 1, 'IMG_655be1b4d11585.89565207.jpg'),
+(2, 'john moren', 'dinela', 'jmdinela@gmail.com', '$2y$10$1o24hhJ6ibvCFNhaoD9jaeQW9PS59s7lDV3f2MtS3Uv3bLNhLqtJm', 0, 2, ''),
+(4, 'Jay Ar', 'De Guzman', 'jdeguzman@gmail.com', '$2y$10$wk28/l2eJqickXsyQR6tZO43Dj279xxm.8otU9pPbeE7Bk/stzjxq', 1, 4, ''),
+(5, 'Lee Angelo', 'Mollo', 'lamollo@gmail.com', '$2y$10$pzhfiX1L7fC723q5n6/xReHRBUrVLbdy2yuiOUsNG6Ay9Wjvr21Ey', 0, 4, '');
 
 --
 -- Indexes for dumped tables
@@ -285,13 +289,13 @@ ALTER TABLE `chapters`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `items_category`
