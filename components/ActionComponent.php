@@ -5,7 +5,7 @@
 
 
 
-if ($_SESSION['user_category'] == 1) {
+if ($_SESSION['CT'] == 1) {
 ?>
     <div class="container">
         <ul class="nav nav-tabs">
@@ -38,7 +38,7 @@ if ($_SESSION['user_category'] == 1) {
         // Function to load content based on the hash in the URL
         function loadContent(route) {
             $.ajax({
-                url: '../includes/load_content.php', // Replace with your PHP script URL
+                url: './includes/load_content.php', // Replace with your PHP script URL
                 method: 'POST',
                 data: {
                     route: route
