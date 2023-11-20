@@ -74,77 +74,141 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                         <form action="includes/profile.inc.php" method="POST" enctype="multipart/form-data">
                             <div class="row d-flex justify-content-center align-items-center">
                                 <!-- Container for details like name, email -->
+                                <!-- User profile picture -->
+                                <!-- <div class="col-6 col-md-6 col-lg-6">
+                                    <img src="images/items/" loading="lazy" class="d-flex justify-content-center img-thumbnail img-fluid" alt="Image" name="item_image">
+                                </div> -->
+                                <!-- User details -->
                                 <div class="col-6 col-md-6 col-lg-6">
-                                    <!-- Name -->
-                                    <div class="col-12 col-md-12 col-lg-12 py-1">
-                                        <label for="user_firstname">Given Name</label>
-                                        <input type="text" class="form-control form-control-sm text-capitalize" id="user_firstname" name="user_firstname" placeholder="Given Name" required value="<?php echo $_SESSION['FN'];?>">
-                                    </div>
-                                    <div class="col-12 col-md-12 col-lg-12 py-1">
-                                        <label for="user_lastname">Surname</label>
-                                        <input type="text" class="form-control form-control-sm text-capitalize" id="user_lastname" name="user_lastname" placeholder="Last Name" required value="<?php echo $_SESSION['LN'];?>">
-                                    </div>
-                                    <div class="col-12 col-md-12 col-lg-12 py-1">
-                                        <label for="user_email">Email Address</label>
-                                        <input type="email" class="form-control form-control-sm" id="user_email" name="user_email" placeholder="Email Address" required value="<?php echo $_SESSION['EM'];?>">
-                                    </div>
+                                    <form action="includes/profile.inc.php" method="POST" enctype="multipart/form-data">
+                                        <!-- Name -->
+                                        <div class="col-12 col-md-12 col-lg-12 py-1">
+                                            <label for="user_firstname">Given Name</label>
+                                            <input type="text" class="form-control form-control-sm text-capitalize" id="user_firstname" name="user_firstname" placeholder="Given Name" required value="<?php echo $_SESSION['FN'];?>">
+                                        </div>
+                                        <!-- Surname -->
+                                        <div class="col-12 col-md-12 col-lg-12 py-1">
+                                            <label for="user_lastname">Surname</label>
+                                            <input type="text" class="form-control form-control-sm text-capitalize" id="user_lastname" name="user_lastname" placeholder="Last Name" required value="<?php echo $_SESSION['LN'];?>">
+                                        </div>
+                                        <!-- Email address -->
+                                        <div class="col-12 col-md-12 col-lg-12 py-1">
+                                            <label for="user_email">Email Address</label>
+                                            <input type="email" class="form-control form-control-sm" id="user_email" name="user_email" placeholder="Email Address" required value="<?php echo $_SESSION['EM'];?>">
+                                        </div>
 
-                                    <!-- Select the session category from database -->
-                                    <?php
-                                    try {
-                                        $sql = "SELECT item_category_name FROM items_category WHERE item_category_id = {$_SESSION['CT']}";
-
-                                        // Prepare the query
-                                        $stmt = $pdo->prepare($sql);
-                                        $stmt->execute();
-
-                                        // Fetch the no. of session category but in category name
-                                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                                        // Process the result
-                                        foreach($result as $row) {
-                                            $category_name = $row['item_category_name'];
-                                        }
-                                    } catch (PDOException $e) {
-                                        // Handle database connection or query errors
-                                        echo "Error: " . $e->getMessage();
-                                    }
-                                    ?>
-                                    <div class="col-12 col-md-12 col-lg-12 py-1">
-                                        <label for="item_category">Category</label>
-                                        <select name="item_category" id="item_category" class="form-control form-control-sm" required>
-                                        <option value="'.$cat_value.'" selected><?php echo $category_name;?> (Current)</option>';
-
+                                        <!-- Select the session category from database -->
                                         <?php
-                                        // To show the other option of the measurement
                                         try {
-                                            $sql = "SELECT * FROM items_category";
+                                            $sql = "SELECT category_id, category_name FROM category WHERE category_id = {$_SESSION['CT']}";
+
                                             // Prepare the query
                                             $stmt = $pdo->prepare($sql);
                                             $stmt->execute();
-                                            
-                                            // Fetch all rows as an associative array
-                                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);    
-                                            
-                                            // Process the result (e.g., display it)
-                                            foreach ($result as $row) {
-                                                // Access columns by their names
-                                                echo '<option value="' . $row["item_category_id"] . '">' . $row['item_category_name'] . '</option>';
+
+                                            // Fetch the no. of session category but in category name
+                                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                            // Process the result
+                                            foreach($result as $row) {
+                                                $category_id = $row['category_id'];
+                                                $category_name = $row['category_name'];
                                             }
                                         } catch (PDOException $e) {
                                             // Handle database connection or query errors
                                             echo "Error: " . $e->getMessage();
                                         }
                                         ?>
-                        
-                                        </select>
-                                    </div>
-                                    <div class="col-12 col-md-12 col-lg-12 py-1">
-                                        <label for="user_email">Chapter</label>
-                                        <input type="email" class="form-control form-control-sm" id="user_email" name="user_email" placeholder="Email Address" required value="<?php echo $_SESSION['CH'];?>">
-                                    </div>
+                                        <div class="col-12 col-md-12 col-lg-12 py-1">
+                                            <label for="item_category">Category</label>
+                                            <select name="item_category" id="item_category" class="text-capitalize form-control form-control-sm" required>
+                                            <option value="<?php echo $category_id; ?>" selected><?php echo $category_name;?> (Current)</option>';
+
+                                            <?php
+                                            // To show the other option of the measurement
+                                            try {
+                                                $sql = "SELECT * FROM category";
+                                                // Prepare the query
+                                                $stmt = $pdo->prepare($sql);
+                                                $stmt->execute();
+                                                
+                                                // Fetch all rows as an associative array
+                                                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);    
+                                                
+                                                // Process the result (e.g., display it)
+                                                foreach ($result as $row) {
+                                                    // Access columns by their names
+                                                    echo '<option value="' . $row["category_id"] . '">' . $row['category_name'] . '</option>';
+                                                }
+                                            } catch (PDOException $e) {
+                                                // Handle database connection or query errors
+                                                echo "Error: " . $e->getMessage();
+                                            }
+                                            ?>
+                            
+                                            </select>
+                                        </div>
+
+                                        <!-- Select the session category from database -->
+                                        <?php
+                                        try {
+                                            $sql = "SELECT chapter_id, chapter_name FROM chapters WHERE chapter_id = {$_SESSION['CH']}";
+
+                                            // Prepare the query
+                                            $stmt = $pdo->prepare($sql);
+                                            $stmt->execute();
+
+                                            // Fetch the no. of session category but in category name
+                                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                            // Process the result
+                                            foreach($result as $row) {
+                                                $chapter_id = $row['chapter_id'];
+                                                $chapter_name = $row['chapter_name'];
+                                            }
+                                        } catch (PDOException $e) {
+                                            // Handle database connection or query errors
+                                            echo "Error: " . $e->getMessage();
+                                        }
+                                        ?>
+                                        <div class="col-12 col-md-12 col-lg-12 py-1">
+                                            <label for="chapter">Chapter</label>
+                                            <select name="chapter" id="chapter" class="text-capitalize form-control form-control-sm" required>
+                                            <option value="<?php echo $chapter_id; ?>" selected><?php echo $chapter_name;?> (Current)</option>';
+
+                                            <?php
+                                            // To show the other option of the measurement
+                                            try {
+                                                $sql = "SELECT * FROM chapters";
+                                                // Prepare the query
+                                                $stmt = $pdo->prepare($sql);
+                                                $stmt->execute();
+                                                
+                                                // Fetch all rows as an associative array
+                                                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);    
+                                                
+                                                // Process the result (e.g., display it)
+                                                foreach ($result as $row) {
+                                                    // Access columns by their names
+                                                    echo '<option value="' . $row["chapter_id"] . '">' . $row['chapter_name'] . '</option>';
+                                                }
+                                            } catch (PDOException $e) {
+                                                // Handle database connection or query errors
+                                                echo "Error: " . $e->getMessage();
+                                            }
+                                            ?>
+                                            </select>
+                                        </div>
+                                        
+                                        <!-- Save button -->
+                                        <div class="mt-3">
+                                            <input type="submit" class="btn btn-sm btnGreen text-light" name="save-profile-btn" value="Save Changes">
+                                        </div>
+                                    </form>
                                 </div>
+
                             </div>
+
                         </form>
                     </div>
                 </div>

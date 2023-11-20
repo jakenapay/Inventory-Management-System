@@ -3,7 +3,6 @@
 if (isset($_POST['login-btn'])) {
     // include other php process
     include_once 'config.inc.php';
-    // include_once 'functions.inc.php';
 
     // get data from login
     $email = $_POST['email'];
