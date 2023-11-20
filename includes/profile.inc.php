@@ -6,6 +6,7 @@ if (isset($_POST['save-profile-btn'])) { // Saving profile information after edi
     include 'config.inc.php';
 
     // Get the new information
+    
 
 
 

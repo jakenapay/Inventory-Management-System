@@ -75,9 +75,9 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                             <div class="row d-flex justify-content-center align-items-center">
                                 <!-- Container for details like name, email -->
                                 <!-- User profile picture -->
-                                <!-- <div class="col-6 col-md-6 col-lg-6">
+                                <div class="col-6 col-md-6 col-lg-6">
                                     <img src="images/items/" loading="lazy" class="d-flex justify-content-center img-thumbnail img-fluid" alt="Image" name="item_image">
-                                </div> -->
+                                </div>
                                 <!-- User details -->
                                 <div class="col-6 col-md-6 col-lg-6">
                                     <form action="includes/profile.inc.php" method="POST" enctype="multipart/form-data">
@@ -121,32 +121,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                         ?>
                                         <div class="col-12 col-md-12 col-lg-12 py-1">
                                             <label for="item_category">Category</label>
-                                            <select name="item_category" id="item_category" class="text-capitalize form-control form-control-sm" required>
-                                            <option value="<?php echo $category_id; ?>" selected><?php echo $category_name;?> (Current)</option>';
-
-                                            <?php
-                                            // To show the other option of the measurement
-                                            try {
-                                                $sql = "SELECT * FROM category";
-                                                // Prepare the query
-                                                $stmt = $pdo->prepare($sql);
-                                                $stmt->execute();
-                                                
-                                                // Fetch all rows as an associative array
-                                                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);    
-                                                
-                                                // Process the result (e.g., display it)
-                                                foreach ($result as $row) {
-                                                    // Access columns by their names
-                                                    echo '<option value="' . $row["category_id"] . '">' . $row['category_name'] . '</option>';
-                                                }
-                                            } catch (PDOException $e) {
-                                                // Handle database connection or query errors
-                                                echo "Error: " . $e->getMessage();
-                                            }
-                                            ?>
-                            
-                                            </select>
+                                            <input type="text" class="form-control form-control-sm text-capitalize" id="user_firstname" name="user_firstname" placeholder="Given Name" required value="<?php echo $category_name;?>" disabled>
                                         </div>
 
                                         <!-- Select the session category from database -->
@@ -173,31 +148,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                         ?>
                                         <div class="col-12 col-md-12 col-lg-12 py-1">   
                                             <label for="chapter">Chapter</label>
-                                            <select name="chapter" id="chapter" class="text-capitalize form-control form-control-sm" required>
-                                            <option value="<?php echo $chapter_id; ?>" selected><?php echo $chapter_name;?> (Current)</option>';
-
-                                            <?php
-                                            // To show the other option of the measurement
-                                            try {
-                                                $sql = "SELECT * FROM chapters";
-                                                // Prepare the query
-                                                $stmt = $pdo->prepare($sql);
-                                                $stmt->execute();
-                                                
-                                                // Fetch all rows as an associative array
-                                                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);    
-                                                
-                                                // Process the result (e.g., display it)
-                                                foreach ($result as $row) {
-                                                    // Access columns by their names
-                                                    echo '<option value="' . $row["chapter_id"] . '">' . $row['chapter_name'] . '</option>';
-                                                }
-                                            } catch (PDOException $e) {
-                                                // Handle database connection or query errors
-                                                echo "Error: " . $e->getMessage();
-                                            }
-                                            ?>
-                                            </select>
+                                            <input type="text" class="form-control form-control-sm text-capitalize" id="user_firstname" name="user_firstname" placeholder="Given Name" required value="<?php echo $chapter_name;?>" disabled>
                                         </div>
                                         
                                         <!-- Save button -->
