@@ -107,6 +107,11 @@ if (isset($_POST['save-profile-btn'])) { // Saving profile information after edi
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
 
+            // Rename the Session for firstname
+            session_start();
+            $_SESSION['FN'] = $firstname;
+            $_SESSION['LN'] = $lastname;
+
             header("location: ../profile.php?m=us"); // Updated successfully
             exit();
         } catch (PDOException $e) {

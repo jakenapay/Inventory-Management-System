@@ -48,6 +48,15 @@ if (isset($_POST['add-item-btn'])) {
         header("location: ../items.php?m=ie");
         exit();
     }
+
+    // If all functions were passed then explode the image name and extension
+    // Declare path and old pic name, and unlink/delete it from folder of images
+    if (isset($old_img) && ($old_img != '')) {
+        $path = "../images/userProfiles/" . $old_img;
+        if (!unlink($path)) {
+            echo "You have an error deleting image";
+        }
+    }
     
     $image_new_name = uniqid('', true) . "." . $image_ext;
     $image_final_name = 'IMG_' . $image_new_name;
@@ -409,6 +418,7 @@ else if (isset($_POST['edit_view'])) { // For editing of item
         
         if ($image != "") {
             $return .= '<img src="images/items/'.$image.'" loading="lazy" class="d-flex justify-content-center img-thumbnail img-fluid" alt="Image" name="item_image">';
+            $return .= '<input type="hidden" value="'.$image.'" name="old_image" id="old_image"';
         } else {
             $return .= '<img src="" name="item_image" alt="No image found" class="d-flex justify-content-center img-thumbnail img-fluid">';
         }
@@ -438,7 +448,7 @@ else if (isset($_POST['save-edit-item-btn'])) { // For saving edit item btn
     $imgType = $_FILES['new_item_image']['type'];
     $imgSize = $_FILES['new_item_image']['size'];
     $imgError = $_FILES['new_item_image']['error'];
-    $old_img = $_FILES['item_image']['name'];
+    $old_img = $_POST['old_image'];
 
     // Check if there's any empty variable
     if (empty($userId) || empty($itemId) || empty($name) || empty($category) || empty($measure) || empty($chapter) || empty($description)) {
@@ -470,44 +480,72 @@ else if (isset($_POST['save-edit-item-btn'])) { // For saving edit item btn
             header("location: ../items.php?m=ie");
             exit();
         }
+
+        // If all functions were passed then explode the image name and extension
+        // Declare path and old pic name, and unlink/delete it from folder of images
+        if (isset($old_img) && ($old_img != '')) {
+            $path = "../images/items/" . $old_img;
+            if (!unlink($path)) {
+                echo "You have an error deleting image";
+            }
+        }
+
+         // If all functions were passed then explode the image name and extension
+        // Create a unique ID for the image
+        // Upload the image to the folder
+        $image_new_name = uniqid('', true) . "." . $image_ext;
+
+        // Upload the image to folder of images
+        $image_final_name = "IMG_" . $image_new_name;
+        $folder = '../images/items/';
+        move_uploaded_file($imgTmpName, $folder . $image_final_name);
+
+        $sql = "UPDATE items SET item_name = :name, item_category = :category, item_measure = :measure, item_chapter = :chapter, item_description = :description, item_image = :image WHERE item_id = :itemId";
+        try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':itemId', $itemId);
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':category', $category);
+            $stmt->bindParam(':measure', $measure);
+            $stmt->bindParam(':chapter', $chapter);
+            $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':image', $image_final_name);
+            $stmt->execute();
+
+            header("location: ../items.php?m=us"); // Updated successfully
+            exit();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            header("location: ../items.php?m=".$e->getMessage().""); // Failed
+            exit();
+        }
+
     } else {
-        $imageTmpExt = explode('.', $old_img);
-        $imageExt = strtolower(end($imageTmpExt));
+        $img = $old_img;
 
-        $allowed_ext = array('jpg', 'jpeg', 'png', 'pdf');
-        $image_info = pathinfo($imageName);
-        $image_ext = strtolower($image_info['extension']);
+        $sql = "UPDATE items SET item_name = :name, item_category = :category, item_measure = :measure, item_chapter = :chapter, item_description = :description, item_image = :image WHERE item_id = :itemId";
+        try {
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':itemId', $itemId);
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':category', $category);
+            $stmt->bindParam(':measure', $measure);
+            $stmt->bindParam(':chapter', $chapter);
+            $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':image', $image_final_name);
+            $stmt->execute();
+
+            header("location: ../items.php?m=us"); // Updated successfully
+            exit();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            header("location: ../items.php?m=".$e->getMessage().""); // Failed
+            exit();
+        }
     }
 
-    // If all functions were passed then explode the image name and extension
-    // Create a unique ID for the image
-    // Upload the image to the folder
-    $image_new_name = uniqid('', true) . "." . $image_ext;
-
-    // Upload the image to folder of images
-    $image_final_name = "IMG_" . $image_new_name;
-    $folder = '../images/items/';
-    move_uploaded_file($imgTmpName, $folder . $image_final_name);
-
-    $sql = "UPDATE items SET item_name = :name, item_category = :category, item_measure = :measure, item_chapter = :chapter, item_description = :description, item_image = :image WHERE item_id = :itemId";
-    try {
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':itemId', $itemId);
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':category', $category);
-        $stmt->bindParam(':measure', $measure);
-        $stmt->bindParam(':chapter', $chapter);
-        $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':image', $image_final_name);
-        $stmt->execute();
-
-        header("location: ../items.php?m=us"); // Updated successfully
-        exit();
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-        header("location: ../items.php?m=".$e->getMessage().""); // Failed
-        exit();
-    }
+   
+    
 }
 else if (isset($_POST['disable-item-btn'])) { // For disabling item
     include 'config.inc.php';

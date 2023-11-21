@@ -13,6 +13,20 @@ if (!isset($_SESSION['ID']) and ($_SESSION['ID'] == '')) {
 $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 ?>
 
+<script>
+    $(document).ready(function() {
+        $('table').DataTable();
+    });
+
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
+
+    $('#myModal').on('shown.bs.modal', function() {
+        $('#myInput').trigger('focus')
+    });
+</script>
+
 <div class="row justify-content-center align-items-center mt-3">
     <div class="col-12 col-sm-12 col-md-10 col-lg-10">
         <?php include '../includes/message.inc.php'; ?>
