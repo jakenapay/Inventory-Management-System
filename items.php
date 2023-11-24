@@ -64,7 +64,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             text-overflow: ellipsis;
         }
     </style>
-    <?php include 'nav.php'; ?>
+    <?php include './nav.php'; ?>
 
     <div id="wrapper">
         <div class="section px-5 pt-4">
@@ -152,8 +152,8 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                         foreach ($result as $row) { ?>
                             <!-- <form action="./includes/tocart.php" method="POST"> -->
 
-                            <div class="col-md-3">
-                                <div class="card mb-4 h-100 d-flex flex-column ">
+                            <div class="col-md-3 col-sm-4 col-lg-3 mb-4">
+                                <div class="card  h-100 d-flex flex-column">
                                     <input type="text" id="user_id" value="<?php echo $_SESSION['ID'] ?>" hidden>
                                     <input type="text" class="item_id" value="<?php echo $row['item_id'] ?>" hidden>
                                     <img src="./images/items/<?php echo $row['item_image'] ?>" class="card-img-top" style="max-width: 100%; min-width: 50px;" alt="...">
