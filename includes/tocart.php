@@ -1,21 +1,11 @@
 <?php
 include './config.inc.php';
 
-if (isset($_POST["Submit"])) {
+if (isset($_POST["userid"])) {
 
-    $user_id = $_POST["user_id"];
-    $item_id = $_POST["item_id"];
+    $user_id = $_POST["userid"];
+    $item_id = $_POST["itemid"];
 
-
-    // $query = "INSERT INTO `cart`(`user_id`, `item_id`) VALUES ('?','?')";
-    // $stmt = $pdo->prepare($query);
-
-    // $stmt->execute(array($user_id, $item_id));
-
-    // if($stmt == true){
-    //     echo "data inserted";
-    // }
-    // echo "this is user id :" . $user_id . "&" . "this is item_id: " . $item_id;
 
     // ? Prepare the SQL query
     $query = "INSERT INTO `cart` (`user_id`, `item_id`) VALUES (?, ?)";

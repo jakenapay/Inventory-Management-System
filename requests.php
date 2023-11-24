@@ -1,5 +1,5 @@
 <?php
-include 'includes/config.inc.php';
+include './includes/config.inc.php';
 session_start();
 
 // Check if there's an id, if it has, then it's logged in
