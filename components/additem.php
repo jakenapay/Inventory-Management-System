@@ -5,7 +5,7 @@ session_start();
 <div>
     <h1>this is the add existing item page</h1>
     <div>
-        <input type="text" name="itemid" id="itemid" autofocus>
+        <input type="text" name="itemid" id="itemid" >
         <button type="button" class="btn btn-success" id="btnAdd">insert to table</button>
     </div>
 
@@ -90,6 +90,7 @@ $(document).ready(function() {
                 },
                 success: function(response) {
                     if (response == "error") {
+                        console.log(response);
                         $('.modal').modal('show');
                         setInterval(function() {
                             $('.modal').modal('hide');

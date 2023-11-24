@@ -16,7 +16,7 @@
                         <li><a href="home.php" class="<?php echo (($_SESSION['active_tab'] === 'home.php')) ? 'active' : ''; ?>">Home</a></li>
                         <li><a href="items.php" class="<?php echo (($_SESSION['active_tab'] === 'items.php')) ? 'active' : ''; ?>">Items</a></li>
                         <li><a href="requests.php" class="<?php echo (($_SESSION['active_tab'] === 'requests.php')) ? 'active' : ''; ?>">Requests</a></li>
-                        
+                        <li><a href="cart.php" class="<?php echo (($_SESSION['active_tab'] === 'cart.php')) ? 'active' : ''; ?>">Cart</a></li>
                         <!-- FOR CHAPTERS LINK -->
                         <!-- Only admins and manila chapter can see this page -->
                         <?php

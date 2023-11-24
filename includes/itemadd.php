@@ -15,7 +15,7 @@ if (isset($_POST['datas'])) {
             echo json_encode($item);
         } else {
             // Handle the case where the item with the provided item_id was not found
-            echo json_encode(['error' => 'Item not found']);
+            echo "error";
         }
     } else {
         // Handle any database query execution errors
