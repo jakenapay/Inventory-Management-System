@@ -6,7 +6,6 @@
     --gray: #f8f8f8;
     --darkGray: #818181;
     --black: #121212;
-
     /* Main color */
     --green: #71b406;
     --purple: #7808ff;
@@ -86,3 +85,28 @@ body {
 .btn:focus {
     box-shadow: none;
 }
+
+
+/* Cart CSS and its number */
+.badge {
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+}
+
+.label-warning[href],
+.badge-warning[href] {
+background-color: #c67605;
+}
+
+#lblCartCount {
+    font-size: 0.8rem;
+    background: transparent;
+    color: var(--black);
+    padding: 0 5px;
+    vertical-align: top;
+    margin-left: -7px; 
+}
+/* End of cart */

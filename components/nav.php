@@ -40,7 +40,6 @@
                             <button type="button" id="btn-more-action" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                                 <?php
-                                // echo ($_SESSION['CT'] == 1) ? '<i class="fa-solid fa-user-tie"></i>' : '<i class="fa-solid fa-user"></i>';
                                 echo $_SESSION['user_firstname'];
                                 ?>
                             </button>

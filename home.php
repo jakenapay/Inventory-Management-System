@@ -28,6 +28,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="assets/css/nav.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="assets/css/home.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="assets/css/cart.css?v=<?php echo time(); ?>">
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
