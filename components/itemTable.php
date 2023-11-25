@@ -34,7 +34,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 </div>
 
 <div class="row justify-content-center align-items-center">
-    <div class="col-12 col-sm-12 col-md-12 col-lg-11">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
         <div class="table-responsive">
             <table class="table table-hover table-sm">
                 <thead>

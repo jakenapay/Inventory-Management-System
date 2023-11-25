@@ -26,6 +26,7 @@
                             }
                         ?>
                         <li><a href="logs.php" class="<?php echo (($_SESSION['active_tab'] === 'logs.php')) ? 'active' : ''; ?>">Logs</a></li>
+                        <li><a href="users.php" class="<?php echo (($_SESSION['active_tab'] === 'users.php')) ? 'active' : ''; ?>">Users</a></li>
                     </ul>
 
                     <ul>

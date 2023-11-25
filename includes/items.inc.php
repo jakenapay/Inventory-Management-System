@@ -219,7 +219,7 @@ else if (isset($_POST['edit_view'])) { // For editing of item
     chapters.chapter_name, 
     items.item_description, 
     items.item_image 
-    FROM items 
+    FROM items
     INNER JOIN items_category ON items.item_category = items_category.item_category_id 
     INNER JOIN items_unit_of_measure ON items.item_measure = items_unit_of_measure.item_uom_id
     INNER JOIN chapters ON items.item_chapter = chapters.chapter_id
@@ -367,69 +367,69 @@ else if (isset($_POST['edit_view'])) { // For editing of item
                             $return .= "Error: " . $e->getMessage();
                         }
                         
-        $return .= '
-                    </select>
-                </div>
-                <div class="col-md-12 py-1">
-                    <label for="item_quantity">Quantity <a class="text-decoration-none" href="restock.php" target="" rel="noopener noreferrer">(Restock)  </a></label>
-                    <input type="text" class="form-control form-control-sm text-capitalize" id="item_quantity" name="item_quantity" placeholder="Quantity" readonly value="'.$quantity.'">
-                </div>';
-
-                if (($_SESSION['CT'] === 1) && ($_SESSION['CH'] === 1)) {
-                    $return .= '
+            $return .= '
+                        </select>
+                    </div>
                     <div class="col-md-12 py-1">
-                        <label for="item_chapter">Chapter</label>
-                        <select name="item_chapter" id="item_chapter" class="form-control form-control-sm" required>
-                            <option value="'.$chapt_value.'" selected>'. $chapter .' (Current)</option>';
+                        <label for="item_quantity">Quantity <a class="text-decoration-none" href="restock.php" target="" rel="noopener noreferrer">(Restock)  </a></label>
+                        <input type="text" class="form-control form-control-sm text-capitalize" id="item_quantity" name="item_quantity" placeholder="Quantity" readonly value="'.$quantity.'">
+                    </div>';
 
-                        // To show the other option of the measurement
-                        try {
-                            $sql = "SELECT * FROM chapters";
-                            // Prepare the query
-                            $stmt = $pdo->prepare($sql);
-                            $stmt->execute();
-                            
-                            // Fetch all rows as an associative array
-                            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);    
-                            
-                            // Process the result (e.g., display it)
-                            foreach ($result as $row) {
-                                // Access columns by their names
-                                $return .= '<option value="' . $row["chapter_id"] . '">' . $row['chapter_name'] . '</option>';
+                    if (($_SESSION['CT'] === 1) && ($_SESSION['CH'] === 1)) {
+                        $return .= '
+                        <div class="col-md-12 py-1">
+                            <label for="item_chapter">Chapter</label>
+                            <select name="item_chapter" id="item_chapter" class="form-control form-control-sm" required>
+                                <option value="'.$chapt_value.'" selected>'. $chapter .' (Current)</option>';
+
+                            // To show the other option of the measurement
+                            try {
+                                $sql = "SELECT * FROM chapters";
+                                // Prepare the query
+                                $stmt = $pdo->prepare($sql);
+                                $stmt->execute();
+                                
+                                // Fetch all rows as an associative array
+                                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);    
+                                
+                                // Process the result (e.g., display it)
+                                foreach ($result as $row) {
+                                    // Access columns by their names
+                                    $return .= '<option value="' . $row["chapter_id"] . '">' . $row['chapter_name'] . '</option>';
+                                }
+                            } catch (PDOException $e) {
+                                // Handle database connection or query errors
+                                $return .= "Error: " . $e->getMessage();
                             }
-                        } catch (PDOException $e) {
-                            // Handle database connection or query errors
-                            $return .= "Error: " . $e->getMessage();
-                        }
 
-                    
-                }
+                        
+                    }
 
-                $return .= '
-                    </select>
-                </div>
-                <div class="col-md-12 py-1">
-                    <label for="item_description">Description</label>
-                    <textarea name="item_description" id="item_description" cols="3" rows="3" class="form-control form-control-sm" placeholder="Description" >'.$description.'</textarea>
+                    $return .= '
+                        </select>
+                    </div>
+                    <div class="col-md-12 py-1">
+                        <label for="item_description">Description</label>
+                        <textarea name="item_description" id="item_description" cols="3" rows="3" class="form-control form-control-sm" placeholder="Description" >'.$description.'</textarea>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-6 py-1">';
-        
-        if ($image != "") {
-            $return .= '<img src="images/items/'.$image.'" loading="lazy" class="d-flex justify-content-center img-thumbnail img-fluid" alt="Image" name="item_image">';
-            $return .= '<input type="hidden" value="'.$image.'" name="old_image" id="old_image"';
-        } else {
-            $return .= '<img src="" name="item_image" alt="No image found" class="d-flex justify-content-center img-thumbnail img-fluid">';
-        }
+            <div class="col-md-6 py-1">';
+            
+            if ($image != "") {
+                $return .= '<img src="images/items/'.$image.'" loading="lazy" class="d-flex justify-content-center img-thumbnail img-fluid" alt="Image" name="item_image">';
+                $return .= '<input type="hidden" value="'.$image.'" name="old_image" id="old_image"';
+            } else {
+                $return .= '<img src="" name="item_image" alt="No image found" class="d-flex justify-content-center img-thumbnail img-fluid">';
+            }
 
-        $return .= '
-            <hr class="w-100">
-            <label for="new_item_image">Upload new image</label>
-            <input type="file" class="form-control-file" id="new_item_image" name="new_item_image" accept="image/png, image/gif, image/jpeg">    
-        </div>';
-        
-        echo $return;
+            $return .= '
+                <hr class="w-100">
+                <label for="new_item_image">Upload new image</label>
+                <input type="file" class="form-control-file" id="new_item_image" name="new_item_image" accept="image/png, image/gif, image/jpeg">    
+            </div>';
+            
+            echo $return;
     }
 }
 else if (isset($_POST['save-edit-item-btn'])) { // For saving edit item btn
@@ -521,7 +521,7 @@ else if (isset($_POST['save-edit-item-btn'])) { // For saving edit item btn
         }
 
     } else {
-        $img = $old_img;
+        $image_final_name = $old_img;
 
         $sql = "UPDATE items SET item_name = :name, item_category = :category, item_measure = :measure, item_chapter = :chapter, item_description = :description, item_image = :image WHERE item_id = :itemId";
         try {
@@ -535,7 +535,7 @@ else if (isset($_POST['save-edit-item-btn'])) { // For saving edit item btn
             $stmt->bindParam(':image', $image_final_name);
             $stmt->execute();
 
-            header("location: ../items.php?m=us"); // Updated successfully
+            header("location: ../items.php?m=us&image=$image_final_name"); // Updated successfully
             exit();
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();

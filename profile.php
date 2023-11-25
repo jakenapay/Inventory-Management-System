@@ -96,109 +96,108 @@ try {
 
             <div class="row justify-content-center align-items-center">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-11">
-                    <div class="container">
-                        <form action="includes/profile.inc.php" method="POST" enctype="multipart/form-data">
-                            <div class="row d-flex justify-content-center align-items-center">
-                                <!-- Container for details like name, email -->
-                                <!-- User profile picture -->
-                                <div class="col-6 col-md-6 col-lg-6">
-                                    <!-- <img src="images/userProfiles/" loading="lazy" class="d-flex justify-content-center img-thumbnail img-fluid" alt="Image" name="user_image"> -->
-                                    <?php
-                                    if ($old_img != '') {
-                                        // if there's an existing image then echo the image
-                                        echo '<img src="images/userProfiles/' . $old_img . '" alt="" loading="lazy" class="d-flex justify-content-center img-thumbnail img-fluid" alt="Image">';
-                                    } else {
-                                        echo '<img src="images/userProfiles/" loading="lazy" class="d-flex justify-content-center img-thumbnail img-fluid" alt="No image found">';
-                                    }
+                    <form action="includes/profile.inc.php" method="POST" enctype="multipart/form-data">
+                        <div class="row d-flex justify-content-center align-items-center">
+                            <!-- Container for details like name, email -->
+
+                            <!-- User profile picture -->
+                            <div class="col-12 col-sm-12 col-md-4 col-lg-3">
+                                <!-- <img src="images/userProfiles/" loading="lazy" class="d-flex justify-content-center img-thumbnail img-fluid" alt="Image" name="user_image"> -->
+                                <?php
+                                if ($old_img != '') {
+                                    // if there's an existing image then echo the image
+                                    echo '<img src="images/userProfiles/' . $old_img . '" alt="" loading="lazy" class="d-flex justify-content-center img-thumbnail img-fluid" alt="Image">';
+                                } else {
+                                    echo '<img src="images/userProfiles/" loading="lazy" class="d-flex justify-content-center img-thumbnail img-fluid" alt="No image found">';
+                                }
                                 ?>
-                                    <!-- hidden -->
-                                    <input type="hidden" name="old_img" value="<?php echo $old_img; ?>">
-                                    <input type="hidden" name="user_id" value="<?php echo $_SESSION['ID']; ?>">
-                                    <hr>
-                                    <label class="label">Update image: </label>
-                                    <input type="file" accept="image/*" name="new_user_image" id="new_user_image">
+                                <!-- hidden -->
+                                <input type="hidden" name="old_img" value="<?php echo $old_img; ?>">
+                                <input type="hidden" name="user_id" value="<?php echo $_SESSION['ID']; ?>">
+                                <hr>
+                                <label class="label">Update image: </label>
+                                <input type="file" accept="image/*" name="new_user_image" id="new_user_image">
+                            
+                            </div>
+                            <!-- User details -->
+                            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                                <!-- Name -->
+                                <div class="col-12 col-md-12 col-lg-12 py-1">
+                                    <label for="user_firstname">Given Name</label>
+                                    <input type="text" class="form-control form-control-sm text-capitalize" id="user_firstname" name="user_firstname" placeholder="Given Name" required value="<?php echo $firstname;?>">
                                 </div>
-                                <!-- User details -->
-                                <div class="col-6 col-md-6 col-lg-6">
-                                    <!-- Name -->
-                                    <div class="col-12 col-md-12 col-lg-12 py-1">
-                                        <label for="user_firstname">Given Name</label>
-                                        <input type="text" class="form-control form-control-sm text-capitalize" id="user_firstname" name="user_firstname" placeholder="Given Name" required value="<?php echo $firstname;?>">
-                                    </div>
-                                    <!-- Surname -->
-                                    <div class="col-12 col-md-12 col-lg-12 py-1">
-                                        <label for="user_lastname">Surname</label>
-                                        <input type="text" class="form-control form-control-sm text-capitalize" id="user_lastname" name="user_lastname" placeholder="Last Name" required value="<?php echo $lastname;?>">
-                                    </div>
-                                    <!-- Email address -->
-                                    <div class="col-12 col-md-12 col-lg-12 py-1">
-                                        <label for="user_email">Email Address</label>
-                                        <input type="email" class="form-control form-control-sm" id="user_email" name="user_email" placeholder="Email Address" required value="<?php echo $email;?>">
-                                    </div>
-
-                                    <!-- Select the session category from database -->
-                                    <?php
-                                    try {
-                                        $sql = "SELECT category_id, category_name FROM category WHERE category_id = {$_SESSION['CT']}";
-
-                                        // Prepare the query
-                                        $stmt = $pdo->prepare($sql);
-                                        $stmt->execute();
-
-                                        // Fetch the no. of session category but in category name
-                                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                                        // Process the result
-                                        foreach($result as $row) {
-                                            $category_id = $row['category_id'];
-                                            $category_name = $row['category_name'];
-                                        }
-                                    } catch (PDOException $e) {
-                                        // Handle database connection or query errors
-                                        echo "Error: " . $e->getMessage();
-                                    }
-                                    ?>
-                                    <div class="col-12 col-md-12 col-lg-12 py-1">
-                                        <label for="item_category">Category</label>
-                                        <input type="text" class="form-control form-control-sm text-capitalize" id="user_category" name="user_category" placeholder="Given Name" required value="<?php echo $category_name;?>" disabled>
-                                    </div>
-
-                                    <!-- Select the session category from database -->
-                                    <?php
-                                    try {
-                                        $sql = "SELECT chapter_id, chapter_name FROM chapters WHERE chapter_id = {$_SESSION['CH']}";
-
-                                        // Prepare the query
-                                        $stmt = $pdo->prepare($sql);
-                                        $stmt->execute();
-
-                                        // Fetch the no. of session category but in category name
-                                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                                        // Process the result
-                                        foreach($result as $row) {
-                                            $chapter_id = $row['chapter_id'];
-                                            $chapter_name = $row['chapter_name'];
-                                        }
-                                    } catch (PDOException $e) {
-                                        // Handle database connection or query errors
-                                        echo "Error: " . $e->getMessage();
-                                    }
-                                    ?>
-                                    <div class="col-12 col-md-12 col-lg-12 py-1">   
-                                        <label for="chapter">Chapter</label>
-                                        <input type="text" class="form-control form-control-sm text-capitalize" id="user_firstname" name="user_chapter" placeholder="Given Name" required value="<?php echo $chapter_name;?>" disabled>
-                                    </div>
+                                <!-- Surname -->
+                                <div class="col-12 col-md-12 col-lg-12 py-1">
+                                    <label for="user_lastname">Surname</label>
+                                    <input type="text" class="form-control form-control-sm text-capitalize" id="user_lastname" name="user_lastname" placeholder="Last Name" required value="<?php echo $lastname;?>">
                                 </div>
-                                
+                                <!-- Email address -->
+                                <div class="col-12 col-md-12 col-lg-12 py-1">
+                                    <label for="user_email">Email Address</label>
+                                    <input type="email" class="form-control form-control-sm" id="user_email" name="user_email" placeholder="Email Address" required value="<?php echo $email;?>">
+                                </div>
+                                <!-- Select the session category from database -->
+                                <?php
+                                try {
+                                    $sql = "SELECT category_id, category_name FROM category WHERE category_id = {$_SESSION['CT']}";
+
+                                    // Prepare the query
+                                    $stmt = $pdo->prepare($sql);
+                                    $stmt->execute();
+
+                                    // Fetch the no. of session category but in category name
+                                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                    // Process the result
+                                    foreach($result as $row) {
+                                        $category_id = $row['category_id'];
+                                        $category_name = $row['category_name'];
+                                    }
+                                } catch (PDOException $e) {
+                                    // Handle database connection or query errors
+                                    echo "Error: " . $e->getMessage();
+                                }
+                                ?>
+                                <!-- CATEGORY -->
+                                <div class="col-12 col-md-12 col-lg-12 py-1">
+                                    <label for="item_category">Category</label>
+                                    <input type="text" class="form-control form-control-sm text-capitalize" id="user_category" name="user_category" placeholder="Given Name" required value="<?php echo $category_name;?>" disabled>
+                                </div>
+                                <!-- Select the session category from database -->
+                                <?php
+                                try {
+                                    $sql = "SELECT chapter_id, chapter_name FROM chapters WHERE chapter_id = {$_SESSION['CH']}";
+
+                                    // Prepare the query
+                                    $stmt = $pdo->prepare($sql);
+                                    $stmt->execute();
+
+                                    // Fetch the no. of session category but in category name
+                                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                    // Process the result
+                                    foreach($result as $row) {
+                                        $chapter_id = $row['chapter_id'];
+                                        $chapter_name = $row['chapter_name'];
+                                    }
+                                } catch (PDOException $e) {
+                                    // Handle database connection or query errors
+                                    echo "Error: " . $e->getMessage();
+                                }
+                                ?>
+                                <!-- CHAPTER -->
+                                <div class="col-12 col-md-12 col-lg-12 py-1">   
+                                    <label for="chapter">Chapter</label>
+                                    <input type="text" class="form-control form-control-sm text-capitalize" id="user_firstname" name="user_chapter" placeholder="Given Name" required value="<?php echo $chapter_name;?>" disabled>
+                                </div>
                                 <!-- Save button -->
-                                <div class="mt-3 d-flex justify-content-center align-items-center">
-                                    <input type="submit" class="btn btn-sm btnGreen text-light" name="save-profile-btn" value="Save Changes">
+                                <div class="mt-3 d-block justify-content-center align-items-center">
+                                    <input type="submit" class="btn btn-sm btnGreen w-100 text-light" name="save-profile-btn" value="Save Changes">
                                 </div>
                             </div>
-
-                        </form>
-                    </div>
+                            
+                        </div>
+                    </form>
                 </div>
             </div>
 
