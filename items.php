@@ -68,7 +68,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 
     <div id="wrapper">
         <div class="section px-5 pt-4">
-            <div class="row justify-content-center align-items-center">
+            <div class="row justify-content-center align-items-center mb-3">
                 <!-- TECHNOLOGY -->
                 <div class="box col-sm-12 col-md-3 col-lg-3">
                     <i class="fa-solid fa-computer icon"></i>
@@ -130,11 +130,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                     ?>
                 </div>
             </div>
-
-
-
-
-
+            
 
             <div class="container">
                 <div class="row">
