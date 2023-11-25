@@ -127,7 +127,6 @@ INSERT INTO `items` (`item_id`, `item_name`, `item_category`, `item_measure`, `i
 (10, 'Sunglasses', 3, 3, 13, 1, 'enabled', 'Rayband, Black frame', 'IMG_650898af7e3799.65129257.jpg'),
 (11, 'Hotdog', 2, 1, 22, 1, 'enabled', 'Jumbo, Tender Juicy, Pure Foods, 12pcs per pack', 'IMG_650899879ba091.62117593.png'),
 (14, 'yoon', 1, 1, 2, 2, 'enabled', 'grdg', 'IMG_655c5d66a35232.43841368.png'),
-(14, 'yoon', 1, 1, 2, 2, 'enabled', 'grdg', 'IMG_655c5d66a35232.43841368.png'),
 (15, 'wa ', 1, 1, 2321, 3, 'enabled', 'dasdasda', 'IMG_655b09bf1c7bc7.78434158.png');
 
 -- --------------------------------------------------------
@@ -197,8 +196,6 @@ CREATE TABLE `users` (
   `user_password` varchar(255) NOT NULL,
   `user_category` int(11) NOT NULL,
   `user_chapter` int(11) NOT NULL,
-  `user_image` varchar(255) NOT NULL,
-  `user_status` enum('active','inactive') NOT NULL
   `user_image` varchar(255) NOT NULL,
   `user_status` enum('active','inactive') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
