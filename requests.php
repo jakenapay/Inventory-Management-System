@@ -141,7 +141,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                     <th>Request by</th>
                                     <th>Status</th>
                                     <th>Date</th>
-                                    <?php echo ($_SESSION['CT'] == 1) ? '<th>Actions</th>' : ''; ?>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -152,42 +152,16 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 
                                             // If chapter is Manila and Admin
                                             if($_SESSION['CT'] == 1) {
-
-                                                // If admin is from manila then show all the chapters requests
-                                                if($_SESSION['CH'] == 1) {                                               // Run this code below
-                                                    $query = "SELECT h.history_id AS ID,
-                                                    i.item_name AS Item,
-                                                    h.history_quantity AS Quantity,
-                                                    CONCAT(u.user_firstname, ' ', u.user_lastname) AS 'Request by',
-                                                    h.history_status AS Status,
-                                                    h.history_date AS Date
-                                                    FROM history AS h
-                                                    INNER JOIN items AS i ON h.history_item_id = i.item_id
-                                                    INNER JOIN users AS u ON h.history_user_id = u.user_id;";
-                                                } else {
-                                                    $query = "SELECT h.history_id AS ID,
-                                                    i.item_name AS Item,
-                                                    h.history_quantity AS Quantity,
-                                                    CONCAT(u.user_firstname, ' ', u.user_lastname) AS 'Request by',
-                                                    h.history_status AS Status,
-                                                    h.history_date AS Date
-                                                    FROM history AS h
-                                                    INNER JOIN items AS i ON h.history_item_id = i.item_id
-                                                    INNER JOIN users AS u ON h.history_user_id = u.user_id
-                                                    WHERE u.user_chapter =".$_SESSION['CH'].";";
-                                                }
-                                            } else if ($_SESSION['CT'] == 0) { // Users' POV
                                                 // Run this code below
                                                 $query = "SELECT h.history_id AS ID,
                                                 i.item_name AS Item,
                                                 h.history_quantity AS Quantity,
                                                 CONCAT(u.user_firstname, ' ', u.user_lastname) AS 'Request by',
-                                                h.history_status AS status,
+                                                h.history_status AS Status,
                                                 h.history_date AS Date
                                                 FROM history AS h
                                                 INNER JOIN items AS i ON h.history_item_id = i.item_id
-                                                INNER JOIN users AS u ON h.history_user_id = u.user_id
-                                                WHERE u.user_id = ".$_SESSION['ID'].";";
+                                                INNER JOIN users AS u ON h.history_user_id = u.user_id;";
                                             }
                                             
                                             // Prepare the query
@@ -221,14 +195,17 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                     
                                                     ?>
                                                     <td><?php echo $row['Date']; ?></td>
-                                                    <?php
-                                                        if($_SESSION['CT'] == 1) { ?>
                                                     <td>
                                                         <?php
                                                         if ($row['Status'] == 'pending') {
                                                             echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['ID'] . '" title="Approve"><i class="fa-solid fa-check"></i></a>';
                                                             echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['ID'] . '" title="Decline"><i class="fa-solid fa-x"></i></a>';
-                                                        }}?>
+                                                        } else {
+                                                            // echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['ID'] . '" title="Approve" ><i class="fa-solid fa-check"></i></a>';
+                                                            // echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['ID'] . '" title="Decline" ><i class="fa-solid fa-x"></i></a>';
+                                                        }
+                                                        
+                                                        ?>
                                                     </td>
                                                 </tr>
                                             <?php    
