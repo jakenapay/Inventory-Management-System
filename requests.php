@@ -154,7 +154,8 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                             if($_SESSION['CT'] == 1) {
 
                                                 // If admin is from manila then show all the chapters requests
-                                                if($_SESSION['CH'] == 1) {                                               // Run this code below
+                                                if($_SESSION['CH'] == 1) {                                               
+                                                    // Run this code below
                                                     $query = "SELECT h.history_id AS ID,
                                                     i.item_name AS Item,
                                                     h.history_quantity AS Quantity,
