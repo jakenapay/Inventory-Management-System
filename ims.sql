@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2023 at 01:49 AM
+-- Generation Time: Nov 26, 2023 at 08:04 AM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,11 +28,33 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `cart` (
-  `user_id` int(255) NOT NULL,
-  `item_id` int(255) NOT NULL,
+  `user_id` int(225) NOT NULL,
+  `item_id` int(225) NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `date_out` varchar(50) NOT NULL
+  `date_out` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`user_id`, `item_id`, `date_added`, `date_out`) VALUES
+(2, 1, '2023-11-25 14:51:10', NULL),
+(2, 2, '2023-11-25 14:52:35', NULL),
+(2, 4, '2023-11-25 14:55:05', NULL),
+(2, 15, '2023-11-25 15:12:35', NULL),
+(2, 15, '2023-11-25 15:27:08', NULL),
+(2, 11, '2023-11-25 15:27:58', NULL),
+(2, 7, '2023-11-25 15:34:12', NULL),
+(2, 8, '2023-11-25 17:22:36', NULL),
+(2, 14, '2023-11-25 18:41:15', NULL),
+(2, 8, '2023-11-25 19:19:01', NULL),
+(2, 2, '2023-11-25 19:45:07', NULL),
+(2, 2, '2023-11-26 04:53:46', NULL),
+(5, 4, '2023-11-26 05:17:36', NULL),
+(5, 5, '2023-11-26 05:17:52', NULL),
+(5, 4, '2023-11-26 05:18:55', NULL),
+(5, 4, '2023-11-26 05:19:27', NULL);
 
 -- --------------------------------------------------------
 
@@ -89,7 +111,7 @@ CREATE TABLE `history` (
   `history_quantity` int(11) NOT NULL,
   `history_user_id` int(11) NOT NULL,
   `history_status` enum('approved','declined','pending','') NOT NULL,
-  `history_date` date NOT NULL
+  `history_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -97,16 +119,18 @@ CREATE TABLE `history` (
 --
 
 INSERT INTO `history` (`history_id`, `history_item_id`, `history_quantity`, `history_user_id`, `history_status`, `history_date`) VALUES
-(1, 11, 2, 1, 'approved', '2023-10-09'),
-(2, 11, 20, 1, 'approved', '2023-10-09'),
-(3, 2, 1, 2, 'approved', '2023-10-16'),
-(4, 1, 1, 1, 'declined', '2023-10-22'),
-(5, 7, 3, 1, 'declined', '2023-10-22'),
-(6, 1, 2, 1, 'declined', '2023-10-26'),
-(7, 14, 2, 1, 'declined', '2023-10-26'),
-(8, 10, 2, 5, 'approved', '2023-10-27'),
-(9, 14, 1, 1, 'declined', '2023-11-20'),
-(10, 1, 1, 1, 'pending', '2023-11-20');
+(1, 11, 2, 1, 'approved', '2023-10-08 16:00:00'),
+(2, 11, 20, 1, 'approved', '2023-10-08 16:00:00'),
+(3, 2, 1, 2, 'approved', '2023-10-15 16:00:00'),
+(4, 1, 1, 1, 'declined', '2023-10-21 16:00:00'),
+(5, 7, 3, 1, 'declined', '2023-10-21 16:00:00'),
+(6, 1, 2, 1, 'declined', '2023-10-25 16:00:00'),
+(7, 14, 2, 1, 'declined', '2023-10-25 16:00:00'),
+(8, 10, 2, 5, 'approved', '2023-10-26 16:00:00'),
+(9, 14, 1, 1, 'declined', '2023-11-19 16:00:00'),
+(10, 1, 1, 1, 'pending', '2023-11-19 16:00:00'),
+(11, 4, 1, 5, 'pending', '2023-11-26 05:56:24'),
+(12, 5, 2, 5, 'pending', '2023-11-26 05:57:30');
 
 -- --------------------------------------------------------
 
@@ -131,7 +155,7 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_status`, `item_description`, `item_image`) VALUES
-(1, 'Galaxy Tab A Tablet', 1, 3, 3, 3, 'enabled', '4gb 256gb color black', 'IMG_65622ebc3496a4.60329714.jpg'),
+(1, 'Galaxy Tab A Tablet', 1, 3, 3, 3, 'enabled', '4gb 256gb color black', 'IMG_655c634aa37f87.97220155.jpg'),
 (2, 'A4 Bond Paper', 3, 2, 10, 2, 'enabled', 'A4 Hardcopy', 'IMG_655c63420ed111.72246669.png'),
 (4, 'ID Lace version 5', 3, 3, 80, 4, 'enabled', 'Version 5, Black & Orange', 'IMG_6543bb326ab0b1.55477099.'),
 (5, 'Jumping wires long', 3, 1, 30, 4, 'enabled', 'Rainbow colors', ''),
@@ -218,10 +242,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_firstname`, `user_lastname`, `user_email`, `user_password`, `user_category`, `user_chapter`, `user_image`, `user_status`) VALUES
-(1, 'Jake', 'Napay', 'jakemantesnapay@gmail.com', '$2y$10$RIQWqDTz88hS713D1XbPIOAiicKGkmTpUr4FJnMSquvh4SbuGUj5S', 1, 1, 'IMG_6562376bb9e018.81352802.jpg', 'active'),
-(2, 'john moren', 'dinela', 'jmdinela@gmail.com', '$2y$10$1o24hhJ6ibvCFNhaoD9jaeQW9PS59s7lDV3f2MtS3Uv3bLNhLqtJm', 0, 2, 'IMG_656238c824d8e5.42598831.jpg', 'active'),
-(4, 'Jay Ar', 'De Guzman', 'jdeguzman@gmail.com', '$2y$10$wk28/l2eJqickXsyQR6tZO43Dj279xxm.8otU9pPbeE7Bk/stzjxq', 1, 4, 'IMG_656238ec523a68.29961135.jpg', 'active'),
-(5, 'Lee Angelo', 'Mollo', 'lamollo@gmail.com', '$2y$10$pzhfiX1L7fC723q5n6/xReHRBUrVLbdy2yuiOUsNG6Ay9Wjvr21Ey', 0, 4, 'IMG_656238f56d3052.72407214.jpg', 'active');
+(1, 'Jake', 'Maangas', 'jakemantesnapay@gmail.com', '$2y$10$RIQWqDTz88hS713D1XbPIOAiicKGkmTpUr4FJnMSquvh4SbuGUj5S', 1, 1, 'IMG_6561f388e0cba6.26612895.png', 'active'),
+(2, 'john moren', 'dinela', 'jmdinela@gmail.com', '$2y$10$1o24hhJ6ibvCFNhaoD9jaeQW9PS59s7lDV3f2MtS3Uv3bLNhLqtJm', 0, 2, 'IMG_6562cc23d0aa35.57042786.jpg', 'active'),
+(4, 'jay Ar', 'De Guzman', 'jdeguzman@gmail.com', '$2y$10$wk28/l2eJqickXsyQR6tZO43Dj279xxm.8otU9pPbeE7Bk/stzjxq', 1, 4, 'IMG_65620bf1516301.89054242.png', 'active'),
+(5, 'Lee Angelo', 'Mollo', 'lamollo@gmail.com', '$2y$10$pzhfiX1L7fC723q5n6/xReHRBUrVLbdy2yuiOUsNG6Ay9Wjvr21Ey', 0, 4, 'IMG_6562d4d53d4b06.24348986.jpg', 'active');
 
 --
 -- Indexes for dumped tables
@@ -303,7 +327,7 @@ ALTER TABLE `chapters`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `items`
