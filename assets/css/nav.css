@@ -113,3 +113,12 @@ nav {
   left: 0;
   border-radius: 50%;
 }
+
+#profile-name {
+  margin-bottom: 0;
+  cursor: default;
+}
+
+#profile-name:hover {
+  background-color: unset;
+}

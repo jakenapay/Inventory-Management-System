@@ -138,6 +138,8 @@
                             </div>
                             <!-- Dropdown menu -->
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <p id="profile-name" class="dropdown-item" href="includes/logout.inc.php"><span><?php echo $_SESSION['FN'];?></span></p>
+                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="profile.php">Profile</a>
                                 <a class="dropdown-item" href="about.php">About</a>
                                 <a class="dropdown-item" href="faqs.php">FAQs</a>

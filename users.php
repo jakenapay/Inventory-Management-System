@@ -117,7 +117,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                 . "users.user_image AS image\n"
                                                 . "FROM `users`\n"
                                                 . "INNER JOIN category ON users.user_category = category.category_id\n"
-                                                . "INNER JOIN chapters ON users.user_chapter = chapters.chapter_id WHERE users.user_chapters = $user_chapter";
+                                                . "INNER JOIN chapters ON users.user_chapter = chapters.chapter_id WHERE users.user_chapter = $user_chapter";
                                             }
                                             // Prepare the query
                                             $stmt = $pdo->query($query);
