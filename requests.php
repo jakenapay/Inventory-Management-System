@@ -152,6 +152,32 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 
                                             // If chapter is Manila and Admin
                                             if($_SESSION['CT'] == 1) {
+
+                                                // If admin is from manila then show all the chapters requests
+                                                if($_SESSION['CH'] == 1) {                                               
+                                                    // Run this code below
+                                                    $query = "SELECT h.history_id AS ID,
+                                                    i.item_name AS Item,
+                                                    h.history_quantity AS Quantity,
+                                                    CONCAT(u.user_firstname, ' ', u.user_lastname) AS 'Request by',
+                                                    h.history_status AS Status,
+                                                    h.history_date AS Date
+                                                    FROM history AS h
+                                                    INNER JOIN items AS i ON h.history_item_id = i.item_id
+                                                    INNER JOIN users AS u ON h.history_user_id = u.user_id;";
+                                                } else {
+                                                    $query = "SELECT h.history_id AS ID,
+                                                    i.item_name AS Item,
+                                                    h.history_quantity AS Quantity,
+                                                    CONCAT(u.user_firstname, ' ', u.user_lastname) AS 'Request by',
+                                                    h.history_status AS Status,
+                                                    h.history_date AS Date
+                                                    FROM history AS h
+                                                    INNER JOIN items AS i ON h.history_item_id = i.item_id
+                                                    INNER JOIN users AS u ON h.history_user_id = u.user_id
+                                                    WHERE u.user_chapter =".$_SESSION['CH'].";";
+                                                }
+                                            } else if ($_SESSION['CT'] == 0) { // Users' POV
                                                 // Run this code below
                                                 $query = "SELECT h.history_id AS ID,
                                                 i.item_name AS Item,
