@@ -162,7 +162,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                     }
                                     ?>
 
-                                </tbody>
+                                </tbody>  
                             </table>
                         </div>
                     </div>

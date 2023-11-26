@@ -68,7 +68,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 
     <div id="wrapper">
         <div class="section px-5 pt-4">
-            <div class="row justify-content-center align-items-center mb-3">
+            <div class="row justify-content-center align-items-center">
                 <!-- TECHNOLOGY -->
                 <div class="box col-sm-12 col-md-3 col-lg-3">
                     <i class="fa-solid fa-computer icon"></i>
@@ -130,7 +130,11 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                     ?>
                 </div>
             </div>
-            
+
+
+
+
+
 
             <div class="container">
                 <div class="row">
@@ -138,14 +142,13 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                     if ($_SESSION['CT'] == "0") {
 
                         $userChapter = $_SESSION["CH"];
-                        $query = $pdo->prepare("SELECT * FROM `items` WHERE item_chapter = :itemChapter ");
+                        $query = $pdo->prepare("SELECT * FROM `items` WHERE item_chapter = :itemChapter AND item_status = :itemStatus ");
                         $query->bindParam(':itemChapter', $userChapter, PDO::PARAM_INT);
+                        $query->bindValue(':itemStatus', "enabled", PDO::PARAM_STR);
                         $query->execute();
                         // set the resulting array to associative
                         $result = $query->fetchAll(PDO::FETCH_ASSOC);
                         foreach ($result as $row) { ?>
-
-
                     <div class="col-md-3 col-sm-4 col-lg-3 mb-4">
                         <div class="card h-100" data-item-id="<?php echo $row['item_id']; ?>">
                             <input type="text" id="user_id" value="<?php echo $_SESSION['ID'] ?>" hidden>
@@ -255,7 +258,6 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             if (item_id_input) {
                 // Check if the element is found before accessing its value
                 const item_id = parseInt(item_id_input.value);
-                alert("Item ID: " + item_id + "user id: " + user_id);
                 setTimeout(() => {
                     spinner.addClass('d-none');
                     svg.addClass('d-none');
@@ -269,6 +271,8 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                             userid: user_id
                         },
                         success: function(response) {
+
+                            alert("item added");
                             if (response) {
                                 setTimeout(() => {
                                     checkIcon.addClass('d-none');
@@ -329,7 +333,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                 Item Status :  <span id="item-stat"> ${itemInfo.item_status}</span> </br>
                                 <sub> Stocks: <span id="item-stoc">${itemInfo.item_quantity}</span> </sub> <br>
                                 
-                                <input  id="item-quan" type="number" min="0" max="${itemInfo.item_quantity / 2} ">
+                                <input  id="item-quan" type="number" min="0" max="${itemInfo.item_quantity}">
                             </p>
                             
                             </div>
@@ -349,6 +353,21 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             console.log("item Id: " + itemId);
             console.log("user id: " + user_id);
             console.log("item quan" + itemQuan);
+
+            $.ajax({
+                type: "POST",
+                url: "./includes/itemreq.inc.php",
+                data: {
+                    itemID : itemId,
+                    itemQ : itemQuan,
+                    userID : user_id 
+                },
+                success: function (response) {
+                    if(response){
+                        alert(response);
+                    }
+                }
+            });
 
         })
 
