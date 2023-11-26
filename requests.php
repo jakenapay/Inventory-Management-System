@@ -183,7 +183,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                 i.item_name AS Item,
                                                 h.history_quantity AS Quantity,
                                                 CONCAT(u.user_firstname, ' ', u.user_lastname) AS 'Request by',
-                                                h.history_status AS status,
+                                                h.history_status AS Status,
                                                 h.history_date AS Date
                                                 FROM history AS h
                                                 INNER JOIN items AS i ON h.history_item_id = i.item_id
