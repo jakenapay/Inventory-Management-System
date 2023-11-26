@@ -141,7 +141,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                     <th>Request by</th>
                                     <th>Status</th>
                                     <th>Date</th>
-                                    <?php echo ($_SESSION['CT'] == 1) ? '<th>Actions</th>' : ''; ?>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -187,8 +187,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                 h.history_date AS Date
                                                 FROM history AS h
                                                 INNER JOIN items AS i ON h.history_item_id = i.item_id
-                                                INNER JOIN users AS u ON h.history_user_id = u.user_id
-                                                WHERE u.user_id = ".$_SESSION['ID'].";";
+                                                INNER JOIN users AS u ON h.history_user_id = u.user_id;";
                                             }
                                             
                                             // Prepare the query
@@ -222,14 +221,17 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                     
                                                     ?>
                                                     <td><?php echo $row['Date']; ?></td>
-                                                    <?php
-                                                        if($_SESSION['CT'] == 1) { ?>
                                                     <td>
                                                         <?php
                                                         if ($row['Status'] == 'pending') {
                                                             echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['ID'] . '" title="Approve"><i class="fa-solid fa-check"></i></a>';
                                                             echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['ID'] . '" title="Decline"><i class="fa-solid fa-x"></i></a>';
-                                                        }}?>
+                                                        } else {
+                                                            // echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['ID'] . '" title="Approve" ><i class="fa-solid fa-check"></i></a>';
+                                                            // echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['ID'] . '" title="Decline" ><i class="fa-solid fa-x"></i></a>';
+                                                        }
+                                                        
+                                                        ?>
                                                     </td>
                                                 </tr>
                                             <?php    
