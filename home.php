@@ -57,7 +57,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
         <div class="section px-5 pt-4">
             <div class="row justify-content-center align-items-center">
                 <!-- TECHNOLOGY -->
-                <div class="box col-md-2">
+                <div class="box col-sm-12 col-md-4 col-lg-4">
                     <i class="fa-solid fa-computer icon"></i>
                     <p class="m-0">Technology</p>
                     <?php 
@@ -77,7 +77,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                     ?>
                 </div>
                 <!-- CONSUMABLE -->
-                <div class="box col-md-2">
+                <div class="box col-sm-12 col-md-4 col-lg-4">
                     <i class="fa-solid fa-glass-water icon"></i>
                     <p class="m-0">Consumable</p>
                     <?php 
@@ -97,7 +97,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                     ?>
                 </div>
                 <!-- OFFICE SUPPLY -->
-                <div class="box col-md-2">
+                <div class="box col-sm-12 col-md-4 col-lg-4">
                     <i class="fa-solid fa-stapler icon"></i>
                     <p class="m-0 px-2">HQ Supply</p>
                     <?php 
@@ -117,7 +117,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                     ?>
                 </div>
                 <!-- CHAPTER -->
-                <div class="box col-md-2">
+                <div class="box col-sm-12 col-md-4 col-lg-4">
                     <i class="fa-solid fa-map icon"></i>
                     <p class="m-0 px-2">Chapters</p>
                     <?php 

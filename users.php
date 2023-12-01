@@ -58,7 +58,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     <?php include 'nav.php';?>
 
     <div id="wrapper">
-        <div class="section px-5 pt-4">
+        <div class="section px-lg-5 pt-4">
             <!-- Contents here -->
 
             <!-- Error/Information Messages -->

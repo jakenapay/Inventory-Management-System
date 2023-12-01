@@ -62,11 +62,11 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             <div class="row justify-content-center align-items-center">
                 <!-- TECHNOLOGY -->
                 <div class="box col-sm-12 col-md-3 col-lg-3">
-                    <i class="fa-solid fa-computer icon"></i>
-                    <p class="m-0">Technology</p>
+                    <i class="fa-solid fa-circle-check icon"></i>
+                    <p class="m-0">Approved</p>
                     <?php
                     // Prepare and execute the query
-                    $query = "SELECT COUNT(item_category) FROM items WHERE item_category = 1";
+                    $query = "SELECT COUNT(history_status) FROM history WHERE history_status = 'approved'";
                     $stmt = $pdo->query($query);
 
                     // Fetch the count
@@ -82,11 +82,11 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                 </div>
                 <!-- CONSUMABLE -->
                 <div class="box col-sm-12 col-md-3 col-lg-3">
-                    <i class="fa-solid fa-glass-water icon"></i>
-                    <p class="m-0">Consumable</p>
+                    <i class="fa-solid fa-spinner icon"></i>
+                    <p class="m-0">Pending</p>
                     <?php
                     // Prepare and execute the query
-                    $query = "SELECT COUNT(item_category) FROM items WHERE item_category = 2";
+                    $query = "SELECT COUNT(history_status) FROM history WHERE history_status = 'pending'";
                     $stmt = $pdo->query($query);
 
                     // Fetch the count
@@ -103,10 +103,10 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                 <!-- OFFICE SUPPLY -->
                 <div class="box col-sm-12 col-md-3 col-lg-3">
                     <i class="fa-solid fa-stapler icon"></i>
-                    <p class="m-0 px-2">Office Supply</p>
+                    <p class="m-0 px-2">Declined</p>
                     <?php
                     // Prepare and execute the query
-                    $query = "SELECT COUNT(item_category) FROM items WHERE item_category = 3";
+                    $query = "SELECT COUNT(history_status) FROM history WHERE history_status = 'declined'";
                     $stmt = $pdo->query($query);
 
                     // Fetch the count
