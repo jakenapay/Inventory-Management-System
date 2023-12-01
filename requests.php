@@ -102,7 +102,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                 </div>
                 <!-- OFFICE SUPPLY -->
                 <div class="box col-sm-12 col-md-3 col-lg-3">
-                    <i class="fa-solid fa-stapler icon"></i>
+                    <i class="fa-solid fa-ban icon"></i>
                     <p class="m-0 px-2">Declined</p>
                     <?php
                     // Prepare and execute the query
