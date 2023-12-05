@@ -111,3 +111,13 @@ background-color: #c67605;
     margin-left: -7px; 
 }
 /* End of cart */
+
+/* Charts */
+rect {
+
+    fill: var(--gray);
+}
+
+.charts {
+    border: var(--border);
+}

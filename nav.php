@@ -37,7 +37,7 @@ $totalIDs = $result['total_ids'];
         <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarNav">
             <ul class="navbar-nav d-flex justify-content-center align-items-center">
                 <li class="nav-item active">
-                    <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'home.php')) ? 'active' : ''; ?>" href="home.php">Home<span class="sr-only">(current)</span></a>
+                    <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'home.php')) ? 'active' : ''; ?>" href="home.php">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'items.php')) ? 'active' : ''; ?>" href="items.php">Items</a>
