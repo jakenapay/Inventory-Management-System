@@ -448,3 +448,9 @@ ul {
     align-items: center;
   }
 }
+
+
+/* For all */
+.show {
+  padding: unset;
+}
