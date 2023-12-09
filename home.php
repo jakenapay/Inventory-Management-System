@@ -89,22 +89,29 @@ try {
     <link rel="stylesheet" href="assets/css/home.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="assets/css/cart.css?v=<?php echo time(); ?>">
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pO3t7S9e6j+54Qe47eqKbAYZ9k0mw0pNEca0Vc83P3QE6mzV3JpWGfo8yo2I5f5z" crossorigin="anonymous">
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRPe0rDEtvf2h+w2jcJfAZ3MTmFcIHd6v9aR3ZlpJ" crossorigin="anonymous">
+
+
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
 
     <!-- Javascript for Datatables.net  -->
     <script>
-        $(document).ready(function() {
-            $('table').DataTable();
-        });
+    $(document).ready(function() {
+        $('table').DataTable();
+    });
 
-        $(function() {
-            $('[data-toggle="tooltip"]').tooltip()
-        });
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip()
+    });
 
-        $('#myModal').on('shown.bs.modal', function() {
-            $('#myInput').trigger('focus')
-        });
+    $('#myModal').on('shown.bs.modal', function() {
+        $('#myInput').trigger('focus')
+    });
     </script>
 
     <!-- For chartJS charts -->
@@ -112,47 +119,47 @@ try {
 
     <!-- Ajax for chart -->
     <script>
-        window.onload = function() {
-            var pie1 = new CanvasJS.Chart("chartContainer", {
-                animationEnabled: true,
-                title: {
-                    text: "Items by Category",
-                    fontSize: 19,
-                    fontFamily: 'Helvetica'
-                },
-                backgroundColor: "#f8f8f8",
-                data: [{
-                    type: "pie",
-                    showInLegend: null,
-                    toolTipContent: "{label}: <strong>{y}</strong>",
-                    indexLabel: "{label} - #percent%",
-                    dataPoints: <?php echo $pie1; ?>
-                }]
-            });
+    window.onload = function() {
+        var pie1 = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            title: {
+                text: "Items by Category",
+                fontSize: 19,
+                fontFamily: 'Helvetica'
+            },
+            backgroundColor: "#f8f8f8",
+            data: [{
+                type: "pie",
+                showInLegend: null,
+                toolTipContent: "{label}: <strong>{y}</strong>",
+                indexLabel: "{label} - #percent%",
+                dataPoints: <?php echo $pie1; ?>
+            }]
+        });
 
-            var lineChart = new CanvasJS.Chart("lineChart1", {
-                title: {
-                    text: "History Items Count per Month",
-                    fontSize: 19,
-                    fontFamily: 'Helvetica',
-                },
-                backgroundColor: "#f8f8f8",
-                axisY: {
-                    title: "Total History Items Count"
-                },
-                axisX: {
-                    title: "Months"
-                },
-                data: [{
-                    type: "line",
-                    dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-                }]
-            });
+        var lineChart = new CanvasJS.Chart("lineChart1", {
+            title: {
+                text: "History Items Count per Month",
+                fontSize: 19,
+                fontFamily: 'Helvetica',
+            },
+            backgroundColor: "#f8f8f8",
+            axisY: {
+                title: "Total History Items Count"
+            },
+            axisX: {
+                title: "Months"
+            },
+            data: [{
+                type: "line",
+                dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+            }]
+        });
 
-            // Render charts
-            pie1.render();
-            lineChart.render();
-        }
+        // Render charts
+        pie1.render();
+        lineChart.render();
+    }
     </script>
 </head>
 
@@ -161,7 +168,17 @@ try {
     <?php include 'nav.php'; ?>
 
     <div id="wrapper">
+
         <div class="section px-5 pt-4">
+            <div class="row">
+                <!-- cart -->
+                <div class="col">
+                    <div class=" justify-content-end justify-content-center-md"
+                        style=" text-align: end; margin-right: 100px;">
+                        <?php include './components/cart.php'?>
+                    </div>
+                </div>
+            </div>
             <div class="row justify-content-center align-items-center">
                 <!-- TECHNOLOGY -->
                 <div class="box col-sm-12 col-md-4 col-lg-2">
@@ -257,11 +274,16 @@ try {
         <br>
     </div>
 
+
     <!-- Optional JavaScript -->
     <script src="https://cdn.canvasjs.com/canvasjs.min.js">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
 
 </body>
 
