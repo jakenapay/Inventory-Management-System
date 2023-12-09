@@ -132,11 +132,6 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             </div>
         </div>
 
-
-
-
-
-
         <div class="container">
             <div class="row">
                 <?php
@@ -173,7 +168,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                             <i class="fa-solid fa-check d-none" id="checkIcon" style="color: #22511f;"></i>
                                         </button>
                                         <button type="button" class="btn btn-primary btn-req">
-                                            Open Modal
+                                           View
                                         </button>
                                     </div>
                                 </div>
@@ -194,11 +189,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                             </div>
                                             <div class="col-md-6">
                                                 <div id="modalItemDetails">
-
-
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     </div>
@@ -304,7 +295,6 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                     const item_id = parseInt(item_id_input.value);
 
                     // Update the modal content
-
                     $.ajax({
                         type: "POST",
                         url: "./includes/getitem.inc.php",
@@ -313,9 +303,6 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                         },
                         success: function(response) {
                             const itemInfo = JSON.parse(response);
-
-
-
                             modalItemImage.attr('src',
                                 `images/items/${itemInfo.item_image}`);
 
