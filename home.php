@@ -15,8 +15,9 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 
 <!-- FOR CHARTS -->
 <?php
-try {
 
+// Pie chart 1 - For items
+try {
     // Fetching category names from the database
     $categoryData = array();
     $sqlCategories = "SELECT item_category_id, item_category_name FROM items_category";
@@ -48,6 +49,7 @@ try {
     echo "Failed: " . $e->getMessage();
 }
 
+// Line chart 1 - For total items count by months
 try {
     // Establish your database connection here
 
@@ -69,6 +71,8 @@ try {
 } catch (PDOException $e) {
     echo "Failed: " . $e->getMessage();
 }
+
+
 ?>
 
 
@@ -119,42 +123,46 @@ try {
 
     <!-- Ajax for chart -->
     <script>
-    window.onload = function() {
-        var pie1 = new CanvasJS.Chart("chartContainer", {
-            animationEnabled: true,
-            title: {
-                text: "Items by Category",
-                fontSize: 19,
-                fontFamily: 'Helvetica'
-            },
-            backgroundColor: "#f8f8f8",
-            data: [{
-                type: "pie",
-                showInLegend: null,
-                toolTipContent: "{label}: <strong>{y}</strong>",
-                indexLabel: "{label} - #percent%",
-                dataPoints: <?php echo $pie1; ?>
-            }]
-        });
+        window.onload = function() {
 
-        var lineChart = new CanvasJS.Chart("lineChart1", {
-            title: {
-                text: "History Items Count per Month",
-                fontSize: 19,
-                fontFamily: 'Helvetica',
-            },
-            backgroundColor: "#f8f8f8",
-            axisY: {
-                title: "Total History Items Count"
-            },
-            axisX: {
-                title: "Months"
-            },
-            data: [{
-                type: "line",
-                dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-            }]
-        });
+            // For pie chart 1
+            var pie1 = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title: {
+                    text: "Items by Category",
+                    fontSize: 19,
+                    fontFamily: 'Helvetica'
+                },
+                padding: "5px",
+                data: [{
+                    type: "pie",
+                    showInLegend: null,
+                    toolTipContent: "{label}: <strong>{y}</strong>",
+                    indexLabel: "{label} - #percent%",
+                    dataPoints: <?php echo $pie1; ?>
+                }]
+            });
+
+            // For line chart 1
+            var lineChart = new CanvasJS.Chart("lineChart1", {
+                title: {
+                    text: "Items Count per Month",
+                    fontSize: 19,
+                    fontFamily: 'Helvetica',
+                },
+                axisY: {
+                    title: "Total Items Count"
+                },
+                axisX: {
+                    title: "Months"
+                },
+                data: [{
+                    type: "line",
+                    dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+                }]
+            });
+
+            
 
         // Render charts
         pie1.render();
@@ -262,11 +270,12 @@ try {
                 </div>
             </div>
             <div class="mt-5 row d-flex justify-content-center align-items-center">
-                <div class="col-sm-12 col-md-12 col-lg-6">
-                    <div id="chartContainer"></div>
+                <div class="col-sm-12 col-md-12 col-lg-4 bg-light">
+                    <p class="">Percentage of Items</p>
+                    <div class="" id="chartContainer"></div>
                 </div>
-                <div class="col-sm-12 col-md-12 col-lg-6">
-                    <div id="lineChart1"></div>
+                <div class="col-sm-12 col-md-12 col-lg-4">
+                    <div class="" id="lineChart1"></div>
                 </div>
             </div>
 

@@ -71,11 +71,15 @@ $totalIDs = $result['total_ids'];
                 <?php
                 if ($_SESSION['active_tab'] == 'items.php') {
                     if (!empty($_SESSION['ID']) && ($_SESSION['CT'] == 1)) { // If you're logged in and an admin you can add item
-                        echo '<ul id="add-item" class="m-0 p-0 d-flex align-items-center">
-                            <li id="addNewItemBtn">
+                        // echo '<ul id="add-item" class="m-0 p-0 d-flex align-items-center">
+                        //     <li id="addNewItemBtn">
+                        //     <button type="button" class="btn btn-success btnGreen btn-sm" data-toggle="modal" data-target="#exampleModal">
+                        //     <i class="fa-solid fa-plus addIcon"></i>New item
+                        //     </button></li></ul>';
+                        echo '<li class="nav-item nav-link" id="addNewItemBtn">
                             <button type="button" class="btn btn-success btnGreen btn-sm" data-toggle="modal" data-target="#exampleModal">
                             <i class="fa-solid fa-plus addIcon"></i>New item
-                            </button></li></ul>';
+                            </button></li>';
                     }
                 }
                 ?>
@@ -100,7 +104,7 @@ $totalIDs = $result['total_ids'];
 
                 <!-- Display none if the users is on mobile -->
                 <!-- Display block if the users is on desktop/laptop -->
-                <div class="dropdown">
+                <li class="nav-item dropdown">
                     <!-- Get the user's image to show in the navigation bar -->
                     <?php
                     try {
@@ -121,11 +125,11 @@ $totalIDs = $result['total_ids'];
                     <!-- Image trigger -->
                     <div class="rounded-image image-profile" id="dropdownMenuButton" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                        <img src="images/userProfiles/<?php echo $userImage; ?>" class="img-fluid mw-50"
+                        <img src="images/userProfiles/<?php echo $userImage; ?>" class="img-fluid"
                             alt="User Image">
                     </div>
                     <!-- Dropdown menu -->
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div class="dropdown-menu px-2" aria-labelledby="dropdownMenuButton">
                         <p id="profile-name" class="dropdown-item" href="includes/logout.inc.php">
                             <span><?php echo $_SESSION['FN']; ?></span></p>
                         <div class="dropdown-divider"></div>
@@ -136,7 +140,7 @@ $totalIDs = $result['total_ids'];
                         <a class="dropdown-item logout" href="includes/logout.inc.php"><span>Log out</span><i
                                 class="fa-solid fa-arrow-right-from-bracket"></i></a>
                     </div>
-                </div>
+                </li>
 
             </ul>
         </div>
