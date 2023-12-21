@@ -72,6 +72,7 @@ try {
     echo "Failed: " . $e->getMessage();
 }
 
+// New Chart here
 
 ?>
 
@@ -92,12 +93,11 @@ try {
     <link rel="stylesheet" href="assets/css/nav.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="assets/css/home.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="assets/css/cart.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="assets/css/analytics.css?v=<?php echo time(); ?>">
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-pO3t7S9e6j+54Qe47eqKbAYZ9k0mw0pNEca0Vc83P3QE6mzV3JpWGfo8yo2I5f5z" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-pO3t7S9e6j+54Qe47eqKbAYZ9k0mw0pNEca0Vc83P3QE6mzV3JpWGfo8yo2I5f5z" crossorigin="anonymous">
     </script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRPe0rDEtvf2h+w2jcJfAZ3MTmFcIHd6v9aR3ZlpJ" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRPe0rDEtvf2h+w2jcJfAZ3MTmFcIHd6v9aR3ZlpJ" crossorigin="anonymous">
 
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
@@ -105,20 +105,23 @@ try {
 
     <!-- Javascript for Datatables.net  -->
     <script>
-    $(document).ready(function() {
-        $('table').DataTable();
-    });
+        $(document).ready(function() {
+            $('table').DataTable();
+        });
 
-    $(function() {
-        $('[data-toggle="tooltip"]').tooltip()
-    });
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
 
-    $('#myModal').on('shown.bs.modal', function() {
-        $('#myInput').trigger('focus')
-    });
+        $('#myModal').on('shown.bs.modal', function() {
+            $('#myInput').trigger('focus')
+        });
     </script>
 
-    <!-- For chartJS charts -->
+    <!-- CDN for chartJS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- For canvaJS charts -->
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
     <!-- Ajax for chart -->
@@ -126,48 +129,98 @@ try {
         window.onload = function() {
 
             // For pie chart 1
-            var pie1 = new CanvasJS.Chart("chartContainer", {
-                animationEnabled: true,
-                title: {
-                    text: "Items by Category",
-                    fontSize: 19,
-                    fontFamily: 'Helvetica'
+            var pieChartData = <?php echo $pie1; ?>;
+            var pieChartConfig = {
+                type: 'pie',
+                data: {
+                    labels: pieChartData.map(data => data.label),
+                    datasets: [{
+                        data: pieChartData.map(data => data.y),
+                        backgroundColor: [
+                            'rgba(113, 180, 6, 0.7)',
+                            'rgba(232, 202, 4, 0.7)',
+                            'rgba(234, 100, 29, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(113, 180, 6, 1)',
+                            'rgba(232, 202, 4, 1)',
+                            'rgba(234, 100, 29, 1)',
+                            // Add more colors if needed
+                        ],
+                        borderWidth: 1
+                    }]
                 },
-                padding: "5px",
-                data: [{
-                    type: "pie",
-                    showInLegend: null,
-                    toolTipContent: "{label}: <strong>{y}</strong>",
-                    indexLabel: "{label} - #percent%",
-                    dataPoints: <?php echo $pie1; ?>
-                }]
-            });
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Items by Category'
+                        },
+                        legend: {
+                            display: true,
+                            position: 'right'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    var label = context.label || '';
+                                    var value = context.parsed || 0;
+                                    return label + ': ' + value;
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            var pieChartCanvas = document.getElementById('pieChart1').getContext('2d');
+            new Chart(pieChartCanvas, pieChartConfig);
+
 
             // For line chart 1
-            var lineChart = new CanvasJS.Chart("lineChart1", {
-                title: {
-                    text: "Items Count per Month",
-                    fontSize: 19,
-                    fontFamily: 'Helvetica',
+            var lineChartData2 = <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>;
+            var lineChartConfig = {
+                type: 'line',
+                data: {
+                    labels: lineChartData2.map(data => data.label),
+                    datasets: [{
+                        label: 'Items Count per Month',
+                        data: lineChartData2.map(data => data.y),
+                        fill: false,
+                        borderColor: 'rgba(113, 180, 6, 1)',
+                        tension: 0.1
+                    }]
                 },
-                axisY: {
-                    title: "Total Items Count"
-                },
-                axisX: {
-                    title: "Months"
-                },
-                data: [{
-                    type: "line",
-                    dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
-                }]
-            });
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Requested Items per Month'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Months'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Total Items Count'
+                            }
+                        }
+                    }
+                }
+            };
+            var lineChartCanvas = document.getElementById('lineChart1').getContext('2d');
+            new Chart(lineChartCanvas, lineChartConfig);
 
-            
+            // New Chart here
 
-        // Render charts
-        pie1.render();
-        lineChart.render();
-    }
+        }
     </script>
 </head>
 
@@ -181,9 +234,8 @@ try {
             <div class="row">
                 <!-- cart -->
                 <div class="col">
-                    <div class=" justify-content-end justify-content-center-md"
-                        style=" text-align: end; margin-right: 100px;">
-                        <?php include './components/cart.php'?>
+                    <div class=" justify-content-end justify-content-center-md" style=" text-align: end; margin-right: 100px;">
+                        <?php include './components/cart.php' ?>
                     </div>
                 </div>
             </div>
@@ -269,13 +321,14 @@ try {
                     ?>
                 </div>
             </div>
-            <div class="mt-5 row d-flex justify-content-center align-items-center">
-                <div class="col-sm-12 col-md-12 col-lg-4 bg-light">
-                    <p class="">Percentage of Items</p>
-                    <div class="" id="chartContainer"></div>
-                </div>
+            <div class="mt-5 row d-flex justify-content-center align-items-center mb-3">
                 <div class="col-sm-12 col-md-12 col-lg-4">
-                    <div class="" id="lineChart1"></div>
+                    <p class="chart-title">Item Percentage</p>
+                    <canvas id="pieChart1"></canvas>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-8">
+                    <p class="chart-title">Requested Items by Month</p>
+                    <canvas id="lineChart1"></canvas>
                 </div>
             </div>
 
@@ -287,11 +340,9 @@ try {
     <!-- Optional JavaScript -->
     <script src="https://cdn.canvasjs.com/canvasjs.min.js">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
     </script>
 
 </body>

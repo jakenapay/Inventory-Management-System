@@ -29,26 +29,21 @@ $totalIDs = $result['total_ids'];
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light px-sm-5 px-md-5 px-lg-5 fixed-top mainnav">
         <a class="navbar-brand logo" href="#">
-            <img src="https://uploads-ssl.webflow.com/6492dd5d65d1855cb14a6692/6494571343918c14057fe090_DEVCON%20Kids%20Logo%20Horizontal.png"
-                alt="Logo" loading="lazy">
+            <img src="https://uploads-ssl.webflow.com/6492dd5d65d1855cb14a6692/6494571343918c14057fe090_DEVCON%20Kids%20Logo%20Horizontal.png" alt="Logo" loading="lazy">
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarNav">
             <ul class="navbar-nav d-flex justify-content-center align-items-center">
                 <li class="nav-item active">
-                    <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'home.php')) ? 'active' : ''; ?>"
-                        href="home.php">Home</a>
+                    <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'home.php')) ? 'active' : ''; ?>" href="home.php">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'items.php')) ? 'active' : ''; ?>"
-                        href="items.php">Items</a>
+                    <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'items.php')) ? 'active' : ''; ?>" href="items.php">Items</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'requests.php')) ? 'active' : ''; ?>"
-                        href="requests.php">Requests</a>
+                    <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'requests.php')) ? 'active' : ''; ?>" href="requests.php">Requests</a>
                 </li>
                 <!-- <?php
                         if (($_SESSION['CT'] === 1) && ($_SESSION['CH'] === 1)) {
@@ -59,12 +54,10 @@ $totalIDs = $result['total_ids'];
                         }
                         ?> -->
                 <li class="nav-item">
-                    <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'logs.php')) ? 'active' : ''; ?>"
-                        href="logs.php">Logs</a>
+                    <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'logs.php')) ? 'active' : ''; ?>" href="logs.php">Logs</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'users.php')) ? 'active' : ''; ?>"
-                        href="users.php">Users</a>
+                    <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'users.php')) ? 'active' : ''; ?>" href="users.php">Users</a>
                 </li>
 
                 <!-- For items.php -->
@@ -84,12 +77,11 @@ $totalIDs = $result['total_ids'];
                 }
                 ?>
 
-                
+
 
                 <!-- For mobile -->
                 <li class="nav-item dropdown" id="profile-dropdown-mobile">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <?php echo $_SESSION['FN'] . " " . $_SESSION['LN']; ?>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -97,14 +89,13 @@ $totalIDs = $result['total_ids'];
                         <a class="dropdown-item" href="faq.php">FAQs</a>
                         <a class="dropdown-item" href="#devconkids.php">Devcon Kids</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item logout" href="includes/logout.inc.php"><span>Log out</span><i
-                                class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                        <a class="dropdown-item logout" href="includes/logout.inc.php"><span>Log out</span><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
                     </div>
                 </li>
 
                 <!-- Display none if the users is on mobile -->
                 <!-- Display block if the users is on desktop/laptop -->
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown pull-right">
                     <!-- Get the user's image to show in the navigation bar -->
                     <?php
                     try {
@@ -123,25 +114,22 @@ $totalIDs = $result['total_ids'];
                     ?>
 
                     <!-- Image trigger -->
-                    <div class="rounded-image image-profile" id="dropdownMenuButton" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        <img src="images/userProfiles/<?php echo $userImage; ?>" class="img-fluid"
-                            alt="User Image">
+                    <div class="rounded-image image-profile" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="images/userProfiles/<?php echo $userImage; ?>" class="img-fluid" alt="User Image">
                     </div>
                     <!-- Dropdown menu -->
-                    <div class="dropdown-menu px-2" aria-labelledby="dropdownMenuButton">
-                        <p id="profile-name" class="dropdown-item" href="includes/logout.inc.php">
-                            <span><?php echo $_SESSION['FN']; ?></span></p>
+                    <div class="dropdown-menu dropdown-menu-right px-2" aria-labelledby="dropdownMenuButton">
+                        <!-- <p id="profile-name" class="dropdown-item" href="includes/logout.inc.php">
+                            <span><?php echo $_SESSION['FN']; ?></span></p> -->
+                        <a class="dropdown-item disabled text-dark pt-2 pe-none"><?php echo $_SESSION['FN']; ?></a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="profile.php">Profile</a>
                         <a class="dropdown-item" href="about.php">About</a>
                         <a class="dropdown-item" href="faqs.php">FAQs</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item logout" href="includes/logout.inc.php"><span>Log out</span><i
-                                class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                        <a class="dropdown-item logout" href="includes/logout.inc.php"><span>Log out</span><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
                     </div>
                 </li>
-
             </ul>
         </div>
     </nav>

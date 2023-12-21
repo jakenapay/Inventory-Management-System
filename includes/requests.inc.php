@@ -1,4 +1,11 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+require 'phpmailer/src/SMTP.php';
+
 session_start();
 
 if(isset($_POST['approve-request-item-btn'])) { // For approving a request
@@ -67,3 +74,4 @@ else if (isset($_POST['decline-request-item-btn'])) { // For declining a request
     header("location: ../requests.php?m=404");
     exit();
 }
+
