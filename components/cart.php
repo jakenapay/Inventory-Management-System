@@ -12,68 +12,72 @@
         </svg>
 
         <?php
-        if ($totalIDs > 0) {
-            echo "<span class='badge badge-warning' id='lblCartCount'> $totalIDs</span>";
+        $inCart = 0;
+        $getAllinCartIDs = $pdo->prepare("SELECT COUNT(item_id) as cartCount FROM cart WHERE inCart = :itemInCart");
+        $getAllinCartIDs->bindParam(':itemInCart', $inCart, PDO::PARAM_INT);
+        $getAllinCartIDs->execute();
+        $result = $getAllinCartIDs->fetch(PDO::FETCH_ASSOC);
+        $cartCount = $result['cartCount'];
+        if ($cartCount > 0) {
+            echo "<span class='badge badge-warning' id='lblCartCount'> $cartCount </span>";
         }
         ?>
     </a>
     <div class="dropdown-menu" aria-labelledby="dropdownCart" style="height: 400px; overflow-y: auto; width: 350px;">
         <?php
-        try {
 
-            $stmt = $pdo->prepare("SELECT cart.*, items.*, users.* 
+        $inCart = 0;
+        $stmt = $pdo->prepare("SELECT cart.*, items.*, users.* 
                                         FROM cart 
                                         INNER JOIN items ON cart.item_id = items.item_id
                                         INNER JOIN users ON cart.user_id = users.user_id 
-                                        WHERE cart.user_id = :id");
-            $stmt->bindParam(':id', $_SESSION['ID'], PDO::PARAM_INT);
-            $stmt->execute();
+                                        WHERE cart.user_id = :id AND cart.inCart = :inCart");
+        $stmt->bindParam(':id', $_SESSION['ID'], PDO::PARAM_INT);
+        $stmt->bindParam(':inCart',  $inCart, PDO::PARAM_BOOL);
+        $stmt->execute();
 
-            // Fetch all rows as an associative array
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // Fetch all rows as an associative array
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            // Process the result
-            foreach ($result as $row) {    ?>
-                <div class="border-bottom mb-3" >
-                    <div class="row ">
+        // Process the result
+        foreach ($result as $row) {    ?>
+            <div class="border-bottom mb-3">
+                <div class="row ">
 
-                        <div class="col-lg-6">
-                            <img src="./images/items/<?php echo $row['item_image'] ?>" class="img-fluid rounded-start" style=" max-width: 100%; max-height: 100%;" alt="Item Image">
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card-body">
-                                <input type="text" id="user_id" value="<?php echo $_SESSION['ID'] ?>" hidden>
-                                <input type="text" class="item_id" value="<?php echo $row['item_id'] ?>" hidden>
-                                <h6 class="card-title"> <small><?php echo $row['item_name'] ?></small></h6>
-                                <p class="card-text"><small><?php echo $row['item_description'] ?></small></p>
-                                <sub class="card-text">
-                                    <small class="text-body-secondary">
-                                        <?php
-                                        echo  "Quantity: " . $row['item_quantity'] . "<br>"
-                                        ?>
-                                    </small>
-                                    <small class="text-body-secondary">
-                                        <?php
-                                        $timestamp = strtotime($row['date_added']);
-                                        $dateTime = new DateTime();
-                                        $dateTime->setTimestamp($timestamp);
-                                        $date = $dateTime->format('Y-m-d');
-                                        echo "Date: $date";
-                                        ?>
-                                    </small>
-                                    <button class="btn btn-primary btn-sm item-btn" data-toggle="modal" data-target="#cartModal" data-image="<?php echo $row['item_image']; ?>" data-name="<?php echo $row['item_name']; ?>" data-description="<?php echo $row['item_description']; ?>" data-date="<?php echo $row['date_added']; ?>" data-id="<?php echo $_SESSION['ID']; ?>" data-item-id="<?php echo $row['item_id']; ?>" data-item-quantity="<?php echo $row['item_quantity']; ?>">View</button>
-                                </sub>
-                            </div>
-                        </div>
-                        
+                    <div class="col-lg-6">
+                        <img src="./images/items/<?php echo $row['item_image'] ?>" class="img-fluid rounded-start" style=" max-width: 100%; max-height: 100%;" alt="Item Image">
                     </div>
+                    <div class="col-lg-6">
+                        <div class="card-body">
+                            <input type="text" id="user_id" value="<?php echo $_SESSION['ID'] ?>" hidden>
+                            <input type="text" class="item_id" value="<?php echo $row['item_id'] ?>" hidden>
+                            <h6 class="card-title"> <small><?php echo $row['item_name'] ?></small></h6>
+                            <p class="card-text"><small><?php echo $row['item_description'] ?></small></p>
+                            <sub class="card-text">
+                                <small class="text-body-secondary">
+                                    <?php
+                                    echo  "Quantity: " . $row['item_quantity'] . "<br>"
+                                    ?>
+                                </small>
+                                <small class="text-body-secondary">
+                                    <?php
+                                    $timestamp = strtotime($row['date_added']);
+                                    $dateTime = new DateTime();
+                                    $dateTime->setTimestamp($timestamp);
+                                    $date = $dateTime->format('Y-m-d');
+                                    echo "Date: $date";
+                                    ?>
+                                </small>
+                                <button class="btn btn-primary btn-sm item-btn" data-toggle="modal" data-target="#cartModalList" data-image="<?php echo $row['item_image']; ?>" data-name="<?php echo $row['item_name']; ?>" data-description="<?php echo $row['item_description']; ?>" data-date="<?php echo $row['date_added']; ?>" data-id="<?php echo $_SESSION['ID']; ?>" data-item-id="<?php echo $row['item_id']; ?>" data-item-quantity="<?php echo $row['item_quantity']; ?>">View</button>
+                            </sub>
+                        </div>
+                    </div>
+
                 </div>
-        <?php  }
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        } ?>
+            </div>
+        <?php  }  ?>
     </div>
-    <div class=" modal fade" id="cartModal" tabindex="-1" aria-labelledby="CartModalLabel" aria-hidden="true">
+    <div class="modal fade" id="cartModalList" tabindex="-1" aria-labelledby="CartModalLabel" aria-hidden="true">
         <!-- Modal content -->
         <div class="modal-dialog">
             <div class="modal-content">
@@ -96,7 +100,7 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary req-btn">Request</button>
+                    <button type="button" class="btn btn-secondary checkout-btn">Check Out</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -107,9 +111,9 @@
     <script>
         const user_id = document.getElementById("user_id").value;
         var itemId;
+        //displaying cart info in modal
         document.addEventListener('DOMContentLoaded', function() {
             const itemButtons = document.querySelectorAll('.item-btn');
-
             itemButtons.forEach(itemButton => {
                 itemButton.addEventListener('click', function() {
                     const image = this.getAttribute('data-image');
@@ -124,24 +128,29 @@
                     document.getElementById('modalItemImage').src =
                         `./images/items/${image}`;
                     document.getElementById('modalItemDetails').innerHTML = `
-                    <h6 class="card-title">${name}</h6>
-                    <p class="card-text">${description}</p>
-                    <sub class="card-text">
-                        <small class="text-body-secondary" hidden>Item ID: ${itemId}</small>
-                        <small class="text-body-secondary" >Item Quantity: ${quantity}</small>
-                        <input  id="item-quan" type="number" min="0" max="${quantity}"> <br>
-                        <small class="text-body-secondary">Date: ${date}</small>
-                    </sub>
+                    <h6>Item Name: <span id="item-name">${name}</span></h5>
+                            <input type="number" min="0" id="item-id" value="${itemId}" hidden>
+                            <div id="additionalDetails">
+                                <p> 
+                                    Item Description: <span id="item-desc">${description}</span> </br>
+                                    <sub> Stocks: <span id="item-stoc">${quantity}</span> </sub> <br>
+                                    <input  id="item-quan" type="number" min="0" max="${quantity}">
+                                </p>
+                            </div>
                         <!-- Add more item details here -->
                     `;
                 });
             });
         });
-        $('.req-btn').click(function() {
+        //checkout button - for checkout the item
+        $('.checkout-btn').click(function() {
             const itemQuan = document.getElementById("item-quan").value;
+            console.log(itemQuan);
+            console.log(itemId);
+            console.log(user_id);
             $.ajax({
                 type: "POST",
-                url: "./includes/itemreq.inc.php",
+                url: "./includes/itemCO.inc.php",
                 data: {
                     itemID: itemId,
                     itemQ: itemQuan,
@@ -149,10 +158,37 @@
                 },
                 success: function(response) {
                     if (response) {
+                        // if success lagay yung PHP MAILER DITO
                         alert(response);
                     }
                 }
             });
 
         })
+
+        // function increment() {
+        //     var inputElement = document.getElementById("item-quan");
+        //     var currentValue = parseInt(inputElement.value);
+        //     var maxValue = parseInt(inputElement.getAttribute("max"));
+
+        //     if (currentValue < maxValue) {
+        //         inputElement.value = currentValue + 1;
+        //     } else {
+        //         // Optionally, handle the case where the maximum value is reached
+        //         alert("Maximum quantity reached!");
+        //     }
+        // }
+
+        // function decrement() {
+        //     var inputElement = document.getElementById("item-quan");
+        //     var currentValue = parseInt(inputElement.value);
+        //     var minValue = parseInt(inputElement.getAttribute("min"));
+
+        //     if (currentValue > minValue) {
+        //         inputElement.value = currentValue - 1;
+        //     } else {
+        //         // Optionally, handle the case where the minimum value is reached
+        //         alert("Minimum quantity reached!");
+        //     }
+        // }
     </script>

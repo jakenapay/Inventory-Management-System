@@ -35,7 +35,7 @@ if ($_SESSION['CT'] == "0") {
             <div class="card">
 
                 <div class="imgBox">
-                    <img src="./images/items/<?php echo $row['item_image'] ?>" alt="mouse corsair" class="mouse">
+                    <img src="./images/items/<?php echo $row['item_image'] ?>" alt="<?php echo $row['item_name'] ?>" class="mouse">
                 </div>
 
                 <div class="contentBox">
@@ -46,12 +46,12 @@ if ($_SESSION['CT'] == "0") {
 
                     <?php if ($row['item_status'] == "disabled" or $row['item_quantity'] == 0) { ?>
                         <h6 class="price" style="color: red;">Item Unavialable</h6>
-                        <button type="button" class="btn buy btn-primary btn-req " data-bs-toggle="modal" data-bs-target="#itemDetails" data-item-id="<?php echo $row['item_id'] ?>" disabled hidden>
+                        <button type="button" class="btn buy btn-primary btn-view " data-bs-toggle="modal" data-bs-target="#itemDetails" data-item-id="<?php echo $row['item_id'] ?>" disabled hidden>
                             Request
                         </button>
                     <?php } else { ?>
-                        <button type="button" class="btn buy btn-primary btn-req " data-bs-toggle="modal" data-bs-target="#itemDetails" data-item-id="<?php echo $row['item_id'] ?>">
-                            Request
+                        <button type="button" class="btn buy btn-primary btn-view " data-bs-toggle="modal" data-bs-target="#itemDetails" data-item-id="<?php echo $row['item_id'] ?>">
+                            View
                         </button>
                     <?php } ?>
                 </div>
@@ -87,7 +87,7 @@ if ($_SESSION['CT'] == "0") {
                                 <i class="fa-solid fa-check d-none" id="checkIcon" style="color: #22511f;"></i>
                             </button>
                         </div>
-                        <button type="button" class="btn btn-secondary req-btn">Request</button>
+                        <button type="button" class="btn btn-secondary btnReq">Request</button>
                     </div>
                 </div>
             </div>
@@ -124,10 +124,11 @@ if ($_SESSION['CT'] == "0") {
     document.addEventListener('DOMContentLoaded', function() {
         const user_id = document.getElementById("user_id").value;
         var modal = new bootstrap.Modal(document.getElementById('itemDetails'));
-        var buttons = document.querySelectorAll('.btn-req');
+        var buttons = document.querySelectorAll('.btn-view');
 
         var getItemId = 0;
-
+        
+        //get the data to display in modal
         buttons.forEach(function(button) {
             button.addEventListener('click', function() {
                 var itemId = this.getAttribute('data-item-id');
@@ -150,7 +151,7 @@ if ($_SESSION['CT'] == "0") {
                         // Update modal content
                         $(".itemImg").attr("src",
                             `./images/items/${itemInfo.item_image}`);
-            
+
 
                         $(".itemdesc").html(`
                             <h6>Item Name: <span id="item-name">${itemInfo.item_name}</span></h5>
@@ -160,12 +161,14 @@ if ($_SESSION['CT'] == "0") {
                                     Item Description: <span id="item-desc">${itemInfo.item_description}</span> </br>
                                     Item Status: <span id="item-stat">${itemInfo.item_status}</span> </br>
                                     <sub> Stocks: <span id="item-stoc">${itemInfo.item_quantity}</span> </sub> <br>
-                                    <input  id="item-quan" type="number" min="0" max="${itemInfo.item_quantity}">
+                                    <input id="item-quan" type="number" min="0" max="${itemInfo.item_quantity}">
+                                   
+                                    <h6 id="quanChecker" style="display: none; color:red;"> <small>insufficient Stocks</small></h6>
                                 </p>
                             </div>
                         `);
-              
-            
+
+
 
                         // Show the modal
                         $('#itemDetails').modal('show');
@@ -175,10 +178,10 @@ if ($_SESSION['CT'] == "0") {
         });
 
         // Other modal logic remains the same
+
+        //to Cart 
         var checkerBtn = document.querySelector('.checker');
         checkerBtn.addEventListener('click', function(e) {
-            const itemQuan = document.getElementById("item-quan").value;
-
             const spinner = $(e.currentTarget).find('.spinner-border');
             const svg = $(e.currentTarget).find('svg');
             const checkIcon = $(e.currentTarget).find('#checkIcon');
@@ -187,12 +190,8 @@ if ($_SESSION['CT'] == "0") {
             svg.addClass('d-none');
             checkIcon.addClass('d-none');
 
-
-
             // Find the 'item-id' input element within the same card
             const item_id_input = getItemId;
-            console.log(item_id_input);
-            console.log(user_id);
             if (item_id_input) {
                 // Check if the element is found before accessing its value
 
@@ -207,11 +206,8 @@ if ($_SESSION['CT'] == "0") {
                         data: {
                             itemid: item_id_input,
                             userid: user_id,
-                            itemquan: itemQuan,
                         },
                         success: function(response) {
-                            alert(response);
-                            alert("item added");
                             if (response) {
                                 setTimeout(() => {
                                     checkIcon.addClass('d-none');
@@ -230,142 +226,46 @@ if ($_SESSION['CT'] == "0") {
 
         });
 
-        var reqBtn = document.querySelector('.req-btn');
+        var reqBtn = document.querySelector('.btnReq');
         reqBtn.addEventListener('click', function() {
-            console.log(itemQuan);
+            const itemQuan = document.getElementById("item-quan").value;
+            const itemId = document.getElementById("item-id").value;
+            const quanChecker = document.getElementById("quanChecker");
+            var maxQuantity = parseInt(document.getElementById("item-quan").max, 10);
+            console.log("item Id: " + itemId);
+            console.log("user id: " + user_id);
+            console.log("item quan:" + itemQuan);
+
+            if (parseInt(itemQuan, 10) > maxQuantity) {
+                quanChecker.style.display = "block";
+
+                // Set a timeout to hide the element after 2 seconds
+                setTimeout(function() {
+                    quanChecker.style.display = "none";
+                }, 2000);
+
+
+            } else {
+                // requesting item function  
+                $.ajax({
+                    type: "POST",
+                    url: "./includes/itemreq.inc.php",
+                    data: {
+                        itemID: itemId,
+                        itemQ: itemQuan,
+                        userID: user_id
+                    },
+                    success: function(response) {
+                        if (response) {
+                            // working na Pwede na lagay yung PHP MAILER DITO
+                            alert(response);
+                            location.reload();
+                        }
+                    }
+                });
+            }
+
+
         });
-    });
-    $(document).ready(() => {
-
-        // $(".checker").click((e) => {
-        //     //user id variable
-        //     const spinner = $(e.currentTarget).find('.spinner-border');
-        //     const svg = $(e.currentTarget).find('svg');
-        //     const checkIcon = $(e.currentTarget).find('#checkIcon');
-
-        //     spinner.removeClass('d-none');
-        //     svg.addClass('d-none');
-        //     checkIcon.addClass('d-none');
-
-
-
-        //     // Find the closest parent element with the class 'card'
-        //     const card = e.currentTarget.closest('.card');
-
-        //     // Find the 'item-id' input element within the same card
-        //     const item_id_input = card.querySelector('.item_id');
-
-        //     if (item_id_input) {
-        //         // Check if the element is found before accessing its value
-        //         const item_id = parseInt(item_id_input.value);
-        //         setTimeout(() => {
-        //             spinner.addClass('d-none');
-        //             svg.addClass('d-none');
-        //             checkIcon.removeClass('d-none');
-
-        //             $.ajax({
-        //                 type: "POST",
-        //                 url: "./includes/tocart.php",
-        //                 data: {
-        //                     itemid: item_id,
-        //                     userid: user_id
-        //                 },
-        //                 success: function(response) {
-
-        //                     alert("item added");
-        //                     if (response) {
-        //                         setTimeout(() => {
-        //                             checkIcon.addClass('d-none');
-        //                             svg.removeClass('d-none');
-        //                         }, 3000);
-        //                         location.reload();
-        //                     }
-        //                 }
-        //             });
-
-        //         }, 5000);
-
-        //     } else {
-        //         console.error("Item ID input not found within the card:", card);
-        //     }
-        // })
-
-        // $(".btn-req").click(function(e) {
-
-        //     // Stop the event from propagating further
-        //     e.stopPropagation();
-
-        //     // Find the closest parent element with the class 'card'
-        //     const card = e.currentTarget.closest('.card');
-
-        //     // Find the 'item-id' input element within the same card
-        //     const item_id_input = card.querySelector('.item_id');
-
-
-        //     const modalItemImage = $('#modalItemImage');
-
-        //     const modalItemDetails = $('#additionalDetails');
-        //     if (item_id_input) {
-        //         const item_id = parseInt(item_id_input.value);
-
-        //         // Update the modal content
-        //         $.ajax({
-        //             type: "POST",
-        //             url: "./includes/getitem.inc.php",
-        //             data: {
-        //                 itemId: item_id,
-        //             },
-        //             success: function(response) {
-        //                 const itemInfo = JSON.parse(response);
-        //                 modalItemImage.attr('src',
-        //                     `images/items/${itemInfo.item_image}`);
-
-        //                 $('#modalItemDetails').html(`
-        //                     <h6>Item Name: <span id="item-name">${itemInfo.item_name}</span></h5>
-        //                     <input type="number" min="0" id="item-id" value= "${itemInfo.item_id}" hidden>
-        //                     <div id="additionalDetails">
-        //                     <p> 
-        //                     Item Description: <span id="item-desc">${itemInfo.item_description}</span> </br>
-        //                         Item Status :  <span id="item-stat"> ${itemInfo.item_status}</span> </br>
-        //                         <sub> Stocks: <span id="item-stoc">${itemInfo.item_quantity}</span> </sub> <br>
-
-        //                         <input  id="item-quan" type="number" min="0" max="${itemInfo.item_quantity}">
-        //                     </p>
-
-        //                     </div>
-        //                 `);
-
-        //             }
-        //         });
-
-        //         // Show the modal programmatically
-        //         $('#exampleModal').modal("show");
-        //     }
-        // });
-
-        // $(".req-btn").click(function() {
-        //     const itemId = document.getElementById("item-id").value;
-        //    
-        //     console.log("item Id: " + itemId);
-        //     console.log("user id: " + user_id);
-        //     console.log("item quan" + itemQuan);
-
-        //     $.ajax({
-        //         type: "POST",
-        //         url: "./includes/itemreq.inc.php",
-        //         data: {
-        //             itemID: itemId,
-        //             itemQ: itemQuan,
-        //             userID: user_id
-        //         },
-        //         success: function(response) {
-        //             if (response) {
-        //                 alert(response);
-        //             }
-        //         }
-        //     });
-
-        // })
-
     });
 </script>
