@@ -9,6 +9,12 @@ if (!isset($_SESSION['ID']) and ($_SESSION['ID'] == '')) {
     exit();
 }
 
+// if you're a user then go back to index.php
+if ($_SESSION['CT'] == '0') {
+    header("location: home.php");
+    exit();
+}
+
 // To determine which is active page in nav bar
 $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 ?>
