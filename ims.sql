@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2023 at 02:18 PM
+-- Generation Time: Jan 06, 2024 at 03:37 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -40,12 +40,19 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`user_id`, `item_id`, `inCart`, `date_added`, `date_out`) VALUES
-(5, 1, 1, '2023-12-26 11:41:32', '2023-12-26 19:41:32'),
+(5, 1, 1, '2024-01-04 10:03:12', '2024-01-04 18:03:12'),
 (5, 2, 1, '2023-12-26 11:42:42', '2023-12-26 19:42:42'),
 (5, 2, 1, '2023-12-26 11:42:42', '2023-12-26 19:42:42'),
-(5, 4, 1, '2023-12-26 12:45:23', '2023-12-26 20:45:23'),
+(5, 4, 1, '2024-01-06 14:36:15', '2024-01-06 22:36:15'),
 (5, 2, 1, '2023-12-26 11:42:42', '2023-12-26 19:42:42'),
-(5, 4, 1, '2023-12-26 12:45:23', '2023-12-26 20:45:23');
+(5, 4, 1, '2024-01-06 14:36:15', '2024-01-06 22:36:15'),
+(5, 10, 1, '2023-12-27 11:28:25', '2023-12-27 19:28:25'),
+(5, 4, 1, '2024-01-06 14:36:15', '2024-01-06 22:36:15'),
+(5, 5, 0, '2023-12-28 14:23:13', NULL),
+(5, 4, 1, '2024-01-06 14:36:15', '2024-01-06 22:36:15'),
+(5, 1, 1, '2024-01-04 10:03:12', '2024-01-04 18:03:12'),
+(5, 4, 1, '2024-01-06 14:36:15', '2024-01-06 22:36:15'),
+(5, 5, 0, '2024-01-04 10:38:22', NULL);
 
 -- --------------------------------------------------------
 
@@ -102,30 +109,44 @@ CREATE TABLE `history` (
   `history_quantity` int(11) NOT NULL,
   `history_user_id` int(11) NOT NULL,
   `history_status` enum('approved','declined','pending','') NOT NULL,
-  `history_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `history_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `isReturned` int(1) NOT NULL,
+  `history_date_return` varchar(30) NOT NULL,
+  `history_due_date` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `history`
 --
 
-INSERT INTO `history` (`history_id`, `history_item_id`, `history_quantity`, `history_user_id`, `history_status`, `history_date`) VALUES
-(1, 1, 1, 5, 'approved', '2023-12-26 11:21:18'),
-(2, 2, 1, 5, 'approved', '2023-12-26 11:22:32'),
-(3, 2, 2, 5, 'approved', '2023-12-26 11:27:45'),
-(4, 4, 1, 5, 'approved', '2023-12-26 11:28:29'),
-(5, 2, 2, 5, 'approved', '2023-12-26 11:35:42'),
-(6, 1, 1, 5, 'approved', '2023-12-26 11:37:20'),
-(7, 1, 1, 5, 'approved', '2023-12-26 11:37:20'),
-(8, 1, 1, 5, 'approved', '2023-12-26 11:37:50'),
-(9, 1, 5, 5, 'approved', '2023-12-26 11:38:00'),
-(10, 1, 7, 5, 'approved', '2023-12-26 11:38:10'),
-(11, 1, 5, 5, 'approved', '2023-12-26 11:41:32'),
-(12, 2, 9, 5, 'approved', '2023-12-26 11:42:42'),
-(13, 4, 1, 5, 'approved', '2023-12-26 12:42:14'),
-(14, 4, 2, 5, 'approved', '2023-12-26 12:42:45'),
-(15, 4, 4, 5, 'approved', '2023-12-26 12:43:06'),
-(16, 4, 5, 5, 'approved', '2023-12-26 12:45:23');
+INSERT INTO `history` (`history_id`, `history_item_id`, `history_quantity`, `history_user_id`, `history_status`, `history_date`, `isReturned`, `history_date_return`, `history_due_date`) VALUES
+(1, 1, 1, 5, 'declined', '2023-12-27 14:46:10', 1, '1/1/1', '1/1/1'),
+(2, 2, 1, 5, 'approved', '2023-12-27 14:47:52', 1, '', ''),
+(3, 2, 2, 5, 'approved', '2023-12-27 14:53:39', 1, '2023-12-27 22:53:39', ''),
+(4, 4, 1, 5, 'approved', '2023-12-27 14:55:40', 1, '2023-12-27 10:55:40', ''),
+(5, 2, 2, 5, 'approved', '2023-12-27 14:58:39', 1, '2023-12-27 10:58:39', ''),
+(6, 1, 1, 5, 'approved', '2023-12-27 14:58:58', 1, '2023-12-27 10:58:58', ''),
+(7, 1, 1, 5, 'approved', '2024-01-04 10:53:52', 1, '2024-01-04 6:53:52', ''),
+(8, 1, 1, 5, 'approved', '2024-01-04 10:54:17', 1, '2024-01-04 6:54:17', ''),
+(9, 1, 5, 5, 'approved', '2024-01-04 10:54:27', 1, '2024-01-04 6:54:27', ''),
+(10, 1, 7, 5, 'approved', '2024-01-04 11:30:56', 1, '2024-01-04 7:30:56', ''),
+(11, 1, 5, 5, 'approved', '2024-01-04 11:31:36', 1, '2024-01-04 7:31:36', ''),
+(12, 2, 9, 5, 'approved', '2023-12-26 11:42:42', 0, '', ''),
+(13, 4, 1, 5, 'approved', '2024-01-06 14:33:09', 1, '2024-01-06 10:33:09', ''),
+(14, 4, 2, 5, 'approved', '2023-12-26 12:42:45', 0, '', ''),
+(15, 4, 4, 5, 'approved', '2023-12-26 12:43:06', 0, '', ''),
+(16, 4, 5, 5, 'approved', '2023-12-26 12:45:23', 0, '', ''),
+(17, 5, 1, 5, 'approved', '2024-01-06 14:33:55', 1, '2024-01-06 10:33:55', ''),
+(18, 10, 1, 5, 'approved', '2023-12-27 11:27:28', 0, '', ''),
+(19, 10, 1, 5, 'approved', '2023-12-27 11:27:35', 0, '', ''),
+(20, 10, 1, 5, 'approved', '2023-12-27 11:28:25', 0, '', ''),
+(21, 1, 100, 5, 'approved', '2023-12-27 15:00:06', 1, '2023-12-27 11:00:06', ''),
+(22, 1, 50, 5, 'approved', '2023-12-27 15:02:06', 1, '2023-12-27 11:02:06', ''),
+(23, 1, 50, 5, 'approved', '2023-12-27 15:03:19', 1, '2023-12-27 11:03:19', ''),
+(24, 4, 5, 5, 'approved', '2023-12-28 13:17:08', 0, '', ''),
+(25, 4, 4, 5, 'approved', '2023-12-28 13:17:17', 0, '', ''),
+(26, 1, 5, 5, 'approved', '2024-01-04 11:31:56', 1, '2024-01-04 7:31:56', ''),
+(27, 4, 1, 5, 'approved', '2024-01-06 14:36:15', 0, '', '');
 
 --
 -- Triggers `history`
@@ -143,6 +164,14 @@ DELIMITER $$
 CREATE TRIGGER `updateQuantityItem` BEFORE INSERT ON `history` FOR EACH ROW BEGIN
     UPDATE items 
     SET items.item_quantity = items.item_quantity -   NEW.history_quantity
+    WHERE items.item_id = NEW.history_item_id;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `updateQuantityItemRequest` BEFORE UPDATE ON `history` FOR EACH ROW BEGIN
+    UPDATE items 
+    SET items.item_quantity = items.item_quantity +   NEW.history_quantity
     WHERE items.item_id = NEW.history_item_id;
 END
 $$
@@ -171,13 +200,13 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_status`, `item_description`, `item_image`) VALUES
-(1, 'Galaxy Tab A Tablet', 1, 3, 0, 3, 'enabled', '4gb 256gb color black', 'IMG_655c634aa37f87.97220155.jpg'),
-(2, 'A4 Bond Paper', 3, 2, 0, 2, 'enabled', 'A4 Hardcopy', 'IMG_655c63420ed111.72246669.png'),
-(4, 'ID Lace version 5', 3, 3, 69, 4, 'enabled', 'Version 5, Black & Orange', 'IMG_6543bb326ab0b1.55477099.'),
+(1, 'Galaxy Tab A Tablet', 1, 3, 140, 3, 'enabled', '4gb 256gb color black', 'IMG_655c634aa37f87.97220155.jpg'),
+(2, 'A4 Bond Paper', 3, 2, 2, 2, 'enabled', 'A4 Hardcopy', 'IMG_655c63420ed111.72246669.png'),
+(4, 'ID Lace version 5', 3, 3, 60, 4, 'enabled', 'Version 5, Black & Orange', 'IMG_6543bb326ab0b1.55477099.'),
 (5, 'Jumping wires long', 3, 1, 31, 4, 'enabled', 'Rainbow colors', ''),
 (7, 'Gel Ink Pen about to delete', 3, 1, 25, 5, 'disabled', 'Black', 'IMG_65350cc0dbc2f1.96755226.'),
 (8, 'Jungle Juice', 2, 2, 13, 2, 'disabled', '350ml Mango, Apple, Grapes, & Orange', 'IMG_650896c28445b9.58710873.jpg'),
-(10, 'Sunglasses', 3, 3, 13, 1, 'enabled', 'Rayband, Black frame', 'IMG_650898af7e3799.65129257.jpg'),
+(10, 'Sunglasses', 3, 3, 10, 1, 'enabled', 'Rayband, Black frame', 'IMG_650898af7e3799.65129257.jpg'),
 (11, 'Hotdog', 2, 1, 22, 1, 'enabled', 'Jumbo, Tender Juicy, Pure Foods, 12pcs per pack', 'IMG_650899879ba091.62117593.png'),
 (14, 'yoon', 1, 1, 2, 2, 'enabled', 'grdg', 'IMG_655c5d66a35232.43841368.png'),
 (15, 'wa ', 1, 1, 2321, 3, 'enabled', 'dasdasda', 'IMG_655b09bf1c7bc7.78434158.png');
@@ -221,6 +250,19 @@ INSERT INTO `items_unit_of_measure` (`item_uom_id`, `item_uom_name`) VALUES
 (1, 'Pack'),
 (2, 'Box'),
 (3, 'Piece(s)');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item_feedback`
+--
+
+CREATE TABLE `item_feedback` (
+  `item_id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `feedback` varchar(225) NOT NULL,
+  `date_of_feedback` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -343,7 +385,7 @@ ALTER TABLE `chapters`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `items`
