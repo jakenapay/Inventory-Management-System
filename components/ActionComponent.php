@@ -25,9 +25,6 @@ if ($_SESSION['CT'] == 1) {
         <div id="content">
             <!--// *Content will be dynamically loaded here -->
         </div>
-
-
-
     </div>
 <?php  } ?>
 

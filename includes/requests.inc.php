@@ -1,10 +1,10 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\Exception;
 
-require 'phpmailer/src/Exception.php';
-require 'phpmailer/src/PHPMailer.php';
-require 'phpmailer/src/SMTP.php';
+// require 'phpmailer/src/Exception.php';
+// require 'phpmailer/src/PHPMailer.php';
+// require 'phpmailer/src/SMTP.php';
 
 session_start();
 
@@ -20,12 +20,19 @@ if(isset($_POST['approve-request-item-btn'])) { // For approving a request
     }
 
     // The process in database
-    $sql = "UPDATE history SET history_status = 'approved' WHERE history_id = :requestId";
+   
     // Probably dadagdagan dito para sa logs table
     try {
+        $sql = "UPDATE history SET isReturned = :updateReturn , history_date_return = :dateReturn WHERE history_id = :requestId";
+        $updateReturn = 1;
+        $currentTimestamp = time();
+        $formattedTimestamp = date("Y-m-d g:i:s", $currentTimestamp);
+        echo $requestId;
         $stmt = $pdo->prepare($sql);
         // Bind the parameter
+        $stmt->bindParam(':updateReturn', $updateReturn , PDO::PARAM_INT);
         $stmt->bindParam(':requestId', $requestId, PDO::PARAM_INT);
+        $stmt->bindParam(':dateReturn', $formattedTimestamp, PDO::PARAM_STR);
         // Execute the statement
         $stmt->execute();
 

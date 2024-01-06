@@ -232,8 +232,8 @@ try {
         <div class="section px-5 pt-4">
             <div class="row">
                 <!-- cart -->
-                <div class="col">
-                    <div class=" justify-content-end justify-content-center-md" style=" text-align: end; margin-right: 100px;">
+                <div class="col-sm-12 col-lg-12 col-md-12">
+                    <div class=" justify-content-end justify-content-center" style=" text-align: end; margin-right: 100px;">
                         <?php include './components/cart.php' ?>
                     </div>
                 </div>

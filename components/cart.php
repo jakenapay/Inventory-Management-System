@@ -1,6 +1,22 @@
 <!-- Dropdown for cart -->
+<style>
+    /* Hide scrollbar for Chrome, Safari, and Edge */
+    .dropdown-menu::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Optional: Style the track and handle for better appearance */
+    .dropdown-menu::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+    }
+
+    .dropdown-menu::-webkit-scrollbar-thumb {
+        background-color: #888;
+    }
+</style>
+
 <div class="dropdown show">
-    <a class="btn btn-sm dropdown-toggle" href="" role="button" id="dropdownCart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="btn btn-sm dropdown-toggle" href="" role="button" id="dropdownCart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="">
         <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 576 512">
             <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
             <style>
@@ -23,7 +39,7 @@
         }
         ?>
     </a>
-    <div class="dropdown-menu" aria-labelledby="dropdownCart" style="height: 400px; overflow-y: auto; width: 350px;">
+    <div class="dropdown-menu" aria-labelledby="dropdownCart" style="height: 170px; overflow-y:auto;  ">
         <?php
 
         $inCart = 0;
@@ -41,24 +57,22 @@
 
         // Process the result
         foreach ($result as $row) {    ?>
-            <div class="border-bottom mb-3">
+            <div class="border-bottom">
                 <div class="row ">
-
-                    <div class="col-lg-6">
+                    <!-- <div class="col-lg-6">
                         <img src="./images/items/<?php echo $row['item_image'] ?>" class="img-fluid rounded-start" style=" max-width: 100%; max-height: 100%;" alt="Item Image">
-                    </div>
-                    <div class="col-lg-6">
+                    </div> -->
+                    <div class="">
                         <div class="card-body">
                             <input type="text" id="user_id" value="<?php echo $_SESSION['ID'] ?>" hidden>
                             <input type="text" class="item_id" value="<?php echo $row['item_id'] ?>" hidden>
-                            <h6 class="card-title"> <small><?php echo $row['item_name'] ?></small></h6>
-                            <p class="card-text"><small><?php echo $row['item_description'] ?></small></p>
+                            <div style="display: flex; justify-content: space-between;">
+                                <h6 class="card-title d-inline-block text-truncate" style="max-width: 50%;"> <small><?php echo $row['item_name'] ?></small></h6>
+                                <button class=" btn btn-primary btn-sm item-btn" data-toggle="modal" data-target="#cartModalList" data-image="<?php echo $row['item_image']; ?>" data-name="<?php echo $row['item_name']; ?>" data-description="<?php echo $row['item_description']; ?>" data-date="<?php echo $row['date_added']; ?>" data-id="<?php echo $_SESSION['ID']; ?>" data-item-id="<?php echo $row['item_id']; ?>" data-item-quantity="<?php echo $row['item_quantity']; ?>">View</button>
+                            </div>
+                            <!-- <p class="card-text"><small><?php echo $row['item_description'] ?></small></p> -->
                             <sub class="card-text">
-                                <small class="text-body-secondary">
-                                    <?php
-                                    echo  "Quantity: " . $row['item_quantity'] . "<br>"
-                                    ?>
-                                </small>
+
                                 <small class="text-body-secondary">
                                     <?php
                                     $timestamp = strtotime($row['date_added']);
@@ -68,7 +82,7 @@
                                     echo "Date: $date";
                                     ?>
                                 </small>
-                                <button class="btn btn-primary btn-sm item-btn" data-toggle="modal" data-target="#cartModalList" data-image="<?php echo $row['item_image']; ?>" data-name="<?php echo $row['item_name']; ?>" data-description="<?php echo $row['item_description']; ?>" data-date="<?php echo $row['date_added']; ?>" data-id="<?php echo $_SESSION['ID']; ?>" data-item-id="<?php echo $row['item_id']; ?>" data-item-quantity="<?php echo $row['item_quantity']; ?>">View</button>
+
                             </sub>
                         </div>
                     </div>
