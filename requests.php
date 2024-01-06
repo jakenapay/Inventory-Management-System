@@ -166,7 +166,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                     h.history_status AS Status,
                                                     h.isReturned AS isReturned,
                                                     h.history_date_return AS dateReturn,
-                                                    h.history_due_date AS dueDate
+                                                    h.history_due_date AS dueDate,
                                                     h.history_date AS Date
                                                     FROM history AS h
                                                     INNER JOIN items AS i ON h.history_item_id = i.item_id
