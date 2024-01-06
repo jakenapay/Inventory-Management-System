@@ -1,29 +1,51 @@
-body {
-    /* background-color: #f0f0f0; */
+/* Phone */
+@media only screen and (max-width: 320px) {
+  #login-btn {
+    background-color: #71b406;
+    color: var(--white);
+    border: 1px solid var(--gray);
+  }
+
+  #login-box {
+    margin: 10px 0 10px;
+  }
+}
+
+/* Tablet */
+@media only screen and (min-width: 321px) and (max-width: 768px) {
+  #login-btn {
+    background-color: #71b406;
+    color: var(--white);
+    border: 1px solid var(--gray);
+  }
+
+  #login-box {
+    margin: 10px 0 10px;
+  }
 }
 
 #login-box {
-    background-color: var(--gray);
-    font-family: var(--mainFont);
-    
-    border: var(--border);
-    border-radius: 20px;
-    box-shadow: var(--boxShadow);
-    padding: 40px 30px 30px;
+  background-color: var(--gray);
+  font-family: var(--mainFont);
+
+  border: var(--border);
+  border-radius: 20px;
+  box-shadow: var(--boxShadow);
+  padding: 40px 30px 30px;
 }
 
 .main-title {
-    font-size: 1.3rem;
-    font-weight: 600;
-    text-align: center;
-    padding: 10px 0px 10px;
-    margin-bottom: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 10px 0px 0px;
+  margin-bottom: 0;
 }
 
 #image-devcon {
-    width: 125px;
-    display: block;
-    margin: 0 auto;
+  width: 125px;
+  display: block;
+  margin: 0 auto;
 }
 
 /* .labels:first-child {
@@ -33,37 +55,36 @@ body {
 } */
 
 .labels {
-    padding-left: 0.5rem;
-    margin: 0 0 0.5rem;
-    font-weight: 500;
-    text-transform: capitalize;
+  padding-left: 0.5rem;
+  margin: 0 0 0.2rem;
+  font-weight: 500;
+  text-transform: capitalize;
 }
 
-
 .userInput {
-    margin: 0 0 0.5rem;
-    display: block;
-    width: 100%;
-    border-radius: 5px;
-    border: var(--border);
-    padding: 0.2rem 1rem 0.2rem;
+  margin: 0 0 0.5rem;
+  display: block;
+  width: 100%;
+  border-radius: 5px;
+  border: var(--border);
+  padding: 0.2rem 1rem 0.2rem;
 }
 
 .button {
-    border-radius: 5px;
-    padding: 0.2rem 1rem 0.2rem;
-    border: var(--border);
-    text-transform: capitalize;
-    transition: all 0.3s ease;
+  border-radius: 5px;
+  padding: 0.2rem 1rem 0.2rem;
+  border: var(--border);
+  text-transform: capitalize;
+  transition: all 0.3s ease;
 }
 
 .button:hover {
-    background-color: #71b406;
-    color: var(--white);
-    border: 1px solid var(--gray);
+  background-color: #71b406;
+  color: var(--white);
+  border: 1px solid var(--gray);
 }
 
 #label-toggle {
-    font-weight: 300;
-    font-size: 0.9rem;
+  font-weight: 300;
+  font-size: 0.9rem;
 }

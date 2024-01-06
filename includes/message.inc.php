@@ -15,6 +15,9 @@ if(isset($_GET['m'])) {
         case "wp";
             echo "<p id='msg' class='msg'>Wrong password</p>";
             break;
+        case "pm";
+            echo "<p id='msg' class='msg'>Password Mismatch</p>";
+            break;
         case "ln":
             echo "<p id='msg' class='msg'>Login needed</p>";
             break;
@@ -29,6 +32,9 @@ if(isset($_GET['m'])) {
             break;
         case "ue":
             echo "<p id='msg' class='msg'>Error adding item</p>";
+            break;
+        case "rqf":
+            echo "<p id='msg' class='msg'>Request failed</p>";
             break;
         case "ia":
             echo "<p id='msg' class='msgOk'>Item added successfully</p>";
@@ -50,6 +56,9 @@ if(isset($_GET['m'])) {
             break;
         case "as":
             echo "<p id='msg' class='msgOk'>Approved successfully</p>";
+            break;
+        case "rqs":
+            echo "<p id='msg' class='msgOk'>Requested successfully</p>";
             break;
         default:
             echo "<p id='msg' class='msg'>Unknown error occured</p>";

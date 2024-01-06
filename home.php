@@ -320,14 +320,39 @@ try {
                     ?>
                 </div>
             </div>
-            <div class="mt-5 row d-flex justify-content-center align-items-center mb-3">
-                <div class="col-sm-12 col-md-12 col-lg-4">
+            <!-- <div class="mt-5 row d-flex justify-content-center align-items-center mb-3">
+                <div class="col-sm-12 col-md-12 col-lg-4 border rounded">
                     <p class="chart-title">Item Percentage</p>
                     <canvas id="pieChart1"></canvas>
                 </div>
-                <div class="col-sm-12 col-md-12 col-lg-8">
+                <div class="col-sm-12 col-md-12 col-lg-8 border rounded">
                     <p class="chart-title">Requested Items by Month</p>
                     <canvas id="lineChart1"></canvas>
+                </div>
+            </div> -->
+            <!-- <div class="mt-5 row justify-content-center align-items-start mb-3">
+                <div class="col-sm-12 col-md-12 col-lg-4 border rounded d-flex flex-column">
+                    <p class="chart-title">Item Percentage</p>
+                    <canvas id="pieChart1" style="flex: 1;"></canvas>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-8 border rounded d-flex flex-column">
+                    <p class="chart-title">Requested Items by Month</p>
+                    <canvas id="lineChart1" style="flex: 1;"></canvas>
+                </div>
+            </div> -->
+
+            <div class="mt-5 row justify-content-center align-items-start mb-3">
+                <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
+                    <div class="border rounded p-3">
+                        <p class="chart-title">Item Percentage</p>
+                        <canvas id="pieChart1" style="width: 100%;"></canvas>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-8">
+                    <div class="border rounded p-3">
+                        <p class="chart-title">Requested Items by Month</p>
+                        <canvas id="lineChart1" style="width: 100%;"></canvas>
+                    </div>
                 </div>
             </div>
 
@@ -336,7 +361,7 @@ try {
     </div>
 
 
-  
+
 
 </body>
 

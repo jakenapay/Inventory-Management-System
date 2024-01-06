@@ -34,13 +34,16 @@
                         <input class="userInput" id="email" name="email" type="email" pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/">
                         <p class="labels">Password</p>
                         <input class="userInput" id="password" name="password" type="password">
-                        <div class="mb-3">
+                        <div class="mb-3 d-flex justify-content-between align-items-center">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" class="custom-control-input" id="toggle-password" name="" onclick="showHidePassword()">
                                 <label id="label-toggle" class="custom-control-label" for="toggle-password">Show password</label>
                             </div>
+                            <div class="labels m-0">
+                                <a href="signin.php" id="label" class="labels">Request an account</a>
+                            </div>
                         </div>
-                        <button id="login-btn" class="button" name="login-btn" type="submit">login</button>
+                        <button id="login-btn" class="button w-100" name="login-btn" type="submit">login</button>
                     </form>
                 </div>
             </div>

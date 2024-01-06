@@ -56,9 +56,12 @@ $totalIDs = $result['total_ids'];
                 <li class="nav-item">
                     <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'logs.php')) ? 'active' : ''; ?>" href="logs.php">Logs</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'users.php')) ? 'active' : ''; ?>" href="users.php">Users</a>
-                </li>
+                <?php
+                if (($_SESSION['CT'] === 1) && ($_SESSION['CH'] === 1)) {
+                    echo '<li class="nav-item">
+                        <a class="nav-link ' . (($_SESSION['active_tab'] === 'users.php') ? 'active' : '') . '" href="users.php">Users</a>
+                    </li>';
+                } ?>
 
                 <!-- For items.php -->
                 <?php
