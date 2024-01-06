@@ -141,6 +141,9 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                     <th>Request by</th>
                                     <th>Status</th>
                                     <th>Date</th>
+                                    <th>Return Status</th>
+                                    <th>Date Return</th>
+                                    <th>Due Return Date</th>
                                     <?php echo ($_SESSION['CT'] == 1) ? "<th>Actions</th>" : ""; ?>
                                 </tr>
                             </thead>
@@ -161,6 +164,9 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                     h.history_quantity AS Quantity,
                                                     CONCAT(u.user_firstname, ' ', u.user_lastname) AS 'Request by',
                                                     h.history_status AS Status,
+                                                    h.isReturned AS isReturned,
+                                                    h.history_date_return AS dateReturn,
+                                                    h.history_due_date AS dueDate
                                                     h.history_date AS Date
                                                     FROM history AS h
                                                     INNER JOIN items AS i ON h.history_item_id = i.item_id
@@ -171,7 +177,10 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                     h.history_quantity AS Quantity,
                                                     CONCAT(u.user_firstname, ' ', u.user_lastname) AS 'Request by',
                                                     h.history_status AS Status,
-                                                    h.history_date AS Date
+                                                    h.history_date AS Date,
+                                                    h.isReturned AS isReturned,
+                                                    h.history_date_return AS dateReturn,
+                                                    h.history_due_date AS dueDate
                                                     FROM history AS h
                                                     INNER JOIN items AS i ON h.history_item_id = i.item_id
                                                     INNER JOIN users AS u ON h.history_user_id = u.user_id
@@ -181,10 +190,14 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                             // Run this code below
                                             $query = "SELECT h.history_id AS ID,
                                                 i.item_name AS Item,
+                                                i.item_id AS itemID,
                                                 h.history_quantity AS Quantity,
                                                 CONCAT(u.user_firstname, ' ', u.user_lastname) AS 'Request by',
                                                 h.history_status AS Status,
-                                                h.history_date AS Date
+                                                h.history_date AS Date,
+                                                h.isReturned AS isReturned,
+                                                h.history_date_return AS dateReturn,
+                                                h.history_due_date AS dueDate
                                                 FROM history AS h
                                                 INNER JOIN items AS i ON h.history_item_id = i.item_id
                                                 INNER JOIN users AS u ON h.history_user_id = u.user_id
@@ -222,19 +235,59 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                 }
 
                                                 ?>
+
+
                                                 <td><?php echo $row['Date']; ?></td>
+
+                                                <td>
+                                                    <?php
+
+                                                    if ($row['isReturned'] == 0) {
+                                                        echo 'No';
+                                                    } else {
+                                                        if ($_SESSION['CT'] == 1) {
+                                                            echo 'Yes';
+                                                        } else {
+                                                            echo '<a href="http://" class="feedback-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#feedbackModal" data-item-id="' . $row['itemID'] . '" title="feedback"><i class="fa-sharp fa-solid fa-comments fa-" style="color: #07f223;"></i></a>';
+                                                        }
+                                                    }
+                                                    ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $row['dateReturn'] ?>
+                                                </td>
+
+                                                <td>
+                                                    asdasdas
+                                                </td>
+                                                <!-- <?php if ($_SESSION['CT'] == 1) { ?>
+                                                    <td>
+                                                    <?php
+                                                            if ($row['isReturned'] == 0) {
+                                                                echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['ID'] . '" title="Approve"><i class="fa-solid fa-check"></i></a>';
+                                                                echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['ID'] . '" title="Decline"><i class="fa-solid fa-x"></i></a>';
+                                                            } else {
+                                                                // echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['ID'] . '" title="Approve" ><i class="fa-solid fa-check"></i></a>';
+                                                                // echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['ID'] . '" title="Decline" ><i class="fa-solid fa-x"></i></a>';
+                                                            }
+                                                        } ?>
+                                                    </td> -->
+
+
+
+
                                                 <?php if ($_SESSION['CT'] == 1) { ?>
                                                     <td>
                                                     <?php
-                                                    if ($row['Status'] == 'pending') {
+                                                    if ($row['isReturned'] == 0) {
                                                         echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['ID'] . '" title="Approve"><i class="fa-solid fa-check"></i></a>';
-                                                        echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['ID'] . '" title="Decline"><i class="fa-solid fa-x"></i></a>';
+                                                        // echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['ID'] . '" title="Decline"><i class="fa-solid fa-x"></i></a>';
                                                     } else {
                                                         // echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['ID'] . '" title="Approve" ><i class="fa-solid fa-check"></i></a>';
                                                         // echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['ID'] . '" title="Decline" ><i class="fa-solid fa-x"></i></a>';
                                                     }
                                                 } ?>
-                                                  </td>  
+
                                             </tr>
                                 <?php
                                         }
@@ -270,9 +323,42 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                         <h6>Are you sure you want to approve this request?</h6>
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
-                        <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['ID']; ?>">
+                        <input type="" name="user_id" id="user_id" value="<?php echo $_SESSION['ID']; ?>" hidden>
                         <button type="button" class="btn btn-secondary btnRed btn-sm px-2" data-bs-dismiss="modal">Close</button>
                         <input type="submit" class="btn btnGreen text-light btn-sm mx-1" name="approve-request-item-btn" value="Approve">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Item Feedback modal -->
+    <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form action="includes/" method="post">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title font-weight-bold" id="exampleModalLabel">Feedback</h6>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="approve_request_id" id="approve_request_id">
+                        <div class="comment-widgets ">
+                            <!-- Comment Row -->
+                            <div class="d-flex flex-row  m-t-0">
+                                <div class="p-2"><img src="./images/userProfiles/<?php echo $_SESSION['UI'] ?>" alt="user" width="50" class="rounded-circle"></div>
+                                <div class="comment-text ">
+                                    <h6 class=""><small><?php echo $_SESSION['FN'] . " " . $_SESSION['LN'] ?> </small></h6> <span class="m-b-15 d-block"> <textarea id="w3review" name="w3review" rows="3" cols="35"></textarea> </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-between">
+                        <input type="" name="user_id" id="user_id" value="<?php echo $_SESSION['ID']; ?>" hidden>
+                        <button type="button" class="btn btn-secondary btnRed btn-sm px-2" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btnGreen text-light btn-sm mx-1" name="approve-request-item-btn" value="Feedback">
                     </div>
                 </div>
             </form>
@@ -311,6 +397,8 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             $('table').on('click', '.approve-btn', function(e) {
                 e.preventDefault();
                 var itemId = $(this).data('item-id');
+
+                console.log(itemId)
                 $.ajax({
                     type: 'POST',
                     url: 'includes/items.inc.php',
@@ -343,14 +431,35 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                 });
             });
 
+            $('table').on('click', '.feedback-btn', function(e) {
+                e.preventDefault();
+                var itemId = $(this).data('item-id');
+                alert(itemId);
+                $.ajax({
+                    type: 'POST',
+                    url: 'includes/requests.inc.php',
+                    data: {
+                        'decline-request-item-btn': true,
+                        'item_id': itemId
+                    },
+                    success: function(response) {
+                        $('#decline_request_id').val(itemId);
+                        $('#declineModal').modal('show');
+                    }
+                });
+            });
+
         });
     </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script> -->
 
 </body>
 

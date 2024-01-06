@@ -29,6 +29,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="assets/css/nav.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="assets/css/items.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="assets/css/itemlist.css?v=<?php echo time(); ?>">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -123,16 +124,41 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
         </div>
 
         <div class="container">
-            <div class="row">
 
-                <?php include './components/itemlist.php' ?>
+            <?php include './components/radioBttnReqList.php'; ?>
+
+            <div id="ItemList">
+                <?php include './components/itemlist.php'; ?>
 
             </div>
+
         </div>
     </div>
     </div>
 
-   
+
 </body>
 
 </html>
+
+<script>
+
+    // function updateItemCards(items) {
+
+    //     // Update your UI with the fetched data
+    //     // For example, replace the existing items in the page with the new items
+    //     const itemsContainer = document.querySelector('.row');
+    //     itemsContainer.innerHTML = '';
+
+    //     items.forEach(function(item) {
+    //         // Create HTML elements for each item and append to the container
+    //         const itemCard = document.createElement('div');
+    //         itemCard.classList.add('col-md-6', 'col-sm-12', 'col-lg-4', 'mt-5');
+    //         // ... (create and append other elements as needed)
+    //         itemsContainer.appendChild(itemCard);
+    //     });
+
+    //     console.error('Response is not an array:', items);
+    //     // Handle the case where the response is not an array
+    //     // (e.g., display an error message or handle it in another way)
+</script>

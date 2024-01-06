@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2023 at 08:04 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.0.28
+-- Generation Time: Jan 06, 2024 at 03:37 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -30,31 +30,29 @@ SET time_zone = "+00:00";
 CREATE TABLE `cart` (
   `user_id` int(225) NOT NULL,
   `item_id` int(225) NOT NULL,
+  `inCart` tinyint(1) NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `date_out` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`user_id`, `item_id`, `date_added`, `date_out`) VALUES
-(2, 1, '2023-11-25 14:51:10', NULL),
-(2, 2, '2023-11-25 14:52:35', NULL),
-(2, 4, '2023-11-25 14:55:05', NULL),
-(2, 15, '2023-11-25 15:12:35', NULL),
-(2, 15, '2023-11-25 15:27:08', NULL),
-(2, 11, '2023-11-25 15:27:58', NULL),
-(2, 7, '2023-11-25 15:34:12', NULL),
-(2, 8, '2023-11-25 17:22:36', NULL),
-(2, 14, '2023-11-25 18:41:15', NULL),
-(2, 8, '2023-11-25 19:19:01', NULL),
-(2, 2, '2023-11-25 19:45:07', NULL),
-(2, 2, '2023-11-26 04:53:46', NULL),
-(5, 4, '2023-11-26 05:17:36', NULL),
-(5, 5, '2023-11-26 05:17:52', NULL),
-(5, 4, '2023-11-26 05:18:55', NULL),
-(5, 4, '2023-11-26 05:19:27', NULL);
+INSERT INTO `cart` (`user_id`, `item_id`, `inCart`, `date_added`, `date_out`) VALUES
+(5, 1, 1, '2024-01-04 10:03:12', '2024-01-04 18:03:12'),
+(5, 2, 1, '2023-12-26 11:42:42', '2023-12-26 19:42:42'),
+(5, 2, 1, '2023-12-26 11:42:42', '2023-12-26 19:42:42'),
+(5, 4, 1, '2024-01-06 14:36:15', '2024-01-06 22:36:15'),
+(5, 2, 1, '2023-12-26 11:42:42', '2023-12-26 19:42:42'),
+(5, 4, 1, '2024-01-06 14:36:15', '2024-01-06 22:36:15'),
+(5, 10, 1, '2023-12-27 11:28:25', '2023-12-27 19:28:25'),
+(5, 4, 1, '2024-01-06 14:36:15', '2024-01-06 22:36:15'),
+(5, 5, 0, '2023-12-28 14:23:13', NULL),
+(5, 4, 1, '2024-01-06 14:36:15', '2024-01-06 22:36:15'),
+(5, 1, 1, '2024-01-04 10:03:12', '2024-01-04 18:03:12'),
+(5, 4, 1, '2024-01-06 14:36:15', '2024-01-06 22:36:15'),
+(5, 5, 0, '2024-01-04 10:38:22', NULL);
 
 -- --------------------------------------------------------
 
@@ -65,7 +63,7 @@ INSERT INTO `cart` (`user_id`, `item_id`, `date_added`, `date_out`) VALUES
 CREATE TABLE `category` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `category`
@@ -85,7 +83,7 @@ CREATE TABLE `chapters` (
   `chapter_id` int(11) NOT NULL,
   `chapter_name` varchar(255) NOT NULL,
   `chapter_address` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `chapters`
@@ -111,26 +109,73 @@ CREATE TABLE `history` (
   `history_quantity` int(11) NOT NULL,
   `history_user_id` int(11) NOT NULL,
   `history_status` enum('approved','declined','pending','') NOT NULL,
-  `history_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `history_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `isReturned` int(1) NOT NULL,
+  `history_date_return` varchar(30) NOT NULL,
+  `history_due_date` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `history`
 --
 
-INSERT INTO `history` (`history_id`, `history_item_id`, `history_quantity`, `history_user_id`, `history_status`, `history_date`) VALUES
-(1, 11, 2, 1, 'approved', '2023-10-08 16:00:00'),
-(2, 11, 20, 1, 'approved', '2023-10-08 16:00:00'),
-(3, 2, 1, 2, 'approved', '2023-10-15 16:00:00'),
-(4, 1, 1, 1, 'declined', '2023-10-21 16:00:00'),
-(5, 7, 3, 1, 'declined', '2023-10-21 16:00:00'),
-(6, 1, 2, 1, 'declined', '2023-10-25 16:00:00'),
-(7, 14, 2, 1, 'declined', '2023-10-25 16:00:00'),
-(8, 10, 2, 5, 'approved', '2023-10-26 16:00:00'),
-(9, 14, 1, 1, 'declined', '2023-11-19 16:00:00'),
-(10, 1, 1, 1, 'pending', '2023-11-19 16:00:00'),
-(11, 4, 1, 5, 'pending', '2023-11-26 05:56:24'),
-(12, 5, 2, 5, 'pending', '2023-11-26 05:57:30');
+INSERT INTO `history` (`history_id`, `history_item_id`, `history_quantity`, `history_user_id`, `history_status`, `history_date`, `isReturned`, `history_date_return`, `history_due_date`) VALUES
+(1, 1, 1, 5, 'declined', '2023-12-27 14:46:10', 1, '1/1/1', '1/1/1'),
+(2, 2, 1, 5, 'approved', '2023-12-27 14:47:52', 1, '', ''),
+(3, 2, 2, 5, 'approved', '2023-12-27 14:53:39', 1, '2023-12-27 22:53:39', ''),
+(4, 4, 1, 5, 'approved', '2023-12-27 14:55:40', 1, '2023-12-27 10:55:40', ''),
+(5, 2, 2, 5, 'approved', '2023-12-27 14:58:39', 1, '2023-12-27 10:58:39', ''),
+(6, 1, 1, 5, 'approved', '2023-12-27 14:58:58', 1, '2023-12-27 10:58:58', ''),
+(7, 1, 1, 5, 'approved', '2024-01-04 10:53:52', 1, '2024-01-04 6:53:52', ''),
+(8, 1, 1, 5, 'approved', '2024-01-04 10:54:17', 1, '2024-01-04 6:54:17', ''),
+(9, 1, 5, 5, 'approved', '2024-01-04 10:54:27', 1, '2024-01-04 6:54:27', ''),
+(10, 1, 7, 5, 'approved', '2024-01-04 11:30:56', 1, '2024-01-04 7:30:56', ''),
+(11, 1, 5, 5, 'approved', '2024-01-04 11:31:36', 1, '2024-01-04 7:31:36', ''),
+(12, 2, 9, 5, 'approved', '2023-12-26 11:42:42', 0, '', ''),
+(13, 4, 1, 5, 'approved', '2024-01-06 14:33:09', 1, '2024-01-06 10:33:09', ''),
+(14, 4, 2, 5, 'approved', '2023-12-26 12:42:45', 0, '', ''),
+(15, 4, 4, 5, 'approved', '2023-12-26 12:43:06', 0, '', ''),
+(16, 4, 5, 5, 'approved', '2023-12-26 12:45:23', 0, '', ''),
+(17, 5, 1, 5, 'approved', '2024-01-06 14:33:55', 1, '2024-01-06 10:33:55', ''),
+(18, 10, 1, 5, 'approved', '2023-12-27 11:27:28', 0, '', ''),
+(19, 10, 1, 5, 'approved', '2023-12-27 11:27:35', 0, '', ''),
+(20, 10, 1, 5, 'approved', '2023-12-27 11:28:25', 0, '', ''),
+(21, 1, 100, 5, 'approved', '2023-12-27 15:00:06', 1, '2023-12-27 11:00:06', ''),
+(22, 1, 50, 5, 'approved', '2023-12-27 15:02:06', 1, '2023-12-27 11:02:06', ''),
+(23, 1, 50, 5, 'approved', '2023-12-27 15:03:19', 1, '2023-12-27 11:03:19', ''),
+(24, 4, 5, 5, 'approved', '2023-12-28 13:17:08', 0, '', ''),
+(25, 4, 4, 5, 'approved', '2023-12-28 13:17:17', 0, '', ''),
+(26, 1, 5, 5, 'approved', '2024-01-04 11:31:56', 1, '2024-01-04 7:31:56', ''),
+(27, 4, 1, 5, 'approved', '2024-01-06 14:36:15', 0, '', '');
+
+--
+-- Triggers `history`
+--
+DELIMITER $$
+CREATE TRIGGER `updateCart` AFTER INSERT ON `history` FOR EACH ROW BEGIN
+UPDATE cart 
+SET inCart = 1,
+date_out = NOW()
+WHERE item_id = NEW.history_item_id AND user_id = NEW.history_user_id;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `updateQuantityItem` BEFORE INSERT ON `history` FOR EACH ROW BEGIN
+    UPDATE items 
+    SET items.item_quantity = items.item_quantity -   NEW.history_quantity
+    WHERE items.item_id = NEW.history_item_id;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `updateQuantityItemRequest` BEFORE UPDATE ON `history` FOR EACH ROW BEGIN
+    UPDATE items 
+    SET items.item_quantity = items.item_quantity +   NEW.history_quantity
+    WHERE items.item_id = NEW.history_item_id;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -148,20 +193,20 @@ CREATE TABLE `items` (
   `item_status` enum('enabled','disabled','','') NOT NULL,
   `item_description` varchar(255) NOT NULL,
   `item_image` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `items`
 --
 
 INSERT INTO `items` (`item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_status`, `item_description`, `item_image`) VALUES
-(1, 'Galaxy Tab A Tablet', 1, 3, 3, 3, 'enabled', '4gb 256gb color black', 'IMG_655c634aa37f87.97220155.jpg'),
-(2, 'A4 Bond Paper', 3, 2, 10, 2, 'enabled', 'A4 Hardcopy', 'IMG_655c63420ed111.72246669.png'),
-(4, 'ID Lace version 5', 3, 3, 80, 4, 'enabled', 'Version 5, Black & Orange', 'IMG_6543bb326ab0b1.55477099.'),
-(5, 'Jumping wires long', 3, 1, 30, 4, 'enabled', 'Rainbow colors', ''),
-(7, 'Gel Ink Pen about to delete', 3, 1, 24, 5, 'disabled', 'Black', 'IMG_65350cc0dbc2f1.96755226.'),
+(1, 'Galaxy Tab A Tablet', 1, 3, 140, 3, 'enabled', '4gb 256gb color black', 'IMG_655c634aa37f87.97220155.jpg'),
+(2, 'A4 Bond Paper', 3, 2, 2, 2, 'enabled', 'A4 Hardcopy', 'IMG_655c63420ed111.72246669.png'),
+(4, 'ID Lace version 5', 3, 3, 60, 4, 'enabled', 'Version 5, Black & Orange', 'IMG_6543bb326ab0b1.55477099.'),
+(5, 'Jumping wires long', 3, 1, 31, 4, 'enabled', 'Rainbow colors', ''),
+(7, 'Gel Ink Pen about to delete', 3, 1, 25, 5, 'disabled', 'Black', 'IMG_65350cc0dbc2f1.96755226.'),
 (8, 'Jungle Juice', 2, 2, 13, 2, 'disabled', '350ml Mango, Apple, Grapes, & Orange', 'IMG_650896c28445b9.58710873.jpg'),
-(10, 'Sunglasses', 3, 3, 13, 1, 'enabled', 'Rayband, Black frame', 'IMG_650898af7e3799.65129257.jpg'),
+(10, 'Sunglasses', 3, 3, 10, 1, 'enabled', 'Rayband, Black frame', 'IMG_650898af7e3799.65129257.jpg'),
 (11, 'Hotdog', 2, 1, 22, 1, 'enabled', 'Jumbo, Tender Juicy, Pure Foods, 12pcs per pack', 'IMG_650899879ba091.62117593.png'),
 (14, 'yoon', 1, 1, 2, 2, 'enabled', 'grdg', 'IMG_655c5d66a35232.43841368.png'),
 (15, 'wa ', 1, 1, 2321, 3, 'enabled', 'dasdasda', 'IMG_655b09bf1c7bc7.78434158.png');
@@ -175,7 +220,7 @@ INSERT INTO `items` (`item_id`, `item_name`, `item_category`, `item_measure`, `i
 CREATE TABLE `items_category` (
   `item_category_id` int(11) NOT NULL,
   `item_category_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `items_category`
@@ -195,7 +240,7 @@ INSERT INTO `items_category` (`item_category_id`, `item_category_name`) VALUES
 CREATE TABLE `items_unit_of_measure` (
   `item_uom_id` int(11) NOT NULL,
   `item_uom_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `items_unit_of_measure`
@@ -209,6 +254,19 @@ INSERT INTO `items_unit_of_measure` (`item_uom_id`, `item_uom_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `item_feedback`
+--
+
+CREATE TABLE `item_feedback` (
+  `item_id` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `feedback` varchar(225) NOT NULL,
+  `date_of_feedback` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `logs`
 --
 
@@ -217,7 +275,7 @@ CREATE TABLE `logs` (
   `log_user` int(11) NOT NULL,
   `log_type` enum('modify','return','request','add','') NOT NULL,
   `log_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -235,7 +293,7 @@ CREATE TABLE `users` (
   `user_chapter` int(11) NOT NULL,
   `user_image` varchar(255) NOT NULL,
   `user_status` enum('active','inactive') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -327,7 +385,7 @@ ALTER TABLE `chapters`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `items`

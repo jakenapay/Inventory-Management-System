@@ -22,6 +22,8 @@ if (isset($_POST['userID'])) {
 
         $stmt->execute();
 
+
+
         // Additional code after successful execution, if needed
         echo "Record inserted successfully!";
     } catch (PDOException $e) {
