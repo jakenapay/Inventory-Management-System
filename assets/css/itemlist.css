@@ -147,27 +147,27 @@
 
 .comment-widgets {
     position: relative;
-    margin-bottom: 10px
+    margin-bottom: 5px
 }
 
 .comment-widgets .comment-row {
     border-bottom: 1px solid transparent;
-    padding: 14px;
+    padding: 0px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     margin: 10px 0
 }
 
-.p-2 {
+/* .p-2 {
     padding: 0.5rem !important
-}
+} */
 
 .comment-text {
     padding-left: 15px
 }
 
-.w-100 {
+/* .w-100 {
     width: 100% !important
 }
 
@@ -180,9 +180,9 @@
     font-size: 0.76563rem;
     line-height: 1.5;
     border-radius: 1px
-}
+} */
 
-.btn-cyan {
+/* .btn-cyan {
     color: #fff;
     background-color: #27a9e3;
     border-color: #27a9e3
@@ -192,8 +192,8 @@
     color: #fff;
     background-color: #1a93ca;
     border-color: #198bbe
-}
+} */
 
-.comment-widgets .comment-row:hover {
+/* .comment-widgets .comment-row:hover {
     background: rgba(0, 0, 0, 0.05)
-}
+} */

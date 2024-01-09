@@ -1,5 +1,4 @@
 <?php
-
 if ($_SESSION["CT"] == 0) {  ?>
     <div class="row">
         <div class="col-lg-9 col-sm-6 col-sm-12 m-auto mt-5">
@@ -39,8 +38,8 @@ if ($_SESSION["CT"] == 0) {  ?>
         <div class="col-lg-3 col-sm-6 col-sm-12 m-auto mt-5">
             <div class=" input-group">
                 <div class="input-group">
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                    <button type="button" class="btn btn-outline-success" data-mdb-ripple-init>search</button>
+                    <input type="search" class="form-control rounded" id="itemSearch" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="button" class="btn btn-outline-success btnSearch" data-mdb-ripple-init>search</button>
                 </div>
             </div>
         </div>
@@ -76,4 +75,22 @@ if ($_SESSION["CT"] == 0) {  ?>
             alert("Please select an option");
         }
     }
+
+
+    $('.btnSearch').click(function() {
+
+        var Sdata = document.getElementById('itemSearch').value;
+        alert(Sdata);
+        // Perform AJAX request using jQuery
+        $.ajax({
+            type: 'POST',
+            url: './includes/searchQuery.inc.php',
+            data: {
+                querySearch: Sdata
+            },
+            success: function(response) {
+                $('#ItemList').html(response);
+            }
+        });
+    });
 </script>

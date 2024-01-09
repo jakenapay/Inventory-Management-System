@@ -1,0 +1,174 @@
+body {
+  min-height: 100vh;
+  background: #adadad;
+  padding: 60px 20px;
+}
+
+.container {
+  margin: 40px auto 0px;
+  position: relative;
+  background: #fff;
+  width: 800px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 1000px) {
+  .container {
+    width: 80%;
+  }
+}
+
+.left {
+  padding: 60px;
+  border-bottom: 3px solid rgba(255, 165, 0, 0.1);
+}
+
+.left img {
+  width: 100%;
+}
+
+/* .left .fa {
+  cursor: pointer;
+  position: absolute;
+  top: 40px;
+  color: #eaeaea;
+  font-size: 18pt;
+  transition: all 0.6s;
+}
+
+.left .fa:hover {
+  color: #ccc;
+}
+
+.left .fa-arrow-left {
+  left: 40px;
+}
+
+.left .fa-arrow-right {
+  right: 40px;
+} */
+
+.right {
+  border-left: 2px solid rgba(255, 165, 0, 0.1);
+  padding: 40px;
+  padding-bottom: 0;
+  background: #f7f5f6;
+}
+
+.categorie {
+  margin-top: 10px;
+  font-size: 16pt;
+  text-transform: uppercase;
+  font-family: "Montserrat";
+  font-weight: 300;
+  color: #ff9800;
+}
+
+.product {
+  font-size: 25pt;
+  margin-top: 10px;
+  font-weight: 500;
+  color: #666;
+  font-family: "Montserrat";
+}
+
+.desc {
+  margin-top: 20px;
+  color: #777;
+}
+
+.desc li {
+  font-size: 10pt;
+  font-family: "Montserrat";
+  margin: 15px -5px;
+}
+
+.title-colour {
+  margin-top: 25px;
+  font-size: 13pt;
+  font-family: "Montserrat";
+}
+
+.color-black {
+  display: inline-block;
+  cursor: pointer;
+  padding: 14px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 30px;
+}
+
+.color-white {
+  cursor: pointer;
+  display: inline-block;
+  padding: 14px;
+  background-color: #fff;
+  color: #fff;
+  margin-left: 10px;
+  border-radius: 30px;
+  border: 1px solid #ddd;
+}
+
+/* .price {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 28px;
+  font-family: "Montserrat";
+  font-weight: 400;
+  display: inline-flex;
+} */
+
+.item {
+  text-align: center;
+  background-color: #ffa501;
+  padding: 10px 25px 7px 25px;
+  color: #fff;
+  border-radius: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: "Montserrat";
+  transition: all 0.6s;
+  border: 3px solid #ffa501;
+  cursor: pointer;
+  width: 50%;
+ 
+  
+}
+
+.item:hover {
+  color: #ffa501;
+  background-color: #fff;
+}
+
+.cart {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px; /* Adjust margin as needed */
+}
+
+
+
+#counter-value {
+  font-size: 24px;
+  width: 50px;
+  text-align: center;
+  height: 35px; /* Set the desired height */
+}
+
+#increment-btn,
+#decrement-btn {
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  height: 35px; /* Set the same height as the input */
+}
+
+#increment-btn:hover,
+#decrement-btn:hover {
+  background-color: #45a049;
+}

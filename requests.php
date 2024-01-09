@@ -180,7 +180,8 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                     h.history_date AS Date,
                                                     h.isReturned AS isReturned,
                                                     h.history_date_return AS dateReturn,
-                                                    h.history_due_date AS dueDate
+                                                    h.history_due_date AS dueDate,
+                                                    h.history_user_id AS hUserID
                                                     FROM history AS h
                                                     INNER JOIN items AS i ON h.history_item_id = i.item_id
                                                     INNER JOIN users AS u ON h.history_user_id = u.user_id
@@ -248,7 +249,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                         if ($_SESSION['CT'] == 1) {
                                                             echo 'Yes';
                                                         } else {
-                                                            echo '<a href="http://" class="feedback-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#feedbackModal" data-item-id="' . $row['itemID'] . '" title="feedback"><i class="fa-sharp fa-solid fa-comments fa-" style="color: #07f223;"></i></a>';
+                                                            echo '<a href="http://" class="feedback-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#feedbackModal" data-item-id="' . $row['itemID'] . '"  data-user-id = "' . $_SESSION['ID'] . '" title="feedback"><i class="fa-sharp fa-solid fa-comments fa-" style="color: #07f223;"></i></a>';
                                                         }
                                                     }
                                                     ?>
@@ -264,7 +265,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                     <td>
                                                     <?php
                                                             if ($row['isReturned'] == 0) {
-                                                                echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['ID'] . '" title="Approve"><i class="fa-solid fa-check"></i></a>';
+                                                                echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['ID'] . '"  title="Approve"><i class="fa-solid fa-check"></i></a>';
                                                                 echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['ID'] . '" title="Decline"><i class="fa-solid fa-x"></i></a>';
                                                             } else {
                                                                 // echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['ID'] . '" title="Approve" ><i class="fa-solid fa-check"></i></a>';
@@ -335,38 +336,38 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     <!-- Item Feedback modal -->
     <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="includes/" method="post">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h6 class="modal-title font-weight-bold" id="exampleModalLabel">Feedback</h6>
-                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="hidden" name="approve_request_id" id="approve_request_id">
-                        <div class="comment-widgets ">
-                            <!-- Comment Row -->
-                            <div class="d-flex flex-row  m-t-0">
-                                <div class="p-2"><img src="./images/userProfiles/<?php echo $_SESSION['UI'] ?>" alt="user" width="50" class="rounded-circle"></div>
-                                <div class="comment-text ">
-                                    <h6 class=""><small><?php echo $_SESSION['FN'] . " " . $_SESSION['LN'] ?> </small></h6> <span class="m-b-15 d-block"> <textarea id="w3review" name="w3review" rows="3" cols="35"></textarea> </span>
-                                </div>
+            <!-- <form action="includes/" method="post"> -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title font-weight-bold" id="exampleModalLabel">Feedback</h6>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" name="feedback_item_id" id="feedback_item_id">
+                    <div class="comment-widgets ">
+                        <!-- Comment Row -->
+                        <div class="d-flex flex-row  m-t-0 ">
+                            <div class="p-2"><img src="./images/userProfiles/<?php echo $_SESSION['UI'] ?>" alt="user" width="50" class="rounded-circle"></div>
+                            <div class="comment-text ">
+                                <h6 class=""><small><?php echo $_SESSION['FN'] . " " . $_SESSION['LN'] ?> </small></h6> <span class="m-b-15 d-block"> <textarea id="w3review" name="w3review" rows="3" cols="40"></textarea> </span>
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer d-flex justify-content-between">
-                        <input type="" name="user_id" id="user_id" value="<?php echo $_SESSION['ID']; ?>" hidden>
-                        <button type="button" class="btn btn-secondary btnRed btn-sm px-2" data-bs-dismiss="modal">Close</button>
-                        <input type="submit" class="btn btnGreen text-light btn-sm mx-1" name="approve-request-item-btn" value="Feedback">
-                    </div>
                 </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <input type="" name="user_id" id="uID" value="<?php echo $_SESSION['ID']; ?>" hidden>
+                    <button type="button" class="btn btn-secondary btnRed btn-sm px-2" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btnGreen text-light btn-sm mx-1" name="approve-request-item-btn" id="feedbackBtn" value="Feedback">
+                </div>
+            </div>
             </form>
         </div>
     </div>
 
     <!-- Declining request item modal -->
-    <div class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="declineModal" aria-hidden="true">
+    <!-- <div class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="declineModal" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form action="includes/requests.inc.php" method="post">
                 <div class="modal-content">
@@ -388,7 +389,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                 </div>
             </form>
         </div>
-    </div>
+    </div> -->
 
     <script>
         $(document).ready(function() {
@@ -397,7 +398,6 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             $('table').on('click', '.approve-btn', function(e) {
                 e.preventDefault();
                 var itemId = $(this).data('item-id');
-
                 console.log(itemId)
                 $.ajax({
                     type: 'POST',
@@ -414,40 +414,47 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             });
 
             // Approving the requested item from modal
-            $('table').on('click', '.decline-btn', function(e) {
-                e.preventDefault();
-                var itemId = $(this).data('item-id');
-                $.ajax({
-                    type: 'POST',
-                    url: 'includes/requests.inc.php',
-                    data: {
-                        'decline-request-item-btn': true,
-                        'item_id': itemId
-                    },
-                    success: function(response) {
-                        $('#decline_request_id').val(itemId);
-                        $('#declineModal').modal('show');
-                    }
-                });
-            });
+            // $('table').on('click', '.decline-btn', function(e) {
+            //     e.preventDefault();
+            //     var itemId = $(this).data('item-id');
+            //     $.ajax({
+            //         type: 'POST',
+            //         url: 'includes/requests.inc.php',
+            //         data: {
+            //             'decline-request-item-btn': true,
+            //             'item_id': itemId
+            //         },
+            //         success: function(response) {
+            //             $('#decline_request_id').val(itemId);
+            //             $('#declineModal').modal('show');
+            //         }
+            //     });
+            // });
 
-            $('table').on('click', '.feedback-btn', function(e) {
-                e.preventDefault();
-                var itemId = $(this).data('item-id');
-                alert(itemId);
-                $.ajax({
-                    type: 'POST',
-                    url: 'includes/requests.inc.php',
-                    data: {
-                        'decline-request-item-btn': true,
-                        'item_id': itemId
-                    },
-                    success: function(response) {
-                        $('#decline_request_id').val(itemId);
-                        $('#declineModal').modal('show');
-                    }
-                });
-            });
+            // $('table').on('click', '.feedback-btn', function(e) {
+            //     e.preventDefault();
+            //     var feedback = document.getElementById('w3review').val;
+            //     var itemId = $(this).data('item-id');
+
+
+            //     alert(feedback)
+            //     // $.ajax({
+            //     //     type: 'POST',
+            //     //     url: 'includes/itemcomment.inc.php',
+            //     //     data: {
+            //     //         item_id: itemId,
+            //     //         uID : uID
+            //     //     },
+            //     //     success: function(response) {
+
+            //     //     }
+            //     // });
+            // });
+            $('#feedbackBtn').click(function() {
+                console.log('clicked')
+            })
+
+
 
         });
     </script>

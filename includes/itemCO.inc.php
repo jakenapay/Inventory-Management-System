@@ -5,7 +5,6 @@ if (isset($_POST['userID'])) {
     $item_id = $_POST['itemID'];
     $user_id = $_POST['userID'];
     $itemQ = $_POST['itemQ'];
-
     try {
         $query = "INSERT INTO `history`(`history_item_id`, `history_quantity`, `history_user_id`, `history_status`) VALUES (?,?,?,?)";
         $stmt = $pdo->prepare($query);
@@ -22,6 +21,11 @@ if (isset($_POST['userID'])) {
 
         $stmt->execute();
 
+        $receiver = 'yugo2801@gmail.com';
+        $subj = 'Item Check Out';
+        $msg = 'item Check Out and request approved ';
+        
+        include './forEmail/sendEmail.php';
 
 
         // Additional code after successful execution, if needed

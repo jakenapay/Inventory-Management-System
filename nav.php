@@ -39,9 +39,16 @@ $totalIDs = $result['total_ids'];
                 <li class="nav-item active">
                     <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'home.php')) ? 'active' : ''; ?>" href="home.php">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'items.php')) ? 'active' : ''; ?>" href="items.php">Items</a>
-                </li>
+                <?php if ($_SESSION['CT'] == 0) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'items.php')) ? 'active' : ''; ?>" href="itemAction.php">Items</a>
+                    </li>
+                <?php } else { ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'items.php')) ? 'active' : ''; ?>" href="items.php">Items</a>
+                    </li>
+                <?php } ?>
+
                 <li class="nav-item">
                     <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'requests.php')) ? 'active' : ''; ?>" href="requests.php">Requests</a>
                 </li>
@@ -57,7 +64,7 @@ $totalIDs = $result['total_ids'];
                     <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'logs.php')) ? 'active' : ''; ?>" href="logs.php">Logs</a>
                 </li>
                 <?php
-                if (($_SESSION['CT'] === 1) && ($_SESSION['CH'] === 1)) {
+                if (($_SESSION['CT'] === 1) && ($_SESSION['CH'] === 1) || ($_SESSION['CT'] == 1)) {
                     echo '<li class="nav-item">
                         <a class="nav-link ' . (($_SESSION['active_tab'] === 'users.php') ? 'active' : '') . '" href="users.php">Users</a>
                     </li>';

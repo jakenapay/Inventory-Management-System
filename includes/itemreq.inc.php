@@ -1,7 +1,10 @@
 <?php
+
+
+
+
 include './config.inc.php';
 if (isset($_POST['userID'])) {
-
     $item_id = $_POST['itemID'];
     $user_id = $_POST['userID'];
     $itemQ = $_POST['itemQ'];
@@ -22,6 +25,9 @@ if (isset($_POST['userID'])) {
 
         $stmt->execute();
 
+      
+
+        
         // Additional code after successful execution, if needed
         echo "Record inserted successfully!";
     } catch (PDOException $e) {

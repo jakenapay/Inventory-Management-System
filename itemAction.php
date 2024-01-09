@@ -15,21 +15,20 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Headers and other attachments/CDN -->
-    <?php include_once 'includes/headers.inc.php'; ?>
+    <?php include_once './includes/headers.inc.php'; ?>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="assets/css/nav.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="assets/css/items.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="assets/css/itemlist.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./assets/css/style.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./assets/css/nav.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./assets/css/items.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="./assets/css/itemlist.css?v=<?php echo time(); ?>">
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -124,7 +123,13 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
         </div>
 
         <div class="container">
-            <?php include './components/ActionComponent.php';?>
+
+            <?php include './components/radioBttnReqList.php'; ?>
+
+            <div id="ItemList">
+                <?php include './components/itemlist.php'; ?>
+            </div>
+
         </div>
     </div>
     </div>
@@ -135,6 +140,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 </html>
 
 <script>
+
     // function updateItemCards(items) {
 
     //     // Update your UI with the fetched data
