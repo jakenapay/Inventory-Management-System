@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -6,6 +7,7 @@ use PHPMailer\PHPMailer\Exception;
 require '../PHPMailer-master/PHPMailer-master/src/Exception.php';
 require '../PHPMailer-master/PHPMailer-master/src/PHPmailer.php';
 require '../PHPMailer-master/PHPMailer-master/src/SMTP.php';
+
 
 
 $mail = new PHPMailer(true);
@@ -18,7 +20,7 @@ $mail->SMTPSecure = 'tls';
 $mail->Port = 587;
 
 $mail->From = "devconkidsinventory@gmail.com"; //my gmail
-$mail->FromName = "Dev Kids Admin"; //sender name
+$mail->FromName = "Dev Kids Admin -"; //sender name
 
 
 $mail->addAddress($receiver);

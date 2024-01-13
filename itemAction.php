@@ -15,6 +15,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -123,24 +124,16 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
         </div>
 
         <div class="container">
-
             <?php include './components/radioBttnReqList.php'; ?>
-
             <div id="ItemList">
                 <?php include './components/itemlist.php'; ?>
             </div>
-
         </div>
     </div>
     </div>
-
-
 </body>
-
 </html>
-
 <script>
-
     // function updateItemCards(items) {
 
     //     // Update your UI with the fetched data

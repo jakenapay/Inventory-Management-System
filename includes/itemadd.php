@@ -4,7 +4,7 @@ include '../includes/config.inc.php';
 if (isset($_POST['datas'])) {
 
     $itemID = $_POST['datas'];
-    $query = $pdo->prepare("SELECT * FROM items WHERE item_id = :itemID");
+    $query = $pdo->prepare("SELECT * FROM items WHERE unique_item_id = :itemID");
     $query->bindParam(':itemID', $itemID, PDO::PARAM_INT); // Assuming item_id is an integer, adjust the data type accordingly
 
     if ($query->execute()) {

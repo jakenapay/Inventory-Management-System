@@ -29,8 +29,9 @@
 
         <?php
         $inCart = 0;
-        $getAllinCartIDs = $pdo->prepare("SELECT COUNT(item_id) as cartCount FROM cart WHERE inCart = :itemInCart");
+        $getAllinCartIDs = $pdo->prepare("SELECT COUNT(item_id) as cartCount FROM cart WHERE inCart = :itemInCart AND user_id = :id");
         $getAllinCartIDs->bindParam(':itemInCart', $inCart, PDO::PARAM_INT);
+        $getAllinCartIDs->bindParam(':id', $_SESSION['ID'], PDO::PARAM_INT);
         $getAllinCartIDs->execute();
         $result = $getAllinCartIDs->fetch(PDO::FETCH_ASSOC);
         $cartCount = $result['cartCount'];

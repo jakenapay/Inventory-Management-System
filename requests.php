@@ -238,7 +238,15 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                 ?>
 
 
-                                                <td><?php echo $row['Date']; ?></td>
+                                                <td>
+                                                    <?php
+                                                    echo $row['Date'];
+                                                    // $correctDateString = $row['Date'];
+                                                    // $correctDateTimeObject = new DateTime($correctDateString);
+                                                    // $correctDateOnly = $correctDateTimeObject->format('Y-m-d');
+                                                    // echo "Correct Date Only: $correctDateOnly";
+                                                    ?>
+                                                </td>
 
                                                 <td>
                                                     <?php
@@ -259,7 +267,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                 </td>
 
                                                 <td>
-                                                    asdasdas
+                                                    <?php echo $row['dueDate'] ?>
                                                 </td>
                                                 <!-- <?php if ($_SESSION['CT'] == 1) { ?>
                                                     <td>

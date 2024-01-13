@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["tableData"])) {
         // Prepare the update query
         try {
             //print_r($rowData);
-            $query = $pdo->prepare("UPDATE items SET item_quantity = :new_quantity WHERE item_id = :itemID");
+            $query = $pdo->prepare("UPDATE items SET item_quantity = :new_quantity WHERE unique_item_id = :itemID");
 
             // Bind parameters
             $query->bindParam(':itemID', $item_id, PDO::PARAM_INT);
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["tableData"])) {
                 // Data exists; update the quantity
 
                 // Fetch the current quantity
-                $select_sql = "SELECT item_quantity FROM items WHERE item_id = :itemID";
+                $select_sql = "SELECT item_quantity FROM items WHERE unique_item_id = :itemID";
                 $select_query = $pdo->prepare($select_sql);
                 $select_query->bindParam(':itemID', $item_id, PDO::PARAM_INT);
                 $select_query->execute();
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["tableData"])) {
                 $new_quantity = $current_quantity + $quantity;
 
                 // Update the quantity
-                $update_sql = "UPDATE items SET item_quantity = :new_quantity WHERE item_id = :itemID";
+                $update_sql = "UPDATE items SET item_quantity = :new_quantity WHERE unique_item_id = :itemID";
                 $update_query = $pdo->prepare($update_sql);
                 $update_query->bindParam(':itemID', $item_id, PDO::PARAM_INT);
                 $update_query->bindParam(':new_quantity', $quantity, PDO::PARAM_INT);

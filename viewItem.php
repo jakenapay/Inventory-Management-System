@@ -231,7 +231,7 @@ if ($itemId !== null) {
                                 checkIcon.addClass('d-none');
                                 svg.removeClass('d-none');
                             }, 1000);
-                            window.location = './items.php'
+                            window.location = './itemAction.php'
                         }
                     }
                 });
