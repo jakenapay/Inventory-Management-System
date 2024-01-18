@@ -49,31 +49,197 @@ try {
     echo "Failed: " . $e->getMessage();
 }
 
-// Line chart 1 - For total items count by months
+// For line chart 1 - for both approved and returned items
 try {
-    // Establish your database connection here
-
-    $sql = "SELECT MONTH(history_date) AS month, COUNT(*) AS total_count
+    $sql = "SELECT DATE_FORMAT(history_date, '%Y-%m') AS month, 
+                   SUM(CASE WHEN history_status = 'approved' THEN 1 ELSE 0 END) AS approved_count,
+                   SUM(CASE WHEN history_status = 'approved' AND isReturned = 1 THEN 1 ELSE 0 END) AS returned_count
             FROM history
-            WHERE history_status = 'approved'
             GROUP BY YEAR(history_date), MONTH(history_date)
-            ORDER BY YEAR(history_date) DESC, MONTH(history_date) DESC";
+            ORDER BY YEAR(history_date), MONTH(history_date)";
 
     $stmt = $pdo->query($sql);
 
     $dataPoints = array();
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $month = date("F Y", mktime(0, 0, 0, $row['month'], 1, date("Y")));
-        $totalCount = $row['total_count'];
 
-        $dataPoints[] = array("y" => $totalCount, "label" => $month);
+    // Initialize an array to store counts for each month
+    $monthlyApprovedCounts = array_fill_keys(array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'), 0);
+    $monthlyReturnedCounts = array_fill_keys(array('01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'), 0);
+
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $month = date("m", strtotime($row['month']));
+        $approvedCount = $row['approved_count'];
+        $returnedCount = $row['returned_count'];
+
+        // Update the counts for the corresponding months
+        $monthlyApprovedCounts[$month] = $approvedCount;
+        $monthlyReturnedCounts[$month] = $returnedCount;
+    }
+
+    // Convert the counts to the required format
+    foreach ($monthlyApprovedCounts as $month => $approvedCount) {
+        $fullMonth = date("F", strtotime("2022-$month-01"));
+        $returnedCount = $monthlyReturnedCounts[$month];
+
+        $dataPoints[] = array("y" => $approvedCount, "returned" => $returnedCount, "label" => $fullMonth);
     }
 } catch (PDOException $e) {
     echo "Failed: " . $e->getMessage();
 }
 
-// New Chart here
+// For bar chart 1 - Most requested item
+try {
+    $sql = "SELECT history_item_id, COUNT(*) AS request_count
+            FROM history
+            GROUP BY history_item_id
+            ORDER BY request_count ASC
+            LIMIT 5"; // Fetch the top 5 most requested items
 
+    $stmt = $pdo->query($sql);
+
+    $barChartDataPoints = array();
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $itemId = $row['history_item_id'];
+
+        // Fetch item name based on history_item_id
+        $itemName = getItemName($itemId, $pdo);
+
+        $requestCount = $row['request_count'];
+
+        $barChartDataPoints[] = array("y" => $requestCount, "label" => $itemName);
+    }
+} catch (PDOException $e) {
+    echo "Failed: " . $e->getMessage();
+}
+
+// For bar chart 1 - Most requested item
+function getItemName($itemId, $pdo)
+{
+    // Assuming you have an 'items' table with columns 'item_id' and 'item_name'
+    $sql = "SELECT item_name FROM items WHERE item_id = :itemId";
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':itemId', $itemId, PDO::PARAM_INT);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return ($result) ? $result['item_name'] : 'Unknown';
+}
+
+// For bar chart 2 but for specific users 
+try {
+    // Replace $adminId with the actual admin's user ID
+    $adminId = $_SESSION['ID']; // Example admin ID
+
+    $sql = "SELECT h.history_item_id, COUNT(*) AS request_count
+            FROM history h
+            JOIN users u ON h.history_user_id = u.user_id
+            WHERE h.history_status = 'approved' AND h.isReturned = 0 AND h.history_user_id = :admin_id
+            GROUP BY h.history_item_id
+            ORDER BY request_count ASC
+            LIMIT 5";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':admin_id', $adminId, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $barChartTwoDataPoints = array();
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $itemId = $row['history_item_id'];
+
+        // Fetch item details using another query
+        $itemSql = "SELECT item_name FROM items WHERE item_id = :item_id";
+        $itemStmt = $pdo->prepare($itemSql);
+        $itemStmt->bindParam(':item_id', $itemId, PDO::PARAM_INT);
+        $itemStmt->execute();
+        $itemRow = $itemStmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($itemRow) {
+            $itemName = $itemRow['item_name'];
+
+            $barChartTwoDataPoints[] = array("y" => $row['request_count'], "label" => $itemName);
+        }
+    }
+} catch (PDOException $e) {
+    echo "Failed: " . $e->getMessage();
+}
+
+// For pie chart of users total requests count
+try {
+    $sql = "SELECT u.user_id, CONCAT(u.user_firstname, ' ', u.user_lastname) AS 'user_name', COUNT(*) AS request_count
+            FROM history h
+            JOIN users u ON h.history_user_id = u.user_id
+            WHERE h.history_status = 'approved'
+            GROUP BY u.user_id
+            ORDER BY request_count DESC LIMIT 5";
+
+    $stmt = $pdo->query($sql);
+
+    $userRequestsCountDataPoints = array();
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $userId = $row['user_id'];
+        $userName = $row['user_name'];
+        $requestCount = $row['request_count'];
+
+        $userRequestsCountDataPoints[] = array("y" => $requestCount, "label" => $userName);
+    }
+} catch (PDOException $e) {
+    echo "Failed: " . $e->getMessage();
+}
+
+try {
+    // Establish your database connection here
+
+    // Fetch the chapters/branches
+    $chapterSql = "SELECT chapter_name FROM chapters";
+    $chapterStmt = $pdo->query($chapterSql);
+    $chapters = $chapterStmt->fetchAll(PDO::FETCH_COLUMN);
+
+    // Initialize an associative array to store counts for each chapter
+    $chapterCounts = array_fill_keys($chapters, 0);
+
+    // Fetch the count of items for each user's chapter
+    $dataSql = "SELECT c.chapter_name, COUNT(*) AS transaction_count
+                FROM history h
+                JOIN users u ON h.history_user_id = u.user_id
+                JOIN chapters c ON u.user_chapter = c.chapter_id
+                WHERE h.history_status = 'approved'
+                GROUP BY c.chapter_id";
+
+    $dataStmt = $pdo->query($dataSql);
+    while ($row = $dataStmt->fetch(PDO::FETCH_ASSOC)) {
+        $chapterName = $row['chapter_name'];
+        $chapterCounts[$chapterName] = $row['transaction_count'];
+    }
+
+    // Extract counts in the correct order based on $chapters
+    $chapterTotalTransactionsDataPoints = array_values(array_intersect_key($chapterCounts, array_flip($chapters)));
+} catch (PDOException $e) {
+    echo "Failed: " . $e->getMessage();
+}
+
+// New graph
+try {
+    // Fetch total transaction counts for each chapter
+    $sql = "SELECT c.chapter_name, COUNT(*) AS transaction_count
+            FROM history h
+            JOIN users u ON h.history_user_id = u.user_id
+            JOIN chapters c ON u.user_chapter = c.chapter_id
+            WHERE h.history_status = 'approved'
+            GROUP BY c.chapter_id";
+
+    $stmt = $pdo->query($sql);
+
+    $barChartDataPoints = array();
+    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $chapterName = $row['chapter_name'];
+        $transactionCount = $row['transaction_count'];
+
+        $chapterTotalTransactions[] = array("y" => $transactionCount, "label" => $chapterName);
+    }
+
+} catch (PDOException $e) {
+    echo "Failed: " . $e->getMessage();
+}
 ?>
 
 
@@ -128,6 +294,22 @@ try {
     <script>
         window.onload = function() {
 
+            // COLOR PALLETE
+            // backgroundColor: [
+            //                 'rgba(113, 180, 6, 0.7)',
+            //                 'rgba(232, 202, 4, 0.7)',
+            //                 'rgba(234, 100, 29, 0.7)',
+            //                 'rgba(120, 8, 255, 0.7)',
+            //                 'rgba(54, 162, 235, 0.7)',
+            //             ],
+            //             borderColor: [
+            //                 'rgba(113, 180, 6, 1)',
+            //                 'rgba(232, 202, 4, 1)',
+            //                 'rgba(234, 100, 29, 1)',
+            //                 'rgba(120, 8, 255, 1)',
+            //                 'rgba(54, 162, 235, 1)',
+            //             ],
+
             // For pie chart 1
             var pieChartData = <?php echo $pie1; ?>;
             var pieChartConfig = {
@@ -139,13 +321,16 @@ try {
                         backgroundColor: [
                             'rgba(113, 180, 6, 0.7)',
                             'rgba(232, 202, 4, 0.7)',
-                            'rgba(234, 100, 29, 0.7)'
+                            'rgba(234, 100, 29, 0.7)',
+                            'rgba(120, 8, 255, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
                         ],
                         borderColor: [
                             'rgba(113, 180, 6, 1)',
                             'rgba(232, 202, 4, 1)',
                             'rgba(234, 100, 29, 1)',
-                            // Add more colors if needed
+                            'rgba(120, 8, 255, 1)',
+                            'rgba(54, 162, 235, 1)',
                         ],
                         borderWidth: 1
                     }]
@@ -154,7 +339,7 @@ try {
                     responsive: true,
                     plugins: {
                         title: {
-                            display: true,
+                            display: false,
                             text: 'Items by Category'
                         },
                         legend: {
@@ -176,7 +361,6 @@ try {
             var pieChartCanvas = document.getElementById('pieChart1').getContext('2d');
             new Chart(pieChartCanvas, pieChartConfig);
 
-
             // For line chart 1
             var lineChartData2 = <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>;
             var lineChartConfig = {
@@ -184,18 +368,28 @@ try {
                 data: {
                     labels: lineChartData2.map(data => data.label),
                     datasets: [{
-                        label: 'Items Count per Month',
-                        data: lineChartData2.map(data => data.y),
-                        fill: false,
-                        borderColor: 'rgba(113, 180, 6, 1)',
-                        tension: 0.1
-                    }]
+                            label: 'Approved Items Count per Month',
+                            data: lineChartData2.map(data => data.y),
+                            fill: true,
+                            borderColor: 'rgba(113, 180, 6, 1)',
+                            backgroundColor: 'rgba(113, 180, 6, 0.1)',
+                            tension: 0.1
+                        },
+                        {
+                            label: 'Returned Items Count per Month',
+                            data: lineChartData2.map(data => data.returned),
+                            fill: true,
+                            borderColor: 'rgba(234, 100, 29, 1)',
+                            backgroundColor: 'rgba(234, 100, 29, 0.1)',
+                            tension: 0.1
+                        }
+                    ]
                 },
                 options: {
                     responsive: true,
                     plugins: {
                         title: {
-                            display: true,
+                            display: false,
                             text: 'Requested Items per Month'
                         }
                     },
@@ -218,9 +412,215 @@ try {
             var lineChartCanvas = document.getElementById('lineChart1').getContext('2d');
             new Chart(lineChartCanvas, lineChartConfig);
 
-            // New Chart here
+            // For horizontal bar chart 1
+            var barChartData = <?php echo json_encode($barChartDataPoints, JSON_NUMERIC_CHECK); ?>;
+            var barChartConfig = {
+                type: 'bar',
+                data: {
+                    labels: barChartData.map(data => data.label),
+                    datasets: [{
+                        label: 'Requested Items',
+                        data: barChartData.map(data => data.y),
+                        backgroundColor: [
+                            'rgba(232, 202, 4, 0.7)',
+                        ],
+                        borderColor: [
+                            'rgba(232, 202, 4, 1)',
 
-        }
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Items'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Total'
+                            }
+                        }
+                    }
+                }
+            };
+            var barChartCanvas = document.getElementById('barChart1').getContext('2d');
+            new Chart(barChartCanvas, barChartConfig);
+
+            // For bar chart 2 for specific ADMIN
+            var adminPersonalData = <?php echo json_encode($barChartTwoDataPoints, JSON_NUMERIC_CHECK); ?>;
+            var barChartConfig = {
+                type: 'bar',
+                data: {
+                    labels: adminPersonalData.map(data => data.label),
+                    datasets: [{
+                        label: 'Top Requested Items',
+                        data: adminPersonalData.map(data => data.y),
+                        backgroundColor: [
+                            'rgba(234, 100, 29, 0.7)',
+
+                        ],
+                        borderColor: [
+                            'rgba(234, 100, 29, 1)',
+
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: false,
+                            text: '<?php echo $_SESSION['FN']; ?>\'s Most Requested Items'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Items'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Request Count'
+                            }
+                        }
+                    }
+                }
+            };
+            var barChartCanvas = document.getElementById('barChart2').getContext('2d');
+            new Chart(barChartCanvas, barChartConfig);
+
+            // For pie chart that shows top 5 user total counts
+            var userDataPoints = <?php echo json_encode($userRequestsCountDataPoints, JSON_NUMERIC_CHECK); ?>;
+            // For donut chart
+            var donutChartData = {
+                labels: userDataPoints.map(data => data.label),
+                datasets: [{
+                    data: userDataPoints.map(data => data.y),
+                    backgroundColor: [
+                        'rgba(113, 180, 6, 0.7)',
+                        'rgba(232, 202, 4, 0.7)',
+                        'rgba(234, 100, 29, 0.7)',
+                        'rgba(120, 8, 255, 0.7)',
+                        'rgba(54, 162, 235, 0.7)',
+                    ],
+                    borderColor: [
+                        'rgba(113, 180, 6, 1)',
+                        'rgba(232, 202, 4, 1)',
+                        'rgba(234, 100, 29, 1)',
+                        'rgba(120, 8, 255, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            };
+            var donutChartConfig = {
+                type: 'pie',
+                data: donutChartData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Top 5 Users'
+                        },
+                        legend: {
+                            display: true,
+                            position: 'bottom'
+                        }
+                    }
+                }
+            };
+            var donutChartCanvas = document.getElementById('donutChart').getContext('2d');
+            new Chart(donutChartCanvas, donutChartConfig);
+
+            // For radar chart
+            const data = {
+                labels: <?php echo json_encode($chapters); ?>,
+                datasets: [{
+                    label: 'Total Transactions',
+                    data: <?php echo json_encode($chapterTotalTransactionsDataPoints); ?>,
+                    fill: true,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    pointBackgroundColor: 'rgb(255, 99, 132)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                }]
+            };
+            const config = {
+                type: 'radar',
+                data: data,
+                options: {
+                    elements: {
+                        line: {
+                            borderWidth: 3
+                        }
+                    }
+                }
+            };
+            // Get the radar chart canvas
+            const radarChartCanvas = document.getElementById('radarChart').getContext('2d');
+            // Create the radar chart
+            new Chart(radarChartCanvas, config);
+
+
+            // NEW
+            var barChartData = <?php echo json_encode($chapterTotalTransactions, JSON_NUMERIC_CHECK); ?>;
+            var barChartConfig = {
+                type: 'bar',
+                data: {
+                    labels: barChartData.map(data => data.label),
+                    datasets: [{
+                        label: 'Chapters',
+                        data: barChartData.map(data => data.y),
+                        backgroundColor: 'rgba(120, 8, 255, 0.7)',
+                        borderColor: 'rgba(120, 8, 255, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Chapters'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Total Transactions'
+                            }
+                        }
+                    }
+                }
+            };
+
+            var barChartCanvas = document.getElementById('chapterTransactionsChart').getContext('2d');
+            new Chart(barChartCanvas, barChartConfig);
+        };
     </script>
 </head>
 
@@ -232,11 +632,12 @@ try {
         <div class="section px-5 pt-4">
             <div class="row">
                 <!-- cart -->
-                <div class="col-sm-12 col-lg-12 col-md-12">
+                <!-- <div class="col-sm-12 col-lg-12 col-md-12">
                     <div class=" justify-content-end justify-content-center" style=" text-align: end; margin-right: 100px;">
-                        <?php include './components/cart.php' ?>
+                        <?php // include './components/cart.php' 
+                        ?>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="row justify-content-center align-items-center">
                 <!-- TECHNOLOGY -->
@@ -320,40 +721,66 @@ try {
                     ?>
                 </div>
             </div>
-            <!-- <div class="mt-5 row d-flex justify-content-center align-items-center mb-3">
-                <div class="col-sm-12 col-md-12 col-lg-4 border rounded">
-                    <p class="chart-title">Item Percentage</p>
-                    <canvas id="pieChart1"></canvas>
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-8 border rounded">
-                    <p class="chart-title">Requested Items by Month</p>
-                    <canvas id="lineChart1"></canvas>
-                </div>
-            </div> -->
-            <!-- <div class="mt-5 row justify-content-center align-items-start mb-3">
-                <div class="col-sm-12 col-md-12 col-lg-4 border rounded d-flex flex-column">
-                    <p class="chart-title">Item Percentage</p>
-                    <canvas id="pieChart1" style="flex: 1;"></canvas>
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-8 border rounded d-flex flex-column">
-                    <p class="chart-title">Requested Items by Month</p>
-                    <canvas id="lineChart1" style="flex: 1;"></canvas>
-                </div>
-            </div> -->
 
             <div class="mt-5 row justify-content-center align-items-start mb-3">
                 <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
-                    <div class="border rounded p-3">
-                        <p class="chart-title">Item Percentage</p>
-                        <canvas id="pieChart1" style="width: 100%;"></canvas>
-                    </div>
+                    <?php if (($_SESSION['CT'] === 1)) { ?>
+                        <div class="border rounded p-3">
+                            <p class="chart-title">Item Percentage</p>
+                            <canvas id="pieChart1" style="width: 100%;"></canvas>
+                        </div>
+                    <?php } ?>
                 </div>
-                <div class="col-sm-12 col-md-12 col-lg-8">
-                    <div class="border rounded p-3">
-                        <p class="chart-title">Requested Items by Month</p>
-                        <canvas id="lineChart1" style="width: 100%;"></canvas>
-                    </div>
+                <div class="col-sm-12 col-md-12 col-lg-8 mb-3">
+                    <?php if (($_SESSION['CT'] === 1)) { ?>
+                        <div class="border rounded p-3">
+                            <p class="chart-title">Requested Items by Month</p>
+                            <canvas id="lineChart1" style="width: 100%;"></canvas>
+                        </div>
+                    <?php } ?>
                 </div>
+                <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+                    <?php if (($_SESSION['CT'] === 1)) { ?>
+                        <div class="border rounded p-3">
+                            <p class="chart-title">Most Requested Items</p>
+                            <canvas id="barChart1" style="width: 100%;"></canvas>
+                        </div>
+                    <?php } ?>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+                    <?php if (($_SESSION['CT'] === 1)) { ?>
+                        <div class="border rounded p-3">
+                            <p class="chart-title">Your Top Items</p>
+                            <canvas id="barChart2" style="width: 100%;"></canvas>
+                        </div>
+                    <?php } ?>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+                    <?php if (($_SESSION['CT'] === 1)) { ?>
+                        <div class="border rounded p-3">
+                            <p class="chart-title">Chapters Total Transactions</p>
+                            <canvas id="radarChart" style="width: 100%;"></canvas>
+                        </div>
+                    <?php } ?>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+                    <?php if (($_SESSION['CT'] === 1)) { ?>
+                        <div class="border rounded p-3">
+                            <p class="chart-title">Users Total Requests Count</p>
+                            <canvas id="donutChart" style="width: 100%;"></canvas>
+                        </div>
+                    <?php } ?>
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
+                    <?php if (($_SESSION['CT'] === 1)) { ?>
+                        <div class="border rounded p-3">
+                            <p class="chart-title">Users Total Requests Count</p>
+                            <canvas id="chapterTransactionsChart" style="width: 100%;"></canvas>
+                        </div>
+                    <?php } ?>
+                </div>
+
+
             </div>
 
         </div>
