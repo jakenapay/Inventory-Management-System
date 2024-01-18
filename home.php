@@ -1,14 +1,12 @@
 <?php
 include 'includes/config.inc.php';
 session_start();
-
 // Check if there's an id, if it has, then it's logged in
 // If there's no id, head back to login page
 if (!isset($_SESSION['ID']) and ($_SESSION['ID'] == '')) {
     header("location: index.php");
     exit();
 }
-
 // To determine which is active page in nav bar
 $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 ?>
@@ -252,13 +250,12 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Headers and other attachments/CDN -->
-    <?php include_once 'includes/headers.inc.php'; ?>
+    <?php include_once './includes/headers.inc.php'; ?>
 
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="assets/css/nav.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="assets/css/home.css?v=<?php echo time(); ?>">
-    <link rel="stylesheet" href="assets/css/cart.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="assets/css/analytics.css?v=<?php echo time(); ?>">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-pO3t7S9e6j+54Qe47eqKbAYZ9k0mw0pNEca0Vc83P3QE6mzV3JpWGfo8yo2I5f5z" crossorigin="anonymous">
@@ -266,8 +263,8 @@ try {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRPe0rDEtvf2h+w2jcJfAZ3MTmFcIHd6v9aR3ZlpJ" crossorigin="anonymous">
 
 
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script> -->
 
     <!-- Javascript for Datatables.net  -->
     <script>
@@ -630,15 +627,6 @@ try {
 
     <div id="wrapper">
         <div class="section px-5 pt-4">
-            <div class="row">
-                <!-- cart -->
-                <!-- <div class="col-sm-12 col-lg-12 col-md-12">
-                    <div class=" justify-content-end justify-content-center" style=" text-align: end; margin-right: 100px;">
-                        <?php // include './components/cart.php' 
-                        ?>
-                    </div>
-                </div> -->
-            </div>
             <div class="row justify-content-center align-items-center">
                 <!-- TECHNOLOGY -->
                 <div class="box col-sm-12 col-md-4 col-lg-2">
@@ -788,8 +776,12 @@ try {
     </div>
 
 
+    <?php
+   
 
 
+
+    ?>
 </body>
 
 
