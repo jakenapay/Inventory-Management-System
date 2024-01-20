@@ -73,16 +73,17 @@ $totalIDs = $result['total_ids'];
                 <!-- For items.php -->
                 <?php
                 if ($_SESSION['active_tab'] == 'items.php') {
-                    if (!empty($_SESSION['ID']) && ($_SESSION['CT'] == 1)) { // If you're logged in and an admin you can add item
-                        // echo '<ul id="add-item" class="m-0 p-0 d-flex align-items-center">
-                        //     <li id="addNewItemBtn">
-                        //     <button type="button" class="btn btn-success btnGreen btn-sm" data-toggle="modal" data-target="#exampleModal">
-                        //     <i class="fa-solid fa-plus addIcon"></i>New item
-                        //     </button></li></ul>';
-                        echo '<li class="nav-item nav-link" id="addNewItemBtn">
+                    if (!empty($_SESSION['ID']) && ($_SESSION['CT'] == 1)) {
+                        echo '
+                        <li class="nav-item nav-link" id="addNewItemBtn">
                             <button type="button" class="btn btn-success btnGreen btn-sm" data-toggle="modal" data-target="#exampleModal">
-                            <i class="fa-solid fa-plus addIcon"></i>New item
-                            </button></li>';
+                                <i class="fa-solid fa-plus addIcon"></i>New item
+                            </button>
+                        </li>
+
+                        <li class="nav-item nav-link">';
+                        include "./components/cart.php";
+                        echo '</li>';
                     }
                 }
                 ?>
@@ -128,7 +129,7 @@ $totalIDs = $result['total_ids'];
                         <img src="images/userProfiles/<?php echo $userImage; ?>" class="img-fluid" alt="User Image">
                     </div>
                     <!-- Dropdown menu -->
-                    <div class="dropdown-menu dropdown-menu-right px-2" aria-labelledby="dropdownMenuButton">
+                    <div class="dropdown-menu dropdown-menu-left px-2" aria-labelledby="dropdownMenuButton">
                         <!-- <p id="profile-name" class="dropdown-item" href="includes/logout.inc.php">
                             <span><?php echo $_SESSION['FN']; ?></span></p> -->
                         <a class="dropdown-item disabled text-dark pt-2 pe-none"><?php echo $_SESSION['FN']; ?></a>
@@ -139,6 +140,7 @@ $totalIDs = $result['total_ids'];
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item logout" href="includes/logout.inc.php"><span>Log out</span><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
                     </div>
+
                 </li>
             </ul>
         </div>

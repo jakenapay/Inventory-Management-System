@@ -215,14 +215,13 @@ try {
     echo "Failed: " . $e->getMessage();
 }
 
-// New graph
+// Bar graph for 
 try {
     // Fetch total transaction counts for each chapter
     $sql = "SELECT c.chapter_name, COUNT(*) AS transaction_count
             FROM history h
             JOIN users u ON h.history_user_id = u.user_id
             JOIN chapters c ON u.user_chapter = c.chapter_id
-            WHERE h.history_status = 'approved'
             GROUP BY c.chapter_id";
 
     $stmt = $pdo->query($sql);

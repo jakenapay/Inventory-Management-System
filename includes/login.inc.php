@@ -34,9 +34,15 @@ if (isset($_POST['login-btn'])) {
                 $_SESSION['CH'] = $row['user_chapter'];
                 $_SESSION['UI'] = $row['user_image'];
 
-                // Redirect to the home page, and exit this file
-                header("location: ../home.php");
-                exit();
+                // If user is active then log in and redirect to index
+                if ($row['user_status'] !== "inactive") {
+                    // Redirect to the home page, and exit this file
+                    header("location: ../home.php");
+                    exit();
+                } else {
+                    header("location: ../index.php?m=iac"); // inactive account
+                    exit();
+                }
             } else { // Wrong password here
                 header("location: ../index.php?m=wp"); // wp stands for Wrong Password
                 exit();
@@ -55,5 +61,3 @@ if (isset($_POST['login-btn'])) {
     header("location: ../index.php");
     exit();
 }
-
-?>

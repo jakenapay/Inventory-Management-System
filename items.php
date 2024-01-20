@@ -51,14 +51,14 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 
     <div id="wrapper">
         <div class="section px-5 pt-4">
-            <div class="row">
-                <!-- cart -->
+            <!-- <div class="row">
+                cart
                 <div class="col">
                     <div class=" justify-content-end justify-content-center-md" style=" text-align: end; margin-right: 100px;">
-                        <?php include './components/cart.php' ?>
+                        <?php // include './components/cart.php' ?>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="row justify-content-center align-items-center">
                 <!-- TECHNOLOGY -->
                 <div class="box col-sm-12 col-md-4 col-lg-3">

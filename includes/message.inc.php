@@ -36,11 +36,17 @@ if(isset($_GET['m'])) {
         case "rqf":
             echo "<p id='msg' class='msg'>Request failed</p>";
             break;
+        case "iac":
+            echo "<p id='msg' class='msg'>Inactive account</p>";
+            break;
         case "ia":
             echo "<p id='msg' class='msgOk'>Item added successfully</p>";
             break;
         case "ss":
             echo "<p id='msg' class='msgOk'>Requested successfully</p>";
+            break;
+        case "aca":
+            echo "<p id='msg' class='msgOk'>Account activated successfully</p>";
             break;
         case "us":
             echo "<p id='msg' class='msgOk'>Updated successfully</p>";
