@@ -42,7 +42,7 @@ $next_page = min($total_pages, $current_page + 1);
 <div class="row">
 
     <?php
-    if ($_SESSION['CT'] == "0") {
+    
         foreach ($records as $row) { ?>
             <div class="col-md-6 col-sm-12 col-lg-4  mt-5">
                 <div class="card">
@@ -73,51 +73,6 @@ $next_page = min($total_pages, $current_page + 1);
                     </div>
                 </div>
             </div>
-            <!-- <div class="modal fade" id="itemDetails" tabindex="-1" aria-labelledby="ItemDetailsModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="ItemDetailsModalLabel">Item Details</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-12 col-sm-12 col-lg-6">
-                                    <img src="" class="img-fluid itemImg" alt="Item Image" style="max-width: 100%; max-height: 100%; width: 175px; height: 200px; text-align: center;">
-                                </div>
-                                <div class="col-md-6 col-sm-12 col-lg-6 mt-3 ">
-                                    <h6 class="item-name"></h6>
-                                    <p class="item-desc"></p>
-                                    <div style="display: flex; flex-direction: column; align-self: flex-end;">
-                                        <p class="quanInput"></p>
-                                        <sub>stock: <span class="item-quan"></span></sub>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                               
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <div class="d-flex justify-content-between align-items-center mt-auto">
-                                <h6 id="quanChecker" style="display: none; color:red;"> <small>insufficient Stocks</small></h6>
-                                <button class="btn checker">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 576 512">
-                                        <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-                                    </svg>
-                                    <div class="spinner-border text-success d-none spinner-border-sm" id="spinner" role="status">
-                                        <span class="visually-hidden">Loading...</span>
-                                    </div>
-                                    <i class="fa-solid fa-check d-none" id="checkIcon" style="color: #22511f;"></i>
-                                </button>
-                            </div>
-                            <button type="button" class="btn btn-success btnReq">Request</button>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
-            <!-- </form> -->
         <?php } ?>
 </div>
 <nav aria-label="Page navigation example">
@@ -130,9 +85,7 @@ $next_page = min($total_pages, $current_page + 1);
     </ul>
 </nav>
 
-<?php } else {
-       
-    } ?>
+
 
 <script>
     // // Initialization for ES Users
@@ -143,45 +96,45 @@ $next_page = min($total_pages, $current_page + 1);
 
     //     var getItemId = 0;
 
-    //     //get the data to display in modal
-    //     // buttons.forEach(function(button) {
-    //     //     button.addEventListener('click', function() {
-    //     //         var itemId = this.getAttribute('data-item-id');
-    //     //         getItemId = itemId;
-    //     //         console.log('Button Clicked! Item ID:', itemId);
-    //     //         $.ajax({
-    //     //             type: "POST",
-    //     //             url: "./includes/getitem.inc.php",
-    //     //             data: {
-    //     //                 itemId: getItemId,
-    //     //             },
-    //     //             success: function(response) {
+       // get the data to display in modal
+        buttons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                var itemId = this.getAttribute('data-item-id');
+                getItemId = itemId;
+                console.log('Button Clicked! Item ID:', itemId);
+                $.ajax({
+                    type: "POST",
+                    url: "./includes/getitem.inc.php",
+                    data: {
+                        itemId: getItemId,
+                    },
+                    success: function(response) {
 
-    //     //                 console.log('Response received:', response);
+                        console.log('Response received:', response);
 
-    //     //                 // Parse the JSON response
-    //     //                 const itemInfo = JSON.parse(response);
-    //     //                 console.log('Parsed itemInfo:', itemInfo);
+                        // Parse the JSON response
+                        const itemInfo = JSON.parse(response);
+                        console.log('Parsed itemInfo:', itemInfo);
 
-    //     //                 // Update modal content
-    //     //                 $(".itemImg").attr("src",
-    //     //                     `./images/items/${itemInfo.item_image}`);
+                        // Update modal content
+                        $(".itemImg").attr("src",
+                            `./images/items/${itemInfo.item_image}`);
 
-    //     //                 $(".item-name").html(`${itemInfo.item_name}`)
-    //     //                 $(".item-desc").html(`${itemInfo.item_description}`)
-    //     //                 $(".item-quan").html(`${itemInfo.item_quantity}`)
-    //     //                 $(".quanInput").html(
-    //     //                     `
-    //     //                 <input type="number" min="0" id="item-id" value="${itemInfo.item_id}" hidden> 
-    //     //                 <input id="item-quan" type="number" min="0" max="${itemInfo.item_quantity}">`
-    //     //                 )
+                        $(".item-name").html(`${itemInfo.item_name}`)
+                        $(".item-desc").html(`${itemInfo.item_description}`)
+                        $(".item-quan").html(`${itemInfo.item_quantity}`)
+                        $(".quanInput").html(
+                            `
+                        <input type="number" min="0" id="item-id" value="${itemInfo.item_id}" hidden> 
+                        <input id="item-quan" type="number" min="0" max="${itemInfo.item_quantity}">`
+                        )
 
-    //     //                 // Show the modal
-    //     //                 $('#itemDetails').modal('show');
-    //     //             }
-    //     //         });
-    //     //     });
-    //     // });
+                        // Show the modal
+                        $('#itemDetails').modal('show');
+                    }
+                });
+            });
+        });
 
     //     // Other modal logic remains the same
 

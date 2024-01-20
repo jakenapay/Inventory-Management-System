@@ -4,11 +4,10 @@
 <?php
 
 
-
 if ($_SESSION['CT'] == 1) {
 ?>
     <div class="container">
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs ">
             <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="#items">Item List</a>
             </li>
@@ -16,7 +15,7 @@ if ($_SESSION['CT'] == 1) {
                 <a class="nav-link" href="#additem">Add Item</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#link">Item Request</a>
+                <a class="nav-link" href="#itemreq">Item Request</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>

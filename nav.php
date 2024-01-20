@@ -49,17 +49,24 @@ $totalIDs = $result['total_ids'];
                     </li>
                 <?php } ?>
 
+                <?php if ($_SESSION['CT'] == 1) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'adminItemList.php')) ? 'active' : ''; ?>" href="adminItemList.php">Request Item</a>
+                    </li>
+                <?php } ?>
+
+
                 <li class="nav-item">
                     <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'requests.php')) ? 'active' : ''; ?>" href="requests.php">Requests</a>
                 </li>
-                <!-- <?php
-                        if (($_SESSION['CT'] === 1) && ($_SESSION['CH'] === 1)) {
-                            $activeClass = ($_SESSION['active_tab'] === 'chapters.php') ? 'active' : '';
-                            echo '<li class="nav-item">
+                <?php
+                if (($_SESSION['CT'] === 1) && ($_SESSION['CH'] === 1)) {
+                    $activeClass = ($_SESSION['active_tab'] === 'chapters.php') ? 'active' : '';
+                    echo '<li class="nav-item">
                         <a class="nav-link ' . $activeClass . '" href="chapters.php">Chapters</a>
                      </li>';
-                        }
-                        ?> -->
+                }
+                ?>
                 <!-- <li class="nav-item">
                     <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'logs.php')) ? 'active' : ''; ?>" href="logs.php">Logs</a>
                 </li> -->

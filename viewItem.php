@@ -105,8 +105,8 @@ if ($itemId !== null) {
         </div>
     </div>
 
-    <?php
-    echo print_r($itemData); ?>
+    <!-- <?php
+    echo print_r($itemData); ?> -->
 </body>
 
 </html>
