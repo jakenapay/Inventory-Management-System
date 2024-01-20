@@ -1,6 +1,21 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<style>
+    .nav-link {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: rgba(0,0,0,.55);
+        text-decoration: none;
+        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+    }
+
+    .nav-link:focus, .nav-link:hover {
+        color: var(--purple);
+    }
+</style>
+
 <?php
 
 
@@ -9,16 +24,16 @@ if ($_SESSION['CT'] == 1) {
     <div class="container">
         <ul class="nav nav-tabs ">
             <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="#items">Item List</a>
+                <a class="nav-link" aria-current="page" href="#items"><span class="fas fa-list"></span> Item List</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#additem">Add Item</a>
+                <a class="nav-link" href="#additem"><span class="fas fa-plus"></span> Add Item</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#itemreq">Item Request</a>
+                <a class="nav-link" href="#itemreq"><span class="fas fa-comment-dots"></span> Item Request</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><span class="fas fa-ban"></span> Disabled</a>
             </li>
         </ul>
         <div id="content">

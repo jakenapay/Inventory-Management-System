@@ -2,14 +2,51 @@
 session_start();
 ?>
 
+<style>
+    .heading {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .left-side {
+        flex: 1;
+    }
+
+    .right-side {
+        padding-left: 20px; /* Adjust the padding as needed */
+    }
+
+    #btnAdd.btn.btn-success {
+        color: #fff;
+        background-color: var(--purple);
+        border-color: var(--purple);
+        margin-left: 5px;
+    }
+
+    #getdata.btn.btn-success {
+        color: #fff;
+        background-color: var(--purple);
+        border-color: var(--purple);
+        margin-top: 10px;
+    }
+
+</style>
+
 <div>
-    <h1>this is the add existing item page</h1>
-    <div>
-        <div id="last-barcode"></div>
-        <input type="text" name="itemid" id="itemid">
-        <button type="button" class="btn btn-success" id="btnAdd">insert to table</button>
+    <div class="heading">
+        <div class="left-side">
+            <h4>Add Existing Item</h4>
+        </div>
 
-
+        <div class="right-side">
+            <div>
+                <div id="last-barcode"></div>
+                <input type="text" name="itemid" id="itemid">
+                <button type="button" class="btn btn-success" id="btnAdd"><span class="fas fa-plus"></span> Add Item</button>
+            </div>
+        </div>
     </div>
 
     <div class="modal" tabindex="-1" role="dialog">
@@ -19,11 +56,11 @@ session_start();
                     <h5 class="modal-title">Alert</h5>
                 </div>
                 <div class="modal-body">
-                    <p>The id not Existing</p>
+                    <p>The id not existing</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -40,12 +77,12 @@ session_start();
         <table class="table table-striped table-inverse table-responsive">
             <thead class="thead-inverse">
                 <tr>
-                    <th>item id</th>
-                    <th>item name</th>
-                    <th>item quantity</th>
-                    <th>item stored</th>
-                    <th>total</th>
-                    <th>delete</th>
+                    <th>Item id</th>
+                    <th>Item Name</th>
+                    <th>Item Quantity</th>
+                    <th>Item Stored</th>
+                    <th>Total</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
@@ -59,7 +96,7 @@ session_start();
                 </tr>
             </tbody>
         </table>
-        <button type="button" class="btn btn-success" id="getdata">get all data in the table</button>
+        <button type="button" class="btn btn-success" id="getdata">Get Data</button>
     </div>
 </div>
 <?php
