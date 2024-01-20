@@ -54,11 +54,11 @@
             <div class="section px-5 pt-4">
                 <div class="row">
                     <!-- cart -->
-                    <div class="col">
+                    <!-- <div class="col">
                         <div class=" justify-content-end justify-content-center-md" style=" text-align: end; margin-right: 100px;">
-                            <?php include './components/cart.php' ?>
+                            <?php // include './components/cart.php' ?>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row justify-content-center align-items-center">
                     <!-- TECHNOLOGY -->

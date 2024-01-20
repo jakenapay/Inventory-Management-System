@@ -93,6 +93,15 @@ $totalIDs = $result['total_ids'];
                         echo '</li>';
                     }
                 }
+
+                if ($_SESSION['active_tab'] == 'adminItemList.php') {
+                    if(!empty($_SESSION['ID']) && ($_SESSION['CT'] == 1)) {
+                        echo '
+                        <li class="nav-item nav-link">';
+                        include "./components/cart.php";
+                        echo '</li>';
+                    }
+                }
                 ?>
 
 
