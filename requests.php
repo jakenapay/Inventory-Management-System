@@ -161,6 +161,8 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                 // Run this code below
                                                 $query = "SELECT h.history_id AS ID,
                                                     i.item_name AS Item,
+                                                    i.item_id AS itemID,
+                                                    h.history_user_id AS userID,
                                                     h.history_quantity AS Quantity,
                                                     CONCAT(u.user_firstname, ' ', u.user_lastname) AS 'Request by',
                                                     h.history_status AS Status,
@@ -174,6 +176,8 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                             } else {
                                                 $query = "SELECT h.history_id AS ID,
                                                     i.item_name AS Item,
+                                                    i.item_id AS itemID,
+                                                    h.history_user_id AS userID,
                                                     h.history_quantity AS Quantity,
                                                     CONCAT(u.user_firstname, ' ', u.user_lastname) AS 'Request by',
                                                     h.history_status AS Status,
@@ -192,6 +196,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                             $query = "SELECT h.history_id AS ID,
                                                 i.item_name AS Item,
                                                 i.item_id AS itemID,
+                                                h.history_user_id AS userID,
                                                 h.history_quantity AS Quantity,
                                                 CONCAT(u.user_firstname, ' ', u.user_lastname) AS 'Request by',
                                                 h.history_status AS Status,
@@ -224,7 +229,17 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                 <td><?php echo $row['ID']; ?></td>
                                                 <td><?php echo $row['Item']; ?></td>
                                                 <td><?php echo $row['Quantity']; ?></td>
-                                                <td class="text-capitalize"><?php echo $row['Request by']; ?></td>
+                                                <td class="text-capitalize"><?php 
+                                                
+                                                if ($row['userID'] == $_SESSION['ID']) {
+                                                    echo 'You';
+                                                }else{
+                                                    echo $row['Request by']; 
+                                                }
+                                             
+                                                
+                                                
+                                                ?></td>
                                                 <?php
                                                 // Show status of items
                                                 if ($row['Status'] == 'approved') {
@@ -254,10 +269,10 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                     if ($row['isReturned'] == 0) {
                                                         echo 'No';
                                                     } else {
-                                                        if ($_SESSION['CT'] == 1) {
-                                                            echo 'Yes';
-                                                        } else {
+                                                        if ($row['userID'] == $_SESSION['ID']) {
                                                             echo '<a href="http://" class="feedback-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#feedbackModal" data-item-id="' . $row['itemID'] . '"  data-user-id = "' . $_SESSION['ID'] . '" title="feedback"><i class="fa-sharp fa-solid fa-comments fa-" style="color: #07f223;"></i></a>';
+                                                        }else{
+                                                            echo 'Yes';
                                                         }
                                                     }
                                                     ?>
@@ -281,10 +296,6 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                             }
                                                         } ?>
                                                     </td> -->
-
-
-
-
                                                 <?php if ($_SESSION['CT'] == 1) { ?>
                                                     <td>
                                                     <?php

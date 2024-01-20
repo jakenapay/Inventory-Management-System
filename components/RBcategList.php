@@ -3,9 +3,10 @@
     $categId = $_POST['categoryId'];
     $user_chapter = $_SESSION['CH'];
 
-    if ($_SESSION['CT'] == "0") {
-        $result = $pdo->query("SELECT * FROM items WHERE item_category = $categId AND item_chapter = $user_chapter");
-        $records = $result->fetchAll(PDO::FETCH_ASSOC);
+
+    $result = $pdo->query("SELECT * FROM items WHERE item_category = $categId AND item_chapter = $user_chapter");
+    $records = $result->fetchAll(PDO::FETCH_ASSOC);
+    if ($result) {
         foreach ($records as $row) { ?>
             <div class="col-md-6 col-sm-12 col-lg-4 mt-5">
                 <div class="card">

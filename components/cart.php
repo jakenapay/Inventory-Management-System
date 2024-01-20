@@ -92,6 +92,9 @@
             </div>
         <?php  }  ?>
     </div>
+
+
+
     <div class="modal fade" id="cartModalList" tabindex="-1" aria-labelledby="CartModalLabel" aria-hidden="true">
         <!-- Modal content -->
         <div class="modal-dialog">
@@ -108,7 +111,7 @@
                             <img src="" class="img-fluid" alt="Item Image" id="modalItemImage">
                         </div>
                         <div class="col-md-6">
-                            <div id="modalItemDetails">
+                            <div id="modalItemDetails" style="text-align: left;">
                             </div>
                         </div>
                     </div>
@@ -143,15 +146,30 @@
                     document.getElementById('modalItemImage').src =
                         `./images/items/${image}`;
                     document.getElementById('modalItemDetails').innerHTML = `
-                    <h6>Item Name: <span id="item-name">${name}</span></h5>
-                            <input type="number" min="0" id="item-id" value="${itemId}" hidden>
-                            <div id="additionalDetails">
+                        <h3 class="product"
+                            style="font-size: 13pt;
+                            margin-top: 5px;
+                            font-weight: 500;
+                            color: #666;
+                            font-family: "Montserrat";">
+                            ${name}
+                        </h3>
+                        <ul class="desc"
+                         style="margin-top: 20px;
+                             color: #777;">
+                            <li>${description}</li>
+                            <li>Item Quantity:<small id="itemQuantity">${quantity}</small></li>
+                            <li>
                                 <p> 
-                                    Item Description: <span id="item-desc">${description}</span> </br>
+                                <input type="number" min="0" id="item-id" value="${itemId}" hidden>
+                                    Item Description: <span id="item-desc"></span> </br>
                                     <sub> Stocks: <span id="item-stoc">${quantity}</span> </sub> <br>
                                     <input  id="item-quan" type="number" min="0" max="${quantity}">
                                 </p>
-                            </div>
+                            </li>
+                        </ul>
+                          
+    
                         <!-- Add more item details here -->
                     `;
                 });

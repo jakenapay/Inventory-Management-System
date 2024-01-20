@@ -1,5 +1,5 @@
 <?php
-if ($_SESSION["CT"] == 0) {  ?>
+ ?>
     <div class="row">
         <div class="col-lg-9 col-sm-6 col-sm-12 m-auto mt-5">
             <div class="form-check form-check-inline">
@@ -17,7 +17,6 @@ if ($_SESSION["CT"] == 0) {  ?>
                 $rbtnQ->execute();
 
                 $rbtnData = $rbtnQ->fetchAll(PDO::FETCH_ASSOC);
-
                 if ($rbtnData) {
 
                     foreach ($rbtnData as $itemCateg) { ?>
@@ -25,7 +24,6 @@ if ($_SESSION["CT"] == 0) {  ?>
                             <li>
                                 <label class="form-check-label">
                                     <input type="radio" class="form-check-input" name="category" id="" value="<?php echo $itemCateg['item_category_id'] ?>" onclick="getRadioValue()">
-
                                     <?php echo $itemCateg['item_category_name'] ?>
                                 </label>
                             </li>
@@ -44,13 +42,13 @@ if ($_SESSION["CT"] == 0) {  ?>
             </div>
         </div>
     </div>
-<?php }; ?>
+<?php  ?>
 
 <script>
     function getRadioValue() {
         // Get the selected radio button
         var selectedOption = document.querySelector('input[name="category"]:checked');
-
+        
         // Check if a radio button is selected
         if (selectedOption.value == 0) {
 
