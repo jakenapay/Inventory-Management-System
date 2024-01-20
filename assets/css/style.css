@@ -22,6 +22,7 @@
     margin: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
+    
 }
 
 body {
@@ -29,6 +30,33 @@ body {
     font-family: var(--mainFont);
     height: 100%;
     margin: 0;
+}
+body.login-page {
+    background-image: url('https://assets-global.website-files.com/6492dd5d65d1855cb14a6692/64932198562c57f5e21d903c_header%20bg.svg'); /* Replace 'path/to/your/background-image.jpg' with the actual path to your image */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Optional, use 'fixed' if you want a fixed background */
+}
+
+.title-box {
+    padding: 20px;
+    
+}
+.homepage-title{
+    font-weight: bold;
+    color: var(--green);
+}
+.login-box {
+    padding: 20px;
+}
+
+.userInput {
+    width: 100%;
+}s
+
+.title_description{
+    text-align: left;
 }
 
 .msg {
@@ -120,4 +148,11 @@ rect {
 
 .charts {
     border: var(--border);
+}
+/* Home */
+.logo-in-upper-middle {
+    display: block;
+    width: 200px;
+    margin: auto;
+    padding-top:20px;
 }
