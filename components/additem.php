@@ -37,7 +37,7 @@ session_start();
 <div>
     <div class="heading">
         <div class="left-side">
-            <h4>Add Existing Item</h4>
+            <h4>Scan item barcode to add existing item</h4>
         </div>
 
         <div class="right-side">
