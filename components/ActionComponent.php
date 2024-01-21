@@ -32,9 +32,9 @@ if ($_SESSION['CT'] == 1) {
             <li class="nav-item">
                 <a class="nav-link" href="#itemreq"><span class="fas fa-comment-dots"></span> Item Request</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><span class="fas fa-ban"></span> Disabled</a>
-            </li>
+            </li> -->
         </ul>
         <div id="content">
             <!--// *Content will be dynamically loaded here -->
