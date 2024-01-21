@@ -59,16 +59,14 @@ $totalIDs = $result['total_ids'];
                 <li class="nav-item">
                     <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'requests.php')) ? 'active' : ''; ?>" href="requests.php">Requests</a>
                 </li>
-                
-                <!-- <?php
-                // if (($_SESSION['CT'] === 1) && ($_SESSION['CH'] === 1)) {
-                //     $activeClass = ($_SESSION['active_tab'] === 'chapters.php') ? 'active' : '';
-                //     echo '<li class="nav-item">
-                //         <a class="nav-link ' . $activeClass . '" href="chapters.php">Chapters</a>
-                //      </li>';
-                // }
-                ?> -->
-
+                <?php
+                if (($_SESSION['CT'] === 1) && ($_SESSION['CH'] === 1)) {
+                    $activeClass = ($_SESSION['active_tab'] === 'chapters.php') ? 'active' : '';
+                    echo '<li class="nav-item">
+                        <a class="nav-link ' . $activeClass . '" href="chapters.php">Chapters</a>
+                     </li>';
+                }
+                ?>
                 <!-- <li class="nav-item">
                     <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'logs.php')) ? 'active' : ''; ?>" href="logs.php">Logs</a>
                 </li> -->
@@ -90,15 +88,6 @@ $totalIDs = $result['total_ids'];
                             </button>
                         </li>
 
-                        <li class="nav-item nav-link">';
-                        include "./components/cart.php";
-                        echo '</li>';
-                    }
-                }
-
-                if ($_SESSION['active_tab'] == 'adminItemList.php') {
-                    if(!empty($_SESSION['ID']) && ($_SESSION['CT'] == 1)) {
-                        echo '
                         <li class="nav-item nav-link">';
                         include "./components/cart.php";
                         echo '</li>';
