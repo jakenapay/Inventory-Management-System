@@ -1,11 +1,28 @@
 /* For general */
 .chart-title {
-    font-size: 1.3rem;
-    font-weight: bold;
-    text-align: center;
-    
+  font-size: 1.3rem;
+  font-weight: bold;
+  text-align: center;
 }
 
 body {
-    font-family: var(--mainFont);
+  font-family: var(--mainFont);
+}
+
+/* Phone */
+@media only screen and (max-width: 320px) {
+    .chart-title {
+        font-size: 0.9rem;
+        font-weight: bold;
+        text-align: center;
+      }
+}
+
+/* Tablet */
+@media only screen and (min-width: 321px) and (max-width: 768px) {
+    .chart-title {
+        font-size: 1rem;
+        font-weight: bold;
+        text-align: center;
+      }
 }

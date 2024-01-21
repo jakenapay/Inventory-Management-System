@@ -226,7 +226,7 @@ try {
 
     $stmt = $pdo->query($sql);
 
-    $barChartDataPoints = array();
+    $chapterTotalTransactions = array();
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $chapterName = $row['chapter_name'];
         $transactionCount = $row['transaction_count'];
@@ -625,7 +625,7 @@ try {
     <?php include 'nav.php'; ?>
 
     <div id="wrapper">
-        <div class="section px-5 pt-4">
+        <div class="section px-lg-5 pt-4">
             <div class="row justify-content-center align-items-center">
                 <!-- TECHNOLOGY -->
                 <div class="box col-sm-12 col-md-4 col-lg-2">
