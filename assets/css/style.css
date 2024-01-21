@@ -22,7 +22,6 @@
     margin: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
-    
 }
 
 body {
@@ -43,6 +42,12 @@ body.login-page {
     padding: 20px;
     
 }
+.title-section{
+    color:var(--green);
+    text-align: center;
+    font-weight: bold;
+    font-size: xx-large;
+}
 .homepage-title{
     font-weight: bold;
     color: var(--green);
@@ -50,6 +55,7 @@ body.login-page {
 .login-box {
     padding: 20px;
 }
+
 
 .userInput {
     width: 100%;
@@ -155,4 +161,9 @@ rect {
     width: 200px;
     margin: auto;
     padding-top:20px;
+}
+
+blockquote.instagram-media {
+    margin: 10px; /* Adjust the margin as needed */
+    padding: 20px; /* Adjust the padding as needed */
 }

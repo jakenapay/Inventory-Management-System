@@ -1,4 +1,4 @@
-body {
+/* body {
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
@@ -15,10 +15,10 @@ label {
 .quantity-container {
   display: flex;
   align-items: center;
-}
+} */
 
-#item-quan {
+/* #item-quan {
   width: 50px;
   text-align: center;
   margin: 0 10px;
-}
+} */
