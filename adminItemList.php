@@ -58,6 +58,7 @@
                     <div class="col">
                         <div class=" justify-content-end justify-content-center-md" style=" text-align: end; margin-right: 100px;">
                             <?php include './components/cart.php'; ?>
+
                         </div>
                     </div>
                 </div>
