@@ -97,44 +97,44 @@ $next_page = min($total_pages, $current_page + 1);
     //     var getItemId = 0;
 
        // get the data to display in modal
-        buttons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                var itemId = this.getAttribute('data-item-id');
-                getItemId = itemId;
-                console.log('Button Clicked! Item ID:', itemId);
-                $.ajax({
-                    type: "POST",
-                    url: "./includes/getitem.inc.php",
-                    data: {
-                        itemId: getItemId,
-                    },
-                    success: function(response) {
+        // // buttons.forEach(function(button) {
+        // //     button.addEventListener('click', function() {
+        // //         var itemId = this.getAttribute('data-item-id');
+        // //         getItemId = itemId;
+        // //         console.log('Button Clicked! Item ID:', itemId);
+        // //         $.ajax({
+        // //             type: "POST",
+        // //             url: "./includes/getitem.inc.php",
+        // //             data: {
+        // //                 itemId: getItemId,
+        // //             },
+        // //             success: function(response) {
 
-                        console.log('Response received:', response);
+        // //                 console.log('Response received:', response);
 
-                        // Parse the JSON response
-                        const itemInfo = JSON.parse(response);
-                        console.log('Parsed itemInfo:', itemInfo);
+        // //                 Parse the JSON response
+        // //                 const itemInfo = JSON.parse(response);
+        // //                 console.log('Parsed itemInfo:', itemInfo);
 
-                        // Update modal content
-                        $(".itemImg").attr("src",
-                            `./images/items/${itemInfo.item_image}`);
+        // //                 Update modal content
+        // //                 $(".itemImg").attr("src",
+        // //                     `./images/items/${itemInfo.item_image}`);
 
-                        $(".item-name").html(`${itemInfo.item_name}`)
-                        $(".item-desc").html(`${itemInfo.item_description}`)
-                        $(".item-quan").html(`${itemInfo.item_quantity}`)
-                        $(".quanInput").html(
-                            `
-                        <input type="number" min="0" id="item-id" value="${itemInfo.item_id}" hidden> 
-                        <input id="item-quan" type="number" min="0" max="${itemInfo.item_quantity}">`
-                        )
+        // //                 $(".item-name").html(`${itemInfo.item_name}`)
+        // //                 $(".item-desc").html(`${itemInfo.item_description}`)
+        // //                 $(".item-quan").html(`${itemInfo.item_quantity}`)
+        // //                 $(".quanInput").html(
+        // //                     `
+        // //                 <input type="number" min="0" id="item-id" value="${itemInfo.item_id}" hidden> 
+        // //                 <input id="item-quan" type="number" min="0" max="${itemInfo.item_quantity}">`
+        // //                 )
 
-                        // Show the modal
-                        $('#itemDetails').modal('show');
-                    }
-                });
-            });
-        });
+        // //                 Show the modal
+        // //                 $('#itemDetails').modal('show');
+        // //             }
+        // //         });
+        // //     });
+        // // });
 
     //     // Other modal logic remains the same
 

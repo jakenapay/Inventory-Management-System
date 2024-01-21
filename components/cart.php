@@ -16,7 +16,7 @@
 </style>
 
 <div class="dropdown show">
-    <a class="btn btn-sm dropdown-toggle" href="" role="button" id="dropdownCart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="">
+    <a class="btn btn-sm dropdown-toggle" href="" role="button" id="dropdownCart" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 576 512">
             <!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
             <style>
@@ -40,7 +40,7 @@
         }
         ?>
     </a>
-    <div class="dropdown-menu" aria-labelledby="dropdownCart" style="height: 170px; overflow-y:auto;  ">
+    <div class="dropdown-menu" aria-labelledby="dropdownCart" style="height: 180px; overflow-y:auto;  ">
         <?php
 
         $inCart = 0;
@@ -69,7 +69,7 @@
                             <input type="text" class="item_id" value="<?php echo $row['item_id'] ?>" hidden>
                             <div style="display: flex; justify-content: space-between;">
                                 <h6 class="card-title d-inline-block text-truncate" style="max-width: 50%;"> <small><?php echo $row['item_name'] ?></small></h6>
-                                <button class=" btn btn-primary btn-sm item-btn" data-toggle="modal" data-target="#cartModalList" data-image="<?php echo $row['item_image']; ?>" data-name="<?php echo $row['item_name']; ?>" data-description="<?php echo $row['item_description']; ?>" data-date="<?php echo $row['date_added']; ?>" data-id="<?php echo $_SESSION['ID']; ?>" data-item-id="<?php echo $row['item_id']; ?>" data-item-quantity="<?php echo $row['item_quantity']; ?>">View</button>
+                                <button class=" btn btn-success btn-sm item-btn" data-toggle="modal" data-target="#cartModalList" data-image="<?php echo $row['item_image']; ?>" data-name="<?php echo $row['item_name']; ?>" data-description="<?php echo $row['item_description']; ?>" data-date="<?php echo $row['date_added']; ?>" data-id="<?php echo $_SESSION['ID']; ?>" data-item-id="<?php echo $row['item_id']; ?>" data-item-quantity="<?php echo $row['item_quantity']; ?>">View</button>
                             </div>
                             <!-- <p class="card-text"><small><?php echo $row['item_description'] ?></small></p> -->
                             <sub class="card-text">
@@ -157,14 +157,14 @@
                         <ul class="desc"
                          style="margin-top: 20px;
                              color: #777;">
-                            <li>${description}</li>
-                            <li>Item Quantity:<small id="itemQuantity">${quantity}</small></li>
+                            <li></li>
                             <li>
                                 <p> 
                                 <input type="number" min="0" id="item-id" value="${itemId}" hidden>
-                                    Item Description: <span id="item-desc"></span> </br>
+                                    Item Description: <span id="item-desc">${description}</span> </br>
                                     <sub> Stocks: <span id="item-stoc">${quantity}</span> </sub> <br>
-                                    <input  id="item-quan" type="number" min="0" max="${quantity}">
+                                    <div><input  id="item-quan" type="number" min="0" max="${quantity}"></div>
+                                    
                                 </p>
                             </li>
                         </ul>
