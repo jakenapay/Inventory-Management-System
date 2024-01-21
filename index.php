@@ -31,6 +31,7 @@
                     <h1 class="homepage-title">Web-Based Inventory Management System</h1>
                 </div>
                 <p class="title_description">Efficiently manage your inventory with our user-friendly web-based system.organization aiming to make computer science accessible and fun for kids. With a focus on kids from underserved communities, we aim to teach the valuable skills necessary for them to participate in an ever-digital future – and thrive in it.</p>
+                
             </div>
             <!-- Second Column with Login Form -->
             <div class="col-md-8 col-lg-6 col-sm-12">
@@ -63,7 +64,7 @@
         </div>
     </div>
     <section class="instagram-section" style="margin-left: 20px; margin-right: 20px;">         
-    <div class="title-section">Lates Update</div>
+    <div class="title-section">LATEST UPDATE</div>
         <!-- New Row for Instagram Section -->
         <div class="row mt-5">
         <!-- First Column for Instagram -->
@@ -84,6 +85,14 @@
         </div>
     </div>
             </section>
+
+            <!-- Footer -->
+    <footer class="footer mt-5">
+        <div class="container text-center">
+            <p>&copy; 2024 BSIT-4B. All rights reserved.</p>
+            <!-- You can add more information, links, or social media icons here -->
+        </div>
+    </footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
