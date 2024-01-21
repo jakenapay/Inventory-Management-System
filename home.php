@@ -233,7 +233,6 @@ try {
 
         $chapterTotalTransactions[] = array("y" => $transactionCount, "label" => $chapterName);
     }
-
 } catch (PDOException $e) {
     echo "Failed: " . $e->getMessage();
 }
@@ -709,66 +708,53 @@ try {
                 </div>
             </div>
 
-            <div class="mt-5 row justify-content-center align-items-start mb-3">
-                <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
-                    <?php if (($_SESSION['CT'] === 1)) { ?>
+            <?php if (($_SESSION['CT'] === 1)) { ?>
+                <div class="mt-5 row justify-content-center align-items-start mb-3">
+                    <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
                         <div class="border rounded p-3">
                             <p class="chart-title">Item Percentage</p>
                             <canvas id="pieChart1" style="width: 100%;"></canvas>
                         </div>
-                    <?php } ?>
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-8 mb-3">
-                    <?php if (($_SESSION['CT'] === 1)) { ?>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-8 mb-3">
                         <div class="border rounded p-3">
                             <p class="chart-title">Requested Items by Month</p>
                             <canvas id="lineChart1" style="width: 100%;"></canvas>
                         </div>
-                    <?php } ?>
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
-                    <?php if (($_SESSION['CT'] === 1)) { ?>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
                         <div class="border rounded p-3">
                             <p class="chart-title">Most Requested Items</p>
                             <canvas id="barChart1" style="width: 100%;"></canvas>
                         </div>
-                    <?php } ?>
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
-                    <?php if (($_SESSION['CT'] === 1)) { ?>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
                         <div class="border rounded p-3">
                             <p class="chart-title">Your Top Items</p>
                             <canvas id="barChart2" style="width: 100%;"></canvas>
                         </div>
-                    <?php } ?>
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
-                    <?php if (($_SESSION['CT'] === 1)) { ?>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
                         <div class="border rounded p-3">
                             <p class="chart-title">Chapters Total Transactions</p>
                             <canvas id="radarChart" style="width: 100%;"></canvas>
                         </div>
-                    <?php } ?>
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
-                    <?php if (($_SESSION['CT'] === 1)) { ?>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
                         <div class="border rounded p-3">
                             <p class="chart-title">Users Total Requests Count</p>
                             <canvas id="donutChart" style="width: 100%;"></canvas>
                         </div>
-                    <?php } ?>
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
-                    <?php if (($_SESSION['CT'] === 1)) { ?>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
                         <div class="border rounded p-3">
                             <p class="chart-title">Users Total Requests Count</p>
                             <canvas id="chapterTransactionsChart" style="width: 100%;"></canvas>
                         </div>
-                    <?php } ?>
+                    </div>
+
                 </div>
-
-
-            </div>
+            <?php } ?>
 
         </div>
         <br>
@@ -776,7 +762,7 @@ try {
 
 
     <?php
-   
+
 
 
 
