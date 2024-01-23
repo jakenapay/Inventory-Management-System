@@ -185,7 +185,6 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
         // Get the selected radio button
         var selectedOption = document.querySelector('input[name="category"]:checked');
         const chptr = document.getElementById('chapter').value;
-        console.log(chptr)
         // Check if a radio button is selected
         if (selectedOption.value == 0) {
 
@@ -216,17 +215,18 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     $('.btnSearch').click(function() {
         const chptr = document.getElementById('chapter').value;
         var Sdata = document.getElementById('itemSearch').value;
-        alert(Sdata);
-        console.log(chptr)
+       
         // Perform AJAX request using jQuery
         $.ajax({
             type: 'POST',
             url: './includes/searchQuery.inc.php',
             data: {
-                querySearch: Sdata
+                querySearch: Sdata,
+                chapter: chptr,
             },
             success: function(response) {
                 $('#ItemList').html(response);
+                $('input[name="category"]').prop('checked', false);
             }
         });
     });

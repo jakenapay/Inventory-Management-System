@@ -229,17 +229,17 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                 <td><?php echo $row['ID']; ?></td>
                                                 <td><?php echo $row['Item']; ?></td>
                                                 <td><?php echo $row['Quantity']; ?></td>
-                                                <td class="text-capitalize"><?php 
-                                                
-                                                if ($row['userID'] == $_SESSION['ID']) {
-                                                    echo 'You';
-                                                }else{
-                                                    echo $row['Request by']; 
-                                                }
-                                             
-                                                
-                                                
-                                                ?></td>
+                                                <td class="text-capitalize"><?php
+
+                                                                            if ($row['userID'] == $_SESSION['ID']) {
+                                                                                echo 'You';
+                                                                            } else {
+                                                                                echo $row['Request by'];
+                                                                            }
+
+
+
+                                                                            ?></td>
                                                 <?php
                                                 // Show status of items
                                                 if ($row['Status'] == 'approved') {
@@ -271,7 +271,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                     } else {
                                                         if ($row['userID'] == $_SESSION['ID']) {
                                                             echo '<a href="http://" class="feedback-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#feedbackModal" data-item-id="' . $row['itemID'] . '"  data-user-id = "' . $_SESSION['ID'] . '" title="feedback"><i class="fa-sharp fa-solid fa-comments fa-" style="color: #07f223;"></i></a>';
-                                                        }else{
+                                                        } else {
                                                             echo 'Yes';
                                                         }
                                                     }
@@ -410,73 +410,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
         </div>
     </div> -->
 
-    <script>
-        $(document).ready(function() {
 
-            // Approving the requested item from modal
-            $('table').on('click', '.approve-btn', function(e) {
-                e.preventDefault();
-                var itemId = $(this).data('item-id');
-                console.log(itemId)
-                $.ajax({
-                    type: 'POST',
-                    url: 'includes/items.inc.php',
-                    data: {
-                        'approve-request-item-btn': true,
-                        'item_id': itemId
-                    },
-                    success: function(response) {
-                        $('#approve_request_id').val(itemId);
-                        $('#approveModal').modal('show');
-                    }
-                });
-            });
-
-            // Approving the requested item from modal
-            // $('table').on('click', '.decline-btn', function(e) {
-            //     e.preventDefault();
-            //     var itemId = $(this).data('item-id');
-            //     $.ajax({
-            //         type: 'POST',
-            //         url: 'includes/requests.inc.php',
-            //         data: {
-            //             'decline-request-item-btn': true,
-            //             'item_id': itemId
-            //         },
-            //         success: function(response) {
-            //             $('#decline_request_id').val(itemId);
-            //             $('#declineModal').modal('show');
-            //         }
-            //     });
-            // });
-
-            // $('table').on('click', '.feedback-btn', function(e) {
-            //     e.preventDefault();
-            //     var feedback = document.getElementById('w3review').val;
-            //     var itemId = $(this).data('item-id');
-
-
-            //     alert(feedback)
-            //     // $.ajax({
-            //     //     type: 'POST',
-            //     //     url: 'includes/itemcomment.inc.php',
-            //     //     data: {
-            //     //         item_id: itemId,
-            //     //         uID : uID
-            //     //     },
-            //     //     success: function(response) {
-
-            //     //     }
-            //     // });
-            // });
-            $('#feedbackBtn').click(function() {
-                console.log('clicked')
-            })
-
-
-
-        });
-    </script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -489,4 +423,74 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 
 </body>
 
+
+
 </html>
+
+<script>
+    $(document).ready(function() {
+
+        // Approving the requested item from modal
+        $('table').on('click', '.approve-btn', function(e) {
+            e.preventDefault();
+            var itemId = $(this).data('item-id');
+            console.log(itemId)
+            $.ajax({
+                type: 'POST',
+                url: 'includes/items.inc.php',
+                data: {
+                    'approve-request-item-btn': true,
+                    'item_id': itemId
+                },
+                success: function(response) {
+                    $('#approve_request_id').val(itemId);
+                    $('#approveModal').modal('show');
+                }
+            });
+        });
+
+        // Approving the requested item from modal
+        // $('table').on('click', '.decline-btn', function(e) {
+        //     e.preventDefault();
+        //     var itemId = $(this).data('item-id');
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: 'includes/requests.inc.php',
+        //         data: {
+        //             'decline-request-item-btn': true,
+        //             'item_id': itemId
+        //         },
+        //         success: function(response) {
+        //             $('#decline_request_id').val(itemId);
+        //             $('#declineModal').modal('show');
+        //         }
+        //     });
+        // });
+
+        // $('table').on('click', '.feedback-btn', function(e) {
+        //     e.preventDefault();
+        //     var feedback = document.getElementById('w3review').val;
+        //     var itemId = $(this).data('item-id');
+
+
+        //     alert(feedback)
+        //     // $.ajax({
+        //     //     type: 'POST',
+        //     //     url: 'includes/itemcomment.inc.php',
+        //     //     data: {
+        //     //         item_id: itemId,
+        //     //         uID : uID
+        //     //     },
+        //     //     success: function(response) {
+
+        //     //     }
+        //     // });
+        // });
+        $('#feedbackBtn').click(function() {
+            console.log('clicked')
+        })
+
+
+
+    });
+</script>
