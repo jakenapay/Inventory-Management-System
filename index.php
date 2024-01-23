@@ -13,13 +13,9 @@
     <link rel="stylesheet" href="assets/css/login.css?v=<?php echo time(); ?>">
 
     <!-- Vendor CSS Files -->
-    <!-- <link href="assets/vendor/css/aos.css" rel="stylesheet"> -->
-    <!-- <link href="assets/vendor/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/css/bootstrap-icons.css" rel="stylesheet"> -->
     <link href="assets/vendor/css/boxicons.min.css" rel="stylesheet">
     <link href="assets/vendor/css/glightbox.min.css" rel="stylesheet">
     <link href="assets/vendor/css/landing.css" rel="stylesheet">
-    <!-- <link href="assets/vendor/css/swiper-bundle.min.css" rel="stylesheet"> -->
 
     <!-- Logo -->
     <img src="https://uploads-ssl.webflow.com/6492dd5d65d1855cb14a6692/6494571343918c14057fe090_DEVCON%20Kids%20Logo%20Horizontal.png" alt="Your Logo" class="logo-in-upper-middle">
