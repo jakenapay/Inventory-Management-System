@@ -21,7 +21,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Headers and other attachments/CDN -->
+    <!-- Headers and other attachments/CDN --> 
     <?php include_once './includes/headers.inc.php'; ?>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 

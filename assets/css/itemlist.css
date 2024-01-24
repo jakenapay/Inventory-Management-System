@@ -199,7 +199,8 @@
     background: rgba(0, 0, 0, 0.05)
 } */
 
-.card-img, .card-img-top {
+.card-img,
+.card-img-top {
   padding: 1rem 0 1rem;
 }
 
@@ -211,7 +212,68 @@
   color: #000000; /* Black color on hover */
 }
 
-.view-btn, .btn-primary, .btn-primary:hover, .btn-primary:active {
+.view-btn,
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active {
   background-color: var(--green);
   border-color: var(--green);
+}
+
+.btn-primary.disabled, .btn-primary:disabled {
+  background-color: var(--orange);
+  border-color: var(--orange);
+}
+
+.card {
+  /* width: 18rem; */
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd; /* Optional: Add a border for visual separation */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  overflow: hidden;
+}
+
+.image-parent {
+  width: 300px;
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  height: 200px;
+}
+
+.card-img-top {
+  left: 0;
+  right: 0;
+  margin: auto;
+  position: absolute;
+}
+
+
+.card-body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.card-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 1; /* Show only 2 lines */
+  text-overflow: ellipsis;
+  margin-bottom: auto; /* Push the text to the top, keeping the "View" button at the bottom */
+}
+
+.view-btn {
+  margin-top: 1rem;
+  width: 100%;
+  align-self: flex-end; /* Align the button to the bottom of the card */
 }

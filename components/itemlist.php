@@ -39,61 +39,76 @@ $next_page = min($total_pages, $current_page + 1);
 
 
 
-<div class="row">
+<div class="row ">
 
     <?php
 
     foreach ($records as $row) { ?>
+
+        <!-- OLD CODE -->
         <!-- <div class="col-md-6 col-sm-12 col-lg-4  mt-5">
             <div class="card">
                 <div class="imgBox">
-                    <img src="./images/items/<?php // echo $row['item_image'] ?>" alt="<?php echo $row['item_name'] ?>" class="mouse">
+                    <img src="./images/items/<?php // echo $row['item_image'] 
+                                                ?>" alt="<?php echo $row['item_name'] ?>" class="mouse">
                 </div>
                 <div class="contentBox">
-                    <input type="text" id="user_id" value="<?php // echo $_SESSION['ID'] ?>" hidden>
-                    <input type="text" class="item_id" value="<?php // echo $row['item_id'] ?>" hidden>
-                    <h3><?php // echo $row['item_name'] ?></h3>
+                    <input type="text" id="user_id" value="<?php // echo $_SESSION['ID'] 
+                                                            ?>" hidden>
+                    <input type="text" class="item_id" value="<?php // echo $row['item_id'] 
+                                                                ?>" hidden>
+                    <h3><?php // echo $row['item_name'] 
+                        ?></h3>
 
 
-                    <?php // if ($row['item_status'] == "disabled" or $row['item_quantity'] == 0) { ?>
+                    <?php // if ($row['item_status'] == "disabled" or $row['item_quantity'] == 0) { 
+                    ?>
                         <h6 class="price" style="color: red;">Item Unavialable</h6>
                         <button type="button" class="btn buy btn-primary btn-view " data-bs-toggle="modal" data-bs-target="#itemDetails" data-item-id="<?php echo $row['item_id'] ?>" disabled hidden>
                             Request
                         </button>
-                    <?php // } else { ?>
+                    <?php // } else { 
+                    ?>
                         <button type="button" class="btn buy btn-primary btn-view " data-bs-toggle="modal" data-bs-target="#itemDetails" data-item-id="<?php echo $row['item_id'] ?>">
                                 View
                             </button>
-                        <a href="viewItem.php?itemid=<?php // echo $row['item_id'] ?>">
+                        <a href="viewItem.php?itemid=<?php // echo $row['item_id'] 
+                                                        ?>">
                             <button type="button" class="btn buy btn-primary">
                                 View
                             </button>
                         </a>
-                    <?php // } ?>
+                    <?php // } 
+                    ?>
                 </div>
             </div>
         </div> -->
 
+        <!--  NEW CODE -->
+        <div class="col-12 col-md-4 col-lg-3 my-2">
+            <div class="card">
+                <!-- Hidden details -->
+                <input type="text" id="user_id" value="<?php echo $_SESSION['ID'] ?>" hidden>
+                <input type="text" class="item_id" value="<?php echo $row['item_id'] ?>" hidden>
+                <!-- Image of the item -->
+                <div class="image-parent">
+                    <img class="card-img-top" src="./images/items/<?php echo $row['item_image'] ?>" alt="<?php echo $row['item_name'] ?>">
+                </div>
+                <div class="card-body">
+                    <!-- Item title -->
+                    <h5 class="card-title"><?php echo $row['item_name'] ?></h5>
+                    <p class="card-text"><?php echo $row['item_description']; ?></p>
 
-        <div class="card" style="width: 18rem;">
-            <!-- Hidden details -->
-            <input type="text" id="user_id" value="<?php echo $_SESSION['ID'] ?>" hidden>
-            <input type="text" class="item_id" value="<?php echo $row['item_id'] ?>" hidden>
-            <!-- Image of the item -->
-            <img class="card-img-top" src="./images/items/<?php echo $row['item_image'] ?>" alt="<?php echo $row['item_name'] ?>">
-            <div class="card-body">
-                <!-- Item title -->
-                <h5 class="card-title"><?php echo $row['item_name'] ?></h5>
-                <p class="card-text"><?php echo $row['item_description']; ?></p>
-                
-                <?php if ($row['item_status'] == "disabled" or $row['item_quantity'] == 0) { ?>
-                        <h6 class="price" style="color: red;">Item Unavialable</h6>
-                        <button type="button" class="btn buy btn-primary btn-view " data-bs-toggle="modal" data-bs-target="#itemDetails" data-item-id="<?php echo $row['item_id'] ?>" disabled hidden>
-                            Request
-                        </button>
+                    <?php if ($row['item_status'] == "disabled" or $row['item_quantity'] == 0) { ?>
+                        <!-- <h6 class="price" style="color: red;">Item Unavailable</h6> -->
+                        <a class="not-allowed btn btn-primary view-btn disabled" href="viewItem.php?itemid=<?php echo $row['item_id'] ?>">Item Unavailable</a>
+                        <!-- <button type="button" class="btn buy btn-primary btn-view" data-bs-toggle="modal" data-bs-target="#itemDetails" data-item-id="<?php echo $row['item_id'] ?>" disabled hidden>
+                                Request
+                            </button> -->
                     <?php } else { ?>
-                <a class="btn btn-primary view-btn" href="viewItem.php?itemid=<?php echo $row['item_id'] ?>">View</a>
-                <?php } ?>
+                        <a class="btn btn-primary view-btn" href="viewItem.php?itemid=<?php echo $row['item_id'] ?>">View</a>
+                    <?php } ?>
+                </div>
             </div>
         </div>
     <?php } ?>

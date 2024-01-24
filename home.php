@@ -550,12 +550,12 @@ try {
                     label: 'Total Transactions',
                     data: <?php echo json_encode($chapterTotalTransactionsDataPoints); ?>,
                     fill: true,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgb(255, 99, 132)',
-                    pointBackgroundColor: 'rgb(255, 99, 132)',
+                    backgroundColor: 'rgba(113, 180, 6, 0.2)',
+                    borderColor: 'rgb(113, 180, 6)',
+                    pointBackgroundColor: 'rgb(113, 180, 6)',
                     pointBorderColor: '#fff',
                     pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                    pointHoverBorderColor: 'rgb(113, 180, 6)'
                 }]
             };
             const config = {
@@ -710,13 +710,13 @@ try {
 
             <?php if (($_SESSION['CT'] === 1)) { ?>
                 <div class="mt-5 row justify-content-center align-items-start mb-3">
-                    <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
+                    <div class="col-sm-12 col-md-12 col-lg-6 mb-4">
                         <div class="border rounded p-3">
-                            <p class="chart-title">Item Percentage</p>
-                            <canvas id="pieChart1" style="width: 100%;"></canvas>
+                            <p class="chart-title">Users Total Requests Count</p>
+                            <canvas id="chapterTransactionsChart" style="width: 100%;"></canvas>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-8 mb-3">
+                    <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
                         <div class="border rounded p-3">
                             <p class="chart-title">Requested Items by Month</p>
                             <canvas id="lineChart1" style="width: 100%;"></canvas>
@@ -734,24 +734,25 @@ try {
                             <canvas id="barChart2" style="width: 100%;"></canvas>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+                    <div class="col-sm-12 col-md-12 col-lg-4 mb-4">
                         <div class="border rounded p-3">
                             <p class="chart-title">Chapters Total Transactions</p>
                             <canvas id="radarChart" style="width: 100%;"></canvas>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
+                    <div class="col-sm-12 col-md-12 col-lg-4 mb-4">
                         <div class="border rounded p-3">
                             <p class="chart-title">Users Total Requests Count</p>
                             <canvas id="donutChart" style="width: 100%;"></canvas>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-12 col-lg-12 mb-3">
+                    <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
                         <div class="border rounded p-3">
-                            <p class="chart-title">Users Total Requests Count</p>
-                            <canvas id="chapterTransactionsChart" style="width: 100%;"></canvas>
+                            <p class="chart-title">Item Percentage</p>
+                            <canvas id="pieChart1" style="width: 100%;"></canvas>
                         </div>
                     </div>
+
 
                 </div>
             <?php } ?>
