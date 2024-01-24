@@ -269,9 +269,10 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                     if ($row['isReturned'] == 0) {
                                                         echo 'No';
                                                     } else {
-                                                        if ($row['userID'] == $_SESSION['ID']) {
-                                                            echo '<a href="http://" class="feedback-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#feedbackModal" data-item-id="' . $row['itemID'] . '"  data-user-id = "' . $_SESSION['ID'] . '" title="feedback"><i class="fa-sharp fa-solid fa-comments fa-" style="color: #07f223;"></i></a>';
-                                                        } else {
+                                                        if ($row['userID'] == $_SESSION['ID']) { ?>
+                                                           <!-- //<a href="./viewItem.php?itemid=<?php echo $row['itemID'] ?>" class="feedback-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#feedbackModal" data-item-id="' . $row['itemID'] . '"  data-user-id = "' . $_SESSION['ID'] . '" title="feedback"><i class="fa-sharp fa-solid fa-comments fa-" style="color: #07f223;"></i></a> -->
+                                                           <a href="./viewItem.php?itemid=<?php echo $row['itemID'] ?>" class="feedback-btn"  title="feedback"><i class="fa-sharp fa-solid fa-comments fa-" style="color: #07f223;"></i></a>
+                                                        <?php } else {
                                                             echo 'Yes';
                                                         }
                                                     }

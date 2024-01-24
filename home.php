@@ -756,18 +756,21 @@ try {
 
                 </div>
             <?php } ?>
+            <?php
+    // Check if the user is an admin
+    $isAdmin = ($_SESSION['CT'] === 1);
 
+    // If the user is not an admin, include landing-page.php
+    if (!$isAdmin) {
+        include 'landing-page.php';
+    }
+    ?>
         </div>
         <br>
     </div>
 
 
-    <?php
-
-
-
-
-    ?>
+    
 </body>
 
 
