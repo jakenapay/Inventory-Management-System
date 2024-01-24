@@ -2,11 +2,11 @@
 # General
 --------------------------------------------------------------*/
 body {
-    font-family: "Open Sans", sans-serif;
+    font-family: "Poppins", sans-serif;
     color: #444444;
   }
   
-  a {
+  /* a {
     color: #009cea;
     text-decoration: none;
   }
@@ -23,7 +23,7 @@ body {
   h5,
   h6 {
     font-family: "Raleway", sans-serif;
-  }
+  } */
   
   /*--------------------------------------------------------------
   # Back to top button
@@ -70,7 +70,7 @@ body {
   /*--------------------------------------------------------------
   # Header
   --------------------------------------------------------------*/
-  #header {
+  /* #header {
     height: 72px;
     transition: all 0.5s;
     z-index: 997;
@@ -101,12 +101,12 @@ body {
     padding: 0;
     margin: 0;
     max-height: 40px;
-  }
+  } */
   
   /*--------------------------------------------------------------
   # Header Social Links
   --------------------------------------------------------------*/
-  .header-social-links {
+  /* .header-social-links {
     margin: 0 0 0 30px;
   }
   
@@ -126,7 +126,7 @@ body {
   
   .header-social-links a:hover {
     color: #009cea;
-  }
+  } */
   
   /*--------------------------------------------------------------
   # Navigation Menu
@@ -134,7 +134,7 @@ body {
   /**
   * Desktop Navigation 
   */
-  .navbar {
+  /* .navbar {
     padding: 0;
   }
   
@@ -239,12 +239,12 @@ body {
     .navbar .dropdown .dropdown:hover>ul {
       left: -100%;
     }
-  }
+  } */
   
   /**
   * Mobile Navigation 
   */
-  .mobile-nav-toggle {
+  /* .mobile-nav-toggle {
     color: #364146;
     font-size: 28px;
     cursor: pointer;
@@ -348,7 +348,7 @@ body {
   
   .navbar-mobile .dropdown>.dropdown-active {
     display: block;
-  }
+  } */
   
   /*--------------------------------------------------------------
   # Hero Section

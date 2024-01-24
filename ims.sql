@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 20, 2024 at 06:57 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Jan 24, 2024 at 01:58 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `cart` (
   `inCart` tinyint(1) NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `date_out` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `cart`
@@ -72,7 +72,7 @@ INSERT INTO `cart` (`user_id`, `item_id`, `inCart`, `date_added`, `date_out`) VA
 CREATE TABLE `category` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `category`
@@ -92,7 +92,7 @@ CREATE TABLE `chapters` (
   `chapter_id` int(11) NOT NULL,
   `chapter_name` varchar(255) NOT NULL,
   `chapter_address` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `chapters`
@@ -122,7 +122,7 @@ CREATE TABLE `history` (
   `isReturned` int(1) NOT NULL,
   `history_date_return` varchar(30) NOT NULL,
   `history_due_date` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `history`
@@ -178,21 +178,21 @@ CREATE TABLE `items` (
   `item_status` enum('enabled','disabled','','') NOT NULL,
   `item_description` varchar(255) NOT NULL,
   `item_image` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `items`
 --
 
 INSERT INTO `items` (`item_id`, `unique_item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_status`, `item_description`, `item_image`) VALUES
-(1, '335733', 'Galaxy Tab A Tablet', 1, 3, 137, 3, 'enabled', '4gb 256gb color black', 'IMG_655c634aa37f87.97220155.jpg'),
-(2, '2792718', 'A4 Bond Paper', 3, 2, 1, 2, 'enabled', 'A4 Hardcopy', 'IMG_655c63420ed111.72246669.png'),
+(1, '335733', 'Galaxy Tab A Tablet', 1, 3, 137, 3, 'enabled', '4gb 256gb color black', 'IMG_65b05ed7742d01.42234270.jpg'),
+(2, '2792718', 'A4 Bond Paper', 3, 2, 1, 2, 'enabled', 'A4 Hardcopy', 'IMG_65b05f1a59e433.85031652.jpg'),
 (4, '976760', 'ID Lace version 5', 3, 3, 42, 4, 'enabled', 'Version 5, Black & Orange', 'IMG_6543bb326ab0b1.55477099.'),
 (5, '7542994', 'Jumping wires long', 3, 1, 25, 4, 'enabled', 'Rainbow colors', ''),
 (7, '275921', 'Gel Ink Pen about to delete', 3, 1, 28, 5, 'disabled', 'Black', 'IMG_65350cc0dbc2f1.96755226.'),
-(8, '111111', 'Jungle Juice', 2, 2, 17, 2, 'disabled', '350ml Mango, Apple, Grapes, & Orange', 'IMG_650896c28445b9.58710873.jpg'),
-(10, '22222', 'Sunglasses', 3, 3, 21, 1, 'enabled', 'Rayband, Black frame', 'IMG_650898af7e3799.65129257.jpg'),
-(11, '33333', 'Hotdog', 2, 1, 27, 1, 'enabled', 'Jumbo, Tender Juicy, Pure Foods, 12pcs per pack', 'IMG_650899879ba091.62117593.png'),
+(8, '111111', 'Jungle Juice', 2, 2, 17, 2, 'disabled', '350ml Mango, Apple, Grapes, & Orange', 'IMG_65b060155362e0.47413439.jpg'),
+(10, '22222', 'Sunglasses', 3, 3, 21, 1, 'enabled', 'Rayband, Black frame', 'IMG_65b060402e4e54.61591925.png'),
+(11, '33333', 'Hotdog', 2, 1, 27, 1, 'enabled', 'Jumbo, Tender Juicy, Pure Foods, 12pcs per pack', 'IMG_65b05f9c007e02.87502069.jpg'),
 (14, '4444', 'yoon', 1, 1, 2, 2, 'enabled', 'grdg', 'IMG_655c5d66a35232.43841368.png'),
 (15, '555555', 'wa ', 1, 1, 2322, 3, 'enabled', 'dasdasda', 'IMG_655b09bf1c7bc7.78434158.png'),
 (17, '1611297', 'test', 1, 3, 1, 4, 'enabled', 'test1', 'IMG_659ff7beabd170.57412449.jpg'),
@@ -214,7 +214,7 @@ INSERT INTO `items` (`item_id`, `unique_item_id`, `item_name`, `item_category`, 
 CREATE TABLE `items_category` (
   `item_category_id` int(11) NOT NULL,
   `item_category_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `items_category`
@@ -234,7 +234,7 @@ INSERT INTO `items_category` (`item_category_id`, `item_category_name`) VALUES
 CREATE TABLE `items_unit_of_measure` (
   `item_uom_id` int(11) NOT NULL,
   `item_uom_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `items_unit_of_measure`
@@ -256,7 +256,7 @@ CREATE TABLE `item_feedback` (
   `user_id` int(10) NOT NULL,
   `feedback` varchar(225) NOT NULL,
   `date_of_feedback` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -269,7 +269,7 @@ CREATE TABLE `logs` (
   `log_user` int(11) NOT NULL,
   `log_type` enum('modify','return','request','add','') NOT NULL,
   `log_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -287,7 +287,7 @@ CREATE TABLE `users` (
   `user_chapter` int(11) NOT NULL,
   `user_image` varchar(255) NOT NULL,
   `user_status` enum('active','inactive') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
