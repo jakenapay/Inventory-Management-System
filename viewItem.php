@@ -106,10 +106,33 @@ if ($itemId !== null) {
 
             </div>
         </div>
-    </div>
 
-    <!-- <?php
-            echo print_r($itemData); ?> -->
+        <div class="row">
+            <small style="text-align: center;">Feedback</small>
+            <div class=" col-md-12 col-lg-12 d-flex justify-content-center mt-5 ">
+                <!-- Card -->
+                <div class="comment-widgets">
+                    <!-- Comment Row -->
+                    <div class="d-flex flex-row comment-row m-t-0">
+                        <div class="p-2"><img src="https://i.imgur.com/Ur43esv.jpg" alt="user" width="50" class="rounded-circle"></div>
+                        <div class="comment-text ">
+                            <h6 class="font-medium"><?php echo $_SESSION['FN'] . ' ' . $_SESSION['LN'] ?></h6> <span class="m-b-15 d-block"><textarea name="comment" id="comment" cols="30" rows="3"></textarea></span>
+                            <div class="comment-footer"> <span class="text-muted float-right"><button class="btn btn-primary  post">POST</button></span> </div>
+                        </div>
+                    </div>
+                </div> <!-- Card -->
+            </div>
+
+
+        </div>
+        <div class="row">
+
+            <?php
+            include './components/itemcomment.php';
+            ?>
+
+        </div>
+
 </body>
 
 </html>
@@ -228,4 +251,24 @@ if ($itemId !== null) {
             console.error("Item ID input not found within the card:", card);
         }
     })
+
+    $('.post').click(function () {
+            var feedback = document.getElementById('comment').value;
+
+        $.ajax({
+            type: "post",
+            url: "./includes/itemcomments.inc.php",
+            data: {
+                itemId : itemId,
+                userId : userId,
+                feedback : feedback,
+            },
+            success: function (response) {
+                if(response){
+                    location.reload();
+                }
+            }
+        });
+
+      })
 </script>
