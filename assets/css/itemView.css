@@ -2,6 +2,7 @@ body {
   min-height: 100vh;
   background: #adadad;
   padding: 60px 20px;
+  font-family: var(--mainFont);
 }
 
 .container {
@@ -57,10 +58,9 @@ body {
 
 .categorie {
   margin-top: 10px;
-  font-size: 16pt;
+  font-size: 1rem;
   text-transform: uppercase;
-  font-family: "Montserrat";
-  font-weight: 300;
+  font-weight: 500;
   color: #ff9800;
 }
 
@@ -69,7 +69,6 @@ body {
   margin-top: 10px;
   font-weight: 500;
   color: #666;
-  font-family: "Montserrat";
 }
 
 .desc {
@@ -78,15 +77,13 @@ body {
 }
 
 .desc li {
-  font-size: 10pt;
-  font-family: "Montserrat";
-  margin: 15px -5px;
+  font-size: 0.8rem;
+  margin: 8px -5px;
 }
 
 .title-colour {
   margin-top: 25px;
   font-size: 13pt;
-  font-family: "Montserrat";
 }
 
 .color-black {
@@ -117,7 +114,7 @@ body {
   font-weight: 400;
   display: inline-flex;
 } */
-
+/* 
 .item {
   text-align: center;
   background-color: #ffa501;
@@ -126,31 +123,26 @@ body {
   border-radius: 30px;
   text-transform: uppercase;
   font-weight: bold;
-  font-family: "Montserrat";
   transition: all 0.6s;
   border: 3px solid #ffa501;
   cursor: pointer;
   width: 50%;
- 
-  
-}
+} */
 
-.item:hover {
+/* .item:hover {
   color: #ffa501;
   background-color: #fff;
-}
+} */
 
 .cart {
-  position: absolute;
+  /* position: absolute;
   top: 0;
   right: 0;
-  margin: 10px; /* Adjust margin as needed */
+  margin: 10px; Adjust margin as needed */
 }
 
-
-
 #counter-value {
-  font-size: 24px;
+  font-size: 0.9rem;
   width: 50px;
   text-align: center;
   height: 35px; /* Set the desired height */
@@ -161,7 +153,7 @@ body {
   font-size: 16px;
   cursor: pointer;
   padding: 5px 10px;
-  background-color: #4CAF50;
+  background-color: var(--green);
   color: white;
   border: none;
   border-radius: 4px;
@@ -170,5 +162,13 @@ body {
 
 #increment-btn:hover,
 #decrement-btn:hover {
-  background-color: #45a049;
+  background-color: var(--green);
 }
+
+.btn-primary, .btn-primary:hover, .btn-primary:active {
+  border: 1px solid var(--green);
+  background-color: var(--green);
+  font-size: 1rem;
+  padding: 2px 5px;
+}
+

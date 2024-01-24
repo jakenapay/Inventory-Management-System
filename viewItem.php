@@ -60,13 +60,12 @@ if ($itemId !== null) {
     <link rel="stylesheet" href="./assets/css/items.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./assets/css/itemView.css?v=<?php echo time(); ?>">
 
-
 </head>
 
 <body>
     <?php include './nav.php'; ?>
 
-    <div class="container">
+    <div class="container p-0">
         <div class="row">
             <div class="left col-md-6 col-sm-12 col-lg-6">
                 <input type="text" id="itemId" value="<?php echo $itemData['item_id'] ?>" hidden>
@@ -74,10 +73,9 @@ if ($itemId !== null) {
                 <img class="headset" src="./images/items/<?php echo $itemData['item_image'] ?>">
             </div>
             <div class="right col-md-6 col-sm-12 col-lg-6">
-                <h4 class="categorie"><?php echo $itemData['item_category_name']; ?></h4>
-                <h3 class="product"><?php echo $itemData['item_name']; ?></h3>
+                <h3 class="product text-capitalize"><?php echo $itemData['item_name']; ?></h3>
+                <h6 class="categorie text-capitalize"><?php echo $itemData['item_category_name']; ?></h6>
                 <ul class="desc">
-
                     <li><?php echo $itemData['item_description']; ?></li>
                     <li>Item Unit Of Measure: <?php echo $itemData['item_uom_name']; ?> </li>
                     <li>Item Quantity:<small id="itemQuantity"><?php echo $itemData['item_quantity']; ?></small></li>
@@ -89,46 +87,34 @@ if ($itemId !== null) {
                         </div>
                     </li>
                 </ul>
-                <div>
-                    <button class="btn btn-sm item">Request</button>
-                </div>
-                <button class="btn cart">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 576 512">
-                        <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
-                    </svg>
-                    <div class="spinner-border text-success d-none spinner-border-sm" id="spinner" role="status">
-                        <span class="visually-hidden">Loading...</span>
+                <div class="my-3 row d-flex align-items-center justify-content-start">
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <button class="btn btn-primary w-100 item">Request</button>
                     </div>
-                    <i class="fa-solid fa-check d-none" id="checkIcon" style="color: #22511f;"></i>
-                </button>
+                    <div class="col-12 col-md-6 col-lg-6">
+                        <button class="btn cart">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="1.5em" viewBox="0 0 576 512">
+                                <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" />
+                            </svg>
+                            <div class="spinner-border text-success d-none spinner-border-sm" id="spinner" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <i class="fa-solid fa-check d-none" id="checkIcon" style="color: #22511f;"></i>
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 
     <!-- <?php
-    echo print_r($itemData); ?> -->
+            echo print_r($itemData); ?> -->
 </body>
 
 </html>
 
 <script>
-    // $(".color-black").click(function() {
-    //     $(this).css("color", "white");
-    //     $(".color-white").css("color", "white");
-    //     $(".blackwhite").html("Black");
-    //     src = "https://media.ldlc.com/r1600/ld/products/00/05/00/34/LD0005003477_2.jpg";
-    //     $(".headset").attr("src", src);
-    // });
-
-    // $(".color-white").click(function() {
-    //     $(this).css("color", "black");
-    //     $(".color-black").css("color", "black");
-    //     $(".blackwhite").html("White");
-    //     src = "https://media.ldlc.com/r1600/ld/products/00/05/00/35/LD0005003502_2.jpg";
-    //     $(".headset").attr("src", src);
-    // });
-
-
     var itemId = document.getElementById('itemId').value;
     var userId = document.getElementById('userId').value;
     var itemQuantityFromPHP = document.getElementById('itemQuantity').innerText;

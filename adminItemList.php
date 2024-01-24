@@ -34,7 +34,7 @@
 
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
+        <link href="https://uploads-ssl.webflow.com/6492dd5d65d1855cb14a6692/649425d6d5c2567ce414d063_favicon.svg" rel="shortcut icon" type="image/x-icon"> 
 
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
         <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>

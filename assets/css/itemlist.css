@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Istok+Web:wght@400;700&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Istok+Web:wght@400;700&display=swap");
 
 
 
@@ -145,7 +145,7 @@
     margin-bottom: 10px
 } */
 
-.comment-widgets {
+/* .comment-widgets {
     position: relative;
     margin-bottom: 5px
 }
@@ -157,15 +157,16 @@
     display: -ms-flexbox;
     display: flex;
     margin: 10px 0
-}
+} */
 
 /* .p-2 {
     padding: 0.5rem !important
 } */
 
+/* 
 .comment-text {
     padding-left: 15px
-}
+} */
 
 /* .w-100 {
     width: 100% !important
@@ -197,3 +198,20 @@
 /* .comment-widgets .comment-row:hover {
     background: rgba(0, 0, 0, 0.05)
 } */
+
+.card-img, .card-img-top {
+  padding: 1rem 0 1rem;
+}
+
+.pagination .page-link {
+  color: #000000; /* Black color */
+}
+
+.pagination .page-link:hover {
+  color: #000000; /* Black color on hover */
+}
+
+.view-btn, .btn-primary, .btn-primary:hover, .btn-primary:active {
+  background-color: var(--green);
+  border-color: var(--green);
+}

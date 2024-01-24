@@ -42,41 +42,65 @@ $next_page = min($total_pages, $current_page + 1);
 <div class="row">
 
     <?php
-    
-        foreach ($records as $row) { ?>
-            <div class="col-md-6 col-sm-12 col-lg-4  mt-5">
-                <div class="card">
-                    <div class="imgBox">
-                        <img src="./images/items/<?php echo $row['item_image'] ?>" alt="<?php echo $row['item_name'] ?>" class="mouse">
-                    </div>
-                    <div class="contentBox">
-                        <input type="text" id="user_id" value="<?php echo $_SESSION['ID'] ?>" hidden>
-                        <input type="text" class="item_id" value="<?php echo $row['item_id'] ?>" hidden>
-                        <h3><?php echo $row['item_name'] ?></h3>
+
+    foreach ($records as $row) { ?>
+        <!-- <div class="col-md-6 col-sm-12 col-lg-4  mt-5">
+            <div class="card">
+                <div class="imgBox">
+                    <img src="./images/items/<?php // echo $row['item_image'] ?>" alt="<?php echo $row['item_name'] ?>" class="mouse">
+                </div>
+                <div class="contentBox">
+                    <input type="text" id="user_id" value="<?php // echo $_SESSION['ID'] ?>" hidden>
+                    <input type="text" class="item_id" value="<?php // echo $row['item_id'] ?>" hidden>
+                    <h3><?php // echo $row['item_name'] ?></h3>
 
 
-                        <?php if ($row['item_status'] == "disabled" or $row['item_quantity'] == 0) { ?>
-                            <h6 class="price" style="color: red;">Item Unavialable</h6>
-                            <button type="button" class="btn buy btn-primary btn-view " data-bs-toggle="modal" data-bs-target="#itemDetails" data-item-id="<?php echo $row['item_id'] ?>" disabled hidden>
-                                Request
-                            </button>
-                        <?php } else { ?>
-                            <!-- <button type="button" class="btn buy btn-primary btn-view " data-bs-toggle="modal" data-bs-target="#itemDetails" data-item-id="<?php echo $row['item_id'] ?>">
+                    <?php // if ($row['item_status'] == "disabled" or $row['item_quantity'] == 0) { ?>
+                        <h6 class="price" style="color: red;">Item Unavialable</h6>
+                        <button type="button" class="btn buy btn-primary btn-view " data-bs-toggle="modal" data-bs-target="#itemDetails" data-item-id="<?php echo $row['item_id'] ?>" disabled hidden>
+                            Request
+                        </button>
+                    <?php // } else { ?>
+                        <button type="button" class="btn buy btn-primary btn-view " data-bs-toggle="modal" data-bs-target="#itemDetails" data-item-id="<?php echo $row['item_id'] ?>">
                                 View
-                            </button> -->
-                            <a href="viewItem.php?itemid=<?php echo $row['item_id'] ?>">
-                                <button type="button" class="btn buy btn-primary">
-                                    View
-                                </button>
-                            </a>
-                        <?php } ?>
-                    </div>
+                            </button>
+                        <a href="viewItem.php?itemid=<?php // echo $row['item_id'] ?>">
+                            <button type="button" class="btn buy btn-primary">
+                                View
+                            </button>
+                        </a>
+                    <?php // } ?>
                 </div>
             </div>
-        <?php } ?>
+        </div> -->
+
+
+        <div class="card" style="width: 18rem;">
+            <!-- Hidden details -->
+            <input type="text" id="user_id" value="<?php echo $_SESSION['ID'] ?>" hidden>
+            <input type="text" class="item_id" value="<?php echo $row['item_id'] ?>" hidden>
+            <!-- Image of the item -->
+            <img class="card-img-top" src="./images/items/<?php echo $row['item_image'] ?>" alt="<?php echo $row['item_name'] ?>">
+            <div class="card-body">
+                <!-- Item title -->
+                <h5 class="card-title"><?php echo $row['item_name'] ?></h5>
+                <p class="card-text"><?php echo $row['item_description']; ?></p>
+                
+                <?php if ($row['item_status'] == "disabled" or $row['item_quantity'] == 0) { ?>
+                        <h6 class="price" style="color: red;">Item Unavialable</h6>
+                        <button type="button" class="btn buy btn-primary btn-view " data-bs-toggle="modal" data-bs-target="#itemDetails" data-item-id="<?php echo $row['item_id'] ?>" disabled hidden>
+                            Request
+                        </button>
+                    <?php } else { ?>
+                <a class="btn btn-primary view-btn" href="viewItem.php?itemid=<?php echo $row['item_id'] ?>">View</a>
+                <?php } ?>
+            </div>
+        </div>
+    <?php } ?>
+
 </div>
-<nav aria-label="Page navigation example">
-    <ul class="pagination m-auto mt-5">
+<nav aria-label="Page navigation example mb-5">
+    <ul class="pagination m-auto my-5">
         <li class="page-item"><a class="page-link" href="?page=<?= $previous_page ?>">Previous</a></li>
         <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
             <li class="page-item"><a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a></li>
@@ -96,45 +120,45 @@ $next_page = min($total_pages, $current_page + 1);
 
     //     var getItemId = 0;
 
-       // get the data to display in modal
-        // // buttons.forEach(function(button) {
-        // //     button.addEventListener('click', function() {
-        // //         var itemId = this.getAttribute('data-item-id');
-        // //         getItemId = itemId;
-        // //         console.log('Button Clicked! Item ID:', itemId);
-        // //         $.ajax({
-        // //             type: "POST",
-        // //             url: "./includes/getitem.inc.php",
-        // //             data: {
-        // //                 itemId: getItemId,
-        // //             },
-        // //             success: function(response) {
+    // get the data to display in modal
+    // // buttons.forEach(function(button) {
+    // //     button.addEventListener('click', function() {
+    // //         var itemId = this.getAttribute('data-item-id');
+    // //         getItemId = itemId;
+    // //         console.log('Button Clicked! Item ID:', itemId);
+    // //         $.ajax({
+    // //             type: "POST",
+    // //             url: "./includes/getitem.inc.php",
+    // //             data: {
+    // //                 itemId: getItemId,
+    // //             },
+    // //             success: function(response) {
 
-        // //                 console.log('Response received:', response);
+    // //                 console.log('Response received:', response);
 
-        // //                 Parse the JSON response
-        // //                 const itemInfo = JSON.parse(response);
-        // //                 console.log('Parsed itemInfo:', itemInfo);
+    // //                 Parse the JSON response
+    // //                 const itemInfo = JSON.parse(response);
+    // //                 console.log('Parsed itemInfo:', itemInfo);
 
-        // //                 Update modal content
-        // //                 $(".itemImg").attr("src",
-        // //                     `./images/items/${itemInfo.item_image}`);
+    // //                 Update modal content
+    // //                 $(".itemImg").attr("src",
+    // //                     `./images/items/${itemInfo.item_image}`);
 
-        // //                 $(".item-name").html(`${itemInfo.item_name}`)
-        // //                 $(".item-desc").html(`${itemInfo.item_description}`)
-        // //                 $(".item-quan").html(`${itemInfo.item_quantity}`)
-        // //                 $(".quanInput").html(
-        // //                     `
-        // //                 <input type="number" min="0" id="item-id" value="${itemInfo.item_id}" hidden> 
-        // //                 <input id="item-quan" type="number" min="0" max="${itemInfo.item_quantity}">`
-        // //                 )
+    // //                 $(".item-name").html(`${itemInfo.item_name}`)
+    // //                 $(".item-desc").html(`${itemInfo.item_description}`)
+    // //                 $(".item-quan").html(`${itemInfo.item_quantity}`)
+    // //                 $(".quanInput").html(
+    // //                     `
+    // //                 <input type="number" min="0" id="item-id" value="${itemInfo.item_id}" hidden> 
+    // //                 <input id="item-quan" type="number" min="0" max="${itemInfo.item_quantity}">`
+    // //                 )
 
-        // //                 Show the modal
-        // //                 $('#itemDetails').modal('show');
-        // //             }
-        // //         });
-        // //     });
-        // // });
+    // //                 Show the modal
+    // //                 $('#itemDetails').modal('show');
+    // //             }
+    // //         });
+    // //     });
+    // // });
 
     //     // Other modal logic remains the same
 

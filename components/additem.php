@@ -96,7 +96,7 @@ session_start();
                 </tr>
             </tbody>
         </table>
-        <button type="button" class="btn btn-success" id="getdata">Get Data</button>
+        <button type="button" class="btn btn-success" id="getdata">Add Items</button>
     </div>
 </div>
 <?php
