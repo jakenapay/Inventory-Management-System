@@ -1,4 +1,5 @@
 <?php
+session_start();
  ?>
     <div class="row">
         <div class="col-lg-9 col-sm-6 col-sm-12 m-auto mt-5">

@@ -3,10 +3,10 @@
     session_start();
     include '../includes/config.inc.php';
 
-    if (isset($_POST['querySearch'])) {
+    if (isset($_POST['querySearch']) && isset($_POST['chapter'])) {
         $searchQuery = $_POST['querySearch'];
 
-        $user_chapter = $_SESSION['CH'];
+        $user_chapter = $_POST['chapter'];
         $result = $pdo->query("SELECT * FROM items WHERE item_name LIKE '%$searchQuery%' AND item_chapter = $user_chapter");
         $records = $result->fetchAll(PDO::FETCH_ASSOC);
 
