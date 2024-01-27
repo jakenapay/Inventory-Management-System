@@ -41,6 +41,8 @@ if ($itemId !== null) {
 
 
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,6 +77,35 @@ if ($itemId !== null) {
             <div class="right col-md-6 col-sm-12 col-lg-6">
                 <h3 class="product text-capitalize"><?php echo $itemData['item_name']; ?></h3>
                 <h6 class="categorie text-capitalize"><?php echo $itemData['item_category_name']; ?></h6>
+                <?php
+                // chapter id convert to chapter name
+                try {
+                    $chapterId = $itemData['item_chapter'];
+
+                    // Set the PDO error mode to exception
+                    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+                    // Your SQL query
+                    $sql = "SELECT chapter_name FROM chapters WHERE chapter_id = :id";
+
+                    // Prepare the statement
+                    $stmt = $pdo->prepare($sql);
+
+                    // Bind the parameter
+                    $stmt->bindParam(':id', $chapterId, PDO::PARAM_INT);
+
+                    // Execute the statement
+                    $stmt->execute();
+
+                    // Fetch the result
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    $chapterName = $result['chapter_name'];
+                } catch (PDOException $e) {
+                    // Handle the exception
+                    echo "Error: " . $e->getMessage();
+                }
+                ?>
+                <h6 class="categorie text-capitalize"><?php echo $chapterName; ?></h6>
                 <ul class="desc">
                     <li><?php echo $itemData['item_description']; ?></li>
                     <li>Item Unit Of Measure: <?php echo $itemData['item_uom_name']; ?> </li>

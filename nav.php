@@ -60,24 +60,38 @@ $totalIDs = $result['total_ids'];
                     <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'requests.php')) ? 'active' : ''; ?>" href="requests.php">Requests</a>
                 </li>
 
-                <!-- <?php
-                // if (($_SESSION['CT'] === 1) && ($_SESSION['CH'] === 1)) {
-                //     $activeClass = ($_SESSION['active_tab'] === 'chapters.php') ? 'active' : '';
-                //     echo '<li class="nav-item">
-                //         <a class="nav-link ' . $activeClass . '" href="chapters.php">Chapters</a>
-                //      </li>';
-                // }
-                ?> -->
-                
-                <!-- <li class="nav-item">
-                    <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'logs.php')) ? 'active' : ''; ?>" href="logs.php">Logs</a>
-                </li> -->
+                <?php if ($_SESSION['CT'] == 1 && $_SESSION['CH'] == 1) { ?>
+                    <li class="nav-item">
+                        <a class="nav-link <?= ($_SESSION['active_tab'] === 'chapters.php') ? 'active' : ''; ?>" href="chapters.php">Chapters</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link <?= ($_SESSION['active_tab'] === 'categories.php') ? 'active' : ''; ?>" href="categories.php">Categories</a>
+                    </li>
+                <?php }  ?>
+
+
                 <?php
                 if (($_SESSION['CT'] === 1) && ($_SESSION['CH'] === 1) || ($_SESSION['CT'] == 1)) {
                     echo '<li class="nav-item">
                         <a class="nav-link ' . (($_SESSION['active_tab'] === 'users.php') ? 'active' : '') . '" href="users.php">Users</a>
                     </li>';
                 } ?>
+
+                <!-- For items.php -->
+                <?php
+                if ($_SESSION['active_tab'] == 'items.php') {
+                    if (!empty($_SESSION['ID']) && ($_SESSION['CT'] == 1)) {
+                        echo '
+                        <li class="nav-item nav-link" id="addNewItemBtn">
+                            <button type="button" class="btn btn-success btnGreen btn-sm" data-toggle="modal" data-target="#exampleModal">
+                                <i class="fa-solid fa-plus addIcon"></i>New item
+                            </button>
+                        </li>
+
+                     ';
+                    }
+                }
+                ?>
 
                 <!-- For mobile -->
                 <li class="nav-item dropdown" id="profile-dropdown-mobile">
@@ -95,7 +109,7 @@ $totalIDs = $result['total_ids'];
 
                 <!-- Display none if the users is on mobile -->
                 <!-- Display block if the users is on desktop/laptop -->
-                <li class="nav-item dropdown pull-left">
+                <li class="nav-item dropdown pull-right">
                     <!-- Get the user's image to show in the navigation bar -->
                     <?php
                     try {
@@ -127,26 +141,9 @@ $totalIDs = $result['total_ids'];
                         <a class="dropdown-item" href="#about">About</a>
                         <a class="dropdown-item" href="#faq">FAQs</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item logout" href="includes/logout.inc.php"><span>Log out</span><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                        <a class="dropdown-item logout" href="includes/logout.inc.php"><span>Log out</span></a>
                     </div>
-
                 </li>
-
-                <!-- For items.php -->
-                <?php
-                if ($_SESSION['active_tab'] == 'items.php') {
-                    if (!empty($_SESSION['ID']) && ($_SESSION['CT'] == 1)) {
-                        echo '
-                        <li class="nav-item nav-link" id="addNewItemBtn">
-                            <button type="button" class="btn btn-success btnGreen btn-sm" data-toggle="modal" data-target="#exampleModal">
-                                <i class="fa-solid fa-plus addIcon"></i>New item
-                            </button>
-                        </li>
-
-                     ';
-                    }
-                }
-                ?>
             </ul>
         </div>
     </nav>

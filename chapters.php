@@ -5,13 +5,13 @@ session_start();
 // Check if there's an id, if it has, then it's logged in
 // If there's no id, head back to login page
 if (!isset($_SESSION['ID']) and ($_SESSION['ID'] == '')) {
-    header("location: index.php");
+    header("location: index.php?m&id=1");
     exit();
 }
 
 // Check if you are from Manila, and you're an admin
-if (($_SESSION['CT'] !== 1) && ($_SESSION['CH'] !== 1)) { // If you're not from Manila and not Admin, run the code below
-    header("location: home.php");
+if (($_SESSION['CT'] != 1) && ($_SESSION['CH'] != 1)) { // If you're not from Manila and not Admin, run the code below
+    header("location: home.php?m&ct!=1&ch!=1");
     exit();
 }
 
