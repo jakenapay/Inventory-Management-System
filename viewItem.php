@@ -78,7 +78,7 @@ if ($itemId !== null) {
                 <ul class="desc">
                     <li><?php echo $itemData['item_description']; ?></li>
                     <li>Item Unit Of Measure: <?php echo $itemData['item_uom_name']; ?> </li>
-                    <li>Item Quantity:<small id="itemQuantity"><?php echo $itemData['item_quantity']; ?></small></li>
+                    <li>Item Quantity: <small id="itemQuantity"><?php echo $itemData['item_quantity']; ?></small></li>
                     <li>
                         <div id="counter-container">
                             <button id="decrement-btn" onclick="decrementCounter()">-</button>
@@ -110,13 +110,13 @@ if ($itemId !== null) {
 
         <div class="row">
             <div class=" mt-5 ">
-                <div class="comment mt-4 text-justify float-left">
-                    <img src="./images/userProfiles/<?php echo $_SESSION['UI'] ?>" alt="" class="rounded-circle" width="40" height="40">
-                    <h4><?php echo $_SESSION['FN'] . ' ' . $_SESSION['LN'] ?></h4>
-                    <p>Write your Feedback</p>
-                    <textarea name="comment" id="comment" cols="60" rows="5"></textarea>
-                    <div><span class="text-muted float-right mb-3"><button class="btn btn-primary post">POST</button></span></div>
-
+                <div class="mt-4 text-justify float-left">
+                    <!-- <img src="./images/userProfiles/<?php echo $_SESSION['UI'] ?>" alt="" class="rounded-circle" width="40" height="40">
+                    <h4 class="d-inline" style="margin-left: 10px; color:var(--purple);"><?php echo $_SESSION['FN'] . ' ' . $_SESSION['LN'] ?></h4> -->
+                    <h3 style="margin-left: 20px;"><b>Comments</b></h3>
+                    <p style="margin-left: 20px;">Write your Feedback</p>
+                    <textarea name="comment" id="comment" cols="75" rows="3" class="d-inline" style="margin-left: 20px;"></textarea><button class="btn btn-primary post" style="margin-bottom: 65px; margin-left: 10px;">Post</button>
+                    <!-- <span class="text-muted float-right mb-3"><button class="btn btn-primary post" style="margin-bottom: 30px; margin-left: 10px;">Post</button></span> -->
                 </div>
                 <!-- Card -->
                 <!-- <div class="comment-widgets"> -->

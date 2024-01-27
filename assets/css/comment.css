@@ -5,13 +5,14 @@
 
 
 .comment{
-    border: 2px solid green;
+    border: 2px solid var(--green);
     background-color: whitesmoke;
     justify-content: center;
     border-radius: 5px;
     padding-left: 40px;
-    padding-right: 30px;
+    padding-right: 10px;
     padding-top: 10px;
+    padding-bottom: 10px;
     
 }
 .comment h4,.comment span,.darker h4,.darker span{
@@ -26,7 +27,3 @@ h1,h4{
     color: black;
     font-weight: bold;
 }
-
-
-
-
