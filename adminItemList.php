@@ -48,6 +48,16 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        .container .form-check-inline {
+            display: inline-flex;
+        }
+        .btn-outline-success {
+            color: var(--green);
+            border-color: var(--green);
+        }
+        .btn-outline-success:hover {
+            background-color: var(--green);
+        }
     </style>
     <?php include './nav.php';
     ?>
@@ -167,7 +177,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                     <div class=" input-group">
                         <div class="input-group">
                             <input type="search" class="form-control rounded" id="itemSearch" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                            <button type="button" class="btn btn-outline-success btnSearch" data-mdb-ripple-init>search</button>
+                            <button type="button" class="btn btn-outline-success btnSearch" data-mdb-ripple-init><i class="fas fa-search"></i></button>
                         </div>
                     </div>
                 </div>

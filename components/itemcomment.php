@@ -6,10 +6,14 @@ $stmt->execute();
 // Fetch data as an associative array
 $feedbackData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
+<style>
+    .mt-5 {
+        margin-top: 0rem!important;
+    }
+</style>
 <div class=" pb-3 mt-5 ">
 
-    <h1>Feedback</h1>
+    <!-- <h3><b>Comments</b></h3> -->
     <?php foreach ($feedbackData as $fData) { ?>
         <!-- <div class="d-flex justify-content-center mt-5 p-3">
         <div class="comment-widgets">
