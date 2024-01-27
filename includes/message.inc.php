@@ -66,6 +66,9 @@ if(isset($_GET['m'])) {
         case "rqs":
             echo "<p id='msg' class='msgOk'>Requested successfully</p>";
             break;
+        case "ic":
+            echo "<p id='msg' class='msg'>Incomplete fields</p>";
+            break;
         default:
             echo "<p id='msg' class='msg'>Unknown error occured</p>";
             break;

@@ -380,7 +380,6 @@ if (isset($_POST['add-item-btn'])) {
                         <input type="text" class="form-control form-control-sm text-capitalize" id="item_quantity" name="item_quantity" placeholder="Quantity" readonly value="' . $quantity . '">
                     </div>';
 
-        if (($_SESSION['CT'] === 1) && ($_SESSION['CH'] === 1)) {
             $return .= '
                         <div class="col-md-12 py-1">
                             <label for="item_chapter">Chapter</label>
@@ -406,7 +405,6 @@ if (isset($_POST['add-item-btn'])) {
                 // Handle database connection or query errors
                 $return .= "Error: " . $e->getMessage();
             }
-        }
 
         $return .= '
                         </select>
@@ -453,7 +451,7 @@ if (isset($_POST['add-item-btn'])) {
     $old_img = $_POST['old_image'];
 
     // Check if there's any empty variable
-    if (empty($userId) || empty($itemId) || empty($name) || empty($category) || empty($measure) || empty($chapter) || empty($description)) {
+    if (empty($userId) || empty($itemId) || empty($name) || $category === "" || $measure === "" || $chapter === "" || empty($description)) {
         header("location: ../items.php?m=ic");
         exit();
     }

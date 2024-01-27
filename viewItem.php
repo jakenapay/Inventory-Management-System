@@ -70,7 +70,7 @@ if ($itemId !== null) {
             <div class="left col-md-6 col-sm-12 col-lg-6">
                 <input type="text" id="itemId" value="<?php echo $itemData['item_id'] ?>" hidden>
                 <input type="text" id="userId" value="<?php echo $_SESSION['ID'] ?>" hidden>
-                <img class="headset" src="./images/items/<?php echo $itemData['item_image'] ?>">
+                <img class="image-resize image-responsive" src="./images/items/<?php echo $itemData['item_image'] ?>">
             </div>
             <div class="right col-md-6 col-sm-12 col-lg-6">
                 <h3 class="product text-capitalize"><?php echo $itemData['item_name']; ?></h3>

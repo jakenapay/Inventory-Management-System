@@ -92,7 +92,7 @@ $next_page = min($total_pages, $current_page + 1);
                 <input type="text" class="item_id" value="<?php echo $row['item_id'] ?>" hidden>
                 <!-- Image of the item -->
                 <div class="image-parent">
-                    <img class="card-img-top" src="./images/items/<?php echo $row['item_image'] ?>" alt="<?php echo $row['item_name'] ?>">
+                    <img class="card-img-top image-responsive image-resize" src="./images/items/<?php echo $row['item_image'] ?>" alt="<?php echo $row['item_name'] ?>">
                 </div>
                 <div class="card-body">
                     <!-- Item title -->

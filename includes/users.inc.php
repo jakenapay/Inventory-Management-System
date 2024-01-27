@@ -480,7 +480,7 @@ if (isset($_POST['user_view'])) {
                 exit();
             }
 
-            header("location: ../users.php?m=us1"); // Updated successfully
+            header("location: ../users.php?m=us"); // Updated successfully
             exit();
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();

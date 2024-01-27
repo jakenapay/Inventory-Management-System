@@ -41,16 +41,21 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 
 <body>
     <style>
-        .card-title {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+    .card-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
     </style>
     <?php include './nav.php'; ?>
 
     <div id="wrapper">
         <div class="section px-5 pt-4">
+            <div class="row justify-content-center align-items-center mt-3">
+                <div class="col-12 col-sm-12 col-md-10 col-lg-10">
+                    <?php include 'includes/message.inc.php'; ?>
+                </div>
+            </div>
             <!-- <div class="row">
                 cart
                 <div class="col">
@@ -123,7 +128,8 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             </div>
         </div>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
             <form action="includes/items.inc.php" method="POST" enctype="multipart/form-data">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -156,14 +162,18 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                 ?>
                                 <!-- Name -->
                                 <div class="col-md-12 py-1">
-                                    <input type="text" class="form-control form-control-sm text-capitalize" id="item_unique_id" name="item_unique_id" value="<?php echo  $shortRandomNumberString ?>" placeholder="Name" hidden>
+                                    <input type="text" class="form-control form-control-sm text-capitalize"
+                                        id="item_unique_id" name="item_unique_id"
+                                        value="<?php echo  $shortRandomNumberString ?>" placeholder="Name" hidden>
                                     <label for="item_name">Name</label>
-                                    <input type="text" class="form-control form-control-sm text-capitalize" id="item_name" name="item_name" placeholder="Name" required>
+                                    <input type="text" class="form-control form-control-sm text-capitalize"
+                                        id="item_name" name="item_name" placeholder="Name" required>
                                 </div>
                                 <!-- Category -->
                                 <div class="col-md-6 py-1">
                                     <label for="item_category">Category</label>
-                                    <select name="item_category" id="item_category" class="form-control form-control-sm" required>
+                                    <select name="item_category" id="item_category" class="form-control form-control-sm"
+                                        required>
                                         <option value="" disabled selected>Category</option>
                                         <?php
                                         try {
@@ -192,7 +202,8 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                 <!-- Measurement -->
                                 <div class="col-md-6 py-1">
                                     <label for="item_measure">Measurement</label>
-                                    <select name="item_measure" id="item_measure" class="form-control form-control-sm" required>
+                                    <select name="item_measure" id="item_measure" class="form-control form-control-sm"
+                                        required>
                                         <option value="" disabled selected>Measurement</option>
                                         <?php
                                         try {
@@ -221,12 +232,14 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                 <!-- Quantity -->
                                 <div class="col-md-6 py-1">
                                     <label for="item_quantity">Quantity</label>
-                                    <input type="number" min="0" class="form-control form-control-sm" id="item_quantity" name="item_quantity" placeholder="Quantity" required>
+                                    <input type="number" min="0" class="form-control form-control-sm" id="item_quantity"
+                                        name="item_quantity" placeholder="Quantity" required>
                                 </div>
                                 <!-- Chapter -->
                                 <div class="col-md-6 py-1">
                                     <label for="item_chapter">Chapter</label>
-                                    <select name="item_chapter" id="item_chapter" class="form-control form-control-sm" required>
+                                    <select name="item_chapter" id="item_chapter" class="form-control form-control-sm"
+                                        required>
                                         <option value="" disabled selected>Chapter</option>
                                         <?php
                                         try {
@@ -260,14 +273,16 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                 <!-- Description -->
                                 <div class="col-md-12 py-1">
                                     <label for="item_description">Description</label>
-                                    <textarea name="item_description" id="item_description" cols="3" rows="1" class="form-control form-control-sm" placeholder="Description"></textarea>
+                                    <textarea name="item_description" id="item_description" cols="3" rows="1"
+                                        class="form-control form-control-sm" placeholder="Description"></textarea>
                                 </div>
                                 <div class="mb-2 mt-2"></div>
                                 <hr class="hr" />
                                 <!-- Image -->
                                 <div class="col-md-12 py-1">
                                     <label for="item_image" class="pb-1">Image</label>
-                                    <input class="form-control form-control-sm" type="file" accept="image/*" name="item_image" id="item_image" required>
+                                    <input class="form-control form-control-sm" type="file" accept="image/*"
+                                        name="item_image" id="item_image" required>
                                 </div>
                                 <!-- User's ID: Who is going to add the new item -->
                                 <!-- For history/log purposes -->
@@ -275,8 +290,10 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-sm btnRed btn-secondary btn-sm btnRed" data-dismiss="modal">Close</button>
-                            <input type="submit" class="btn btn-sm btnGreen text-light" name="add-item-btn" value="Add item">
+                            <button type="button" class="btn btn-sm btnRed btn-secondary btn-sm btnRed"
+                                data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-sm btnGreen text-light" name="add-item-btn"
+                                value="Add item">
                         </div>
                     </div>
                 </div>

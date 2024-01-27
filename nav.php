@@ -28,7 +28,7 @@ $totalIDs = $result['total_ids'];
 ?>
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light bg-light px-sm-5 px-md-5 px-lg-5 fixed-top mainnav">
-        <a class="navbar-brand logo" href="#">
+        <a class="navbar-brand logo" href="home.php">
             <img src="https://uploads-ssl.webflow.com/6492dd5d65d1855cb14a6692/6494571343918c14057fe090_DEVCON%20Kids%20Logo%20Horizontal.png" alt="Logo" loading="lazy">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,24 +79,6 @@ $totalIDs = $result['total_ids'];
                     </li>';
                 } ?>
 
-                <!-- For items.php -->
-                <?php
-                if ($_SESSION['active_tab'] == 'items.php') {
-                    if (!empty($_SESSION['ID']) && ($_SESSION['CT'] == 1)) {
-                        echo '
-                        <li class="nav-item nav-link" id="addNewItemBtn">
-                            <button type="button" class="btn btn-success btnGreen btn-sm" data-toggle="modal" data-target="#exampleModal">
-                                <i class="fa-solid fa-plus addIcon"></i>New item
-                            </button>
-                        </li>
-
-                     ';
-                    }
-                }
-                ?>
-
-
-
                 <!-- For mobile -->
                 <li class="nav-item dropdown" id="profile-dropdown-mobile">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -113,7 +95,7 @@ $totalIDs = $result['total_ids'];
 
                 <!-- Display none if the users is on mobile -->
                 <!-- Display block if the users is on desktop/laptop -->
-                <li class="nav-item dropdown pull-right">
+                <li class="nav-item dropdown pull-left">
                     <!-- Get the user's image to show in the navigation bar -->
                     <?php
                     try {
@@ -149,6 +131,22 @@ $totalIDs = $result['total_ids'];
                     </div>
 
                 </li>
+
+                <!-- For items.php -->
+                <?php
+                if ($_SESSION['active_tab'] == 'items.php') {
+                    if (!empty($_SESSION['ID']) && ($_SESSION['CT'] == 1)) {
+                        echo '
+                        <li class="nav-item nav-link" id="addNewItemBtn">
+                            <button type="button" class="btn btn-success btnGreen btn-sm" data-toggle="modal" data-target="#exampleModal">
+                                <i class="fa-solid fa-plus addIcon"></i>New item
+                            </button>
+                        </li>
+
+                     ';
+                    }
+                }
+                ?>
             </ul>
         </div>
     </nav>
