@@ -141,7 +141,7 @@ $totalIDs = $result['total_ids'];
                         <a class="dropdown-item" href="#about">About</a>
                         <a class="dropdown-item" href="#faq">FAQs</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item logout" href="includes/logout.inc.php"><span>Log out</span></a>
+                        <a class="dropdown-item logout" href="includes/logout.inc.php"><span>Log Out</span></a>
                     </div>
                 </li>
             </ul>
