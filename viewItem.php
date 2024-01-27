@@ -59,7 +59,7 @@ if ($itemId !== null) {
     <link rel="stylesheet" href="./assets/css/nav.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./assets/css/items.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="./assets/css/itemView.css?v=<?php echo time(); ?>">
-
+    <link rel="stylesheet" href="./assets/css/comment.css?php echo time(); ?>">
 </head>
 
 <body>
@@ -107,32 +107,34 @@ if ($itemId !== null) {
             </div>
         </div>
 
+
         <div class="row">
-            <small style="text-align: center;">Feedback</small>
-            <div class=" col-md-12 col-lg-12 d-flex justify-content-center mt-5 ">
+            <div class=" mt-5 ">
+                <div class="comment mt-4 text-justify float-left">
+                    <img src="./images/userProfiles/<?php echo $_SESSION['UI'] ?>" alt="" class="rounded-circle" width="40" height="40">
+                    <h4><?php echo $_SESSION['FN'] . ' ' . $_SESSION['LN'] ?></h4>
+                    <p>Write your Feedback</p>
+                    <textarea name="comment" id="comment" cols="60" rows="5"></textarea>
+                    <div><span class="text-muted float-right mb-3"><button class="btn btn-primary post">POST</button></span></div>
+
+                </div>
                 <!-- Card -->
-                <div class="comment-widgets">
-                    <!-- Comment Row -->
-                    <div class="d-flex flex-row comment-row m-t-0">
+                <!-- <div class="comment-widgets"> -->
+                <!-- Comment Row -->
+                <!-- <div class="d-flex flex-row comment-row m-t-0">
                         <div class="p-2"><img src="https://i.imgur.com/Ur43esv.jpg" alt="user" width="50" class="rounded-circle"></div>
                         <div class="comment-text ">
                             <h6 class="font-medium"><?php echo $_SESSION['FN'] . ' ' . $_SESSION['LN'] ?></h6> <span class="m-b-15 d-block"><textarea name="comment" id="comment" cols="30" rows="3"></textarea></span>
                             <div class="comment-footer"> <span class="text-muted float-right"><button class="btn btn-primary  post">POST</button></span> </div>
                         </div>
                     </div>
-                </div> <!-- Card -->
+                </div> Card -->
             </div>
-
-
-        </div>
-        <div class="row">
-
             <?php
             include './components/itemcomment.php';
             ?>
-
         </div>
-
+    </div>
 </body>
 
 </html>
@@ -252,23 +254,23 @@ if ($itemId !== null) {
         }
     })
 
-    $('.post').click(function () {
-            var feedback = document.getElementById('comment').value;
+    $('.post').click(function() {
+        var feedback = document.getElementById('comment').value;
 
         $.ajax({
             type: "post",
             url: "./includes/itemcomments.inc.php",
             data: {
-                itemId : itemId,
-                userId : userId,
-                feedback : feedback,
+                itemId: itemId,
+                userId: userId,
+                feedback: feedback,
             },
-            success: function (response) {
-                if(response){
+            success: function(response) {
+                if (response) {
                     location.reload();
                 }
             }
         });
 
-      })
+    })
 </script>
