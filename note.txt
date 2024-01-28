@@ -1,16 +1,11 @@
 home
--dashboard
--landing page
 -slideshow of chapters
 --no. of users of each chapters
--with picture of chapter
 
 items
 -single page
 --Item list
 --Request list (admin, hide for users)
---add item (wag muna hahahaha)
---mga modal wag muna galawin
 Viewing
 -Remove request function
 Borrowing
@@ -19,8 +14,6 @@ Borrowing
 -
 
 requests
--baka isama lang din sa item (DONEEEEEEEE)
-
 
 -chapters
 -pov ng manila admins:

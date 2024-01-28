@@ -1,179 +1,188 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
 :root {
-    --mainFont: 'Inter', sans-serif;
-    --white: #fff;
-    --gray: #f8f8f8;
-    --darkGray: #818181;
-    --black: #121212;
-    /* Main color */
-    --green: #71b406;
-    --purple: rgb(120, 8, 255);
-    --orange: #ea641d;
-    --yellow: #e8ca04;
-   
-    --border: 1px solid #c4c4c4;
-    --boxShadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
-    --boxShadowTable: rgba(0, 0, 0, 0.014) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset;
+  --mainFont: "Inter", sans-serif;
+  --white: #fff;
+  --gray: #f8f8f8;
+  --darkGray: #818181;
+  --black: #121212;
+  /* Main color */
+  --green: #71b406;
+  --purple: rgb(120, 8, 255);
+  --orange: #ea641d;
+  --yellow: #e8ca04;
+
+  --border: 1px solid #c4c4c4;
+  --boxShadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  --boxShadowTable: rgba(0, 0, 0, 0.014) 0px 0px 0px 1px,
+    rgb(209, 213, 219) 0px 0px 0px 1px inset;
 }
 
-*, body, html {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
+*,
+body,
+html {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 body {
-    /* font-family: Helvetica, Arial, sans-serif; */
-    font-family: var(--mainFont);
-    height: 100%;
-    margin: 0;
+  /* font-family: Helvetica, Arial, sans-serif; */
+  font-family: var(--mainFont);
+  height: 100%;
+  margin: 0;
 }
 body.login-page {
-    background-image: url('https://assets-global.website-files.com/6492dd5d65d1855cb14a6692/64932198562c57f5e21d903c_header%20bg.svg'); /* Replace 'path/to/your/background-image.jpg' with the actual path to your image */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Optional, use 'fixed' if you want a fixed background */
+  background-image: url("https://assets-global.website-files.com/6492dd5d65d1855cb14a6692/64932198562c57f5e21d903c_header%20bg.svg"); /* Replace 'path/to/your/background-image.jpg' with the actual path to your image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Optional, use 'fixed' if you want a fixed background */
 }
 
 .title-box {
-    padding: 20px;
-    
+  padding: 20px;
 }
-.title-section{
-    color:var(--green);
-    text-align: center;
-    font-weight: bold;
-    font-size: xx-large;
+.title-section {
+  color: var(--green);
+  text-align: center;
+  font-weight: bold;
+  font-size: xx-large;
 }
-.homepage-title{
-    font-weight: bold;
-    color: var(--green);
+.homepage-title {
+  font-weight: bold;
+  color: var(--green);
 }
 .login-box {
-    padding: 20px;
+  padding: 20px;
 }
-
 
 .userInput {
-    width: 100%;
+  width: 100%;
 }
 
-.title_description{
-    text-align: left;
+.title_description {
+  text-align: left;
 }
 
 .msg {
-    background-color: #ffc0c0;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: 200;
-    font-size: 0.9rem;
-    font-style: italic;
-    color: #db0e0e;
+  background-color: #ffc0c0;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: 200;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #db0e0e;
 }
 
 .msgOk {
-    background-color: #c0ffc0;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: 200;
-    font-size: 0.9rem;
-    font-style: italic;
-    color: #056103;
+  background-color: #c0ffc0;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: 200;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: #056103;
 }
 
 #wrapper {
-    min-height: 100vh;
-    /* background-color: var(--gray); */
-    height: 100%;
-    margin: 0;
-    padding-top: 5rem;
+  min-height: 100vh;
+  /* background-color: var(--gray); */
+  height: 100%;
+  margin: 0;
+  padding-top: 5rem;
 }
 
 .btnRed {
-    border: 1px solid var(--orange);
-    background-color: var(--orange);
-    font-size: 0.9rem;
-    padding: 2px 5px;
+  border: 1px solid var(--orange);
+  background-color: var(--orange);
+  font-size: 0.9rem;
+  padding: 2px 5px;
 }
 
 .btnRed:hover {
-    border: 1px solid var(--orange);
-    background-color: #d35b1b;
+  border: 1px solid var(--orange);
+  background-color: #d35b1b;
 }
 
 .btnGreen {
-    border: 1px solid var(--green);
-    background-color: var(--green);
-    font-size: 0.9rem;
-    padding: 2px 5px;
+  border: 1px solid var(--green);
+  background-color: var(--green);
+  font-size: 0.9rem;
+  padding: 2px 5px;
 }
 
 .btnGreen:hover {
-    border: 1px solid var(--green);
-    background-color: #629b05;
+  border: 1px solid var(--green);
+  background-color: #629b05;
 }
 
 .btn:focus {
-    box-shadow: none;
+  box-shadow: none;
 }
-
 
 /* Cart CSS and its number */
 .badge {
-    padding-left: 9px;
-    padding-right: 9px;
-    -webkit-border-radius: 9px;
-    -moz-border-radius: 9px;
-    border-radius: 9px;
+  padding-left: 9px;
+  padding-right: 9px;
+  -webkit-border-radius: 9px;
+  -moz-border-radius: 9px;
+  border-radius: 9px;
 }
 
 .label-warning[href],
 .badge-warning[href] {
-background-color: #c67605;
+  background-color: #c67605;
 }
 
 #lblCartCount {
-    font-size: 0.8rem;
-    background: transparent;
-    color: var(--black);
-    padding: 0 5px;
-    vertical-align: top;
-    margin-left: -7px; 
+  font-size: 0.8rem;
+  background: transparent;
+  color: var(--black);
+  padding: 0 5px;
+  vertical-align: top;
+  margin-left: -7px;
 }
 /* End of cart */
 
 /* Charts */
 rect {
-
-    fill: var(--gray);
+  fill: var(--gray);
 }
 
 .charts {
-    border: var(--border);
+  border: var(--border);
 }
 /* Home */
 .logo-in-upper-middle {
-    display: block;
-    width: 200px;
-    margin: auto;
-    padding-top:20px;
+  display: block;
+  width: 200px;
+  margin: auto;
+  padding-top: 20px;
 }
 
 blockquote.instagram-media {
-    margin: 10px; /* Adjust the margin as needed */
-    padding: 20px; /* Adjust the padding as needed */
+  margin: 10px; /* Adjust the margin as needed */
+  padding: 20px; /* Adjust the padding as needed */
 }
-
 
 /* Chapters */
 .title-chapter {
-    font-weight: 700;
+  font-weight: 700;
 }
 
 .fa-pen-to-square {
-    background-color: var(--yellow);
+  background-color: var(--yellow);
+}
+
+@media screen and (max-width: 479px) {
+  #addNewChapter {
+    width: 100%;
+  }
+
+  .title-chapter {
+    text-align: center;
+  }
 }

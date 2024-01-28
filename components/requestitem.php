@@ -47,8 +47,8 @@ WHERE to_chapter = $user_chapter;
                             <td><?php echo $row['history_item_id'] ?></td>
                             <td><?php echo $row['item_name'] ?></td>
                             <td><?php echo $row['history_quantity'] ?></td>
-                            <td><?php echo $row['user_firstname'] . " " . $row["user_lastname"]?></td>
-                            <td><?php echo $row['history_status'] ?></td>
+                            <td class="text-capitalize"><?php echo $row['user_firstname'] . " " . $row["user_lastname"]?></td>
+                            <td class="text-capitalize"><?php echo $row['history_status'] ?></td>
                             <td><?php echo $row['history_date'] ?></td>
                             <td><?php //echo $row['history_isReturn'] 
                                 if($row['history_isReturn'] == 0 ){
