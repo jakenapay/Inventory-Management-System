@@ -121,7 +121,7 @@ if (isset($_POST['userID'])) {
         }
 
         // Additional code after successful execution, if needed
-        echo "Record inserted successfully!";
+        echo " Requested Successfully!";
     } catch (PDOException $e) {
         // Handle the error here
         echo "Error: " . $e->getMessage();

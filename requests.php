@@ -341,7 +341,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                     </div>
                     <div class="modal-body">
                         <input type="hidden" name="approve_request_id" id="approve_request_id">
-                        <h6>Are you sure you want to approve this request?</h6>
+                        <h6>s the User Returning This Item?</h6>
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
                         <input type="" name="user_id" id="user_id" value="<?php echo $_SESSION['ID']; ?>" hidden>
