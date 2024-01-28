@@ -2,14 +2,20 @@
     <?php
     require './vendor/autoload.php';
 
-    // This will output the barcode as HTML output to display in the browser
-    $generator = new Picqer\Barcode\BarcodeGeneratorHTML();
+    $barcode = "./images/barcode/item". time() . ".png";
+
+    $color = [0, 0, 0];
+
+    $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
+    file_put_contents($barcode, $generator->getBarcode('335733', $generator::TYPE_CODE_128, 3, 50, $color));
+
+ 
     ?>
 
-    <h6><?php echo $generator->getBarcode('111111', $generator::TYPE_CODE_128) ?></h6>
+    <!-- <h6><?php echo $generator->getBarcode('111111', $generator::TYPE_CODE_128) ?></h6> -->
     <br>
-
-    <br>
+    <img src = "./images/items1706433619.png">
+    <!-- <br>
     <br>
     <br>
     <br>
@@ -353,5 +359,5 @@
     <br>
     <br>
 
-    <h6><?php echo $generator->getBarcode('123456', $generator::TYPE_CODE_128) ?></h6>
+    <h6><?php echo $generator->getBarcode('123456', $generator::TYPE_CODE_128) ?></h6> -->
 </div>

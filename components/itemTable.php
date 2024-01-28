@@ -204,6 +204,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                         <input type="number" class="form-control form-control-sm mx-1" name="req-quantity" id="req-quantity" placeholder="1-1000" min="1" max="1000" required>
                         <input type="submit" class="btn btn-sm btnGreen text-light mx-1" name="req-item-btn" value="Request">
                     </div> -->
+                    <button id="printButton">Print Image</button>
                 </div>
             </div>
         </div>
@@ -364,4 +365,22 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             });
         });
     });
+    // Function to trigger print when the button is clicked
+    document.getElementById('printButton').addEventListener('click', function() {
+        printImage();
+    });
+
+    // Function to open the print dialog
+    function printImage() {
+        var barcodeImage = document.getElementById('barcode');
+
+        // Create a new window
+        var newWindow = window.open('', '_blank');
+
+        // Append only the image to the new window
+        newWindow.document.write('<html><head><title>Printable Image</title></head><body><img src="' + barcodeImage.src + '" class="img-thumbnail img-fluid" alt="Image"></body></html>');
+
+        // Trigger print in the new window
+        newWindow.print();
+    }
 </script>

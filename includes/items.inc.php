@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+require '../vendor/autoload.php';
+
+
+
 // Adding new item
 if (isset($_POST['add-item-btn'])) {
     include 'config.inc.php';
@@ -70,10 +74,18 @@ if (isset($_POST['add-item-btn'])) {
     move_uploaded_file($tmp_img_name, $folder . $image_final_name);
     // $uniqueItemId = $name . "-" . substr(md5(uniqid(rand(), true)), 0, rand(3, 5));
 
+    $item_barcode = "item" . time() . ".png";
+    $barcodePath = "../images/barcode/" . $item_barcode;
+
+    $color = [0, 0, 0];
+
+    $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
+    file_put_contents($barcodePath, $generator->getBarcode($UUID, $generator::TYPE_CODE_128, 3, 50, $color));
 
 
 
-    $sql = "INSERT INTO `items` (`item_name`,`unique_item_id` ,`item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_description`, `item_image` , `item_condition`, `item_location`, `item_cost`) VALUES (:value1, :value2, :value3, :value4, :value5, :value6, :value7 , :value8 , :value9 ,:value10, :value11); ";
+
+    $sql = "INSERT INTO `items` (`item_name`,`unique_item_id` ,`item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_description`, `item_image` , `item_condition`, `item_location`, `item_cost`, `barcode_img`) VALUES (:value1, :value2, :value3, :value4, :value5, :value6, :value7 , :value8 , :value9 ,:value10, :value11, :value12); ";
     $stmt = $pdo->prepare($sql);
 
     // Bind values to the placeholders
@@ -88,6 +100,7 @@ if (isset($_POST['add-item-btn'])) {
     $stmt->bindParam(':value9', $condition);
     $stmt->bindParam(':value10', $location);
     $stmt->bindParam(':value11', $cost);
+    $stmt->bindParam(':value12', $item_barcode);
 
     try {
         $stmt->execute();
@@ -112,7 +125,8 @@ if (isset($_POST['add-item-btn'])) {
     items.item_image,
     items.item_cost,
     items.item_condition,
-    items.item_location
+    items.item_location,
+    items.barcode_img
     FROM items 
     INNER JOIN items_category ON items.item_category = items_category.item_category_id 
     INNER JOIN items_unit_of_measure ON items.item_measure = items_unit_of_measure.item_uom_id
@@ -133,8 +147,9 @@ if (isset($_POST['add-item-btn'])) {
         $description = $row['item_description'];
         $image = $row['item_image'];
         $itemCost = $row['item_cost'];
-        $itemCondition =$row['item_condition'];
+        $itemCondition = $row['item_condition'];
         $itemLocation = $row['item_location'];
+        $barcodeimg = $row['barcode_img'];
 
         $return = '
         <div class="col-md-6 py-1">
@@ -173,7 +188,7 @@ if (isset($_POST['add-item-btn'])) {
                     <input type="text" class="form-control form-control-sm text-capitalize" id="item_condition" name="item_condition" placeholder="Condition" readonly value="' . $itemCondition . '">
                 </div>
                 <div class="col-md-12 py-1">
-                    <label for="item_location">Description</label>
+                    <label for="item_location">Location</label>
                     <input type="text" class="form-control form-control-sm text-capitalize" id="item_location" name="item_location" placeholder="Location" readonly value="' . $itemLocation . '">
                 </div>
 
@@ -182,6 +197,7 @@ if (isset($_POST['add-item-btn'])) {
         </div>
         <div class="col-md-6 py-1">
             <img src="images/items/' . $image . '" loading="lazy" class="img-thumbnail img-fluid" alt="Image">
+            <img  src="images/barcode/'. $barcodeimg .'" id="barcode" loading="lazy" class="img-thumbnail img-fluid" alt="Image">
         </div>
         ';
 
