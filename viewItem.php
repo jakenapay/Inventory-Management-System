@@ -72,6 +72,8 @@ if ($itemId !== null) {
             <div class="left col-md-6 col-sm-12 col-lg-6">
                 <input type="text" id="itemId" value="<?php echo $itemData['item_id'] ?>" hidden>
                 <input type="text" id="userId" value="<?php echo $_SESSION['ID'] ?>" hidden>
+                <input type="text" id="userEmail" value="<?php echo $_SESSION['EM'] ?>" hidden>
+                <input type="text" id="itemName" value="<?php echo $itemData['item_name'] ?>" hidden>
                 <img class="image-resize image-responsive" src="./images/items/<?php echo $itemData['item_image'] ?>">
             </div>
             <div class="right col-md-6 col-sm-12 col-lg-6">
@@ -173,6 +175,7 @@ if ($itemId !== null) {
 <script>
     var itemId = document.getElementById('itemId').value;
     var userId = document.getElementById('userId').value;
+
     var itemQuantityFromPHP = document.getElementById('itemQuantity').innerText;
 
     console.log("Item Quantity in JavaScript:", itemQuantityFromPHP);
@@ -220,20 +223,25 @@ if ($itemId !== null) {
 
     $('.item').click(() => {
         var itemQuan = document.getElementById('counter-value').value;
+        var userEM = document.getElementById('userEmail').value;
+        var itemName =document.getElementById('itemName').value;
 
-
+        // Get the content of the HTML element
+     
+        // Log the value to the console (you can use it as needed)
         $.ajax({
             type: "POST",
             url: "./includes/itemreq.inc.php",
             data: {
                 itemID: itemId,
                 itemQ: itemQuan,
-                userID: userId
+                userID: userId,
+                userEM: userEM,
+                itemName: itemName,
             },
             success: function(response) {
                 if (response) {
                     // working na Pwede na lagay yung PHP MAILER DITO
-                    alert(response);
                     location.reload();
                 }
             }

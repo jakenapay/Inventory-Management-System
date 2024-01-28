@@ -182,7 +182,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 
 <!-- View modal for specific item -->
 <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <form action="includes/items.inc.php" method="POST" enctype="multipart/form-data">
+    <form action="" method="POST" enctype="multipart/form-data">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -204,7 +204,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                         <input type="number" class="form-control form-control-sm mx-1" name="req-quantity" id="req-quantity" placeholder="1-1000" min="1" max="1000" required>
                         <input type="submit" class="btn btn-sm btnGreen text-light mx-1" name="req-item-btn" value="Request">
                     </div> -->
-                    <button id="printButton">Print Image</button>
+                    <button id="printButton" class="btn btn-sm btnGreen text-light">Print Barcode</button>
                 </div>
             </div>
         </div>
@@ -369,18 +369,12 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     document.getElementById('printButton').addEventListener('click', function() {
         printImage();
     });
-
     // Function to open the print dialog
     function printImage() {
         var barcodeImage = document.getElementById('barcode');
-
         // Create a new window
         var newWindow = window.open('', '_blank');
-
         // Append only the image to the new window
         newWindow.document.write('<html><head><title>Printable Image</title></head><body><img src="' + barcodeImage.src + '" class="img-thumbnail img-fluid" alt="Image"></body></html>');
-
-        // Trigger print in the new window
-        newWindow.print();
     }
 </script>

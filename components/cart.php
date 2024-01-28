@@ -153,6 +153,7 @@
                             color: #666;
                             font-family: "Montserrat";">
                             <b>${name}</b>
+                            <input type="number" min="0" id="item-name" value="${name}" hidden>
                         </h3>
                         <ul class="desc"
                          style="margin-top: 20px;
