@@ -103,7 +103,7 @@ $totalIDs = $result['total_ids'];
                         <a class="dropdown-item" href="faq.php">FAQs</a>
                         <a class="dropdown-item" href="#devconkids.php">Devcon Kids</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item logout" href="includes/logout.inc.php"><span>Log out</span><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+                        <a class="dropdown-item logout" href="includes/logout.inc.php"><span>Log Out</span><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
                     </div>
                 </li>
 
@@ -126,7 +126,7 @@ $totalIDs = $result['total_ids'];
                     }
 
                     ?>
-
+            
                     <!-- Image trigger -->
                     <div class="rounded-image image-profile" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img src="images/userProfiles/<?php echo $userImage; ?>" class="img-fluid" alt="User Image">

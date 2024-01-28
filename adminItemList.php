@@ -21,8 +21,8 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Headers and other attachments/CDN -->
-    <?php include_once 'includes/headers.inc.php'; ?>
+    <!-- Headers and other attachments/CDN --> 
+    <?php include_once './includes/headers.inc.php'; ?>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <!-- CSS -->
@@ -32,14 +32,13 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     <link rel="stylesheet" href="./assets/css/itemlist.css?v=<?php echo time(); ?>">
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link href="https://uploads-ssl.webflow.com/6492dd5d65d1855cb14a6692/649425d6d5c2567ce414d063_favicon.svg" rel="shortcut icon" type="image/x-icon">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <link href="https://uploads-ssl.webflow.com/6492dd5d65d1855cb14a6692/649425d6d5c2567ce414d063_favicon.svg" rel="shortcut icon" type="image/x-icon"> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
-    
 </head>
 
 <body>
@@ -70,7 +69,6 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                 <div class="col">
                     <div class=" justify-content-end justify-content-center-md" style=" text-align: end; margin-right: 100px;">
                         <?php include './components/cart.php'; ?>
-
                     </div>
                 </div>
             </div>
@@ -143,7 +141,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                 <div class="col-lg-9 col-sm-6 col-sm-12 m-auto mt-5">
                     <div class="form-check form-check-inline">
                         <ul>
-                            <input type="text" id="chapter" value="<?php echo $_SESSION['CH']; ?> " hidden>
+                        <input type="text" id="chapter" value="<?php echo $_SESSION['CH'];?> " hidden>
                             <li>
                                 <label class="form-check-label">
                                     <input type="radio" class="form-check-input" name="category" id="" value="0" onclick="getRadioValue()" checked>
@@ -162,7 +160,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                             foreach ($rbtnData as $itemCateg) { ?>
                                 <ul>
                                     <li>
-
+                                        
                                         <label class="form-check-label">
                                             <input type="radio" class="form-check-input" name="category" id="" value="<?php echo $itemCateg['item_category_id'] ?>" onclick="getRadioValue()">
                                             <?php echo $itemCateg['item_category_name'] ?>
@@ -228,7 +226,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     $('.btnSearch').click(function() {
         const chptr = document.getElementById('chapter').value;
         var Sdata = document.getElementById('itemSearch').value;
-
+       
         // Perform AJAX request using jQuery
         $.ajax({
             type: 'POST',
