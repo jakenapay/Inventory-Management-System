@@ -6,6 +6,7 @@ $user_chapter = $_SESSION['CH'];
 $query = "SELECT * FROM ctochistory 
 INNER JOIN chapters ON ctochistory.from_chapter = chapters.chapter_id
 INNER JOIN items ON ctochistory.history_item_id = items.item_id
+INNER JOIN users ON ctochistory.history_user_id = users.user_id
 WHERE to_chapter = $user_chapter;
 "
 ;
@@ -46,10 +47,16 @@ WHERE to_chapter = $user_chapter;
                             <td><?php echo $row['history_item_id'] ?></td>
                             <td><?php echo $row['item_name'] ?></td>
                             <td><?php echo $row['history_quantity'] ?></td>
-                            <td><?php echo $row['history_user_id'] ?></td>
+                            <td><?php echo $row['user_firstname'] . " " . $row["user_lastname"]?></td>
                             <td><?php echo $row['history_status'] ?></td>
                             <td><?php echo $row['history_date'] ?></td>
-                            <td><?php echo $row['history_isReturn'] ?></td>
+                            <td><?php //echo $row['history_isReturn'] 
+                                if($row['history_isReturn'] == 0 ){
+                                    echo "NO";
+                                }else{
+                                    echo "YES";
+                                }
+                            ?></td>
                             <td><?php echo $row['history_date_return'] ?></td>
                             <td><?php echo $row['history_due_date'] ?></td>
                             <td><?php echo $row['chapter_name'] ?></td>

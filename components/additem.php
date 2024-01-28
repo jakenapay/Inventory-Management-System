@@ -15,7 +15,8 @@ session_start();
     }
 
     .right-side {
-        padding-left: 20px; /* Adjust the padding as needed */
+        padding-left: 20px;
+        /* Adjust the padding as needed */
     }
 
     #btnAdd.btn.btn-success {
@@ -31,7 +32,6 @@ session_start();
         border-color: var(--purple);
         margin-top: 10px;
     }
-
 </style>
 
 <div>
@@ -49,7 +49,8 @@ session_start();
         </div>
     </div>
 
-    <div class="modal" tabindex="-1" role="dialog">
+    <!-- paayos neto lee -->
+    <div class="modal modal-error" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -74,6 +75,7 @@ session_start();
     ?>
     <div>
         <input type="text" value="<?php echo $_SESSION['CH'] ?>" hidden id="chapter">
+        <h6 id="error"></h6>
         <table class="table table-striped table-inverse table-responsive">
             <thead class="thead-inverse">
                 <tr>
@@ -145,9 +147,9 @@ session_start();
                     success: function(response) {
                         if (response == "error") {
                             console.log(response);
-                            $('.modal').modal('show');
+                            $('.modal-error').modal('show');
                             setInterval(function() {
-                                $('.modal').modal('hide');
+                                $('.modal-error').modal('hide');
                             }, 5000);
 
                         } else {
@@ -254,9 +256,6 @@ session_start();
         const tableBody = $("#tableBody");
         const existingRow = tableBody.find("tr[data-item-id='" + scannedBarcode + "']");
 
-        // var itemChecker = document.getElementById('itemId')
-
-        // itemChecker.value = '';
 
         const chapter = document.getElementById('chapter').value;
 
@@ -283,9 +282,9 @@ session_start();
                 },
                 success: function(response) {
                     if (response == "error") {
-                        $('.modal').modal('show');
-                        setInterval(function() {
-                            $('.modal').modal('hide');
+                        $("#error").text("ID not found in the database").fadeIn();
+                        setTimeout(function() {
+                            $("#error").fadeOut();
                         }, 5000);
 
 
@@ -312,8 +311,6 @@ session_start();
                         newRow.find("td").eq(4).text(tot);
 
                         newRow.attr("data-item-id", scannedBarcode)
-
-                        // Clear the value of the itemid input
 
 
                     }

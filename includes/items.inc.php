@@ -18,6 +18,9 @@ if (isset($_POST['add-item-btn'])) {
     $quantity = $_POST['item_quantity'];
     $chapter = $_POST['item_chapter'];
     $description = $_POST['item_description'];
+    $cost = $_POST['item_cost'];
+    $location = $_POST['item_location'];
+    $condition = $_POST['item_condition'];
 
     $UUID = $_POST['item_unique_id'];
 
@@ -31,7 +34,7 @@ if (isset($_POST['add-item-btn'])) {
     $image_info = pathinfo($image);
     $image_ext = strtolower($image_info['extension']);
 
-    if (empty($name) || empty($category) || empty($measure) || empty($quantity) || empty($chapter) || empty($description) || empty($image)) {
+    if (empty($name) || empty($category) || empty($measure) || empty($quantity) || empty($chapter) || empty($description) || empty($image) || empty($location) || empty($cost) || empty($condition)) {
         header("location: ../items.php?m=ef");
         exit();
     }
@@ -68,9 +71,9 @@ if (isset($_POST['add-item-btn'])) {
     // $uniqueItemId = $name . "-" . substr(md5(uniqid(rand(), true)), 0, rand(3, 5));
 
 
- 
 
-    $sql = "INSERT INTO `items` (`item_name`,`unique_item_id` ,`item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_description`, `item_image`) VALUES (:value1, :value2, :value3, :value4, :value5, :value6, :value7 , :value8); ";
+
+    $sql = "INSERT INTO `items` (`item_name`,`unique_item_id` ,`item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_description`, `item_image` , `item_condition`, `item_location`, `item_cost`) VALUES (:value1, :value2, :value3, :value4, :value5, :value6, :value7 , :value8 , :value9 ,:value10, :value11); ";
     $stmt = $pdo->prepare($sql);
 
     // Bind values to the placeholders
@@ -82,6 +85,9 @@ if (isset($_POST['add-item-btn'])) {
     $stmt->bindParam(':value6', $chapter);
     $stmt->bindParam(':value7', $description);
     $stmt->bindParam(':value8', $image_final_name);
+    $stmt->bindParam(':value9', $condition);
+    $stmt->bindParam(':value10', $location);
+    $stmt->bindParam(':value11', $cost);
 
     try {
         $stmt->execute();
@@ -103,7 +109,10 @@ if (isset($_POST['add-item-btn'])) {
     items.item_quantity, 
     chapters.chapter_name, 
     items.item_description, 
-    items.item_image 
+    items.item_image,
+    items.item_cost,
+    items.item_condition,
+    items.item_location
     FROM items 
     INNER JOIN items_category ON items.item_category = items_category.item_category_id 
     INNER JOIN items_unit_of_measure ON items.item_measure = items_unit_of_measure.item_uom_id
@@ -123,6 +132,9 @@ if (isset($_POST['add-item-btn'])) {
         $chapter = $row['chapter_name'];
         $description = $row['item_description'];
         $image = $row['item_image'];
+        $itemCost = $row['item_cost'];
+        $itemCondition =$row['item_condition'];
+        $itemLocation = $row['item_location'];
 
         $return = '
         <div class="col-md-6 py-1">
@@ -152,6 +164,20 @@ if (isset($_POST['add-item-btn'])) {
                     <label for="item_description">Description</label>
                     <textarea name="item_description" id="item_description" cols="3" rows="3" class="form-control form-control-sm" placeholder="Description" readonly>' . $description . '</textarea>
                 </div>
+                <div class="col-md-12 py-1">
+                    <label for="item_cost">Cost</label>
+                    <input type="text" class="form-control form-control-sm text-capitalize" id="item_cost" name="item_cost" placeholder="Cost" readonly value="' . $itemCost . '">
+                </div>
+                <div class="col-md-12 py-1">
+                    <label for="item_condition">Condition</label>
+                    <input type="text" class="form-control form-control-sm text-capitalize" id="item_condition" name="item_condition" placeholder="Condition" readonly value="' . $itemCondition . '">
+                </div>
+                <div class="col-md-12 py-1">
+                    <label for="item_location">Description</label>
+                    <input type="text" class="form-control form-control-sm text-capitalize" id="item_location" name="item_location" placeholder="Location" readonly value="' . $itemLocation . '">
+                </div>
+
+
             </div>
         </div>
         <div class="col-md-6 py-1">
@@ -380,31 +406,31 @@ if (isset($_POST['add-item-btn'])) {
                         <input type="text" class="form-control form-control-sm text-capitalize" id="item_quantity" name="item_quantity" placeholder="Quantity" readonly value="' . $quantity . '">
                     </div>';
 
-            $return .= '
+        $return .= '
                         <div class="col-md-12 py-1">
                             <label for="item_chapter">Chapter</label>
                             <select name="item_chapter" id="item_chapter" class="form-control form-control-sm" required>
                                 <option value="' . $chapt_value . '" selected>' . $chapter . ' (Current)</option>';
 
-            // To show the other option of the measurement
-            try {
-                $sql = "SELECT * FROM chapters";
-                // Prepare the query
-                $stmt = $pdo->prepare($sql);
-                $stmt->execute();
+        // To show the other option of the measurement
+        try {
+            $sql = "SELECT * FROM chapters";
+            // Prepare the query
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
 
-                // Fetch all rows as an associative array
-                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            // Fetch all rows as an associative array
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                // Process the result (e.g., display it)
-                foreach ($result as $row) {
-                    // Access columns by their names
-                    $return .= '<option value="' . $row["chapter_id"] . '">' . $row['chapter_name'] . '</option>';
-                }
-            } catch (PDOException $e) {
-                // Handle database connection or query errors
-                $return .= "Error: " . $e->getMessage();
+            // Process the result (e.g., display it)
+            foreach ($result as $row) {
+                // Access columns by their names
+                $return .= '<option value="' . $row["chapter_id"] . '">' . $row['chapter_name'] . '</option>';
             }
+        } catch (PDOException $e) {
+            // Handle database connection or query errors
+            $return .= "Error: " . $e->getMessage();
+        }
 
         $return .= '
                         </select>
