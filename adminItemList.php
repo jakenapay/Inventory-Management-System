@@ -58,6 +58,10 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
         .btn-outline-success:hover {
             background-color: var(--green);
         }
+        .form-check-input:checked {
+            background-color: var(--purple);
+            border-color: var(--purple);
+        }
     </style>
     <?php include './nav.php';
     ?>
