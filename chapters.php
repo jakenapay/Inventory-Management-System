@@ -34,6 +34,20 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     <link rel="stylesheet" href="assets/css/style.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="assets/css/nav.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="assets/css/chapters.css?v=<?php echo time(); ?>">
+
+    <script>
+        $(document).ready(function() {
+            $('table').DataTable();
+        });
+
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        });
+
+        $('#myModal').on('shown.bs.modal', function() {
+            $('#myInput').trigger('focus')
+        });
+    </script>
 </head>
 
 <body>
@@ -61,44 +75,67 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                         </div>
                     </div>
                     <hr>
-                    <!-- SELECT ALL CHAPTERS -->
-                    <?php
-                    $sql = "SELECT * FROM chapters";
-                    try {
-                        $stmt = $pdo->prepare($sql);
-                        $stmt->execute();
-                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    <div class="table-responsive">
+                        <table class="table table-hover table-sm">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Address</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- SELECT ALL CHAPTERS -->
+                                <?php
+                                $sql = "SELECT * FROM chapters";
+                                try {
+                                    $stmt = $pdo->prepare($sql);
+                                    $stmt->execute();
+                                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                        // Loop through the results
-                        foreach ($result as $row) { ?>
-                            <!-- Show chapters with Card -->
-                            <div class="col-12 col-md-4 col-lg-3 py-2">
-                                <div class="card" style="height: 150px;">
-                                    <!-- <img class="card-img-top" src="..." alt="<?php echo $row['chapter_name']; ?>"> -->
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-start flex-column">
-                                            <div class="mb-auto p-2">
-                                                <h5 class="card-text font-weight-bold text-capitalize pb-0 mb-0"><?php echo $row['chapter_name']; ?></h5>
-                                                <p class="card-text text-secondary text-capitalize"><?php echo $row['chapter_address']; ?></p>
+                                    // Loop through the results
+                                    foreach ($result as $row) { ?>
+                                        <!-- Show chapters with Card -->
+                                        <!-- <div class="col-12 col-md-4 col-lg-3 py-2">
+                                            <div class="card" style="height: 150px;">
+                                                <img class="card-img-top" src="..." alt="<?php echo $row['chapter_name']; ?>">
+                                                <div class="card-body">
+                                                    <div class="d-flex align-items-start flex-column">
+                                                        <div class="mb-auto p-2">
+                                                            <h5 class="card-text font-weight-bold text-capitalize pb-0 mb-0"><?php echo $row['chapter_name']; ?></h5>
+                                                            <p class="card-text text-secondary text-capitalize"><?php echo $row['chapter_address']; ?></p>
+                                                        </div>
+                                                        <div class="col-12 p-2">
+                                                            Edit icon 
+                                                            <a href="http://" class="edit-chapter-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#editModal" data-chapter-id="<?php echo $row['chapter_id']; ?>" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-12 p-2">
-                                                <!-- Edit icon  -->
+                                        </div> -->
+
+                                        <tr>
+                                            <td class="text-capitalize"><?php echo $row['chapter_id']; ?></td>
+                                            <td class="text-capitalize"><?php echo $row['chapter_name']; ?></td>
+                                            <td class="text-capitalize"><?php echo $row['chapter_address']; ?></td>
+                                            <td class="text-capitalize">
                                                 <a href="http://" class="edit-chapter-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#editModal" data-chapter-id="<?php echo $row['chapter_id']; ?>" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    <?php }
-                    } catch (PDOException $e) {
-                        echo "Error: " . $e->getMessage();
-                        header("location: ../items.php?m=" . $e->getMessage() . ""); // Failed
-                        exit();
-                    }
-                    ?>
+                                            </td>
+                                        </tr>
+                                <?php }
+                                } catch (PDOException $e) {
+                                    echo "Error: " . $e->getMessage();
+                                    header("location: ../items.php?m=" . $e->getMessage() . ""); // Failed
+                                    exit();
+                                }
+                                ?>
+                                </tables>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 
     <!-- Modal for new chapter -->
@@ -140,7 +177,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     </div>
 
 
-    <!-- Modal for edit specific chapter -->
+    <!-- Edit modal for specific user -->
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <form action="includes/chapters.inc.php" method="POST" enctype="multipart/form-data">
             <div class="modal-dialog" role="document">
@@ -152,14 +189,13 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div id="chapter_view" class="row justify-content-between align-items-center chapter-view">
+                        <div class="row justify-content-between align-items-center chapter-view">
                             <!-- This is where data being fetch from chapters.inc.php -->
                         </div>
-                        <a href="http://" target="_blank" rel="noopener noreferrer"></a>
                     </div>
                     <div class="modal-footer d-flex justify-content-between align-items-center">
                         <!-- To get the user's ID and record it for history (log) -->
-                        <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['ID']; ?>">
+                        <input type="hidden" name="editor-user-id" id="editor-user-id" value="<?php echo $_SESSION['ID']; ?>">
                         <button type="button" class="btn btn-secondary btn-sm btnRed" data-bs-dismiss="modal">Close</button>
                         <input type="submit" class="btn btn-sm btnGreen text-light mx-1" name="save-edit-chapter-btn" value="Save">
                     </div>
@@ -182,7 +218,8 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                         'chapter_id': chaptId
                     },
                     success: function(response) {
-                        $('#chapter_view').html(response);
+                        console.log(response);
+                        $('.chapter-view').html(response);
                         $('#editModal').modal('show');
                     }
                 });

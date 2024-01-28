@@ -35,23 +35,23 @@ if (isset($_POST['add-chapter-btn'])) {
     }
 } else if (isset($_POST['edit_chapter_view'])) {
     include 'config.inc.php';
-
     // Get data
     $chapterId = $_POST['chapter_id'];
-    $stmt = $pdo->prepare("SELECT * FROM chapter WHERE chapter_id = :id");
-    $stmt->bindParam(':id', $chapterId, PDO::PARAM_INT);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM chapters WHERE chapter_id = :id");
+        $stmt->bindParam(':id', $chapterId, PDO::PARAM_INT);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    foreach ($result as $row) {
-        $chapterId = $row['chapter_id'];
-        $chapterName = $row['chapter_name'];
-        $chapterAddress = $row['chapter_address'];
+        foreach ($result as $row) {
+            $chapterId = $row['chapter_id'];
+            $chapterName = $row['chapter_name'];
+            $chapterAddress = $row['chapter_address'];
 
-        echo '
-        <div class="col-6 col-md-6 col-lg-6">
+            echo '
+        <div class="col-12 col-md-12 col-lg-12">
             <div class="py-1">
-                <input type="hidden" class="form-control form-control-sm text-capitalize" id="chapter_id" name="chapter_id" placeholder="Chapter ID"  value="' . $chapterId . '">
+                <input type="text" class="form-control form-control-sm text-capitalize" id="chapter_id" name="chapter_id" placeholder="Chapter ID"  value="' . $chapterId . '">
                 <label for="chapter_name">Chapter Name</label>
                 <input type="text" class="form-control form-control-sm text-capitalize" id="chapter_name" name="chapter_name" placeholder="Chapter Name"  value="' . $chapterName . '">
             </div>
@@ -61,6 +61,36 @@ if (isset($_POST['add-chapter-btn'])) {
             </div>
         </div>
         ';
+        }
+    } catch (PDOException $e) {
+        echo "error: " . $e->getMessage();
+    }
+} else if (isset($_POST['save-edit-chapter-btn'])) {
+    include 'config.inc.php';
+
+    $chapterId = $_POST['chapter_id'];
+    $chapterName = $_POST['chapter_name'];
+    $chapterAddress = $_POST['chapter_address'];
+
+    if (empty($chapterId) || empty($chapterName) || empty($chapterAddress)) {
+        header("location: ../chapters.php?m=ic&id=$chapterId&n=$chapterName&a=$chapterAddress");
+        exit();
+    }
+
+    $sql = "UPDATE chapters SET chapter_name = :name, chapter_address = :address WHERE chapter_id = :id";
+
+    try {
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':id', $chapterId, PDO::PARAM_INT);
+        $stmt->bindParam(':name', $chapterName, PDO::PARAM_STR);
+        $stmt->bindParam(':address', $chapterAddress, PDO::PARAM_STR);
+        $stmt->execute();
+        header("location: ../chapters.php?m=us"); // Updated successfully
+        exit();
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+        header("location: ../chapters.php?m=" . $e->getMessage() . ""); // Failed
+        exit();
     }
 } else {
     header("location: ../chapters.php?m=404");
