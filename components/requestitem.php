@@ -63,8 +63,10 @@ WHERE to_chapter = $user_chapter;
 
                             <td>
                                 <?php
-                                echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['history_id'] . '"  title="Approve"><i class="fa-solid fa-check"></i></a>';
-                                echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['history_id'] . '" title="Decline"><i class="fa-solid fa-x"></i></a>';
+                                if($row['history_status'] == "process") {
+                                    echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['history_id'] . '"  title="Approve"><i class="fa-solid fa-check"></i></a>';
+                                } 
+                                // echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['history_id'] . '" title="Decline"><i class="fa-solid fa-x"></i></a>';
                                 ?>
 
                             </td>
@@ -83,7 +85,7 @@ WHERE to_chapter = $user_chapter;
 <!-- Approving request item modal -->
 <div class="modal fade" id="approveModal" tabindex="-1" role="dialog" aria-labelledby="approveModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <form action="includes/requests.inc.php" method="post">
+        <form action="includes/requestItem.inc.php" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <h6 class="modal-title font-weight-bold" id="exampleModalLabel">Approve Requested Item</h6>
@@ -107,4 +109,25 @@ WHERE to_chapter = $user_chapter;
 
 <script>
     new DataTable('#example');
+
+    $(document).ready(function() {
+
+        // Enable the item from modal
+        $('table').on('click', '.approve-btn', function(e) {
+            e.preventDefault();
+            var itemId = $(this).data('item-id');
+            $.ajax({
+                type: 'POST',
+                url: 'includes/requestItem.inc.php',
+                data: {
+                    'approve-request-item-btn': true,
+                    'item_id': itemId
+                },
+                success: function(response) {
+                    $('#approve_request_id').val(itemId);
+                    $('#approveModal').modal('show');
+                }
+            });
+        });
+    });
 </script>
