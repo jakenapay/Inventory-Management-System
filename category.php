@@ -10,8 +10,8 @@ if (!isset($_SESSION['ID']) and ($_SESSION['ID'] == '')) {
 }
 
 // Check if you are from Manila, and you're an admin
-if (($_SESSION['CT'] !== 1) && ($_SESSION['CH'] !== 1)) { // If you're not from Manila and not Admin, run the code below
-    header("location: home.php");
+if (($_SESSION['CT'] != 1) && ($_SESSION['CH'] != 1)) { // If you're not from Manila and not Admin, run the code below
+    header("location: home.php?m&ct!=1&ch!=1");
     exit();
 }
 
@@ -41,8 +41,18 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 
     <div id="wrapper">
         <div class="section">
-            
-        </div>
+            <div class="row">
+                <?php 
+                try {
+
+                } catch (PDOException $e) {
+
+                }
+                
+                ?>
+                <div class="col-12 col-md-4 col-lg-3"></div>
+            </div>
+        </div>  
     </div>
 
     <!-- Optional JavaScript -->

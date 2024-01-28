@@ -65,7 +65,7 @@ $totalIDs = $result['total_ids'];
                         <a class="nav-link <?= ($_SESSION['active_tab'] === 'chapters.php') ? 'active' : ''; ?>" href="chapters.php">Chapters</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link <?= ($_SESSION['active_tab'] === 'categories.php') ? 'active' : ''; ?>" href="categories.php">Categories</a>
+                        <a class="nav-link <?= ($_SESSION['active_tab'] === 'category.php') ? 'active' : ''; ?>" href="category.php">Categories</a>
                     </li>
                 <?php }  ?>
 
