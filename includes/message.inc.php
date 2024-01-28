@@ -33,6 +33,9 @@ if(isset($_GET['m'])) {
         case "ue":
             echo "<p id='msg' class='msg'>Error adding item</p>";
             break;
+        case "pnm":
+            echo "<p id='msg' class='msg'>Password Not Match</p>";
+            break;
         case "rqf":
             echo "<p id='msg' class='msg'>Request failed</p>";
             break;
