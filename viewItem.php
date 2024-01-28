@@ -121,11 +121,13 @@ if ($itemId !== null) {
                 </ul>
                 <div class="my-3 row d-flex align-items-center justify-content-start">
                     <div class="col-12 col-md-6 col-lg-6">
-                        <button class="btn btn-primary w-100 item">Request</button>
+
                         <?php
                         if ($_SESSION['CH'] != $itemData['item_chapter']) {
                         ?>
                             <button class="btn btn-primary btn-block-lg w-100 req-other">Request to Other</button>
+                        <?php } else { ?>
+                            <button class="btn btn-primary w-100 item">Request</button>
                         <?php } ?>
                     </div>
                     <div class="col-12 col-md-6 col-lg-6">

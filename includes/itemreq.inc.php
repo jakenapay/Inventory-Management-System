@@ -50,7 +50,7 @@ if (isset($_POST['userID'])) {
         // echo $userName;
 
         if ($stmt->execute()) {
-            $receiver = "yugo2801@gmail.com";
+            $receiver = $userEM;
             $subj = 'Item';
             $msg = '<!DOCTYPE html>
             <html lang="en">

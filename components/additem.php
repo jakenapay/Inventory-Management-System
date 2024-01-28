@@ -176,7 +176,7 @@ session_start();
                             //# item total cell
                             newRow.find("td").eq(4).text(tot);
 
-                            // newRow.attr("data-item-id", datas)
+                             newRow.attr("data-item-id", datas)
                         }
 
                     }

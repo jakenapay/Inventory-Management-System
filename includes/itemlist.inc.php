@@ -10,6 +10,4 @@ if (isset($_POST['categoryId']) && isset($_POST['chapter'])) {
 
    echo 'error';  
 }
-
-
 ?>
