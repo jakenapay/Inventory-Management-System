@@ -53,7 +53,7 @@ if (isset($_POST['enter-pass-btn'])) {
     }
 
     echo '<script>alert("Password changed successfully");</script>';
-    header("location: index.php?=us");
+    echo '<script>window.location.href="index.php?us";</script>';
     exit();
 }
 
