@@ -131,7 +131,7 @@ try {
     $sql = "SELECT h.history_item_id, COUNT(*) AS request_count
             FROM history h
             JOIN users u ON h.history_user_id = u.user_id
-            WHERE h.history_status = 'approved' AND h.isReturned = 0 AND h.history_user_id = :admin_id
+            WHERE h.history_status = 'approved' AND h.history_user_id = :admin_id
             GROUP BY h.history_item_id
             ORDER BY request_count ASC
             LIMIT 5";
@@ -454,7 +454,7 @@ try {
 
             // For bar chart 2 for specific ADMIN
             var adminPersonalData = <?php echo json_encode($barChartTwoDataPoints, JSON_NUMERIC_CHECK); ?>;
-            var barChartConfig = {
+            var barChartConfig2 = {
                 type: 'bar',
                 data: {
                     labels: adminPersonalData.map(data => data.label),
@@ -497,7 +497,7 @@ try {
                 }
             };
             var barChartCanvas = document.getElementById('barChart2').getContext('2d');
-            new Chart(barChartCanvas, barChartConfig);
+            new Chart(barChartCanvas, barChartConfig2);
 
             // For pie chart that shows top 5 user total counts
             var userDataPoints = <?php echo json_encode($userRequestsCountDataPoints, JSON_NUMERIC_CHECK); ?>;
