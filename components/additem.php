@@ -42,7 +42,8 @@ session_start();
 
         <div class="right-side">
             <div>
-                <div id="last-barcode"></div>
+                <!-- <span>Item ID:</span>
+                <div id="last-barcode"></div> -->
                 <input type="text" name="itemid" id="itemid">
                 <button type="button" class="btn btn-success" id="btnAdd"><span class="fas fa-plus"></span> Add Item</button>
             </div>
@@ -50,7 +51,7 @@ session_start();
     </div>
 
     <!-- paayos neto lee -->
-    <div class="modal modal-error" tabindex="-1" role="dialog">
+    <!-- <div class="modal modal-error" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -65,7 +66,7 @@ session_start();
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <?php
 
@@ -76,6 +77,8 @@ session_start();
     <div>
         <input type="text" value="<?php echo $_SESSION['CH'] ?>" hidden id="chapter">
         <h6 id="error"></h6>
+        <span>Item ID:</span>
+        <div id="last-barcode"></div>
         <table class="table table-striped table-inverse table-responsive">
             <thead class="thead-inverse">
                 <tr>
