@@ -46,7 +46,7 @@ if (isset($_POST['approve-request-item-btn'])) {
             $historyReq = $result['history_id'];
 
             // EMAIL SENDING
-            $receiver = "jakemantesnapay@gmail.com";
+            $receiver = $userEmail;
             $subj = "Your request has been approved!";
             $msg = '<!DOCTYPE html>
                         <html lang="en">

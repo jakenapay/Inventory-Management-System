@@ -63,9 +63,9 @@ WHERE to_chapter = $user_chapter;
 
                             <td>
                                 <?php
-                                if($row['history_status'] == "process") {
-                                    echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['history_id'] . '"  title="Approve"><i class="fa-solid fa-check"></i></a>';
-                                } 
+                                if ($row['history_status'] == "process") {
+                                    echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['history_id'] . '"  title="Delivered"><i class="fa-solid fa-check"></i></a>';
+                                }
                                 // echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['history_id'] . '" title="Decline"><i class="fa-solid fa-x"></i></a>';
                                 ?>
 

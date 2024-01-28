@@ -444,7 +444,7 @@ if (isset($_POST['user_view'])) {
                                     <h1>Your Account is Now Activated!</h1>
                                     <p>
                                         Dear '.$row["user_firstname"].',<br><br>
-                                        We are thrilled to inform you that your account with [Your Company Name] has been successfully activated! You can now enjoy all the benefits and features our platform has to offer.<br><br>
+                                        We are thrilled to inform you that your account with DevconKids Inventory has been successfully activated! You can now enjoy all the benefits and features our platform has to offer.<br><br>
                                         Here are a few key details about your account:<br>
                                         <strong>User name:</strong> '.$row["user_firstname"]. ' ' .$row["user_lastname"].'<br>
                                         <strong>Email Address:</strong> '.$row["user_email"].'<br>
@@ -454,9 +454,9 @@ if (isset($_POST['user_view'])) {
                                         Feel free to log in to your account using the following link:<br>
                                         <a class="button" href="http://localhost/projects/Inventory-Management-System/index.php">Log In</a>
                                     </p>
-                                    <p>If you have any questions or encounter any issues, please don\'t hesitate to contact our support team at [Support Email Address].</p>
+                                    <p>If you have any questions or encounter any issues, please don\'t hesitate to contact our support team at Devconkidsinventory@gmail.com.</p>
                                     <div class="footer">
-                                        Thank you for choosing [Your Company Name]. We look forward to providing you with an excellent experience!
+                                        Thank you for choosing DevconKids Inventory. We look forward to providing you with an excellent experience!
                                     </div>
                                 </div>
                             </body>
