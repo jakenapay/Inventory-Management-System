@@ -69,7 +69,7 @@
                             <input type="text" class="item_id" value="<?php echo $row['item_id'] ?>" hidden>
                             <div style="display: flex; justify-content: space-between;">
                                 <h6 class="card-title d-inline-block text-truncate" style="max-width: 50%;"> <small><?php echo $row['item_name'] ?></small></h6>
-                                <button class=" btn btn-success btn-sm item-btn" data-toggle="modal" data-target="#cartModalList" data-image="<?php echo $row['item_image']; ?>" data-name="<?php echo $row['item_name']; ?>" data-description="<?php echo $row['item_description']; ?>" data-date="<?php echo $row['date_added']; ?>" data-id="<?php echo $_SESSION['ID']; ?>" data-item-id="<?php echo $row['item_id']; ?>" data-item-quantity="<?php echo $row['item_quantity']; ?>">View</button>
+                                <button class=" btn btn-success btn-sm item-btn" style="color: #fff; background-color: var(--green); border-color: var(--green);" data-toggle="modal" data-target="#cartModalList" data-image="<?php echo $row['item_image']; ?>" data-name="<?php echo $row['item_name']; ?>" data-description="<?php echo $row['item_description']; ?>" data-date="<?php echo $row['date_added']; ?>" data-id="<?php echo $_SESSION['ID']; ?>" data-item-id="<?php echo $row['item_id']; ?>" data-item-quantity="<?php echo $row['item_quantity']; ?>">View</button>
                             </div>
                             <!-- <p class="card-text"><small><?php echo $row['item_description'] ?></small></p> -->
                             <sub class="card-text">
@@ -101,8 +101,8 @@
             <div class="modal-content">
                 <!-- Modal header -->
                 <div class="modal-header">
-                    <h5 class="modal-title" id="CartModalLable">Item Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="CartModalLable"><b>Item Details</b></h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
@@ -118,8 +118,8 @@
                 </div>
                 <!-- Modal footer -->
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary checkout-btn">Check Out</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary checkout-btn" style="background-color: var(--green)">Check Out</button>
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
                 </div>
             </div>
         </div>
@@ -152,7 +152,7 @@
                             font-weight: 500;
                             color: #666;
                             font-family: "Montserrat";">
-                            ${name}
+                            <b>${name}</b>
                         </h3>
                         <ul class="desc"
                          style="margin-top: 20px;

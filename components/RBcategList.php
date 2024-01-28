@@ -129,7 +129,7 @@
         $records = $result->fetchAll(PDO::FETCH_ASSOC);
         if ($records) {
             foreach ($records as $row) { ?>
-                <div class="col-12 col-md-4 col-lg-3 my-2">
+            <div class="col-12 col-md-4 col-lg-3 my-2">
             <div class="card">
                 <!-- Hidden details -->
                 <input type="text" id="user_id" value="<?php echo $_SESSION['ID'] ?>" hidden>

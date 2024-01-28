@@ -292,7 +292,7 @@
     <br>
     <br>
 
-    <!-- <h6><?php echo $generator->getBarcode('4444', $generator::TYPE_CODE_128) ?></h6>
+    <h6><?php echo $generator->getBarcode('4444', $generator::TYPE_CODE_128) ?></h6>
 
     <br>
     <br>
@@ -353,5 +353,5 @@
     <br>
     <br>
 
-    <h6><?php echo $generator->getBarcode('4444', $generator::TYPE_CODE_128) ?></h6> -->
+    <h6><?php echo $generator->getBarcode('123456', $generator::TYPE_CODE_128) ?></h6>
 </div>
