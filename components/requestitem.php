@@ -88,19 +88,19 @@ WHERE to_chapter = $user_chapter;
         <form action="includes/requestItem.inc.php" method="post">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h6 class="modal-title font-weight-bold" id="exampleModalLabel">Approve Requested Item</h6>
+                    <h6 class="modal-title font-weight-bold" id="exampleModalLabel">Mark as Delivered</h6>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="approve_request_id" id="approve_request_id">
-                    <h6>Are you sure you want to approve this request?</h6>
+                    <h6>Are you sure you want to mark this request as delivered?</h6>
                 </div>
                 <div class="modal-footer d-flex justify-content-between">
                     <input type="" name="user_id" id="user_id" value="<?php echo $_SESSION['ID']; ?>" hidden>
                     <button type="button" class="btn btn-secondary btnRed btn-sm px-2" data-bs-dismiss="modal">Close</button>
-                    <input type="submit" class="btn btnGreen text-light btn-sm mx-1" name="approve-request-item-btn" value="Approve">
+                    <input type="submit" class="btn btnGreen text-light btn-sm mx-1" name="approve-request-item-btn" value="Mark as Delivered">
                 </div>
             </div>
         </form>

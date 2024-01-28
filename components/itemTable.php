@@ -353,9 +353,9 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             var itemId = $(this).data('item-id');
             $.ajax({
                 type: 'POST',
-                url: 'includes/requestItem.inc.php',
+                url: 'includes/items.inc.php',
                 data: {
-                    'approve-request-item-btn': true,
+                    'enabled-item-btn': true,
                     'item_id': itemId
                 },
                 success: function(response) {
