@@ -455,3 +455,26 @@ ul {
 .show {
   padding: unset;
 }
+
+
+/* For mobile */
+.navbar-nav .dropdown-menu {
+    right: 0;
+    left: auto;
+}
+
+/* For tablets */
+@media screen and (min-width: 768px) {
+    .navbar-nav .dropdown-menu {
+        right: 0;
+        left: auto;
+    }
+}
+
+/* For laptops/desktops */
+@media screen and (min-width: 990px) {
+    .navbar-nav .dropdown-menu {
+        right: 0;
+        left: auto;
+    }
+}

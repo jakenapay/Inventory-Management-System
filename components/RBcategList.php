@@ -129,15 +129,16 @@
         $records = $result->fetchAll(PDO::FETCH_ASSOC);
         if ($records) {
             foreach ($records as $row) { ?>
-                <!-- <div class="col-md-6 col-sm-12 col-lg-4 mt-5"> -->
                 <div class="col-12 col-md-4 col-lg-3 my-2">
-                    <div class="card">
-                        <!-- <div class="imgBox image-parent"> -->
-                        <div class="image-parent">
-                            <!-- <img class="card-img-top image-responsive image-resize" src="./images/items/<?php echo $row['item_image'] ?>" alt="<?php echo $row['item_name'] ?>" class="mouse"> -->
-                            <img class="card-img-top image-responsive image-resize" src="./images/items/<?php echo $row['item_image'] ?>" alt="<?php echo $row['item_name'] ?>">
-                        </div>
-                        <div class="card-body">
+            <div class="card">
+                <!-- Hidden details -->
+                <input type="text" id="user_id" value="<?php echo $_SESSION['ID'] ?>" hidden>
+                <input type="text" class="item_id" value="<?php echo $row['item_id'] ?>" hidden>
+                <!-- Image of the item -->
+                <div class="image-parent">
+                    <img class="card-img-top image-responsive image-resize" src="./images/items/<?php echo $row['item_image'] ?>" alt="<?php echo $row['item_name'] ?>">
+                </div>
+                <div class="card-body">
                     <!-- Item title -->
                     <h5 class="card-title"><?php echo $row['item_name'] ?></h5>
                     <p class="card-text"><?php echo $row['item_description']; ?></p>
@@ -151,7 +152,6 @@
                     <?php } else { ?>
                         <a class="btn btn-primary view-btn" href="viewItem.php?itemid=<?php echo $row['item_id'] ?>">View</a>
                     <?php } ?>
-                </div>
                         </div>
                     </div>
                 </div>
