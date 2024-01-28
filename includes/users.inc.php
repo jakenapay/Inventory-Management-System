@@ -1,11 +1,11 @@
 <?php
 
-// use PHPMailer\PHPMailer\PHPMailer;
-// use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-// require '../PHPMailer-master/PHPMailer-master/src/Exception.php';
-// require '../PHPMailer-master/PHPMailer-master/src/PHPmailer.php';
-// require '../PHPMailer-master/PHPMailer-master/src/SMTP.php';
+require '../PHPMailer-master/PHPMailer-master/src/Exception.php';
+require '../PHPMailer-master/PHPMailer-master/src/PHPmailer.php';
+require '../PHPMailer-master/PHPMailer-master/src/SMTP.php';
 
 session_start();
 
@@ -378,97 +378,97 @@ if (isset($_POST['user_view'])) {
                 if ($row && $row['user_status'] === 'active') {
                     // Email the user that their account is now activated!
 
-                    // $mail = new PHPMailer(true);
-                    // $mail->isSMTP();
-                    // $mail->Host = 'smtp.gmail.com';
-                    // $mail->SMTPAuth = true;
-                    // $mail->Username = 'devconkidsinventory@gmail.com';
-                    // $mail->Password = 'yipo vnsj ymki ldrl';
-                    // $mail->SMTPSecure = 'tls';
-                    // $mail->Port = 587;
+                    $mail = new PHPMailer(true);
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'devconkidsinventory@gmail.com';
+                    $mail->Password = 'yipo vnsj ymki ldrl';
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port = 587;
 
-                    // $mail->From = "devconkidsinventory@gmail.com"; //my gmail
-                    // $mail->FromName = "DevCon Kids Inventory"; //sender name
+                    $mail->From = "devconkidsinventory@gmail.com"; //my gmail
+                    $mail->FromName = "DevCon Kids Inventory"; //sender name
 
-                    // // details
-                    // $subj = "Your account is now activated!";
-                    // $receiver = $row['user_email'];
-                    // $msg = '
-                    //         <!DOCTYPE html>
-                    //         <html lang="en">
-                    //         <head>
-                    //             <meta charset="UTF-8">
-                    //             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    //             <title>Account Activation</title>
-                    //             <style>
-                    //                 body {
-                    //                     font-family: Arial, sans-serif;
-                    //                     background-color: #f4f4f4;
-                    //                     margin: 0;
-                    //                     padding: 0;
-                    //                 }
+                    // details
+                    $subj = "Your account is now activated!";
+                    $receiver = $row['user_email'];
+                    $msg = '
+                            <!DOCTYPE html>
+                            <html lang="en">
+                            <head>
+                                <meta charset="UTF-8">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                                <title>Account Activation</title>
+                                <style>
+                                    body {
+                                        font-family: Arial, sans-serif;
+                                        background-color: #f4f4f4;
+                                        margin: 0;
+                                        padding: 0;
+                                    }
 
-                    //                 .container {
-                    //                     max-width: 600px;
-                    //                     margin: 50px auto;
-                    //                     background-color: #ffffff;
-                    //                     padding: 20px;
-                    //                     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-                    //                 }
+                                    .container {
+                                        max-width: 600px;
+                                        margin: 50px auto;
+                                        background-color: #ffffff;
+                                        padding: 20px;
+                                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                                    }
 
-                    //                 h1 {
-                    //                     color: #333;
-                    //                 }
+                                    h1 {
+                                        color: #333;
+                                    }
 
-                    //                 p {
-                    //                     color: #555;
-                    //                 }
+                                    p {
+                                        color: #555;
+                                    }
 
-                    //                 .button {
-                    //                     display: inline-block;
-                    //                     padding: 10px 20px;
-                    //                     background-color: #007BFF;
-                    //                     color: #ffffff;
-                    //                     text-decoration: none;
-                    //                     border-radius: 5px;
-                    //                 }
+                                    .button {
+                                        display: inline-block;
+                                        padding: 10px 20px;
+                                        background-color: #007BFF;
+                                        color: #ffffff;
+                                        text-decoration: none;
+                                        border-radius: 5px;
+                                    }
 
-                    //                 .footer {
-                    //                     margin-top: 20px;
-                    //                     color: #777;
-                    //                 }
-                    //             </style>
-                    //         </head>
-                    //         <body>
-                    //             <div class="container">
-                    //                 <h1>Your Account is Now Activated!</h1>
-                    //                 <p>
-                    //                     Dear '.$row["user_firstname"].',<br><br>
-                    //                     We are thrilled to inform you that your account with [Your Company Name] has been successfully activated! You can now enjoy all the benefits and features our platform has to offer.<br><br>
-                    //                     Here are a few key details about your account:<br>
-                    //                     <strong>User name:</strong> '.$row["user_firstname"]. ' ' .$row["user_lastname"].'<br>
-                    //                     <strong>Email Address:</strong> '.$row["user_email"].'<br>
-                    //                     <strong>Account Status:</strong> Active
-                    //                 </p>
-                    //                 <p>
-                    //                     Feel free to log in to your account using the following link:<br>
-                    //                     <a class="button" href="http://localhost/projects/Inventory-Management-System/index.php">Log In</a>
-                    //                 </p>
-                    //                 <p>If you have any questions or encounter any issues, please don\'t hesitate to contact our support team at [Support Email Address].</p>
-                    //                 <div class="footer">
-                    //                     Thank you for choosing [Your Company Name]. We look forward to providing you with an excellent experience!
-                    //                 </div>
-                    //             </div>
-                    //         </body>
-                    //         </html>
-                    //         ';
+                                    .footer {
+                                        margin-top: 20px;
+                                        color: #777;
+                                    }
+                                </style>
+                            </head>
+                            <body>
+                                <div class="container">
+                                    <h1>Your Account is Now Activated!</h1>
+                                    <p>
+                                        Dear '.$row["user_firstname"].',<br><br>
+                                        We are thrilled to inform you that your account with [Your Company Name] has been successfully activated! You can now enjoy all the benefits and features our platform has to offer.<br><br>
+                                        Here are a few key details about your account:<br>
+                                        <strong>User name:</strong> '.$row["user_firstname"]. ' ' .$row["user_lastname"].'<br>
+                                        <strong>Email Address:</strong> '.$row["user_email"].'<br>
+                                        <strong>Account Status:</strong> Active
+                                    </p>
+                                    <p>
+                                        Feel free to log in to your account using the following link:<br>
+                                        <a class="button" href="http://localhost/projects/Inventory-Management-System/index.php">Log In</a>
+                                    </p>
+                                    <p>If you have any questions or encounter any issues, please don\'t hesitate to contact our support team at [Support Email Address].</p>
+                                    <div class="footer">
+                                        Thank you for choosing [Your Company Name]. We look forward to providing you with an excellent experience!
+                                    </div>
+                                </div>
+                            </body>
+                            </html>
+                            ';
                             
-                    // $mail->addAddress($receiver);
+                    $mail->addAddress($receiver);
 
-                    // $mail->isHTML(true);
-                    // $mail->Subject    = $subj;
-                    // $mail->Body    = $msg;
-                    // $mail->send();
+                    $mail->isHTML(true);
+                    $mail->Subject    = $subj;
+                    $mail->Body    = $msg;
+                    $mail->send();
 
                     header("Location: ../users.php?m=aca"); // Account activated and sent email
                     exit();

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2024 at 03:41 AM
+-- Generation Time: Jan 28, 2024 at 01:28 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -43,29 +43,31 @@ INSERT INTO `cart` (`user_id`, `item_id`, `inCart`, `date_added`, `date_out`) VA
 (5, 1, 1, '2024-01-10 02:23:36', '2024-01-10 10:23:36'),
 (5, 2, 1, '2024-01-07 04:39:48', '2024-01-07 12:39:48'),
 (5, 2, 1, '2024-01-07 04:39:48', '2024-01-07 12:39:48'),
-(5, 4, 1, '2024-01-28 02:12:32', '2024-01-28 10:12:32'),
+(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
 (5, 2, 1, '2024-01-07 04:39:48', '2024-01-07 12:39:48'),
-(5, 4, 1, '2024-01-28 02:12:32', '2024-01-28 10:12:32'),
+(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
 (5, 10, 1, '2023-12-27 11:28:25', '2023-12-27 19:28:25'),
-(5, 4, 1, '2024-01-28 02:12:32', '2024-01-28 10:12:32'),
+(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
 (5, 5, 1, '2024-01-28 02:22:22', '2024-01-28 10:22:22'),
-(5, 4, 1, '2024-01-28 02:12:32', '2024-01-28 10:12:32'),
+(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
 (5, 1, 1, '2024-01-10 02:23:36', '2024-01-10 10:23:36'),
-(5, 4, 1, '2024-01-28 02:12:32', '2024-01-28 10:12:32'),
+(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
 (5, 5, 1, '2024-01-28 02:22:22', '2024-01-28 10:22:22'),
 (5, 1, 1, '2024-01-10 02:23:36', '2024-01-10 10:23:36'),
 (5, 1, 1, '2024-01-10 02:23:36', '2024-01-10 10:23:36'),
 (5, 1, 1, '2024-01-10 02:23:36', '2024-01-10 10:23:36'),
-(5, 4, 1, '2024-01-28 02:12:32', '2024-01-28 10:12:32'),
+(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
 (5, 5, 1, '2024-01-28 02:22:22', '2024-01-28 10:22:22'),
-(5, 4, 1, '2024-01-28 02:12:32', '2024-01-28 10:12:32'),
-(5, 4, 1, '2024-01-28 02:12:32', '2024-01-28 10:12:32'),
+(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
+(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
 (4, 19, 1, '2024-01-28 01:49:42', '2024-01-28 09:49:42'),
 (5, 17, 1, '2024-01-20 06:06:07', '2024-01-20 14:06:07'),
-(5, 4, 1, '2024-01-28 02:12:32', '2024-01-28 10:12:32'),
+(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
 (4, 4, 1, '2024-01-27 19:58:32', '2024-01-28 03:58:32'),
 (1, 11, 1, '2024-01-23 06:47:52', '2024-01-23 14:47:52'),
-(5, 24, 1, '2024-01-28 02:27:13', '2024-01-28 10:27:13');
+(5, 24, 1, '2024-01-28 02:27:13', '2024-01-28 10:27:13'),
+(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
+(1, 29, 1, '2024-01-28 12:18:47', '2024-01-28 20:18:47');
 
 -- --------------------------------------------------------
 
@@ -183,7 +185,12 @@ INSERT INTO `history` (`history_id`, `history_item_id`, `history_quantity`, `his
 (16, 25, 1, 5, 'approved', '2024-01-28 02:05:54', 1, '2024-01-28 10:05:54', '2024-02-04'),
 (17, 4, 3, 5, 'approved', '2024-01-28 02:12:32', 0, '', '2024-02-04'),
 (18, 5, 1, 5, 'approved', '2024-01-28 02:22:22', 0, '', '2024-02-04'),
-(19, 24, 2, 5, 'approved', '2024-01-28 02:27:13', 0, '', '2024-02-04');
+(19, 24, 2, 5, 'approved', '2024-01-28 02:27:13', 0, '', '2024-02-04'),
+(20, 4, 5, 5, 'approved', '2024-01-28 11:35:06', 0, '', '2024-02-01'),
+(21, 4, 1, 5, 'approved', '2024-01-28 11:39:32', 0, '', '2024-01-31'),
+(22, 4, 1, 5, 'approved', '2024-01-28 11:39:42', 0, '', '2024-01-31'),
+(23, 4, 1, 5, 'approved', '2024-01-28 11:54:00', 0, '', '2024-01-31'),
+(24, 29, 1, 1, 'approved', '2024-01-28 12:20:43', 1, '2024-01-28 8:20:43', '2024-02-01');
 
 --
 -- Triggers `history`
@@ -198,7 +205,7 @@ END
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `updateQuantityItem` BEFORE INSERT ON `history` FOR EACH ROW BEGIN
+CREATE TRIGGER `updateQuantityItem` AFTER INSERT ON `history` FOR EACH ROW BEGIN
     UPDATE items 
     SET items.item_quantity = items.item_quantity -   NEW.history_quantity
     WHERE items.item_id = NEW.history_item_id;
@@ -206,7 +213,7 @@ END
 $$
 DELIMITER ;
 DELIMITER $$
-CREATE TRIGGER `updateQuantityItemRequest` BEFORE UPDATE ON `history` FOR EACH ROW BEGIN
+CREATE TRIGGER `updateQuantityItemRequest` AFTER UPDATE ON `history` FOR EACH ROW BEGIN
     UPDATE items 
     SET items.item_quantity = items.item_quantity +   NEW.history_quantity
     WHERE items.item_id = NEW.history_item_id;
@@ -230,34 +237,44 @@ CREATE TABLE `items` (
   `item_chapter` int(11) NOT NULL,
   `item_status` enum('enabled','disabled','','') NOT NULL,
   `item_description` varchar(255) NOT NULL,
-  `item_image` varchar(255) NOT NULL
+  `item_image` varchar(255) NOT NULL,
+  `item_condition` varchar(30) NOT NULL,
+  `item_location` varchar(30) NOT NULL,
+  `item_cost` varchar(30) NOT NULL,
+  `barcode_img` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`item_id`, `unique_item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_status`, `item_description`, `item_image`) VALUES
-(1, '335733', 'Galaxy Tab A Tablet', 1, 3, 136, 3, 'enabled', '4gb 256gb color black', 'IMG_655c634aa37f87.97220155.jpg'),
-(2, '2792718', 'A4 Bond Paper', 3, 2, 1, 2, 'enabled', 'A4 Hardcopy', 'IMG_655c63420ed111.72246669.png'),
-(4, '976760', 'ID Lace version 5', 3, 3, 38, 4, 'enabled', 'Version 5, Black & Orange', 'IMG_65b54f67295394.14973149.jpg'),
-(5, '7542994', 'Jumping wires long', 3, 1, 29, 4, 'enabled', 'Rainbow colors', ''),
-(7, '275921', 'Gel Ink Pen about to delete', 3, 1, 28, 5, 'disabled', 'Black', 'IMG_65350cc0dbc2f1.96755226.'),
-(8, '111111', 'Jungle Juice', 2, 2, 17, 2, 'disabled', '350ml Mango, Apple, Grapes, & Orange', 'IMG_650896c28445b9.58710873.jpg'),
-(10, '22222', 'Sunglasses', 3, 3, 20, 1, 'enabled', 'Rayband, Black frame', 'IMG_650898af7e3799.65129257.jpg'),
-(11, '33333', 'Hotdog', 2, 1, 27, 1, 'enabled', 'Jumbo, Tender Juicy, Pure Foods, 12pcs per pack', 'IMG_650899879ba091.62117593.png'),
-(14, '4444', 'yoon', 1, 1, 2, 2, 'enabled', 'grdg', 'IMG_655c5d66a35232.43841368.png'),
-(15, '555555', 'wa ', 1, 1, 2322, 3, 'enabled', 'dasdasda', 'IMG_655b09bf1c7bc7.78434158.png'),
-(17, '1611297', 'test', 1, 3, 2, 4, 'enabled', 'test1', 'IMG_659ff7beabd170.57412449.jpg'),
-(18, '7481585', 'test2', 1, 1, 0, 4, 'enabled', '123456', 'IMG_659ff9f9239e03.99338571.jpg'),
-(19, '282344', 'test3', 2, 3, 0, 4, 'enabled', 'test3', 'IMG_659ffa70106748.76927790.jpg'),
-(20, '297191', 'apple', 1, 3, 3, 4, 'enabled', 'Apple Tablet 128gb', 'IMG_659fff00ab4ad6.04338973.jpg'),
-(21, '502418', 'apple', 1, 3, 4, 4, 'enabled', 'apple', 'IMG_659fff19cc8683.32328815.jpg'),
-(22, '198574', 'Ipad ', 1, 1, 6, 4, 'enabled', '128gb', 'IMG_65a0002e93cda7.54501938.jpg'),
-(23, '437405', 'test123', 1, 2, 5, 4, 'enabled', 'asdqwe', 'IMG_65a0048c38da78.15335833.png'),
-(24, '636402', 'test2135', 3, 3, 6, 4, 'enabled', 'asesafasfasfaf', 'IMG_65a00521112126.48306863.jpg'),
-(25, '556645', 'gTpcwq', 1, 1, 5, 4, 'enabled', 'gTpcwq', 'IMG_65a0079dd76291.06280406.jpg'),
-(26, '6769580', 'yahboom', 1, 3, 5, 4, 'enabled', 'Yahboom', 'IMG_65b51c6e55b933.21830352.jpg');
+INSERT INTO `items` (`item_id`, `unique_item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_status`, `item_description`, `item_image`, `item_condition`, `item_location`, `item_cost`, `barcode_img`) VALUES
+(1, '335733', 'Galaxy Tab A Tablet', 1, 3, 137, 3, 'enabled', '4gb 256gb color black', 'IMG_655c634aa37f87.97220155.jpg', '', '', '', ''),
+(2, '2792718', 'A4 Bond Paper', 3, 2, 2, 2, 'enabled', 'A4 Hardcopy', 'IMG_655c63420ed111.72246669.png', '', '', '', ''),
+(4, '976760', 'ID Lace version 5', 3, 3, 31, 4, 'enabled', 'Version 5, Black & Orange', 'IMG_65b54f67295394.14973149.jpg', '', '', '', ''),
+(5, '7542994', 'Jumping wires long', 3, 1, 30, 4, 'enabled', 'Rainbow colors', '', '', '', '', ''),
+(7, '275921', 'Gel Ink Pen about to delete', 3, 1, 29, 5, 'disabled', 'Black', 'IMG_65350cc0dbc2f1.96755226.', '', '', '', ''),
+(8, '111111', 'Jungle Juice', 2, 2, 19, 2, 'disabled', '350ml Mango, Apple, Grapes, & Orange', 'IMG_650896c28445b9.58710873.jpg', '', '', '', ''),
+(10, '22222', 'Sunglasses', 3, 3, 22, 1, 'enabled', 'Rayband, Black frame', 'IMG_650898af7e3799.65129257.jpg', '', '', '', ''),
+(11, '33333', 'Hotdog', 2, 1, 30, 1, 'enabled', 'Jumbo, Tender Juicy, Pure Foods, 12pcs per pack', 'IMG_650899879ba091.62117593.png', '', '', '', ''),
+(14, '4444', 'yoon', 1, 1, 3, 2, 'enabled', 'grdg', 'IMG_655c5d66a35232.43841368.png', '', '', '', ''),
+(15, '555555', 'wa ', 1, 1, 2322, 3, 'enabled', 'dasdasda', 'IMG_655b09bf1c7bc7.78434158.png', '', '', '', ''),
+(17, '1611297', 'test', 1, 3, 2, 4, 'enabled', 'test1', 'IMG_659ff7beabd170.57412449.jpg', '', '', '', ''),
+(18, '7481585', 'test2', 1, 1, 0, 4, 'enabled', '123456', 'IMG_659ff9f9239e03.99338571.jpg', '', '', '', ''),
+(19, '282344', 'test3', 2, 3, 0, 4, 'enabled', 'test3', 'IMG_659ffa70106748.76927790.jpg', '', '', '', ''),
+(20, '297191', 'apple', 1, 3, 3, 4, 'enabled', 'Apple Tablet 128gb', 'IMG_659fff00ab4ad6.04338973.jpg', '', '', '', ''),
+(21, '502418', 'apple', 1, 3, 4, 4, 'enabled', 'apple', 'IMG_659fff19cc8683.32328815.jpg', '', '', '', ''),
+(22, '198574', 'Ipad ', 1, 1, 6, 4, 'enabled', '128gb', 'IMG_65a0002e93cda7.54501938.jpg', '', '', '', ''),
+(23, '437405', 'test123', 1, 2, 5, 4, 'enabled', 'asdqwe', 'IMG_65a0048c38da78.15335833.png', '', '', '', ''),
+(24, '636402', 'test2135', 3, 3, 6, 4, 'enabled', 'asesafasfasfaf', 'IMG_65a00521112126.48306863.jpg', '', '', '', ''),
+(25, '556645', 'gTpcwq', 1, 1, 5, 4, 'enabled', 'gTpcwq', 'IMG_65a0079dd76291.06280406.jpg', '', '', '', ''),
+(26, '6769580', 'yahboom', 1, 3, 5, 4, 'enabled', 'Yahboom', 'IMG_65b51c6e55b933.21830352.jpg', '', '', '', ''),
+(27, '2485134', 'laptop with charger', 1, 3, 5, 4, 'enabled', 'laptop with charger', 'IMG_65b5cc928ee556.54555165.jpg', 'good', 'container 1', '43,000', ''),
+(28, '266957', 'pull up banner', 3, 3, 10, 1, 'enabled', 'dev kids - Pull Up Banner', 'IMG_65b6187b83ef60.26505028.jpg', 'good', 'container 2', '3000', ''),
+(29, '648385', 'glue gun', 3, 3, 5, 1, 'enabled', 'Glue Gun', 'IMG_65b6217c798772.96700470.jpg', 'good', 'container 1', '120', './images/barcode/item1706434940.png'),
+(31, '607550', 'papers ', 2, 1, 10, 1, 'enabled', 'Papers ', 'IMG_65b62479317950.06778313.jpg', 'good', 'container 3', '50', 'item1706435705.png'),
+(32, '088981', 'Memory Card', 1, 3, 10, 4, 'enabled', '128gb . SanDisk', 'IMG_65b62cd616d248.80556829.jpg', 'good', 'container 3', '1000', 'item1706437846.png'),
+(33, '792957', 'camera', 1, 3, 2, 1, 'enabled', 'SONY', 'IMG_65b62db46270a0.80610743.jpg', 'good', 'container 4', '40000', 'item1706438068.png');
 
 -- --------------------------------------------------------
 
@@ -324,7 +341,8 @@ INSERT INTO `item_feedback` (`item_id`, `user_id`, `feedback`, `date_of_feedback
 (20, 5, 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?', '2024-01-26 03:37:58'),
 (4, 4, 'nice lace', '2024-01-27 15:09:49'),
 (24, 4, 'lupet ni jake\n', '2024-01-27 18:47:28'),
-(5, 5, 'check comment', '2024-01-28 02:22:17');
+(5, 5, 'check comment', '2024-01-28 02:22:17'),
+(4, 5, 'nice lace', '2024-01-28 11:34:35');
 
 -- --------------------------------------------------------
 
@@ -365,7 +383,9 @@ INSERT INTO `users` (`user_id`, `user_firstname`, `user_lastname`, `user_email`,
 (1, 'Jake', 'Maangas', 'jakemantesnapay@gmail.com', '$2y$10$RIQWqDTz88hS713D1XbPIOAiicKGkmTpUr4FJnMSquvh4SbuGUj5S', 1, 1, 'IMG_6561f388e0cba6.26612895.png', 'active'),
 (2, 'john moren', 'dinela', 'jmdinela@gmail.com', '$2y$10$1o24hhJ6ibvCFNhaoD9jaeQW9PS59s7lDV3f2MtS3Uv3bLNhLqtJm', 0, 2, 'IMG_6562cc23d0aa35.57042786.jpg', 'active'),
 (4, 'jay Ar', 'De Guzman', 'jdeguzman@gmail.com', '$2y$10$wk28/l2eJqickXsyQR6tZO43Dj279xxm.8otU9pPbeE7Bk/stzjxq', 1, 4, 'IMG_65b53e80615ca2.06937730.jpg', 'active'),
-(5, 'Lee Angelo', 'Mollo', 'lamollo@gmail.com', '$2y$10$pzhfiX1L7fC723q5n6/xReHRBUrVLbdy2yuiOUsNG6Ay9Wjvr21Ey', 0, 4, 'IMG_6562d4d53d4b06.24348986.jpg', 'active');
+(5, 'Lee Angelo', 'Mollo', 'lamollo@gmail.com', '$2y$10$pzhfiX1L7fC723q5n6/xReHRBUrVLbdy2yuiOUsNG6Ay9Wjvr21Ey', 0, 4, 'IMG_6562d4d53d4b06.24348986.jpg', 'active'),
+(6, 'John Moren', 'Dinela', 'jmdnl@gmail.com', '$2y$10$BJxuBj104cTfQrnc1qZXFO/Qq6ZcjfKoZ24pZLYFOIQkLAI8s0hP.', 0, 1, 'defaultProfile.jpg', 'inactive'),
+(7, 'Jay Ar', 'De Guzman', 'jdg@gmail.com', '$2y$10$6EzlUhJvm1W3ZhSHd7BVqueSlkDXd56SVDZ1LKrDOhvlvcDS4V0EC', 0, 1, 'defaultProfile.jpg', 'active');
 
 --
 -- Indexes for dumped tables
@@ -459,13 +479,13 @@ ALTER TABLE `ctochistory`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `items_category`
@@ -489,7 +509,7 @@ ALTER TABLE `logs`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
