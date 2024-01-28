@@ -5,6 +5,8 @@ if (isset($_POST['userID'])) {
     $item_id = $_POST['itemID'];
     $user_id = $_POST['userID'];
     $itemQ = $_POST['itemQ'];
+    $nameItem = $_POST['nameItem'];
+    $userem = $_POST['userem'];
     try {
         $query = "INSERT INTO `history`(`history_item_id`, `history_quantity`, `history_user_id`, `history_status` , `history_due_date`) VALUES (?,?,?,?,?)";
         $stmt = $pdo->prepare($query);
@@ -80,10 +82,10 @@ if (isset($_POST['userID'])) {
                 <div class="container">
                     <h1>Your Item Request has been Approved!</h1>
                     <p>
-                        Dear ' . $userName . ',<br><br>
+                        Dear ' . $userem . ',<br><br>
                         We are pleased to inform you that your requested item has been approved! You can now proceed to collect or use the item as needed.<br><br>
                         Here are the details of your approved item:<br>
-                        <strong>Item Name:</strong> ' . $itemName . '<br>
+                        <strong>Item Name:</strong> ' . $nameItem . '<br>
                         <strong>Approval Status:</strong> Approved
                     </p>
                     <p>

@@ -66,6 +66,7 @@
                     <div class="">
                         <div class="card-body">
                             <input type="text" id="user_id" value="<?php echo $_SESSION['ID'] ?>" hidden>
+                            <input type="text" id="user_em" value="<?php echo $_SESSION['EM'] ?>" hidden>
                             <input type="text" class="item_id" value="<?php echo $row['item_id'] ?>" hidden>
                             <div style="display: flex; justify-content: space-between;">
                                 <h6 class="card-title d-inline-block text-truncate" style="max-width: 50%;"> <small><?php echo $row['item_name'] ?></small></h6>
@@ -153,8 +154,8 @@
                             color: #666;
                             font-family: "Montserrat";">
                             <b>${name}</b>
-                            <input type="number" min="0" id="item-name" value="${name}" hidden>
                         </h3>
+                        <input type="text" min="0" id="itemName" value="${name}" hidden>
                         <ul class="desc"
                          style="margin-top: 20px;
                              color: #777;">
@@ -165,7 +166,6 @@
                                     Item Description: <span id="item-desc">${description}</span> </br>
                                     <sub> Stocks: <span id="item-stoc">${quantity}</span> </sub> <br>
                                     <div><input  id="item-quan" type="number" min="0" max="${quantity}"></div>
-                                    
                                 </p>
                             </li>
                         </ul>
@@ -179,13 +179,21 @@
         //checkout button - for checkout the item
         $('.checkout-btn').click(function() {
             const itemQuan = document.getElementById("item-quan").value;
+            const nameItem = document.getElementById("itemName").value;
+            const userem = document.getElementById("user_em").value;
+
+            console.log(nameItem)
+            console.log(userem)
+            console.log(itemQuan)
             $.ajax({
                 type: "POST",
                 url: "./includes/itemCO.inc.php",
                 data: {
                     itemID: itemId,
                     itemQ: itemQuan,
-                    userID: user_id
+                    userID: user_id,
+                    nameItem: nameItem,
+                    userem : userem
                 },
                 success: function(response) {
                     if (response) {
