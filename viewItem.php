@@ -329,7 +329,8 @@ if ($itemId !== null) {
             },
             success: function(response) {
                 if (response) {
-                    console.log(response)
+                    alert(response)
+                    location.reload();
                 }
             }
         });

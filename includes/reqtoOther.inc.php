@@ -35,7 +35,8 @@ try {
         $stmt->bindParam(8, $toChapterId, PDO::PARAM_STR);
         
         $stmt->execute();
-        
+
+        echo " Requested Successfully!";
     } else {
         echo 'error';
     }
