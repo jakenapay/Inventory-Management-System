@@ -59,7 +59,7 @@ body.login-page {
 
 .userInput {
     width: 100%;
-}s
+}
 
 .title_description{
     text-align: left;
@@ -166,4 +166,14 @@ rect {
 blockquote.instagram-media {
     margin: 10px; /* Adjust the margin as needed */
     padding: 20px; /* Adjust the padding as needed */
+}
+
+
+/* Chapters */
+.title-chapter {
+    font-weight: 700;
+}
+
+.fa-pen-to-square {
+    background-color: var(--yellow);
 }
