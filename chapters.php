@@ -47,14 +47,21 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
         $('#myModal').on('shown.bs.modal', function() {
             $('#myInput').trigger('focus')
         });
+
+        setTimeout(function() {
+            document.getElementById("msg").style.display = "none"; // hide the element after 3 seconds
+        }, 5000);
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
 </head>
 
 <body>
 
     <?php include 'nav.php'; ?>
     <div id="wrapper">
-        <div class="section mt-5">
+        <div class="section mt-lg-5">
             <div class="row justify-content-center align-items-center mt-3 mb-2">
                 <div class="col-12 col-sm-12 col-md-10 col-lg-10">
                     <?php include 'includes/message.inc.php'; ?>
@@ -66,12 +73,12 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                         <div class="col-12 col-md-6 col-6">
                             <h3 class="m-0 font-weight-light title-chapter">Chapters</h3>
                         </div>
-                        <div class="col-12 col-md-6 col-6 ">
-                            <li class="nav-item nav-link d-flex justify-content-end" id="addNewChapter">
-                                <button type="button" class="btn btn-success btnGreen btn-sm" data-toggle="modal" data-target="#exampleModal">
+                        <div class="col-12 col-md-6 col-6">
+                            <div class="nav-item nav-link d-flex justify-content-end">
+                                <button type="button" id="addNewChapter" class="btn btn-success btnGreen btn-sm" data-toggle="modal" data-target="#exampleModal">
                                     <i class="fa-solid fa-plus addIcon"></i>New Chapter
                                 </button>
-                            </li>
+                            </div>
                         </div>
                     </div>
                     <hr>
@@ -96,47 +103,31 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 
                                     // Loop through the results
                                     foreach ($result as $row) { ?>
-                                        <!-- Show chapters with Card -->
-                                        <!-- <div class="col-12 col-md-4 col-lg-3 py-2">
-                                            <div class="card" style="height: 150px;">
-                                                <img class="card-img-top" src="..." alt="<?php echo $row['chapter_name']; ?>">
-                                                <div class="card-body">
-                                                    <div class="d-flex align-items-start flex-column">
-                                                        <div class="mb-auto p-2">
-                                                            <h5 class="card-text font-weight-bold text-capitalize pb-0 mb-0"><?php echo $row['chapter_name']; ?></h5>
-                                                            <p class="card-text text-secondary text-capitalize"><?php echo $row['chapter_address']; ?></p>
-                                                        </div>
-                                                        <div class="col-12 p-2">
-                                                            Edit icon 
-                                                            <a href="http://" class="edit-chapter-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#editModal" data-chapter-id="<?php echo $row['chapter_id']; ?>" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
-
                                         <tr>
                                             <td class="text-capitalize"><?php echo $row['chapter_id']; ?></td>
                                             <td class="text-capitalize"><?php echo $row['chapter_name']; ?></td>
                                             <td class="text-capitalize"><?php echo $row['chapter_address']; ?></td>
                                             <td class="text-capitalize">
-                                                <a href="http://" class="edit-chapter-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#editModal" data-chapter-id="<?php echo $row['chapter_id']; ?>" title="Edit"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a href="#" class="edit-chapter-btn" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#editModal" data-chapter-id="<?php echo $row['chapter_id']; ?>" title="Edit">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                 <?php }
                                 } catch (PDOException $e) {
                                     echo "Error: " . $e->getMessage();
-                                    header("location: ../items.php?m=" . $e->getMessage() . ""); // Failed
+                                    header("location: ../chapters.php?m=" . $e->getMessage() . ""); // Failed
                                     exit();
                                 }
                                 ?>
-                                </tables>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+
 
     <!-- Modal for new chapter -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

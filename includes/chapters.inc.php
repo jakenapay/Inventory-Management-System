@@ -51,13 +51,13 @@ if (isset($_POST['add-chapter-btn'])) {
             echo '
         <div class="col-12 col-md-12 col-lg-12">
             <div class="py-1">
-                <input type="text" class="form-control form-control-sm text-capitalize" id="chapter_id" name="chapter_id" placeholder="Chapter ID"  value="' . $chapterId . '">
+                <input type="hidden" class="form-control form-control-sm text-capitalize" id="id" name="id" placeholder="Chapter ID"  value="' . $chapterId . '">
                 <label for="chapter_name">Chapter Name</label>
-                <input type="text" class="form-control form-control-sm text-capitalize" id="chapter_name" name="chapter_name" placeholder="Chapter Name"  value="' . $chapterName . '">
+                <input type="text" class="form-control form-control-sm text-capitalize" id="name" name="name" placeholder="Chapter Name"  value="' . $chapterName . '">
             </div>
             <div class="py-1">
                 <label for="chapter_address">Chapter Address</label>
-                <input type="text" class="form-control form-control-sm text-capitalize" id="chapter_address" name="chapter_address" placeholder="Chapter Address"  value="' . $chapterAddress . '">
+                <input type="text" class="form-control form-control-sm text-capitalize" id="address" name="address" placeholder="Chapter Address"  value="' . $chapterAddress . '">
             </div>
         </div>
         ';
@@ -68,14 +68,20 @@ if (isset($_POST['add-chapter-btn'])) {
 } else if (isset($_POST['save-edit-chapter-btn'])) {
     include 'config.inc.php';
 
-    $chapterId = $_POST['chapter_id'];
-    $chapterName = $_POST['chapter_name'];
-    $chapterAddress = $_POST['chapter_address'];
+    $chapterId = $_POST['id'];
+    $chapterName = $_POST['name'];
+    $chapterAddress = $_POST['address'];
 
-    if (empty($chapterId) || empty($chapterName) || empty($chapterAddress)) {
-        header("location: ../chapters.php?m=ic&id=$chapterId&n=$chapterName&a=$chapterAddress");
-        exit();
-    }
+    // try {
+    //     if (empty($chapterId)) {
+    //         header("location: ../chapters.php?m=ic&id=$chapterId&n=$chapterName&a=$chapterAddress");
+    //         exit();
+    //     }
+    // } catch (PDOException $e) {
+    //     echo "Error: " . $e->getMessage();
+    //     header("location: ../chapters.php?m=" . $e->getMessage() . ""); // Failed
+    //     exit();
+    // }
 
     $sql = "UPDATE chapters SET chapter_name = :name, chapter_address = :address WHERE chapter_id = :id";
 
