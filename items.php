@@ -272,19 +272,19 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                 <!-- item location -->
                                 <div class="col-md-6 py-1">
                                     <label for="item_location">Item Location</label>
-                                    <input type="text" min="0" class="form-control form-control-sm" id="item_location" name="item_location" placeholder="item_location" required>
+                                    <input type="text" min="0" class="form-control form-control-sm" id="item_location" name="item_location" placeholder="Item Location" required>
                                 </div>
 
                                 <!-- item item_condition -->
                                 <div class="col-md-6 py-1">
                                     <label for="item_condition">Item Condition</label>
-                                    <input type="text" min="0" class="form-control form-control-sm" id="item_condition" name="item_condition" placeholder="item_condition" required>
+                                    <input type="text" min="0" class="form-control form-control-sm" id="item_condition" name="item_condition" placeholder="Item Condition" required>
                                 </div>
 
                                 <!-- item item_cost -->
                                 <div class="col-md-6 py-1">
-                                    <label for="item_cost">Item Location</label>
-                                    <input type="text" min="0" class="form-control form-control-sm" id="item_cost" name="item_cost" placeholder="item_cost" required>
+                                    <label for="item_cost">Item Cost</label>
+                                    <input type="text" min="0" class="form-control form-control-sm" id="item_cost" name="item_cost" placeholder="Item Cost" required>
                                 </div>
 
 
