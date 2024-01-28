@@ -18,7 +18,7 @@ function get_records($pdo, $start, $limit,)
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-$limit = 6; // Number of records per page
+$limit = 8; // Number of records per page
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 $start = ($page - 1) * $limit;
 

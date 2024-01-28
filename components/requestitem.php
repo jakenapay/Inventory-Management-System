@@ -1,192 +1,78 @@
 <?php
-include '../includes/config.inc.php';
+include_once '../includes/config.inc.php';
 session_start();
 
+$user_chapter = $_SESSION['CH'];
+$query = "SELECT * FROM ctochistory 
+INNER JOIN chapters ON ctochistory.from_chapter = chapters.chapter_id
+INNER JOIN items ON ctochistory.history_item_id = items.item_id
+WHERE to_chapter = $user_chapter;
+"
+;
 ?>
-<div class="row">
-    <div class="col-lg-9 col-sm-6 col-sm-12 m-auto mt-5">
-        <div class="form-check form-check-inline">
-            <ul>
-                <li>
-                    <label class="form-check-label">
-                        <input type="radio" class="form-check-input" name="category" id="" value="0" onclick="getRadioValue()" checked>
-                        All
-                    </label>
-                </li>
-            </ul>
-            <?php
-            $rbtnNameQuery = "SELECT * FROM `items_category`";
-            $rbtnQ = $pdo->prepare($rbtnNameQuery);
-            $rbtnQ->execute();
+<div class="row justify-content-center align-items-center">
+    <div class="col-12 col-sm12 col-md-12 col-lg-12">
+        <div class="table-responsive">
+            <table id="example" class="table table-hover table-sm" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Item Id</th>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>User</th>
+                        <th>Request Status</th>
+                        <th>Date Requested</th>
+                        <th>Return?</th>
+                        <th>Date Returned</th>
+                        <th>Due Date</th>
+                        <th>Chapter</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $stmt = $pdo->query($query);
+                    // Execute the query
+                    $stmt->execute();
+                    // Fetch all rows as an associative array
+                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    // Process the result (e.g., display it)
+                    foreach ($result as $row) {
+                        // Access columns by their names, e.g., $row['column_name']
+                    ?>
+                        <tr>
+                            <td><?php echo $row['history_id'] ?></td>
+                            <td><?php echo $row['history_item_id'] ?></td>
+                            <td><?php echo $row['item_name'] ?></td>
+                            <td><?php echo $row['history_quantity'] ?></td>
+                            <td><?php echo $row['history_user_id'] ?></td>
+                            <td><?php echo $row['history_status'] ?></td>
+                            <td><?php echo $row['history_date'] ?></td>
+                            <td><?php echo $row['history_isReturn'] ?></td>
+                            <td><?php echo $row['history_date_return'] ?></td>
+                            <td><?php echo $row['history_due_date'] ?></td>
+                            <td><?php echo $row['chapter_name'] ?></td>
+                            
 
-            $rbtnData = $rbtnQ->fetchAll(PDO::FETCH_ASSOC);
+                            <td>
+                                <?php
+                                    echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['history_id'] . '"  title="Approve"><i class="fa-solid fa-check"></i></a>';
+                                    echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['history_id'] . '" title="Decline"><i class="fa-solid fa-x"></i></a>';
+                                ?>
 
-            if ($rbtnData) {
+                            </td>
+                        </tr>
 
-                foreach ($rbtnData as $itemCateg) { ?>
-                    <ul>
-                        <li>
-                            <label class="form-check-label">
-                                <input type="radio" class="form-check-input" name="category" id="" value="<?php echo $itemCateg['item_category_id'] ?>" onclick="getRadioValue()">
+                    <?php } ?>
+                </tbody>
 
-                                <?php echo $itemCateg['item_category_name'] ?>
-                            </label>
-                        </li>
-                    </ul>
-                <?php } ?>
-            <?php } else {
-            } ?>
-        </div>
-    </div>
-    <div class="col-lg-3 col-sm-6 col-sm-12 m-auto mt-5">
-        <div class=" input-group">
-            <div class="input-group">
-                <input type="search" class="form-control rounded" id="itemSearch" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                <button type="button" class="btn btn-outline-success btnSearch" data-mdb-ripple-init>search</button>
-            </div>
+            </table>
         </div>
     </div>
 </div>
 
 
-<div id="ItemList">
-    <?php
-    function get_total_records($pdo)
-    {
-        $userChapter = $_SESSION["CH"];
-        $result = $pdo->query("SELECT COUNT(item_id) AS total FROM items WHERE item_chapter = $userChapter");
-
-        // $result->bindParam(":ItemCategory" , $itemCategory, PDO::PARAM_INT);
-        $row = $result->fetch(PDO::FETCH_ASSOC);
-        return $row['total'];
-    }
-
-    function get_records($pdo, $start, $limit,)
-    {
-        $userChapter = $_SESSION["CH"];
-        $sql = "SELECT * FROM items  WHERE item_chapter = $userChapter  LIMIT $start, $limit   ";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute();
-
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-    $limit = 6; // Number of records per page
-    $page = isset($_GET['page']) ? $_GET['page'] : 1;
-    $start = ($page - 1) * $limit;
-
-
-    $total_records = get_total_records($pdo, $start, $limit);
-    $total_pages = ceil($total_records / $limit);
-
-    $records = get_records($pdo, $start, $limit);
-
-    // Ensure current page is within valid range
-    $current_page = max(1, min($start, $total_pages));
-
-    // Calculate previous and next page numbers
-    $previous_page = max(1, $current_page - 1);
-    $next_page = min($total_pages, $current_page + 1);
-
-    ?>
-
-
-
-    <div class="row">
-
-        <?php 
-        foreach ($records as $row) { ?>
-            <div class="col-md-6 col-sm-12 col-lg-4  mt-5">
-                <div class="card">
-                    <div class="imgBox">
-                        <img src="./images/items/<?php echo $row['item_image'] ?>" alt="<?php echo $row['item_name'] ?>" class="mouse">
-                    </div>
-                    <div class="contentBox">
-                        <input type="text" id="user_id" value="<?php echo $_SESSION['ID'] ?>" hidden>
-                        <input type="text" class="item_id" value="<?php echo $row['item_id'] ?>" hidden>
-                        <h3><?php echo $row['item_name'] ?></h3>
-
-
-                        <?php if ($row['item_status'] == "disabled" or $row['item_quantity'] == 0) { ?>
-                            <h6 class="price" style="color: red;">Item Unavialable</h6>
-                            <button type="button" class="btn buy btn-primary btn-view " data-bs-toggle="modal" data-bs-target="#itemDetails" data-item-id="<?php echo $row['item_id'] ?>" disabled hidden>
-                                Request
-                            </button>
-                        <?php } else { ?>
-                            <!-- <button type="button" class="btn buy btn-primary btn-view " data-bs-toggle="modal" data-bs-target="#itemDetails" data-item-id="<?php echo $row['item_id'] ?>">
-                                View
-                            </button> -->
-                            <a href="viewItem.php?itemid=<?php echo $row['item_id'] ?>">
-                                <button type="button" class="btn buy btn-primary">
-                                    View
-                                </button>
-                            </a>
-                        <?php } ?>
-                    </div>
-                </div>
-            </div>
-        <?php } ?>
-    </div>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination m-auto mt-5">
-            <li class="page-item"><a class="page-link" href="?page=<?= $previous_page ?>">Previous</a></li>
-            <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                <li class="page-item"><a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a></li>
-            <?php endfor; ?>
-            <li class="page-item"><a class="page-link" href="?page=<?= $next_page ?>">Next</a></li>
-        </ul>
-    </nav>
-
-    <?php {
-    } ?>
-
-
-
-    <script>
-        function getRadioValue() {
-            // Get the selected radio button
-            var selectedOption = document.querySelector('input[name="category"]:checked');
-
-            console.log(selectedOption);
-            // Check if a radio button is selected
-            if (selectedOption.value == 0) {
-
-                location.reload();
-            }
-
-            if (selectedOption) {
-                // Display the selected value
-                var selectedCategoryId = selectedOption.value;
-                // Use AJAX to fetch data based on the selected category
-                $.ajax({
-                    type: "POST",
-                    url: "./includes/itemlist.inc.php", // Replace with your server-side script
-                    data: {
-                        categoryId: selectedCategoryId,
-                    },
-                    success: function(response) {
-                        $('#ItemList').html(response);
-                    }
-                });
-            } else {
-                alert("Please select an option");
-            }
-        }
-
-
-        $('.btnSearch').click(function() {
-
-            var Sdata = document.getElementById('itemSearch').value;
-            alert(Sdata);
-            // Perform AJAX request using jQuery
-            $.ajax({
-                type: 'POST',
-                url: './includes/searchQuery.inc.php',
-                data: {
-                    querySearch: Sdata
-                },
-                success: function(response) {
-                    $('#ItemList').html(response);
-                }
-            });
-        });
-    </script>
+<script>
+    new DataTable('#example');
+</script>
