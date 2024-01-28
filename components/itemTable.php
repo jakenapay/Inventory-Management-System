@@ -199,11 +199,11 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                 <div class="modal-footer d-flex justify-content-between align-items-center">
                     <!-- To get the user's ID and record it for history (log) -->
                     <input type="hidden" name="user_id" id="user_id" value="<?php echo $_SESSION['ID']; ?>">
-                    <button type="button" class="btn btn-secondary btn-sm btnRed" data-bs-dismiss="modal">Close</button>
+                    <!-- <button type="button" class="btn btn-secondary btn-sm btnRed" data-bs-dismiss="modal">Close</button>
                     <div class="d-flex justify-content-between align-items-center">
                         <input type="number" class="form-control form-control-sm mx-1" name="req-quantity" id="req-quantity" placeholder="1-1000" min="1" max="1000" required>
                         <input type="submit" class="btn btn-sm btnGreen text-light mx-1" name="req-item-btn" value="Request">
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
