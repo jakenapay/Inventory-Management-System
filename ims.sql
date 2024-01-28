@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2024 at 12:58 PM
+-- Generation Time: Jan 28, 2024 at 01:28 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -33,7 +33,7 @@ CREATE TABLE `cart` (
   `inCart` tinyint(1) NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `date_out` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `cart`
@@ -66,7 +66,8 @@ INSERT INTO `cart` (`user_id`, `item_id`, `inCart`, `date_added`, `date_out`) VA
 (4, 4, 1, '2024-01-27 19:58:32', '2024-01-28 03:58:32'),
 (1, 11, 1, '2024-01-23 06:47:52', '2024-01-23 14:47:52'),
 (5, 24, 1, '2024-01-28 02:27:13', '2024-01-28 10:27:13'),
-(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00');
+(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
+(1, 29, 1, '2024-01-28 12:18:47', '2024-01-28 20:18:47');
 
 -- --------------------------------------------------------
 
@@ -77,7 +78,7 @@ INSERT INTO `cart` (`user_id`, `item_id`, `inCart`, `date_added`, `date_out`) VA
 CREATE TABLE `category` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `category`
@@ -97,7 +98,7 @@ CREATE TABLE `chapters` (
   `chapter_id` int(11) NOT NULL,
   `chapter_name` varchar(255) NOT NULL,
   `chapter_address` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `chapters`
@@ -129,7 +130,7 @@ CREATE TABLE `ctochistory` (
   `history_due_date` date DEFAULT NULL,
   `from_chapter` varchar(255) DEFAULT NULL,
   `to_chapter` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ctochistory`
@@ -159,7 +160,7 @@ CREATE TABLE `history` (
   `isReturned` int(1) NOT NULL,
   `history_date_return` varchar(30) NOT NULL,
   `history_due_date` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `history`
@@ -188,7 +189,8 @@ INSERT INTO `history` (`history_id`, `history_item_id`, `history_quantity`, `his
 (20, 4, 5, 5, 'approved', '2024-01-28 11:35:06', 0, '', '2024-02-01'),
 (21, 4, 1, 5, 'approved', '2024-01-28 11:39:32', 0, '', '2024-01-31'),
 (22, 4, 1, 5, 'approved', '2024-01-28 11:39:42', 0, '', '2024-01-31'),
-(23, 4, 1, 5, 'approved', '2024-01-28 11:54:00', 0, '', '2024-01-31');
+(23, 4, 1, 5, 'approved', '2024-01-28 11:54:00', 0, '', '2024-01-31'),
+(24, 29, 1, 1, 'approved', '2024-01-28 12:20:43', 1, '2024-01-28 8:20:43', '2024-02-01');
 
 --
 -- Triggers `history`
@@ -235,34 +237,44 @@ CREATE TABLE `items` (
   `item_chapter` int(11) NOT NULL,
   `item_status` enum('enabled','disabled','','') NOT NULL,
   `item_description` varchar(255) NOT NULL,
-  `item_image` varchar(255) NOT NULL
+  `item_image` varchar(255) NOT NULL,
+  `item_condition` varchar(30) NOT NULL,
+  `item_location` varchar(30) NOT NULL,
+  `item_cost` varchar(30) NOT NULL,
+  `barcode_img` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`item_id`, `unique_item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_status`, `item_description`, `item_image`) VALUES
-(1, '335733', 'Galaxy Tab A Tablet', 1, 3, 136, 3, 'enabled', '4gb 256gb color black', 'IMG_655c634aa37f87.97220155.jpg'),
-(2, '2792718', 'A4 Bond Paper', 3, 2, 1, 2, 'enabled', 'A4 Hardcopy', 'IMG_655c63420ed111.72246669.png'),
-(4, '976760', 'ID Lace version 5', 3, 3, 38, 4, 'enabled', 'Version 5, Black & Orange', 'IMG_65b54f67295394.14973149.jpg'),
-(5, '7542994', 'Jumping wires long', 3, 1, 29, 4, 'enabled', 'Rainbow colors', ''),
-(7, '275921', 'Gel Ink Pen about to delete', 3, 1, 28, 5, 'disabled', 'Black', 'IMG_65350cc0dbc2f1.96755226.'),
-(8, '111111', 'Jungle Juice', 2, 2, 17, 2, 'disabled', '350ml Mango, Apple, Grapes, & Orange', 'IMG_650896c28445b9.58710873.jpg'),
-(10, '22222', 'Sunglasses', 3, 3, 20, 1, 'enabled', 'Rayband, Black frame', 'IMG_650898af7e3799.65129257.jpg'),
-(11, '33333', 'Hotdog', 2, 1, 27, 1, 'enabled', 'Jumbo, Tender Juicy, Pure Foods, 12pcs per pack', 'IMG_650899879ba091.62117593.png'),
-(14, '4444', 'yoon', 1, 1, 2, 2, 'enabled', 'grdg', 'IMG_655c5d66a35232.43841368.png'),
-(15, '555555', 'wa ', 1, 1, 2322, 3, 'enabled', 'dasdasda', 'IMG_655b09bf1c7bc7.78434158.png'),
-(17, '1611297', 'test', 1, 3, 2, 4, 'enabled', 'test1', 'IMG_659ff7beabd170.57412449.jpg'),
-(18, '7481585', 'test2', 1, 1, 0, 4, 'enabled', '123456', 'IMG_659ff9f9239e03.99338571.jpg'),
-(19, '282344', 'test3', 2, 3, 0, 4, 'enabled', 'test3', 'IMG_659ffa70106748.76927790.jpg'),
-(20, '297191', 'apple', 1, 3, 3, 4, 'enabled', 'Apple Tablet 128gb', 'IMG_659fff00ab4ad6.04338973.jpg'),
-(21, '502418', 'apple', 1, 3, 4, 4, 'enabled', 'apple', 'IMG_659fff19cc8683.32328815.jpg'),
-(22, '198574', 'Ipad ', 1, 1, 6, 4, 'enabled', '128gb', 'IMG_65a0002e93cda7.54501938.jpg'),
-(23, '437405', 'test123', 1, 2, 5, 4, 'enabled', 'asdqwe', 'IMG_65a0048c38da78.15335833.png'),
-(24, '636402', 'test2135', 3, 3, 6, 4, 'enabled', 'asesafasfasfaf', 'IMG_65a00521112126.48306863.jpg'),
-(25, '556645', 'gTpcwq', 1, 1, 5, 4, 'enabled', 'gTpcwq', 'IMG_65a0079dd76291.06280406.jpg'),
-(26, '6769580', 'yahboom', 1, 3, 5, 4, 'enabled', 'Yahboom', 'IMG_65b51c6e55b933.21830352.jpg');
+INSERT INTO `items` (`item_id`, `unique_item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_status`, `item_description`, `item_image`, `item_condition`, `item_location`, `item_cost`, `barcode_img`) VALUES
+(1, '335733', 'Galaxy Tab A Tablet', 1, 3, 137, 3, 'enabled', '4gb 256gb color black', 'IMG_655c634aa37f87.97220155.jpg', '', '', '', ''),
+(2, '2792718', 'A4 Bond Paper', 3, 2, 2, 2, 'enabled', 'A4 Hardcopy', 'IMG_655c63420ed111.72246669.png', '', '', '', ''),
+(4, '976760', 'ID Lace version 5', 3, 3, 31, 4, 'enabled', 'Version 5, Black & Orange', 'IMG_65b54f67295394.14973149.jpg', '', '', '', ''),
+(5, '7542994', 'Jumping wires long', 3, 1, 30, 4, 'enabled', 'Rainbow colors', '', '', '', '', ''),
+(7, '275921', 'Gel Ink Pen about to delete', 3, 1, 29, 5, 'disabled', 'Black', 'IMG_65350cc0dbc2f1.96755226.', '', '', '', ''),
+(8, '111111', 'Jungle Juice', 2, 2, 19, 2, 'disabled', '350ml Mango, Apple, Grapes, & Orange', 'IMG_650896c28445b9.58710873.jpg', '', '', '', ''),
+(10, '22222', 'Sunglasses', 3, 3, 22, 1, 'enabled', 'Rayband, Black frame', 'IMG_650898af7e3799.65129257.jpg', '', '', '', ''),
+(11, '33333', 'Hotdog', 2, 1, 30, 1, 'enabled', 'Jumbo, Tender Juicy, Pure Foods, 12pcs per pack', 'IMG_650899879ba091.62117593.png', '', '', '', ''),
+(14, '4444', 'yoon', 1, 1, 3, 2, 'enabled', 'grdg', 'IMG_655c5d66a35232.43841368.png', '', '', '', ''),
+(15, '555555', 'wa ', 1, 1, 2322, 3, 'enabled', 'dasdasda', 'IMG_655b09bf1c7bc7.78434158.png', '', '', '', ''),
+(17, '1611297', 'test', 1, 3, 2, 4, 'enabled', 'test1', 'IMG_659ff7beabd170.57412449.jpg', '', '', '', ''),
+(18, '7481585', 'test2', 1, 1, 0, 4, 'enabled', '123456', 'IMG_659ff9f9239e03.99338571.jpg', '', '', '', ''),
+(19, '282344', 'test3', 2, 3, 0, 4, 'enabled', 'test3', 'IMG_659ffa70106748.76927790.jpg', '', '', '', ''),
+(20, '297191', 'apple', 1, 3, 3, 4, 'enabled', 'Apple Tablet 128gb', 'IMG_659fff00ab4ad6.04338973.jpg', '', '', '', ''),
+(21, '502418', 'apple', 1, 3, 4, 4, 'enabled', 'apple', 'IMG_659fff19cc8683.32328815.jpg', '', '', '', ''),
+(22, '198574', 'Ipad ', 1, 1, 6, 4, 'enabled', '128gb', 'IMG_65a0002e93cda7.54501938.jpg', '', '', '', ''),
+(23, '437405', 'test123', 1, 2, 5, 4, 'enabled', 'asdqwe', 'IMG_65a0048c38da78.15335833.png', '', '', '', ''),
+(24, '636402', 'test2135', 3, 3, 6, 4, 'enabled', 'asesafasfasfaf', 'IMG_65a00521112126.48306863.jpg', '', '', '', ''),
+(25, '556645', 'gTpcwq', 1, 1, 5, 4, 'enabled', 'gTpcwq', 'IMG_65a0079dd76291.06280406.jpg', '', '', '', ''),
+(26, '6769580', 'yahboom', 1, 3, 5, 4, 'enabled', 'Yahboom', 'IMG_65b51c6e55b933.21830352.jpg', '', '', '', ''),
+(27, '2485134', 'laptop with charger', 1, 3, 5, 4, 'enabled', 'laptop with charger', 'IMG_65b5cc928ee556.54555165.jpg', 'good', 'container 1', '43,000', ''),
+(28, '266957', 'pull up banner', 3, 3, 10, 1, 'enabled', 'dev kids - Pull Up Banner', 'IMG_65b6187b83ef60.26505028.jpg', 'good', 'container 2', '3000', ''),
+(29, '648385', 'glue gun', 3, 3, 5, 1, 'enabled', 'Glue Gun', 'IMG_65b6217c798772.96700470.jpg', 'good', 'container 1', '120', './images/barcode/item1706434940.png'),
+(31, '607550', 'papers ', 2, 1, 10, 1, 'enabled', 'Papers ', 'IMG_65b62479317950.06778313.jpg', 'good', 'container 3', '50', 'item1706435705.png'),
+(32, '088981', 'Memory Card', 1, 3, 10, 4, 'enabled', '128gb . SanDisk', 'IMG_65b62cd616d248.80556829.jpg', 'good', 'container 3', '1000', 'item1706437846.png'),
+(33, '792957', 'camera', 1, 3, 2, 1, 'enabled', 'SONY', 'IMG_65b62db46270a0.80610743.jpg', 'good', 'container 4', '40000', 'item1706438068.png');
 
 -- --------------------------------------------------------
 
@@ -273,7 +285,7 @@ INSERT INTO `items` (`item_id`, `unique_item_id`, `item_name`, `item_category`, 
 CREATE TABLE `items_category` (
   `item_category_id` int(11) NOT NULL,
   `item_category_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `items_category`
@@ -293,7 +305,7 @@ INSERT INTO `items_category` (`item_category_id`, `item_category_name`) VALUES
 CREATE TABLE `items_unit_of_measure` (
   `item_uom_id` int(11) NOT NULL,
   `item_uom_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `items_unit_of_measure`
@@ -315,7 +327,7 @@ CREATE TABLE `item_feedback` (
   `user_id` int(10) NOT NULL,
   `feedback` varchar(225) NOT NULL,
   `date_of_feedback` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `item_feedback`
@@ -343,7 +355,7 @@ CREATE TABLE `logs` (
   `log_user` int(11) NOT NULL,
   `log_type` enum('modify','return','request','add','') NOT NULL,
   `log_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -361,7 +373,7 @@ CREATE TABLE `users` (
   `user_chapter` int(11) NOT NULL,
   `user_image` varchar(255) NOT NULL,
   `user_status` enum('active','inactive') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -467,7 +479,7 @@ ALTER TABLE `ctochistory`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `items`
