@@ -23,7 +23,7 @@ if ($itemId !== null) {
     $itemId = intval($itemId);
 
     // Prepare and execute the query
-    $query = "SELECT * FROM items INNER JOIN items_category AS itemCategory ON items.item_category = itemCategory.item_category_id INNER JOIN items_unit_of_measure AS iuom ON items.item_measure = iuom.item_uom_id
+    $query = "SELECT * FROM items INNER JOIN items_category AS itemCategory ON items.item_category = itemCategory.item_category_id INNER JOIN items_unit_of_measure AS iuom ON items.item_measure = iuom.item_uom_id INNER JOIN chapters 
     WHERE items.item_id = :itemid ";
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':itemid', $itemId, PDO::PARAM_INT);
@@ -31,9 +31,6 @@ if ($itemId !== null) {
 
     // Fetch data as an associative array
     $itemData = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        // Output or use the data as needed
-    ;
 } else {
     echo "Item ID not provided";
 }
@@ -72,8 +69,6 @@ if ($itemId !== null) {
             <div class="left col-md-6 col-sm-12 col-lg-6">
                 <input type="text" id="itemId" value="<?php echo $itemData['item_id'] ?>" hidden>
                 <input type="text" id="userId" value="<?php echo $_SESSION['ID'] ?>" hidden>
-                <input type="text" id="userEmail" value="<?php echo $_SESSION['EM'] ?>" hidden>
-                <input type="text" id="itemName" value="<?php echo $itemData['item_name'] ?>" hidden>
                 <img class="image-resize image-responsive" src="./images/items/<?php echo $itemData['item_image'] ?>">
             </div>
             <div class="right col-md-6 col-sm-12 col-lg-6">
@@ -108,6 +103,10 @@ if ($itemId !== null) {
                 }
                 ?>
                 <h6 class="categorie text-capitalize"><?php echo $chapterName; ?></h6>
+                <input type="text" id="chapterName" value="<?php echo $itemData["item_chapter"] ?>" hidden>
+                <input type="text" id="fromChapter" value="<?php echo $_SESSION['CH'] ?>" hidden>
+                <input type="text" id="userEmail" value="<?php echo $_SESSION['EM'] ?>" hidden>
+                <input type="text" id="itemName" value="<?php echo $itemData['item_name'] ?>" hidden>
                 <ul class="desc">
                     <li><?php echo $itemData['item_description']; ?></li>
                     <li>Item Unit Of Measure: <?php echo $itemData['item_uom_name']; ?> </li>
@@ -123,6 +122,11 @@ if ($itemId !== null) {
                 <div class="my-3 row d-flex align-items-center justify-content-start">
                     <div class="col-12 col-md-6 col-lg-6">
                         <button class="btn btn-primary w-100 item">Request</button>
+                        <?php
+                        if ($_SESSION['CH'] != $itemData['item_chapter']) {
+                        ?>
+                            <button class="btn btn-primary btn-block-lg w-100 req-other">Request to Other</button>
+                        <?php } ?>
                     </div>
                     <div class="col-12 col-md-6 col-lg-6">
                         <button class="btn cart">
@@ -149,19 +153,8 @@ if ($itemId !== null) {
                     <h3 style="margin-left: 20px;"><b>Comments</b></h3>
                     <p style="margin-left: 20px;">Write your Feedback</p>
                     <textarea name="comment" id="comment" cols="75" rows="3" class="d-inline" style="margin-left: 20px;"></textarea><button class="btn btn-primary post" style="margin-bottom: 65px; margin-left: 10px;">Post</button>
-                    <!-- <span class="text-muted float-right mb-3"><button class="btn btn-primary post" style="margin-bottom: 30px; margin-left: 10px;">Post</button></span> -->
                 </div>
-                <!-- Card -->
-                <!-- <div class="comment-widgets"> -->
-                <!-- Comment Row -->
-                <!-- <div class="d-flex flex-row comment-row m-t-0">
-                        <div class="p-2"><img src="https://i.imgur.com/Ur43esv.jpg" alt="user" width="50" class="rounded-circle"></div>
-                        <div class="comment-text ">
-                            <h6 class="font-medium"><?php echo $_SESSION['FN'] . ' ' . $_SESSION['LN'] ?></h6> <span class="m-b-15 d-block"><textarea name="comment" id="comment" cols="30" rows="3"></textarea></span>
-                            <div class="comment-footer"> <span class="text-muted float-right"><button class="btn btn-primary  post">POST</button></span> </div>
-                        </div>
-                    </div>
-                </div> Card -->
+
             </div>
             <?php
             include './components/itemcomment.php';
@@ -175,7 +168,6 @@ if ($itemId !== null) {
 <script>
     var itemId = document.getElementById('itemId').value;
     var userId = document.getElementById('userId').value;
-
     var itemQuantityFromPHP = document.getElementById('itemQuantity').innerText;
 
     console.log("Item Quantity in JavaScript:", itemQuantityFromPHP);
@@ -224,11 +216,9 @@ if ($itemId !== null) {
     $('.item').click(() => {
         var itemQuan = document.getElementById('counter-value').value;
         var userEM = document.getElementById('userEmail').value;
-        var itemName =document.getElementById('itemName').value;
+        var itemName = document.getElementById('itemName').value;
 
-        // Get the content of the HTML element
-     
-        // Log the value to the console (you can use it as needed)
+
         $.ajax({
             type: "POST",
             url: "./includes/itemreq.inc.php",
@@ -242,6 +232,7 @@ if ($itemId !== null) {
             success: function(response) {
                 if (response) {
                     // working na Pwede na lagay yung PHP MAILER DITO
+                    alert(response);
                     location.reload();
                 }
             }
@@ -307,6 +298,36 @@ if ($itemId !== null) {
             success: function(response) {
                 if (response) {
                     location.reload();
+                }
+            }
+        });
+
+    })
+
+    $('.req-other').click(function() {
+        var itemQuan = document.getElementById('counter-value').value;
+        var toChapterId = document.getElementById('chapterName').value;
+        var fromChapterId = document.getElementById('fromChapter').value;
+        console.log(itemId);
+        console.log(userId);
+        console.log(itemQuan);
+        console.log(toChapterId);
+        console.log(fromChapterId);
+
+
+        $.ajax({
+            type: "post",
+            url: "./includes/reqtoOther.inc.php",
+            data: {
+                itemId: itemId,
+                userId: userId,
+                itemQuan: itemQuan,
+                toChapterId: toChapterId,
+                fromChapterId: fromChapterId,
+            },
+            success: function(response) {
+                if (response) {
+                    console.log(response)
                 }
             }
         });
