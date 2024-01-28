@@ -178,9 +178,6 @@
         //checkout button - for checkout the item
         $('.checkout-btn').click(function() {
             const itemQuan = document.getElementById("item-quan").value;
-            console.log(itemQuan);
-            console.log(itemId);
-            console.log(user_id);
             $.ajax({
                 type: "POST",
                 url: "./includes/itemCO.inc.php",
@@ -192,36 +189,10 @@
                 success: function(response) {
                     if (response) {
                         // if success lagay yung PHP MAILER DITO
-                        alert(response);
+                       location.reload();
                     }
                 }
             });
 
         })
-
-        // function increment() {
-        //     var inputElement = document.getElementById("item-quan");
-        //     var currentValue = parseInt(inputElement.value);
-        //     var maxValue = parseInt(inputElement.getAttribute("max"));
-
-        //     if (currentValue < maxValue) {
-        //         inputElement.value = currentValue + 1;
-        //     } else {
-        //         // Optionally, handle the case where the maximum value is reached
-        //         alert("Maximum quantity reached!");
-        //     }
-        // }
-
-        // function decrement() {
-        //     var inputElement = document.getElementById("item-quan");
-        //     var currentValue = parseInt(inputElement.value);
-        //     var minValue = parseInt(inputElement.getAttribute("min"));
-
-        //     if (currentValue > minValue) {
-        //         inputElement.value = currentValue - 1;
-        //     } else {
-        //         // Optionally, handle the case where the minimum value is reached
-        //         alert("Minimum quantity reached!");
-        //     }
-        // }
     </script>
