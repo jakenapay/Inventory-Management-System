@@ -125,9 +125,8 @@ if (isset($_POST['send-code-btn'])) {
         // Execute the query
         $stmt->execute();
     
-        // Check if the update was successful
         if ($stmt->rowCount() === 0) {
-            header("location: sendToEmail.php?m=404");
+            header("location: emailCode.php?m=cuf");
             exit();
         }
     } catch (PDOException $e) {
