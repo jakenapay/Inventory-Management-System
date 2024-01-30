@@ -1,11 +1,11 @@
 <?php
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
-require '../PHPMailer-master/PHPMailer-master/src/Exception.php';
-require '../PHPMailer-master/PHPMailer-master/src/PHPmailer.php';
-require '../PHPMailer-master/PHPMailer-master/src/SMTP.php';
+
+require '../PHPMailer-master/src/Exception.php';
+require '../PHPMailer-master/src/PHPmailer.php';
+require '../PHPMailer-master/src/SMTP.php';
 
 session_start();
 

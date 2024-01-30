@@ -25,10 +25,7 @@ if (isset($_POST['userID'])) {
         $stmt->bindParam(3, $user_id, PDO::PARAM_INT);
         $stmt->bindValue(4, "approved", PDO::PARAM_STR);
         $stmt->bindValue(5, $due_date_str, PDO::PARAM_STR);
-        // Assuming $history_date is the date you want to insert
-        // $history_date = date("Y-m-d H:i:s");
-        // $stmt->bindParam(5, $history_date, PDO::PARAM_STR);
-
+  
         $stmt->execute();
 
         $receiver = 'yugo2801@gmail.com';
@@ -79,23 +76,23 @@ if (isset($_POST['userID'])) {
                 </style>
             </head>
             <body>
-                <div class="container">
-                    <h1>Your Item Request has been Approved!</h1>
+            <div class="container">
+                <h1>Your Item Request has been Approved!</h1>
                     <p>
-                        Dear ' . $userem . ',<br><br>
+                        Dear ' . $userEM . ',<br><br>
                         We are pleased to inform you that your requested item has been approved! You can now proceed to collect or use the item as needed.<br><br>
                         Here are the details of your approved item:<br>
-                        <strong>Item Name:</strong> ' . $nameItem . '<br>
+                        <strong>Item Name: ' . $itemName . '</strong> <br>
                         <strong>Approval Status:</strong> Approved
                     </p>
                     <p>
-                        If you have any further questions or need assistance, feel free to contact us.<br>
-                        <a class="button" href="">Visit Our Website</a>
+                    Click This Button To Post Feedback of This Item.<br>
+                    <a href="' . $url . '"> <button class="button">Item Link </button></a>
                     </p>
-                    <div class="footer">
-                        Thank you for using our service. We appreciate your business!
-                    </div>
+                <div class="footer">
+                    Thank you for using our service. We appreciate your business!
                 </div>
+             </div>
             </body>
             </html>';
 
