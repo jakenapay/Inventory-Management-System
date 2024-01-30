@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 28, 2024 at 01:35 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jan 29, 2024 at 02:26 AM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `cart` (
   `inCart` tinyint(1) NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `date_out` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `cart`
@@ -43,31 +43,32 @@ INSERT INTO `cart` (`user_id`, `item_id`, `inCart`, `date_added`, `date_out`) VA
 (5, 1, 1, '2024-01-10 02:23:36', '2024-01-10 10:23:36'),
 (5, 2, 1, '2024-01-07 04:39:48', '2024-01-07 12:39:48'),
 (5, 2, 1, '2024-01-07 04:39:48', '2024-01-07 12:39:48'),
-(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
+(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
 (5, 2, 1, '2024-01-07 04:39:48', '2024-01-07 12:39:48'),
-(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
+(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
 (5, 10, 1, '2023-12-27 11:28:25', '2023-12-27 19:28:25'),
-(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
+(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
 (5, 5, 1, '2024-01-28 02:22:22', '2024-01-28 10:22:22'),
-(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
+(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
 (5, 1, 1, '2024-01-10 02:23:36', '2024-01-10 10:23:36'),
-(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
+(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
 (5, 5, 1, '2024-01-28 02:22:22', '2024-01-28 10:22:22'),
 (5, 1, 1, '2024-01-10 02:23:36', '2024-01-10 10:23:36'),
 (5, 1, 1, '2024-01-10 02:23:36', '2024-01-10 10:23:36'),
 (5, 1, 1, '2024-01-10 02:23:36', '2024-01-10 10:23:36'),
-(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
+(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
 (5, 5, 1, '2024-01-28 02:22:22', '2024-01-28 10:22:22'),
-(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
-(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
+(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
+(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
 (4, 19, 1, '2024-01-28 01:49:42', '2024-01-28 09:49:42'),
 (5, 17, 1, '2024-01-20 06:06:07', '2024-01-20 14:06:07'),
-(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
-(4, 4, 1, '2024-01-27 19:58:32', '2024-01-28 03:58:32'),
+(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
+(4, 4, 1, '2024-01-29 00:42:17', '2024-01-29 08:42:17'),
 (1, 11, 1, '2024-01-23 06:47:52', '2024-01-23 14:47:52'),
 (5, 24, 1, '2024-01-28 02:27:13', '2024-01-28 10:27:13'),
-(5, 4, 1, '2024-01-28 11:54:00', '2024-01-28 19:54:00'),
-(1, 29, 1, '2024-01-28 12:18:47', '2024-01-28 20:18:47');
+(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
+(1, 29, 1, '2024-01-28 12:18:47', '2024-01-28 20:18:47'),
+(4, 17, 0, '2024-01-28 14:28:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -78,7 +79,7 @@ INSERT INTO `cart` (`user_id`, `item_id`, `inCart`, `date_added`, `date_out`) VA
 CREATE TABLE `category` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `category`
@@ -98,7 +99,7 @@ CREATE TABLE `chapters` (
   `chapter_id` int(11) NOT NULL,
   `chapter_name` varchar(255) NOT NULL,
   `chapter_address` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `chapters`
@@ -130,7 +131,7 @@ CREATE TABLE `ctochistory` (
   `history_due_date` date DEFAULT NULL,
   `from_chapter` varchar(255) DEFAULT NULL,
   `to_chapter` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `ctochistory`
@@ -142,7 +143,15 @@ INSERT INTO `ctochistory` (`history_id`, `history_item_id`, `history_quantity`, 
 (3, 2, 1, 4, 'process', '2024-01-27 20:33:50', 0, NULL, '2024-02-04', '4', '2'),
 (4, 10, 1, 4, 'process', '2024-01-27 22:08:51', 0, NULL, '2024-02-04', '4', '1'),
 (5, 10, 1, 4, 'process', '2024-01-27 22:35:40', 0, NULL, '2024-02-04', '4', '1'),
-(6, 17, 1, 1, 'process', '2024-01-27 23:00:41', 0, NULL, '2024-02-04', '1', '4');
+(6, 17, 1, 1, 'process', '2024-01-27 23:00:41', 0, NULL, '2024-02-04', '1', '4'),
+(7, 1, 1, 4, 'process', '2024-01-28 13:00:55', 0, NULL, '2024-02-04', '4', '3'),
+(8, 1, 1, 4, 'process', '2024-01-28 13:04:32', 0, NULL, '2024-02-04', '4', '3'),
+(9, 1, 1, 4, 'process', '2024-01-28 13:07:42', 0, NULL, '2024-02-04', '4', '3'),
+(10, 10, 1, 4, 'process', '2024-01-28 13:07:59', 0, NULL, '2024-02-04', '4', '1'),
+(11, 1, 1, 4, 'process', '2024-01-28 16:31:52', 0, NULL, '2024-02-05', '4', '3'),
+(12, 1, 1, 4, 'process', '2024-01-28 16:33:04', 0, NULL, '2024-02-05', '4', '3'),
+(13, 1, 1, 4, 'process', '2024-01-28 16:34:16', 0, NULL, '2024-02-05', '4', '3'),
+(14, 1, 1, 4, 'process', '2024-01-28 16:34:33', 0, NULL, '2024-02-05', '4', '3');
 
 -- --------------------------------------------------------
 
@@ -160,37 +169,29 @@ CREATE TABLE `history` (
   `isReturned` int(1) NOT NULL,
   `history_date_return` varchar(30) NOT NULL,
   `history_due_date` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `history`
 --
 
 INSERT INTO `history` (`history_id`, `history_item_id`, `history_quantity`, `history_user_id`, `history_status`, `history_date`, `isReturned`, `history_date_return`, `history_due_date`) VALUES
-(1, 17, 1, 5, 'approved', '2024-01-23 06:24:56', 1, '2024-01-23 2:24:56', '2024-01-27'),
 (2, 5, 5, 5, 'approved', '2024-01-23 06:25:00', 1, '2024-01-23 2:25:00', ''),
-(3, 17, 1, 5, 'approved', '2024-01-23 06:25:03', 1, '2024-01-23 2:25:03', '2024-01-27'),
-(4, 20, 1, 5, 'approved', '2024-01-20 06:09:10', 1, '2024-01-20 2:09:10', '2024-01-27'),
 (5, 4, 3, 4, 'approved', '2024-01-21 08:38:50', 1, '2024-01-21 4:38:50', '2024-01-28'),
-(6, 11, 1, 1, 'approved', '2024-01-21 08:32:41', 1, '2024-01-21 4:32:41', '2024-01-28'),
 (7, 5, 1, 4, 'approved', '2024-01-21 08:38:30', 1, '2024-01-21 4:38:30', '2024-01-28'),
-(8, 10, 1, 1, 'approved', '2024-01-23 06:40:26', 1, '2024-01-23 2:40:26', '2024-01-30'),
-(9, 10, 1, 1, 'approved', '2024-01-23 06:41:45', 1, '2024-01-23 2:41:45', '2024-01-30'),
-(10, 11, 1, 1, 'approved', '2024-01-23 06:48:00', 1, '2024-01-23 2:48:00', '2024-01-30'),
-(11, 20, 1, 5, 'approved', '2024-01-24 15:51:17', 0, '', '2024-01-31'),
 (12, 4, 1, 4, 'approved', '2024-01-27 19:58:32', 0, '', '2024-02-04'),
 (13, 1, 1, 4, 'approved', '2024-01-27 21:28:07', 0, '', '2024-02-04'),
-(14, 19, 4, 4, 'approved', '2024-01-28 01:49:42', 0, '', '2024-02-04'),
-(15, 25, 1, 5, 'approved', '2024-01-28 02:06:08', 1, '2024-01-28 10:06:08', '2024-02-04'),
-(16, 25, 1, 5, 'approved', '2024-01-28 02:05:54', 1, '2024-01-28 10:05:54', '2024-02-04'),
 (17, 4, 3, 5, 'approved', '2024-01-28 02:12:32', 0, '', '2024-02-04'),
 (18, 5, 1, 5, 'approved', '2024-01-28 02:22:22', 0, '', '2024-02-04'),
-(19, 24, 2, 5, 'approved', '2024-01-28 02:27:13', 0, '', '2024-02-04'),
 (20, 4, 5, 5, 'approved', '2024-01-28 11:35:06', 0, '', '2024-02-01'),
 (21, 4, 1, 5, 'approved', '2024-01-28 11:39:32', 0, '', '2024-01-31'),
 (22, 4, 1, 5, 'approved', '2024-01-28 11:39:42', 0, '', '2024-01-31'),
 (23, 4, 1, 5, 'approved', '2024-01-28 11:54:00', 0, '', '2024-01-31'),
-(24, 29, 1, 1, 'approved', '2024-01-28 12:20:43', 1, '2024-01-28 8:20:43', '2024-02-01');
+(24, 29, 1, 1, 'approved', '2024-01-28 12:20:43', 1, '2024-01-28 8:20:43', '2024-02-01'),
+(25, 1, 1, 4, 'approved', '2024-01-28 13:06:43', 0, '', '2024-01-31'),
+(26, 1, 3, 4, 'approved', '2024-01-28 14:57:16', 1, '2024-01-28 10:57:16', '2024-01-31'),
+(29, 4, 1, 5, 'approved', '2024-01-29 00:40:50', 1, '2024-01-29 8:40:50', '2024-02-01'),
+(30, 4, 1, 4, 'approved', '2024-01-29 00:42:17', 0, '', '2024-02-01');
 
 --
 -- Triggers `history`
@@ -242,33 +243,19 @@ CREATE TABLE `items` (
   `item_location` varchar(30) NOT NULL,
   `item_cost` varchar(30) NOT NULL,
   `barcode_img` varchar(60) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `items`
 --
 
 INSERT INTO `items` (`item_id`, `unique_item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_status`, `item_description`, `item_image`, `item_condition`, `item_location`, `item_cost`, `barcode_img`) VALUES
-(1, '335733', 'Galaxy Tab A Tablet', 1, 3, 137, 3, 'enabled', '4gb 256gb color black', 'IMG_655c634aa37f87.97220155.jpg', '', '', '', ''),
-(2, '2792718', 'A4 Bond Paper', 3, 2, 2, 2, 'enabled', 'A4 Hardcopy', 'IMG_655c63420ed111.72246669.png', '', '', '', ''),
-(4, '976760', 'ID Lace version 5', 3, 3, 31, 4, 'enabled', 'Version 5, Black & Orange', 'IMG_65b54f67295394.14973149.jpg', '', '', '', ''),
-(5, '7542994', 'Jumping wires long', 3, 1, 30, 4, 'enabled', 'Rainbow colors', '', '', '', '', ''),
-(7, '275921', 'Gel Ink Pen about to delete', 3, 1, 29, 5, 'disabled', 'Black', 'IMG_65350cc0dbc2f1.96755226.', '', '', '', ''),
-(8, '111111', 'Jungle Juice', 2, 2, 19, 2, 'disabled', '350ml Mango, Apple, Grapes, & Orange', 'IMG_650896c28445b9.58710873.jpg', '', '', '', ''),
-(10, '22222', 'Sunglasses', 3, 3, 22, 1, 'enabled', 'Rayband, Black frame', 'IMG_650898af7e3799.65129257.jpg', '', '', '', ''),
-(11, '33333', 'Hotdog', 2, 1, 30, 1, 'enabled', 'Jumbo, Tender Juicy, Pure Foods, 12pcs per pack', 'IMG_650899879ba091.62117593.png', '', '', '', ''),
-(14, '4444', 'yoon', 1, 1, 3, 2, 'enabled', 'grdg', 'IMG_655c5d66a35232.43841368.png', '', '', '', ''),
-(15, '555555', 'wa ', 1, 1, 2322, 3, 'enabled', 'dasdasda', 'IMG_655b09bf1c7bc7.78434158.png', '', '', '', ''),
-(17, '1611297', 'test', 1, 3, 2, 4, 'enabled', 'test1', 'IMG_659ff7beabd170.57412449.jpg', '', '', '', ''),
-(18, '7481585', 'test2', 1, 1, 0, 4, 'enabled', '123456', 'IMG_659ff9f9239e03.99338571.jpg', '', '', '', ''),
-(19, '282344', 'test3', 2, 3, 0, 4, 'enabled', 'test3', 'IMG_659ffa70106748.76927790.jpg', '', '', '', ''),
-(20, '297191', 'apple', 1, 3, 3, 4, 'enabled', 'Apple Tablet 128gb', 'IMG_659fff00ab4ad6.04338973.jpg', '', '', '', ''),
-(21, '502418', 'apple', 1, 3, 4, 4, 'enabled', 'apple', 'IMG_659fff19cc8683.32328815.jpg', '', '', '', ''),
-(22, '198574', 'Ipad ', 1, 1, 6, 4, 'enabled', '128gb', 'IMG_65a0002e93cda7.54501938.jpg', '', '', '', ''),
-(23, '437405', 'test123', 1, 2, 5, 4, 'enabled', 'asdqwe', 'IMG_65a0048c38da78.15335833.png', '', '', '', ''),
-(24, '636402', 'test2135', 3, 3, 6, 4, 'enabled', 'asesafasfasfaf', 'IMG_65a00521112126.48306863.jpg', '', '', '', ''),
-(25, '556645', 'gTpcwq', 1, 1, 5, 4, 'enabled', 'gTpcwq', 'IMG_65a0079dd76291.06280406.jpg', '', '', '', ''),
-(26, '6769580', 'yahboom', 1, 3, 5, 4, 'enabled', 'Yahboom', 'IMG_65b51c6e55b933.21830352.jpg', '', '', '', ''),
+(1, '335733', 'Galaxy Tab A Tablet', 1, 3, 136, 3, 'enabled', '4gb 256gb color black', 'IMG_65b6ef174c0736.96179317.jpg', '', '', '', ''),
+(2, '2792718', 'A4 Bond Paper', 3, 2, 2, 2, 'enabled', 'A4 Hardcopy', 'IMG_65b6ef565740b1.02912169.jpg', '', '', '', ''),
+(4, '976760', 'ID Lace version 5', 3, 3, 30, 4, 'enabled', 'Version 5, Black & Orange', 'IMG_65b6f234396e25.48633346.jpg', '', '', '', ''),
+(5, '7542994', 'Jumping wires long', 3, 1, 30, 4, 'enabled', 'Rainbow colors', 'IMG_65b6ef8adbd544.13403523.jpg', '', '', '', ''),
+(7, '275921', 'Gel Ink Pen ', 3, 1, 29, 5, 'enabled', 'Black', 'IMG_65b6f037ad2397.33467649.jpg', '', '', '', ''),
+(26, '6769580', 'yahboom', 1, 3, 5, 4, 'enabled', 'Yahboom', 'IMG_65b6efa698ae38.87036472.jpg', '', '', '', ''),
 (27, '2485134', 'laptop with charger', 1, 3, 5, 4, 'enabled', 'laptop with charger', 'IMG_65b5cc928ee556.54555165.jpg', 'good', 'container 1', '43,000', ''),
 (28, '266957', 'pull up banner', 3, 3, 10, 1, 'enabled', 'dev kids - Pull Up Banner', 'IMG_65b6187b83ef60.26505028.jpg', 'good', 'container 2', '3000', ''),
 (29, '648385', 'glue gun', 3, 3, 5, 1, 'enabled', 'Glue Gun', 'IMG_65b6217c798772.96700470.jpg', 'good', 'container 1', '120', './images/barcode/item1706434940.png'),
@@ -285,7 +272,7 @@ INSERT INTO `items` (`item_id`, `unique_item_id`, `item_name`, `item_category`, 
 CREATE TABLE `items_category` (
   `item_category_id` int(11) NOT NULL,
   `item_category_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `items_category`
@@ -305,7 +292,7 @@ INSERT INTO `items_category` (`item_category_id`, `item_category_name`) VALUES
 CREATE TABLE `items_unit_of_measure` (
   `item_uom_id` int(11) NOT NULL,
   `item_uom_name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `items_unit_of_measure`
@@ -327,7 +314,7 @@ CREATE TABLE `item_feedback` (
   `user_id` int(10) NOT NULL,
   `feedback` varchar(225) NOT NULL,
   `date_of_feedback` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `item_feedback`
@@ -355,7 +342,7 @@ CREATE TABLE `logs` (
   `log_user` int(11) NOT NULL,
   `log_type` enum('modify','return','request','add','') NOT NULL,
   `log_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -374,16 +361,16 @@ CREATE TABLE `users` (
   `user_image` varchar(255) NOT NULL,
   `user_status` enum('active','inactive') NOT NULL,
   `user_code` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`user_id`, `user_firstname`, `user_lastname`, `user_email`, `user_password`, `user_category`, `user_chapter`, `user_image`, `user_status`, `user_code`) VALUES
-(1, 'Jake', 'Maangas', 'jakemantesnapay@gmail.com', '$2y$10$RIQWqDTz88hS713D1XbPIOAiicKGkmTpUr4FJnMSquvh4SbuGUj5S', 1, 1, 'IMG_6561f388e0cba6.26612895.png', 'active', 0),
+(1, 'Jake', 'Maangas', 'jakemantesnapay@gmail.com', '$2y$10$RIQWqDTz88hS713D1XbPIOAiicKGkmTpUr4FJnMSquvh4SbuGUj5S', 1, 1, 'IMG_65b6eeb7dc2d67.53853231.jpg', 'active', 0),
 (2, 'john moren', 'dinela', 'jmdinela@gmail.com', '$2y$10$1o24hhJ6ibvCFNhaoD9jaeQW9PS59s7lDV3f2MtS3Uv3bLNhLqtJm', 0, 2, 'IMG_6562cc23d0aa35.57042786.jpg', 'active', 0),
-(4, 'jay Ar', 'De Guzman', 'jdeguzman@gmail.com', '$2y$10$wk28/l2eJqickXsyQR6tZO43Dj279xxm.8otU9pPbeE7Bk/stzjxq', 1, 4, 'IMG_65b53e80615ca2.06937730.jpg', 'active', 0),
+(4, 'jay Ar', 'De Guzman', 'deguzmanjayar9@gmail.com', '$2y$10$j7dAlO.jJHJN4oScGaEZYeiP/TGC2.qOZoW/70ERoDWCYB7qugtw.', 1, 4, 'IMG_65b53e80615ca2.06937730.jpg', 'active', 3293),
 (5, 'Lee Angelo', 'Mollo', 'lamollo@gmail.com', '$2y$10$pzhfiX1L7fC723q5n6/xReHRBUrVLbdy2yuiOUsNG6Ay9Wjvr21Ey', 0, 4, 'IMG_6562d4d53d4b06.24348986.jpg', 'active', 0),
 (6, 'John Moren', 'Dinela', 'jmdnl@gmail.com', '$2y$10$BJxuBj104cTfQrnc1qZXFO/Qq6ZcjfKoZ24pZLYFOIQkLAI8s0hP.', 0, 1, 'defaultProfile.jpg', 'inactive', 0),
 (7, 'Jay Ar', 'De Guzman', 'jdg@gmail.com', '$2y$10$6EzlUhJvm1W3ZhSHd7BVqueSlkDXd56SVDZ1LKrDOhvlvcDS4V0EC', 0, 1, 'defaultProfile.jpg', 'active', 0);
@@ -474,13 +461,13 @@ ALTER TABLE `chapters`
 -- AUTO_INCREMENT for table `ctochistory`
 --
 ALTER TABLE `ctochistory`
-  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `items`

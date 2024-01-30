@@ -330,7 +330,7 @@ if ($itemId !== null) {
             success: function(response) {
                 if (response) {
                     alert(response)
-                    location.reload();
+                    location .reload();
                 }
             }
         });

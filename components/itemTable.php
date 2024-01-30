@@ -152,10 +152,10 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                 echo '<a href="http://" class="enabled-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#enabledModal" data-item-id="' . $row['ID'] . '" title="Enable"><i class="fa-solid fa-check"></i></a>';
                                             }
 
-                                            echo '<a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Request"><i class="fa-solid fa-truck-arrow-right"></i></a>';
+                                            // echo '<a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Request"><i class="fa-solid fa-truck-arrow-right"></i></a>';
                                         } else {
                                             echo '<a href="http://" class="view-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#viewModal" data-item-id="' . $row['ID'] . '" title="View"><i class="fa-solid fa-eye"></i></a>';
-                                            echo '<a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Request"><i class="fa-solid fa-truck-arrow-right"></i></a>';
+                                            // echo '<a href="http://" target="" rel="noopener noreferrer" data-toggle="tooltip" title="Request"><i class="fa-solid fa-truck-arrow-right"></i></a>';
                                         }
                                         ?>
                                     </td>
