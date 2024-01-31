@@ -42,7 +42,9 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     <!-- Javascript for Datatables.net  -->
     <script>
         $(document).ready(function() {
-            $('table').DataTable();
+            $('table').DataTable({
+        "order": [[0, "desc"]] // Assuming user ID is in the first column (index 0)
+    });
         });
 
         $(function() {
