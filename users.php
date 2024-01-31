@@ -219,7 +219,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="row justify-content-between align-items-center user-view">
+                        <div class="row justify-content-between align-items-center user-view-edit">
                             <!-- This is where data being fetch from users.inc.php -->
                         </div>
                         <a href="http://" target="_blank" rel="noopener noreferrer"></a>
@@ -267,7 +267,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                         'user_id': userId
                     },
                     success: function(response) {
-                        $('.user-view').html(response);
+                        $('.user-view-edit').html(response);
                         $('#editModal').modal('show');
                     }
                 });

@@ -4,7 +4,6 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $database = "ims";
-
 try {
     // Create a PDO connection
     $pdo = new PDO("mysql:host=$servername;dbname=$database;charset=utf8", $username, $password);

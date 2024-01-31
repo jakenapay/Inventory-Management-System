@@ -25,9 +25,9 @@ if (isset($_POST['send-code-btn'])) {
         return $randomString;
     }
 
-    require 'PHPMailer-master/PHPMailer-master/src/Exception.php';
-    require 'PHPMailer-master/PHPMailer-master/src/PHPmailer.php';
-    require 'PHPMailer-master/PHPMailer-master/src/SMTP.php';
+    require("phpmailer/src/Exception.php");
+    require("phpmailer/src/PHPMailer.php");
+    require("phpmailer/src/SMTP.php");
 
     $code = generateRandomString($length = 4);
     $msg = '<!DOCTYPE html>
@@ -112,7 +112,7 @@ if (isset($_POST['send-code-btn'])) {
     $mail->isHTML(true); //this line is to allow the html
     $mail->Subject    = $subj;
     $mail->Body    = $msg;
-    $mail->send();
+    
 
     try {
         // Prepare the SQL statement
@@ -126,8 +126,10 @@ if (isset($_POST['send-code-btn'])) {
         $stmt->execute();
     
         if ($stmt->rowCount() === 0) {
-            header("location: emailCode.php?m=cuf");
+            header("location: emailCode.php?m=unf");
             exit();
+        } else {
+            $mail->send();
         }
     } catch (PDOException $e) {
         // Handle any PDO exceptions
@@ -140,7 +142,6 @@ if (isset($_POST['send-code-btn'])) {
     exit();
 }
 
-?>
 ?>
 
 <!DOCTYPE html>
