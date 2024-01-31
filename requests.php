@@ -47,9 +47,9 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             $('#myInput').trigger('focus')
         });
 
-        setTimeout(function() {
-            document.getElementById("msg").style.display = "none"; // hide the element after 3 seconds
-        }, 5000);
+        // setTimeout(function() {
+        //     document.getElementById("msg").style.display = "none"; // hide the element after 3 seconds
+        // }, 5000);
     </script>
 </head>
 
@@ -270,9 +270,9 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                         echo 'No';
                                                     } else {
                                                         if ($row['userID'] == $_SESSION['ID']) { ?>
-                                                           <!-- //<a href="./viewItem.php?itemid=<?php echo $row['itemID'] ?>" class="feedback-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#feedbackModal" data-item-id="' . $row['itemID'] . '"  data-user-id = "' . $_SESSION['ID'] . '" title="feedback"><i class="fa-sharp fa-solid fa-comments fa-" style="color: #07f223;"></i></a> -->
-                                                           <a href="./viewItem.php?itemid=<?php echo $row['itemID'] ?>" class="feedback-btn"  title="feedback"><i class="fa-sharp fa-solid fa-comments fa-" style="color: #07f223;"></i></a>
-                                                        <?php } else {
+                                                            <!-- //<a href="./viewItem.php?itemid=<?php echo $row['itemID'] ?>" class="feedback-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#feedbackModal" data-item-id="' . $row['itemID'] . '"  data-user-id = "' . $_SESSION['ID'] . '" title="feedback"><i class="fa-sharp fa-solid fa-comments fa-" style="color: #07f223;"></i></a> -->
+                                                            <a href="./viewItem.php?itemid=<?php echo $row['itemID'] ?>" class="feedback-btn" title="feedback"><i class="fa-sharp fa-solid fa-comments fa-" style="color: #07f223;"></i></a>
+                                                    <?php } else {
                                                             echo 'Yes';
                                                         }
                                                     }
@@ -285,18 +285,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                 <td>
                                                     <?php echo $row['dueDate'] ?>
                                                 </td>
-                                                <!-- <?php if ($_SESSION['CT'] == 1) { ?>
-                                                    <td>
-                                                    <?php
-                                                            if ($row['isReturned'] == 0) {
-                                                                echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['ID'] . '"  title="Approve"><i class="fa-solid fa-check"></i></a>';
-                                                                echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['ID'] . '" title="Decline"><i class="fa-solid fa-x"></i></a>';
-                                                            } else {
-                                                                // echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['ID'] . '" title="Approve" ><i class="fa-solid fa-check"></i></a>';
-                                                                // echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['ID'] . '" title="Decline" ><i class="fa-solid fa-x"></i></a>';
-                                                            }
-                                                        } ?>
-                                                    </td> -->
+
                                                 <?php if ($_SESSION['CT'] == 1) { ?>
                                                     <td>
                                                     <?php
@@ -304,11 +293,8 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                         echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['ID'] . '" title="Returng"><i class="fa-solid fa-check"></i></a>';
                                                         // echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['ID'] . '" title="Decline"><i class="fa-solid fa-x"></i></a>';
                                                     } else {
-                                                        // echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['ID'] . '" title="Approve" ><i class="fa-solid fa-check"></i></a>';
-                                                        // echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['ID'] . '" title="Decline" ><i class="fa-solid fa-x"></i></a>';
                                                     }
                                                 } ?>
-
                                             </tr>
                                 <?php
                                         }
@@ -340,8 +326,16 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input type="hidden" name="approve_request_id" id="approve_request_id">
+                        <input type="hidden" name="approve_request_id" id="approve_request_id" value="1">
                         <h6>Is the User Returning This Item?</h6>
+                        <p>
+                            <span>
+                                <small>Note: <br>
+                                    Wait 3 Sec to Click approve Button
+                                    to Avoid Data Traffic
+                                </small>
+                            </span>
+                        </p>
                     </div>
                     <div class="modal-footer d-flex justify-content-between">
                         <input type="" name="user_id" id="user_id" value="<?php echo $_SESSION['ID']; ?>" hidden>
@@ -354,37 +348,37 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     </div>
 
     <!-- Item Feedback modal -->
-    <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModal" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <!-- <form action="includes/" method="post"> -->
-            <div class="modal-content">
+    <!-- <div class="modal fade" id="feedbackModal" tabindex="-1" role="dialog" aria-labelledby="feedbackModal" aria-hidden="true">
+        <div class="modal-dialog" role="document"> -->
+    <!-- <form action="includes/" method="post"> -->
+    <!-- <div class="modal-content">
                 <div class="modal-header">
                     <h6 class="modal-title font-weight-bold" id="exampleModalLabel">Feedback</h6>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div>
-                <div class="modal-body">
+                </div> -->
+    <!-- <div class="modal-body">
                     <input type="hidden" name="feedback_item_id" id="feedback_item_id">
-                    <div class="comment-widgets ">
-                        <!-- Comment Row -->
-                        <div class="d-flex flex-row  m-t-0 ">
-                            <div class="p-2"><img src="./images/userProfiles/<?php echo $_SESSION['UI'] ?>" alt="user" width="50" class="rounded-circle"></div>
+                    <div class="comment-widgets "> -->
+    <!-- Comment Row -->
+    <!-- <div class="d-flex flex-row  m-t-0 "> -->
+    <!-- <div class="p-2"><img src="./images/userProfiles/<?php echo $_SESSION['UI'] ?>" alt="user" width="50" class="rounded-circle"></div>
                             <div class="comment-text ">
                                 <h6 class=""><small><?php echo $_SESSION['FN'] . " " . $_SESSION['LN'] ?> </small></h6> <span class="m-b-15 d-block"> <textarea id="w3review" name="w3review" rows="3" cols="40"></textarea> </span>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer d-flex justify-content-between">
+                </div> -->
+    <!-- <div class="modal-footer d-flex justify-content-between">
                     <input type="" name="user_id" id="uID" value="<?php echo $_SESSION['ID']; ?>" hidden>
                     <button type="button" class="btn btn-secondary btnRed btn-sm px-2" data-bs-dismiss="modal">Close</button>
                     <input type="submit" class="btn btnGreen text-light btn-sm mx-1" name="approve-request-item-btn" id="feedbackBtn" value="Feedback">
-                </div>
-            </div>
+                </div> -->
+    <!-- </div>
             </form>
         </div>
-    </div>
+    </div> -->
 
     <!-- Declining request item modal -->
     <!-- <div class="modal fade" id="declineModal" tabindex="-1" role="dialog" aria-labelledby="declineModal" aria-hidden="true">
@@ -411,16 +405,14 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
         </div>
     </div> -->
 
-
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script> -->
+    </script>
 
 </body>
 
@@ -446,6 +438,9 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                 success: function(response) {
                     $('#approve_request_id').val(itemId);
                     $('#approveModal').modal('show');
+
+
+                    console.log(response);
                 }
             });
         });

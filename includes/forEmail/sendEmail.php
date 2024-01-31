@@ -1,12 +1,13 @@
 <?php
 session_start();
 
+
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-
-require '../PHPMailer-master/PHPMailer-master/src/Exception.php';
-require '../PHPMailer-master/PHPMailer-master/src/PHPmailer.php';
-require '../PHPMailer-master/PHPMailer-master/src/SMTP.php';
+//Load Composer's autoloader
+require '../vendor/autoload.php';
 
 
 
