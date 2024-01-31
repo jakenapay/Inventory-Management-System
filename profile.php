@@ -28,6 +28,7 @@ try {
         $firstname = $row['user_firstname'];
         $lastname = $row['user_lastname'];
         $email = $row['user_email'];
+        $position = $row['user_position'];
         $category = $row['user_category'];
         $chapter = $row['user_chapter'];
         $old_img = $row['user_image'];
@@ -152,6 +153,33 @@ try {
                                     foreach($result as $row) {
                                         $category_id = $row['category_id'];
                                         $category_name = $row['category_name'];
+                                    }
+                                } catch (PDOException $e) {
+                                    // Handle database connection or query errors
+                                    echo "Error: " . $e->getMessage();
+                                }
+                                ?>
+                                <!-- POSITION -->
+                                <div class="col-12 col-md-12 col-lg-12 py-1">
+                                    <label for="user_position">Position</label>
+                                    <input type="text" class="form-control form-control-sm text-capitalize" id="user_position" name="user_position" placeholder="Position" required value="<?php echo $position;?>" disabled>
+                                </div>
+                                <!-- Select the session category from database -->
+                                <?php
+                                try {
+                                    $sql = "SELECT chapter_id, chapter_name FROM chapters WHERE chapter_id = {$_SESSION['CH']}";
+
+                                    // Prepare the query
+                                    $stmt = $pdo->prepare($sql);
+                                    $stmt->execute();
+
+                                    // Fetch the no. of session category but in category name
+                                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                    // Process the result
+                                    foreach($result as $row) {
+                                        $chapter_id = $row['chapter_id'];
+                                        $chapter_name = $row['chapter_name'];
                                     }
                                 } catch (PDOException $e) {
                                     // Handle database connection or query errors
