@@ -411,7 +411,8 @@
                   <?php if (password_verify('requestedItemsByMonth', $graphToPrint)) { ?>
                       <!-- 2 -->
                       <div class="mx-5">
-                          <h3 class="title">Insights: Approved and Returned Items Over Time</h3>
+                          <!-- requestedItemsByMonth -->
+                          <h3 class="title mt-5">Insights: Approved and Returned Items Over Time</h3>
                           <p>
                               The month with the highest number of accepted requests is: <?php echo $highestMonthAccepted; ?><br>
                               The month with the highest number of returned items is: <?php echo $highestMonthReturned; ?>
@@ -432,8 +433,15 @@
                                           <td><?php echo $dataPoint['returned']; ?></td>
                                       </tr>
                                   <?php endforeach; ?>
+                                  <!-- Summary Row -->
+                                  <tr>
+                                      <td><strong>Total</strong></td>
+                                      <td><strong><?php echo array_sum(array_column($dataPoints, 'y')); ?></strong></td>
+                                      <td><strong><?php echo array_sum(array_column($dataPoints, 'returned')); ?></strong></td>
+                                  </tr>
                               </tbody>
                           </table>
+
                           <!-- Footer -->
                           <footer>
                               <br>
@@ -444,7 +452,8 @@
                   <?php } else if (password_verify('mostRequestedItems', $graphToPrint)) { ?>
                       <!-- 3 -->
                       <div class="mx-5">
-                          <h2 class="title">Insights: Most Requested Items</h2>
+                          <!-- mostRequestedItems -->
+                          <h2 class="title mt-5">Insights: Most Requested Items</h2>
                           <?php
                             $maxRequestsItem = null;
                             $maxRequests = 0;
@@ -457,7 +466,7 @@
                                 }
                             }
                             ?>
-                          <p>Items with the highest number of requests, such as "<?php echo $maxRequestsItem; ?>", are likely to be restocked more frequently.</p>
+                          <p>Items with the highest number of requests, such as "<strong><?php echo $maxRequestsItem; ?></strong>", are likely to be restocked more frequently.</p>
                           <table border="1">
                               <thead>
                                   <tr>
@@ -472,6 +481,12 @@
                                           <td><?php echo $dataPoint['y']; ?></td>
                                       </tr>
                                   <?php endforeach; ?>
+
+                                  <!-- Total Row -->
+                                  <tr>
+                                      <td><strong>Total</strong></td>
+                                      <td><strong><?php echo array_sum(array_column($barChartDataPoints, 'y')); ?></strong></td>
+                                  </tr>
                               </tbody>
                           </table>
                           <!-- Footer -->
@@ -483,8 +498,8 @@
 
                   <?php } else if (password_verify('yourTopItems', $graphToPrint)) { ?>
                       <div class="mx-5">
-                          <h2 class="title">Insights: Most Requested Items by You</h2>
-
+                          <!-- yourTopItems -->
+                          <h2 class="title mt-5">Insights: Most Requested Items by You</h2>
                           <?php
                             $maxRequestsItemTwo = null;
                             $maxRequestsTwo = 0;
@@ -498,8 +513,7 @@
                             }
                             ?>
 
-                          <p>Items with the highest number of requests by you, such as "<?php echo $maxRequestsItemTwo; ?>", are likely to be restocked more frequently.</p>
-
+                          <p>Items with the highest number of requests by you, such as "<strong><?php echo $maxRequestsItemTwo; ?></strong>", are likely to be restocked more frequently.</p>
                           <table border="1">
                               <thead>
                                   <tr>
@@ -514,6 +528,12 @@
                                           <td><?php echo $dataPoint['y']; ?></td>
                                       </tr>
                                   <?php endforeach; ?>
+
+                                  <!-- Total Row -->
+                                  <tr>
+                                      <td><strong>Total</strong></td>
+                                      <td><strong><?php echo array_sum(array_column($barChartTwoDataPoints, 'y')); ?></strong></td>
+                                  </tr>
                               </tbody>
                           </table>
 
@@ -528,6 +548,7 @@
                   <?php } else if (password_verify('chaptersTotalTransactions', $graphToPrint) || (password_verify('chaptersTotalRequestCount', $graphToPrint))) { ?>
                       <!-- 5 -->
                       <div class="mx-5">
+                          <!-- chaptersTotalTransactions -->
                           <?php
                             $maxTransactionsChapter = null;
                             $maxTransactionsCount = 0;
@@ -541,9 +562,8 @@
                             }
                             ?>
 
-                          <h2 class="title">Insights: Users Total Requests Count</h2>
-
-                          <p>The chapter with the most total transaction count as of <?php echo date("F j, Y H:i:s"); ?> is the chapter "<?php echo $maxTransactionsChapter; ?>".</p>
+                          <h2 class="title mt-5">Insights: Chapters Total Transaction Count</h2>
+                          <p>The chapter with the most total transaction count as of <?php echo date("F j, Y H:i:s"); ?> is the chapter "<strong><?php echo $maxTransactionsChapter; ?></strong>".</p>
                           <table border="1">
                               <thead>
                                   <tr>
@@ -558,6 +578,12 @@
                                           <td><?php echo $dataPoint['y']; ?></td>
                                       </tr>
                                   <?php endforeach; ?>
+
+                                  <!-- Total Row -->
+                                  <tr>
+                                      <td><strong>Total</strong></td>
+                                      <td><strong><?php echo array_sum(array_column($chapterTotalTransactions, 'y')); ?></strong></td>
+                                  </tr>
                               </tbody>
                           </table>
                           <!-- Footer -->
@@ -569,7 +595,9 @@
                   <?php } else if (password_verify('itemPercentage', $graphToPrint)) { ?>
                       <div class="mx-5">
                           <!-- 6 -->
-                          <h2 class="title">Insights: Item Percentage</h2>
+                          <!-- itemPercentage -->
+                          <h2 class="title mt-5">Insights: Item Percentage</h2>
+                          <p>This is the percentage of the items in terms of category</p>
                           <?php if (is_array($itemPercentageData)) : ?>
                               <table border="1">
                                   <thead>
@@ -871,6 +899,7 @@
                                   </tr>
                               </tbody>
                           </table>
+
                           <!-- yourTopItems -->
                           <h2 class="title mt-5">Insights: Most Requested Items by You</h2>
                           <?php
