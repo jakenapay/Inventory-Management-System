@@ -31,7 +31,7 @@ if ($_SESSION['CT'] == 1) {
                 <a class="nav-link" href="#additem"><span class="fas fa-plus"></span> Add Item</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#itemreq"><span class="fas fa-comment-dots"></span>Cross-Chapter Request</a>
+                <a class="nav-link" href="#itemreq"><span class="fas fa-comment-dots"></span> Cross-Chapter Request</a>
             </li>
 
 
@@ -41,6 +41,14 @@ if ($_SESSION['CT'] == 1) {
 
             <li class="nav-item">
                 <a class="nav-link" href="#itemcrit"><span class="fa-solid fa-triangle-exclamation text-muted"></span> Item Critical </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#itemcateg"><span class="fa-solid fa-layer-group text-muted"></span> Item Categories </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#chapters"><span class="fa-solid fa-city text-muted"></span> Chapters </a>
             </li>
         </ul>
         <div id="content">

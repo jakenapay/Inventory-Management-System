@@ -12,6 +12,10 @@ if (isset($_POST['route'])) {
         include '../components/itemlocation.php';
     }elseif($route === '#itemcrit'){
         include '../components/criticaltable.php';
+    }elseif($route === '#itemcateg'){
+        include '../components/itemcategory.php';
+    }elseif($route === '#chapters'){
+        include '../components/chapters.php';    
     } else {
         include '../components/itemTable.php';
     }

@@ -45,13 +45,13 @@ $totalIDs = $result['total_ids'];
                     </li>
                 <?php } else { ?>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'items.php')) ? 'active' : ''; ?>" href="items.php">Items</a>
+                        <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'items.php')) ? 'active' : ''; ?>" href="items.php">Inventory</a>
                     </li>
                 <?php } ?>
 
                 <?php if ($_SESSION['CT'] == 1) { ?>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'adminItemList.php')) ? 'active' : ''; ?>" href="adminItemList.php">Request</a>
+                        <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'adminItemList.php')) ? 'active' : ''; ?>" href="adminItemList.php">Items</a>
                     </li>
                 <?php } ?>
 
@@ -60,14 +60,14 @@ $totalIDs = $result['total_ids'];
                     <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'requests.php')) ? 'active' : ''; ?>" href="requests.php">Requests</a>
                 </li>
 
-                <?php if ($_SESSION['CT'] == 1 && $_SESSION['CH'] == 1) { ?>
+                <!-- <?php if ($_SESSION['CT'] == 1 && $_SESSION['CH'] == 1) { ?>
                     <li class="nav-item">
                         <a class="nav-link <?= ($_SESSION['active_tab'] === 'chapters.php') ? 'active' : ''; ?>" href="chapters.php">Chapters</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link <?= ($_SESSION['active_tab'] === 'category.php') ? 'active' : ''; ?>" href="category.php">Categories</a>
                     </li>
-                <?php }  ?>
+                <?php }  ?> -->
 
 
                 <?php

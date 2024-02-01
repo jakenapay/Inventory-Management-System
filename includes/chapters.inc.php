@@ -8,7 +8,7 @@ if (isset($_POST['add-chapter-btn'])) {
 
     // If empty then go back
     if (empty($chapterName) && empty($chapterAddress)) {
-        header("location: ../chapters.php?m=ic");
+        header("location: ../items.php#chapters?m=ic");
         exit();
     }
 
@@ -25,12 +25,12 @@ if (isset($_POST['add-chapter-btn'])) {
         $stmt->execute();
 
         // Redirect after successful insertion
-        header("location: ../chapters.php?m=ca"); // Chapter Added Succesfully
+        header("location: ../items.php#chapters?m=ca"); // Chapter Added Succesfully
         exit();
     } catch (PDOException $e) {
         // Handle the exception
         echo "Error: " . $e->getMessage();
-        header("location: ../chapters.php?m=error");
+        header("location: ../items.php#chapters?m=error");
         exit();
     }
 } else if (isset($_POST['edit_chapter_view'])) {
@@ -74,12 +74,12 @@ if (isset($_POST['add-chapter-btn'])) {
 
     // try {
     //     if (empty($chapterId)) {
-    //         header("location: ../chapters.php?m=ic&id=$chapterId&n=$chapterName&a=$chapterAddress");
+    //         header("location: ../items.php#chapters?m=ic&id=$chapterId&n=$chapterName&a=$chapterAddress");
     //         exit();
     //     }
     // } catch (PDOException $e) {
     //     echo "Error: " . $e->getMessage();
-    //     header("location: ../chapters.php?m=" . $e->getMessage() . ""); // Failed
+    //     header("location: ../items.php#chapters?m=" . $e->getMessage() . ""); // Failed
     //     exit();
     // }
 
@@ -91,14 +91,14 @@ if (isset($_POST['add-chapter-btn'])) {
         $stmt->bindParam(':name', $chapterName, PDO::PARAM_STR);
         $stmt->bindParam(':address', $chapterAddress, PDO::PARAM_STR);
         $stmt->execute();
-        header("location: ../chapters.php?m=us"); // Updated successfully
+        header("location: ../items.php#chapters?m=us"); // Updated successfully
         exit();
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
-        header("location: ../chapters.php?m=" . $e->getMessage() . ""); // Failed
+        header("location: ../items.php#chapters?m=" . $e->getMessage() . ""); // Failed
         exit();
     }
 } else {
-    header("location: ../chapters.php?m=404");
+    header("location: ../items.php#chapters?m=404");
     exit();
 }

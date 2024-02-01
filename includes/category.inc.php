@@ -7,7 +7,7 @@ if (isset($_POST['add-category-btn'])) {
 
     // If empty then go back
     if (empty($categoryName)) {
-        header("location: ../category.php?m=ic");
+        header("location: ../items.php#itemcateg?m=ic");
         exit();
     }
 
@@ -23,12 +23,12 @@ if (isset($_POST['add-category-btn'])) {
         $stmt->execute();
 
         // Redirect after successful insertion
-        header("location: ../category.php?m=ca"); // Chapter Added Succesfully
+        header("location: ../items.php#itemcateg?m=ca"); // Chapter Added Succesfully
         exit();
     } catch (PDOException $e) {
         // Handle the exception
         echo "Error: " . $e->getMessage();
-        header("location: ../category.php?m=error");
+        header("location: ../items.php#itemcateg?m=error");
         exit();
     }
 } else if (isset($_POST['edit_category_view'])) {
@@ -71,14 +71,14 @@ if (isset($_POST['add-category-btn'])) {
         $stmt->bindParam(':id', $categoryId, PDO::PARAM_INT);
         $stmt->bindParam(':name', $categoryName, PDO::PARAM_STR);
         $stmt->execute();
-        header("location: ../category.php?m=us"); // Updated successfully
+        header("location: ../items.php#itemcateg?m=us"); // Updated successfully
         exit();
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
-        header("location: ../category.php?m=" . $e->getMessage() . ""); // Failed
+        header("location: ../items.php#itemcateg?m=" . $e->getMessage() . ""); // Failed
         exit();
     }
 } else {
-    header("location: ../category.php?m=404");
+    header("location: ../items.php#itemcateg?m=404");
     exit();
 }
