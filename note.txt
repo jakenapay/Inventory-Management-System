@@ -35,3 +35,37 @@ profile.php
 
 :jake
 :updated: 10/26/23
+
+Jake's block of code for forecast
+<!-- <?php if (password_verify('forecast', $graphToPrint)) { ?>
+            <h2>Inventory Status</h2>
+            <table class="my-5" border="1">
+                <thead>
+                    <tr>
+                        <th>Items</th>
+                        <th>Remaining Stocks</th>
+                        <th>Remarks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($pieDataPoints as $dataPoint) : ?>
+                        <tr>
+                            <td><?php echo $dataPoint['label']; ?></td>
+                            <td><?php echo $dataPoint['y']; ?></td>
+                            <td>
+                                <?php
+                                if ($dataPoint['y'] == 0) {
+                                    echo 'Out of Stock';
+                                } elseif ($dataPoint['y'] <= 10) {
+                                    echo 'Low Stock';
+                                } elseif ($dataPoint['y'] <= 50) {
+                                    echo 'Normal Stock';
+                                } else {
+                                    echo 'High Stock';
+                                }
+                                ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table> -->

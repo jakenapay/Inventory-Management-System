@@ -1,6 +1,6 @@
 /* For general */
 .chart-title {
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: bold;
   text-align: center;
 }
@@ -12,7 +12,7 @@ body {
 /* Phone */
 @media only screen and (max-width: 320px) {
     .chart-title {
-        font-size: 0.9rem;
+        font-size: 0.7rem;
         font-weight: bold;
         text-align: center;
       }

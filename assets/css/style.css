@@ -8,7 +8,7 @@
   --black: #121212;
   /* Main color */
   --green: #71b406;
-  --purple: rgb(120, 8, 255);
+  --purple: #7808ff;
   --orange: #ea641d;
   --yellow: #e8ca04;
 
@@ -114,9 +114,21 @@ body.login-page {
   padding: 2px 5px;
 }
 
+.btnPurple {
+  border: 1px solid var(--purple);
+  background-color: var(--purple);
+  font-size: 0.9rem;
+  padding: 2px 5px;
+}
+
 .btnGreen:hover {
   border: 1px solid var(--green);
   background-color: #629b05;
+}
+
+.btnPurple:hover {
+  border: 1px solid var(--purple);
+  background-color: #5709b7;
 }
 
 .btn:focus {
