@@ -23,6 +23,7 @@ if (isset($_POST['user_view'])) {
             users.user_id AS id,
             CONCAT(users.user_firstname, ' ', users.user_lastname) AS name,
             users.user_email AS email,
+            users.user_position AS position,
             category.category_name AS category,
             chapters.chapter_name AS chapter,
             users.user_status AS status,
@@ -44,6 +45,7 @@ if (isset($_POST['user_view'])) {
             $id = $row['id'];
             $name = $row['name'];
             $email = $row['email'];
+            $position = $row['position'];
             $category = $row['category'];
             $chapter = $row['chapter'];
             $status = $row['status'];
@@ -70,6 +72,10 @@ if (isset($_POST['user_view'])) {
                         <div class="col-md-12 py-1">
                             <label for="user_email">Email Address</label>
                             <input type="text" class="form-control form-control-sm" id="user_email" name="user_email" placeholder="Email" readonly value="' . $email . '">
+                        </div>
+                        <div class="col-md-12 py-1">
+                            <label for="user_position">Position</label>
+                            <input type="text" class="form-control form-control-sm text-capitalize" id="user_position" name="user_position" placeholder="Position" readonly value="' . $position . '">
                         </div>
                         <div class="col-md-12 py-1">
                             <label for="user_category">Category</label>
@@ -112,6 +118,7 @@ if (isset($_POST['user_view'])) {
                 users.user_firstname AS firstname,
                 users.user_lastname AS lastname,
                 users.user_email AS email,
+                users.user_position AS position,
                 category.category_name AS category,
                 category.category_id AS category_id,
                 chapters.chapter_name AS chapter,
@@ -136,6 +143,7 @@ if (isset($_POST['user_view'])) {
             $firstname = $row['firstname'];
             $lastname = $row['lastname'];
             $email = $row['email'];
+            $position = $row['position'];
             $category = $row['category'];
             $categoryId = $row['category_id'];
             $chapter = $row['chapter'];
@@ -174,6 +182,20 @@ if (isset($_POST['user_view'])) {
                         <div class="col-md-12 py-1">
                             <label for="user_email">Email Address</label>
                             <input type="text" class="form-control form-control-sm" id="user_email" name="user_email" placeholder="Email" value="' . $email . '">
+                        </div>
+                        <div class="col-md-12 py-1">
+                            <label for="user_position">Position</label>
+                            <select name="user_position" id="user_position" class="form-control form-control-sm" required>
+                                <option value="DEVCON Manila Main Admin">DEVCON Manila Main Admin</option>
+                                <option value="DEVCON CDO Admin">DEVCON CDO Admin</option>
+                                <option value="DEVCON Cebu Admin">DEVCON Cebu Admin</option>
+                                <option value="DEVCON Davao Admin">DEVCON Davao Admin</option>
+                                <option value="DEVCON Iligan Admin">DEVCON Iligan Admin</option>
+                                <option value="Tech Enthusiasts">Tech Enthusiasts</option>
+                                <option value="Lead Learners">Lead Learners</option>
+                                <option value="Volunteer">Volunteer</option>
+                                <option value="Staff">Staff</option>
+                            </select>
                         </div>
                         <div class="col-md-12 py-1">
                             <label for="user_category">Category</label>
@@ -264,6 +286,7 @@ if (isset($_POST['user_view'])) {
     $firstname = $_POST['user_firstname'];
     $lastname = $_POST['user_lastname'];
     $email = $_POST['user_email'];
+    $position = $_POST['user_position'];
     $category = $_POST['user_category'];
     $chapter = $_POST['user_chapter'];
     $status = $_POST['user_status'];
@@ -278,7 +301,7 @@ if (isset($_POST['user_view'])) {
 
     // Check if there's any empty variable
     try {
-        if (empty($id) || empty($firstname) || empty($lastname) || empty($category) || empty($chapter) || empty($email) || empty($status)) {
+        if (empty($id) || empty($firstname) || empty($lastname) || empty($category) || empty($chapter) || empty($email) || empty($position) || empty($status)) {
             header("location: ../users.php?m=ic");
         }
     } catch (PDOException $e) {
@@ -331,13 +354,14 @@ if (isset($_POST['user_view'])) {
         $folder = '../images/userProfiles/';
         move_uploaded_file($imgTmpName, $folder . $image_final_name);
 
-        $sql = "UPDATE users SET user_firstname = :fname, user_lastname = :lname, user_email = :email, user_category = :category, user_chapter = :chapter, user_status = :status, user_image = :image WHERE user_id = :id";
+        $sql = "UPDATE users SET user_firstname = :fname, user_lastname = :lname, user_email = :email, user_position = :position, user_category = :category, user_chapter = :chapter, user_status = :status, user_image = :image WHERE user_id = :id";
         try {
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':fname', $firstname);
             $stmt->bindParam(':lname', $lastname);
             $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':position', $position);
             $stmt->bindParam(':category', $category);
             $stmt->bindParam(':chapter', $chapter);
             $stmt->bindParam(':status', $status);
@@ -353,13 +377,14 @@ if (isset($_POST['user_view'])) {
         }
     } else {
         $image_final_name = $old_img;
-        $sql = "UPDATE users SET user_firstname = :fname, user_lastname = :lname, user_email = :email, user_category = :category, user_chapter = :chapter, user_status = :status, user_image = :image WHERE user_id = :id";
+        $sql = "UPDATE users SET user_firstname = :fname, user_lastname = :lname, user_email = :email, user_position = :position, user_category = :category, user_chapter = :chapter, user_status = :status, user_image = :image WHERE user_id = :id";
         try {
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':fname', $firstname);
             $stmt->bindParam(':lname', $lastname);
             $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':position', $position);
             $stmt->bindParam(':category', $category);
             $stmt->bindParam(':chapter', $chapter);
             $stmt->bindParam(':status', $status);

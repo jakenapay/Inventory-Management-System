@@ -42,7 +42,9 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     <!-- Javascript for Datatables.net  -->
     <script>
         $(document).ready(function() {
-            $('table').DataTable();
+            $('table').DataTable({
+        "order": [[0, "desc"]] // Assuming user ID is in the first column (index 0)
+    });
         });
 
         $(function() {
@@ -84,6 +86,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                         <th>ID</th>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Position</th>
                                         <th>Category</th>
                                         <th>Chapters</th>
                                         <!-- On progress  -->
@@ -103,6 +106,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                 $query = "SELECT users.user_id AS id,\n"
                                                     . "CONCAT(users.user_firstname, ' ', users.user_lastname) AS name,\n"
                                                     . "users.user_email AS email,\n"
+                                                    . "users.user_position AS position,\n"
                                                     . "category.category_name AS category,\n"
                                                     . "chapters.chapter_name AS chapters,\n"
                                                     . "users.user_status AS status,\n"
@@ -117,6 +121,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                 $query = "SELECT users.user_id AS id,\n"
                                                 . "CONCAT(users.user_firstname, ' ', users.user_lastname) AS name,\n"
                                                 . "users.user_email AS email,\n"
+                                                . "users.user_position AS position,\n"
                                                 . "category.category_name AS category,\n"
                                                 . "chapters.chapter_name AS chapters,\n"
                                                 . "users.user_status AS status,\n"
@@ -140,6 +145,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                     <td class="text-capitalize"><?php echo $row['id']; ?></td>
                                                     <td class="text-capitalize"><?php echo $row['name']; ?></td>
                                                     <td class=""><?php echo $row['email']; ?></td>
+                                                    <td class="text-capitalize"><?php echo $row['position']; ?></td>
                                                     <td class="text-capitalize"><?php echo $row['category']; ?></td>
                                                     <td class="text-capitalize"><?php echo $row['chapters']; ?></td>
 
