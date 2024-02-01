@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 29, 2024 at 02:26 AM
+-- Generation Time: Feb 01, 2024 at 09:19 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -34,41 +34,6 @@ CREATE TABLE `cart` (
   `date_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `date_out` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`user_id`, `item_id`, `inCart`, `date_added`, `date_out`) VALUES
-(5, 1, 1, '2024-01-10 02:23:36', '2024-01-10 10:23:36'),
-(5, 2, 1, '2024-01-07 04:39:48', '2024-01-07 12:39:48'),
-(5, 2, 1, '2024-01-07 04:39:48', '2024-01-07 12:39:48'),
-(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
-(5, 2, 1, '2024-01-07 04:39:48', '2024-01-07 12:39:48'),
-(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
-(5, 10, 1, '2023-12-27 11:28:25', '2023-12-27 19:28:25'),
-(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
-(5, 5, 1, '2024-01-28 02:22:22', '2024-01-28 10:22:22'),
-(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
-(5, 1, 1, '2024-01-10 02:23:36', '2024-01-10 10:23:36'),
-(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
-(5, 5, 1, '2024-01-28 02:22:22', '2024-01-28 10:22:22'),
-(5, 1, 1, '2024-01-10 02:23:36', '2024-01-10 10:23:36'),
-(5, 1, 1, '2024-01-10 02:23:36', '2024-01-10 10:23:36'),
-(5, 1, 1, '2024-01-10 02:23:36', '2024-01-10 10:23:36'),
-(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
-(5, 5, 1, '2024-01-28 02:22:22', '2024-01-28 10:22:22'),
-(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
-(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
-(4, 19, 1, '2024-01-28 01:49:42', '2024-01-28 09:49:42'),
-(5, 17, 1, '2024-01-20 06:06:07', '2024-01-20 14:06:07'),
-(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
-(4, 4, 1, '2024-01-29 00:42:17', '2024-01-29 08:42:17'),
-(1, 11, 1, '2024-01-23 06:47:52', '2024-01-23 14:47:52'),
-(5, 24, 1, '2024-01-28 02:27:13', '2024-01-28 10:27:13'),
-(5, 4, 1, '2024-01-29 00:38:15', '2024-01-29 08:38:15'),
-(1, 29, 1, '2024-01-28 12:18:47', '2024-01-28 20:18:47'),
-(4, 17, 0, '2024-01-28 14:28:11', NULL);
 
 -- --------------------------------------------------------
 
@@ -138,20 +103,9 @@ CREATE TABLE `ctochistory` (
 --
 
 INSERT INTO `ctochistory` (`history_id`, `history_item_id`, `history_quantity`, `history_user_id`, `history_status`, `history_date`, `history_isReturn`, `history_date_return`, `history_due_date`, `from_chapter`, `to_chapter`) VALUES
-(1, 2, 1, 4, 'process', '2024-01-27 20:33:17', 0, NULL, '2024-02-04', '4', '2'),
-(2, 2, 1, 4, 'process', '2024-01-27 20:33:17', 0, NULL, '2024-02-04', '4', '2'),
-(3, 2, 1, 4, 'process', '2024-01-27 20:33:50', 0, NULL, '2024-02-04', '4', '2'),
-(4, 10, 1, 4, 'process', '2024-01-27 22:08:51', 0, NULL, '2024-02-04', '4', '1'),
-(5, 10, 1, 4, 'process', '2024-01-27 22:35:40', 0, NULL, '2024-02-04', '4', '1'),
-(6, 17, 1, 1, 'process', '2024-01-27 23:00:41', 0, NULL, '2024-02-04', '1', '4'),
-(7, 1, 1, 4, 'process', '2024-01-28 13:00:55', 0, NULL, '2024-02-04', '4', '3'),
-(8, 1, 1, 4, 'process', '2024-01-28 13:04:32', 0, NULL, '2024-02-04', '4', '3'),
-(9, 1, 1, 4, 'process', '2024-01-28 13:07:42', 0, NULL, '2024-02-04', '4', '3'),
-(10, 10, 1, 4, 'process', '2024-01-28 13:07:59', 0, NULL, '2024-02-04', '4', '1'),
-(11, 1, 1, 4, 'process', '2024-01-28 16:31:52', 0, NULL, '2024-02-05', '4', '3'),
-(12, 1, 1, 4, 'process', '2024-01-28 16:33:04', 0, NULL, '2024-02-05', '4', '3'),
-(13, 1, 1, 4, 'process', '2024-01-28 16:34:16', 0, NULL, '2024-02-05', '4', '3'),
-(14, 1, 1, 4, 'process', '2024-01-28 16:34:33', 0, NULL, '2024-02-05', '4', '3');
+(1, 4, 1, 1, 'delivered', '2024-01-31 14:33:54', 0, NULL, '2024-02-07', '1', '4'),
+(2, 4, 1, 1, 'process', '2024-01-31 14:32:51', 0, NULL, '2024-02-07', '1', '4'),
+(3, 4, 1, 1, 'process', '2024-01-31 14:32:54', 0, NULL, '2024-02-07', '1', '4');
 
 -- --------------------------------------------------------
 
@@ -176,22 +130,38 @@ CREATE TABLE `history` (
 --
 
 INSERT INTO `history` (`history_id`, `history_item_id`, `history_quantity`, `history_user_id`, `history_status`, `history_date`, `isReturned`, `history_date_return`, `history_due_date`) VALUES
-(2, 5, 5, 5, 'approved', '2024-01-23 06:25:00', 1, '2024-01-23 2:25:00', ''),
-(5, 4, 3, 4, 'approved', '2024-01-21 08:38:50', 1, '2024-01-21 4:38:50', '2024-01-28'),
-(7, 5, 1, 4, 'approved', '2024-01-21 08:38:30', 1, '2024-01-21 4:38:30', '2024-01-28'),
-(12, 4, 1, 4, 'approved', '2024-01-27 19:58:32', 0, '', '2024-02-04'),
-(13, 1, 1, 4, 'approved', '2024-01-27 21:28:07', 0, '', '2024-02-04'),
-(17, 4, 3, 5, 'approved', '2024-01-28 02:12:32', 0, '', '2024-02-04'),
-(18, 5, 1, 5, 'approved', '2024-01-28 02:22:22', 0, '', '2024-02-04'),
-(20, 4, 5, 5, 'approved', '2024-01-28 11:35:06', 0, '', '2024-02-01'),
-(21, 4, 1, 5, 'approved', '2024-01-28 11:39:32', 0, '', '2024-01-31'),
-(22, 4, 1, 5, 'approved', '2024-01-28 11:39:42', 0, '', '2024-01-31'),
-(23, 4, 1, 5, 'approved', '2024-01-28 11:54:00', 0, '', '2024-01-31'),
-(24, 29, 1, 1, 'approved', '2024-01-28 12:20:43', 1, '2024-01-28 8:20:43', '2024-02-01'),
-(25, 1, 1, 4, 'approved', '2024-01-28 13:06:43', 0, '', '2024-01-31'),
-(26, 1, 3, 4, 'approved', '2024-01-28 14:57:16', 1, '2024-01-28 10:57:16', '2024-01-31'),
-(29, 4, 1, 5, 'approved', '2024-01-29 00:40:50', 1, '2024-01-29 8:40:50', '2024-02-01'),
-(30, 4, 1, 4, 'approved', '2024-01-29 00:42:17', 0, '', '2024-02-01');
+(1, 32, 1, 4, 'approved', '2024-01-30 12:48:47', 1, '2024-01-30 8:48:47', '2024-02-02'),
+(2, 32, 1, 4, 'approved', '2024-01-30 12:48:50', 1, '2024-01-30 8:48:50', '2024-02-02'),
+(3, 32, 1, 4, 'approved', '2024-01-30 12:48:52', 1, '2024-01-30 8:48:52', '2024-02-02'),
+(4, 32, 1, 4, 'approved', '2024-01-30 12:48:54', 1, '2024-01-30 8:48:54', '2024-02-02'),
+(5, 32, 1, 4, 'approved', '2024-01-30 12:48:56', 1, '2024-01-30 8:48:56', '2024-02-02'),
+(6, 32, 1, 4, 'approved', '2024-01-30 12:48:58', 1, '2024-01-30 8:48:58', '2024-02-02'),
+(7, 32, 1, 4, 'approved', '2024-01-30 12:49:00', 1, '2024-01-30 8:49:00', '2024-02-02'),
+(8, 32, 1, 4, 'approved', '2024-01-30 12:49:02', 1, '2024-01-30 8:49:02', '2024-02-02'),
+(9, 32, 1, 4, 'approved', '2024-01-30 12:49:04', 1, '2024-01-30 8:49:04', '2024-02-02'),
+(10, 32, 1, 4, 'approved', '2024-01-30 12:49:06', 1, '2024-01-30 8:49:06', '2024-02-02'),
+(11, 32, 1, 4, 'approved', '2024-01-31 01:44:07', 1, '2024-01-31 9:44:07', '2024-02-02'),
+(12, 32, 1, 4, 'approved', '2024-01-31 01:45:39', 1, '2024-01-31 9:45:39', '2024-02-02'),
+(13, 32, 1, 4, 'approved', '2024-01-30 12:49:49', 0, '', '2024-02-02'),
+(14, 32, 1, 4, 'approved', '2024-01-30 12:50:00', 0, '', '2024-02-02'),
+(15, 32, 1, 4, 'approved', '2024-01-30 12:56:25', 0, '', '2024-02-02'),
+(16, 4, 1, 4, 'approved', '2024-01-30 12:58:18', 0, '', '2024-02-02'),
+(17, 4, 1, 4, 'approved', '2024-01-30 12:58:59', 0, '', '2024-02-02'),
+(18, 4, 1, 4, 'approved', '2024-01-30 12:59:58', 0, '', '2024-02-02'),
+(19, 4, 1, 4, 'approved', '2024-01-30 13:01:26', 0, '', '2024-02-02'),
+(20, 32, 1, 4, 'approved', '2024-01-30 16:44:06', 0, '', '2024-02-03'),
+(21, 32, 1, 4, 'approved', '2024-01-30 17:20:29', 1, '2024-01-31 1:20:29', '2024-02-03'),
+(22, 32, 1, 4, 'approved', '2024-01-30 17:20:26', 1, '2024-01-31 1:20:26', '2024-02-03'),
+(23, 32, 1, 4, 'approved', '2024-01-30 17:20:24', 1, '2024-01-31 1:20:24', '2024-02-03'),
+(24, 32, 1, 4, 'approved', '2024-01-30 17:20:21', 1, '2024-01-31 1:20:21', '2024-02-03'),
+(25, 32, 1, 4, 'approved', '2024-01-30 17:40:29', 1, '2024-01-31 1:40:29', '2024-02-03'),
+(26, 32, 1, 4, 'approved', '2024-01-30 17:40:26', 1, '2024-01-31 1:40:26', '2024-02-03'),
+(27, 32, 1, 4, 'approved', '2024-01-30 17:40:22', 1, '2024-01-31 1:40:22', '2024-02-03'),
+(28, 32, 1, 4, 'approved', '2024-01-30 17:40:20', 1, '2024-01-31 1:40:20', '2024-02-03'),
+(29, 32, 1, 4, 'approved', '2024-01-31 01:44:00', 1, '2024-01-31 9:44:00', '2024-02-03'),
+(30, 32, 1, 4, 'approved', '2024-01-31 01:45:32', 1, '2024-01-31 9:45:32', '2024-02-03'),
+(31, 32, 1, 4, 'approved', '2024-01-31 01:38:16', 1, '2024-01-31 9:38:16', '2024-02-03'),
+(32, 5, 1, 4, 'approved', '2024-01-31 03:08:48', 0, '', '2024-02-03');
 
 --
 -- Triggers `history`
@@ -242,26 +212,31 @@ CREATE TABLE `items` (
   `item_condition` varchar(30) NOT NULL,
   `item_location` varchar(30) NOT NULL,
   `item_cost` varchar(30) NOT NULL,
-  `barcode_img` varchar(60) NOT NULL
+  `barcode_img` varchar(60) NOT NULL,
+  `date_acquired` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`item_id`, `unique_item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_status`, `item_description`, `item_image`, `item_condition`, `item_location`, `item_cost`, `barcode_img`) VALUES
-(1, '335733', 'Galaxy Tab A Tablet', 1, 3, 136, 3, 'enabled', '4gb 256gb color black', 'IMG_65b6ef174c0736.96179317.jpg', '', '', '', ''),
-(2, '2792718', 'A4 Bond Paper', 3, 2, 2, 2, 'enabled', 'A4 Hardcopy', 'IMG_65b6ef565740b1.02912169.jpg', '', '', '', ''),
-(4, '976760', 'ID Lace version 5', 3, 3, 30, 4, 'enabled', 'Version 5, Black & Orange', 'IMG_65b6f234396e25.48633346.jpg', '', '', '', ''),
-(5, '7542994', 'Jumping wires long', 3, 1, 30, 4, 'enabled', 'Rainbow colors', 'IMG_65b6ef8adbd544.13403523.jpg', '', '', '', ''),
-(7, '275921', 'Gel Ink Pen ', 3, 1, 29, 5, 'enabled', 'Black', 'IMG_65b6f037ad2397.33467649.jpg', '', '', '', ''),
-(26, '6769580', 'yahboom', 1, 3, 5, 4, 'enabled', 'Yahboom', 'IMG_65b6efa698ae38.87036472.jpg', '', '', '', ''),
-(27, '2485134', 'laptop with charger', 1, 3, 5, 4, 'enabled', 'laptop with charger', 'IMG_65b5cc928ee556.54555165.jpg', 'good', 'container 1', '43,000', ''),
-(28, '266957', 'pull up banner', 3, 3, 10, 1, 'enabled', 'dev kids - Pull Up Banner', 'IMG_65b6187b83ef60.26505028.jpg', 'good', 'container 2', '3000', ''),
-(29, '648385', 'glue gun', 3, 3, 5, 1, 'enabled', 'Glue Gun', 'IMG_65b6217c798772.96700470.jpg', 'good', 'container 1', '120', './images/barcode/item1706434940.png'),
-(31, '607550', 'papers ', 2, 1, 10, 1, 'enabled', 'Papers ', 'IMG_65b62479317950.06778313.jpg', 'good', 'container 3', '50', 'item1706435705.png'),
-(32, '088981', 'Memory Card', 1, 3, 10, 4, 'enabled', '128gb . SanDisk', 'IMG_65b62cd616d248.80556829.jpg', 'good', 'container 3', '1000', 'item1706437846.png'),
-(33, '792957', 'camera', 1, 3, 2, 1, 'enabled', 'SONY', 'IMG_65b62db46270a0.80610743.jpg', 'good', 'container 4', '40000', 'item1706438068.png');
+INSERT INTO `items` (`item_id`, `unique_item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_status`, `item_description`, `item_image`, `item_condition`, `item_location`, `item_cost`, `barcode_img`, `date_acquired`) VALUES
+(1, '335733', 'Galaxy Tab A Tablet', 1, 3, 136, 3, 'enabled', '4gb 256gb color black', 'IMG_65b6ef174c0736.96179317.jpg', '', 'Container 1', '', '', '2024-01-31 12:21:29'),
+(2, '2792718', 'A4 Bond Paper', 3, 2, 2, 2, 'enabled', 'A4 Hardcopy', 'IMG_65b6ef565740b1.02912169.jpg', '', 'Container 2', '', '', '2024-01-31 12:21:43'),
+(4, '976760', 'ID Lace version 5', 3, 3, 26, 4, 'enabled', 'Version 5, Black & Orange', 'IMG_65b6f234396e25.48633346.jpg', '', 'Container 3', '', '', '2024-01-31 12:21:47'),
+(5, '7542994', 'Jumping wires long', 3, 1, 29, 4, 'enabled', 'Rainbow colors', 'IMG_65b6ef8adbd544.13403523.jpg', '', 'Container 4', '', '', '2024-01-31 12:21:53'),
+(7, '275921', 'Gel Ink Pen ', 3, 1, 29, 5, 'enabled', 'Black', 'IMG_65b6f037ad2397.33467649.jpg', '', 'Container 1', '', '', '2024-01-31 12:21:58'),
+(26, '6769580', 'yahboom', 1, 3, 5, 4, 'enabled', 'Yahboom', 'IMG_65b6efa698ae38.87036472.jpg', '', 'Container 2', '', '', '2024-01-31 12:22:01'),
+(27, '2485134', 'laptop with charger', 1, 3, 5, 4, 'enabled', 'laptop with charger', 'IMG_65b5cc928ee556.54555165.jpg', 'good', 'Container 1', '43,000', '', '2024-01-31 12:22:04'),
+(28, '266957', 'pull up banner', 3, 3, 10, 1, 'enabled', 'dev kids - Pull Up Banner', 'IMG_65b6187b83ef60.26505028.jpg', 'good', 'Container 2', '3000', '', '2024-01-31 12:22:07'),
+(29, '648385', 'glue gun', 3, 3, 5, 1, 'enabled', 'Glue Gun', 'IMG_65b6217c798772.96700470.jpg', 'good', 'Container 1', '120', './images/barcode/item1706434940.png', '2024-01-31 12:22:10'),
+(31, '607550', 'papers ', 2, 1, 13, 1, 'enabled', 'Papers ', 'IMG_65b62479317950.06778313.jpg', 'good', 'Container 3', '50', 'item1706435705.png', '2024-01-31 12:22:13'),
+(32, '088981', 'Memory Card', 1, 3, 6, 4, 'enabled', '128gb . SanDisk', 'IMG_65b62cd616d248.80556829.jpg', 'good', 'Container 3', '1000', 'item1706437846.png', '2024-01-31 12:22:16'),
+(33, '792957', 'camera', 1, 3, 2, 1, 'enabled', 'SONY', 'IMG_65b62db46270a0.80610743.jpg', 'good', 'Container 4', '40000', 'item1706438068.png', '2024-01-31 12:22:19'),
+(34, '172154', 'ballpen', 3, 3, 12, 4, 'enabled', 'Panda Ballpen Black', 'IMG_65b9c8e2d17a45.91293172.jpg', 'good', 'container 1', '10', 'item1706674402.png', '2024-01-31 04:15:49'),
+(35, '152909', 'Mobile phone', 1, 3, 6, 4, 'enabled', 'Realme Phones', 'IMG_65b9c9e7931e66.39339155.png', 'Good', 'container 4', '3000', 'item1706674663.png', '2024-01-31 04:17:43'),
+(36, '564921', 'Gel Ink Pen ', 3, 3, 10, 4, 'enabled', 'Gell Ink Pen - Black', 'IMG_65b9ccb183c296.66663381.jpg', 'good', 'container 4', '10', 'item1706675377.png', '2024-01-31 04:29:37'),
+(37, '9310182', 'Ipad ', 1, 3, 1, 4, 'enabled', 'IPAD - 128gb', 'IMG_65b9d3e6e3c0d9.72434804.jpg', 'good', 'container 1', '40000', 'item1706677222.png', '2024-01-31 05:00:22');
 
 -- --------------------------------------------------------
 
@@ -329,7 +304,37 @@ INSERT INTO `item_feedback` (`item_id`, `user_id`, `feedback`, `date_of_feedback
 (4, 4, 'nice lace', '2024-01-27 15:09:49'),
 (24, 4, 'lupet ni jake\n', '2024-01-27 18:47:28'),
 (5, 5, 'check comment', '2024-01-28 02:22:17'),
-(4, 5, 'nice lace', '2024-01-28 11:34:35');
+(4, 5, 'nice lace', '2024-01-28 11:34:35'),
+(32, 4, 'memo ', '2024-01-30 14:13:34');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `item_location`
+--
+
+CREATE TABLE `item_location` (
+  `location_id` int(11) NOT NULL,
+  `location_name` varchar(50) NOT NULL,
+  `container_name` varchar(30) NOT NULL,
+  `chapter` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `item_location`
+--
+
+INSERT INTO `item_location` (`location_id`, `location_name`, `container_name`, `chapter`) VALUES
+(1, 'Room 1', 'Container 1', 4),
+(2, 'Room 1', 'Container 2', 4),
+(3, 'Room 1', 'Container 3', 4),
+(4, 'Room 1', 'Container 4', 4),
+(5, 'Room 1', 'Container 5', 4),
+(6, 'Room 1', 'Container 6', 4),
+(7, 'Room 1', 'Container 7', 3),
+(8, 'Room 1', 'Container 8', 2),
+(9, 'Room 2', 'Container 1', 1),
+(10, 'room2', 'Container 2', 1);
 
 -- --------------------------------------------------------
 
@@ -370,7 +375,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `user_firstname`, `user_lastname`, `user_email`, `user_password`, `user_category`, `user_chapter`, `user_image`, `user_status`, `user_code`) VALUES
 (1, 'Jake', 'Maangas', 'jakemantesnapay@gmail.com', '$2y$10$RIQWqDTz88hS713D1XbPIOAiicKGkmTpUr4FJnMSquvh4SbuGUj5S', 1, 1, 'IMG_65b6eeb7dc2d67.53853231.jpg', 'active', 0),
 (2, 'john moren', 'dinela', 'jmdinela@gmail.com', '$2y$10$1o24hhJ6ibvCFNhaoD9jaeQW9PS59s7lDV3f2MtS3Uv3bLNhLqtJm', 0, 2, 'IMG_6562cc23d0aa35.57042786.jpg', 'active', 0),
-(4, 'jay Ar', 'De Guzman', 'deguzmanjayar9@gmail.com', '$2y$10$j7dAlO.jJHJN4oScGaEZYeiP/TGC2.qOZoW/70ERoDWCYB7qugtw.', 1, 4, 'IMG_65b53e80615ca2.06937730.jpg', 'active', 3293),
+(4, 'jay Ar', 'De Guzman', 'deguzmanjayar9@gmail.com', '$2y$10$j7dAlO.jJHJN4oScGaEZYeiP/TGC2.qOZoW/70ERoDWCYB7qugtw.', 1, 4, 'IMG_65b900f5db5930.59217230.png', 'active', 3293),
 (5, 'Lee Angelo', 'Mollo', 'lamollo@gmail.com', '$2y$10$pzhfiX1L7fC723q5n6/xReHRBUrVLbdy2yuiOUsNG6Ay9Wjvr21Ey', 0, 4, 'IMG_6562d4d53d4b06.24348986.jpg', 'active', 0),
 (6, 'John Moren', 'Dinela', 'jmdnl@gmail.com', '$2y$10$BJxuBj104cTfQrnc1qZXFO/Qq6ZcjfKoZ24pZLYFOIQkLAI8s0hP.', 0, 1, 'defaultProfile.jpg', 'inactive', 0),
 (7, 'Jay Ar', 'De Guzman', 'jdg@gmail.com', '$2y$10$6EzlUhJvm1W3ZhSHd7BVqueSlkDXd56SVDZ1LKrDOhvlvcDS4V0EC', 0, 1, 'defaultProfile.jpg', 'active', 0);
@@ -427,6 +432,12 @@ ALTER TABLE `items_unit_of_measure`
   ADD PRIMARY KEY (`item_uom_id`);
 
 --
+-- Indexes for table `item_location`
+--
+ALTER TABLE `item_location`
+  ADD PRIMARY KEY (`location_id`);
+
+--
 -- Indexes for table `logs`
 --
 ALTER TABLE `logs`
@@ -461,19 +472,19 @@ ALTER TABLE `chapters`
 -- AUTO_INCREMENT for table `ctochistory`
 --
 ALTER TABLE `ctochistory`
-  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `items_category`
@@ -486,6 +497,12 @@ ALTER TABLE `items_category`
 --
 ALTER TABLE `items_unit_of_measure`
   MODIFY `item_uom_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `item_location`
+--
+ALTER TABLE `item_location`
+  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `logs`
