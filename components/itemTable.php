@@ -39,10 +39,12 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             <table class="table table-hover table-sm">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        <!-- <th>Item ID</th> -->
+                        <th>Unique ID</th>
                         <th>Name</th>
                         <th>Category</th>
                         <th>Measurement</th>
+                        <th>Date Acquired</th>
                         <!-- CONDITIONAL FOR ADMINS OR USERS -->
                         <?php
                         if (isset($_SESSION['CT']) && ($_SESSION['CT']) != 0) { // IF ADMIN
@@ -63,13 +65,14 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                             // If chapter is Manila and Admin
                             if (($_SESSION['CH'] == 1) && ($_SESSION['CT'] == 1)) {
                                 // Run this code below
-                                $query = "SELECT items.item_id AS ID,\n"
+                                $query = "SELECT items.item_id AS ID,\n" . "items.unique_item_id AS UUID, \n"
                                     . "items.item_name AS Name,\n"
                                     . "items_category.item_category_name AS Category,\n"
                                     . "items_unit_of_measure.item_uom_name AS Measurement,\n"
                                     . "items.item_quantity AS Quantity,\n"
                                     . "chapters.chapter_name AS Chapter,\n"
-                                    . "items.item_status AS Status\n"
+                                    . "items.item_status AS Status,\n" .
+                                    "items.date_acquired AS DofA \n"
                                     . "FROM items\n"
                                     . "INNER JOIN items_category ON items.item_category = items_category.item_category_id\n"
                                     . "INNER JOIN items_unit_of_measure ON items.item_measure = items_unit_of_measure.item_uom_id\n"
@@ -79,12 +82,14 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                 $user_chapter = $_SESSION['CH'];
                                 $query = "SELECT 
                                                             items.item_id AS ID,
+                                                            items.unique_item_id AS UUID,
                                                             items.item_name AS Name,
                                                             items_category.item_category_name AS Category,
                                                             items_unit_of_measure.item_uom_name AS Measurement,
                                                             items.item_quantity AS Quantity,
                                                             chapters.chapter_name AS Chapter,
-                                                            items.item_status AS Status
+                                                            items.item_status AS Status,
+                                                            items.date_acquired AS DofA
                                                         FROM items
                                                         INNER JOIN items_category ON items.item_category = items_category.item_category_id
                                                         INNER JOIN items_unit_of_measure ON items.item_measure = items_unit_of_measure.item_uom_id
@@ -95,10 +100,12 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                 $user_chapter = $_SESSION['CH'];
                                 $query = "SELECT
                                                             items.item_id AS ID,
+                                                            items.unique_item_id AS UUID,
                                                             items.item_name AS Name,
                                                             items_category.item_category_name AS Category,
                                                             items_unit_of_measure.item_uom_name AS Measurement,
-                                                            items.item_status AS Status
+                                                            items.item_status AS Status,
+                                                            items.date_acquired AS DofA
                                                         FROM items
                                                         INNER JOIN items_category ON items.item_category = items_category.item_category_id
                                                         INNER JOIN items_unit_of_measure ON items.item_measure = items_unit_of_measure.item_uom_id
@@ -122,10 +129,12 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                     ?>
                                 <!-- Break to continue HTML   -->
                                 <tr>
-                                    <td><?php echo $row['ID']; ?></td>
+                                    <!-- <td><?php echo $row['ID']; ?></td> -->
+                                    <td><?php echo $row['UUID']; ?></td>
                                     <td><?php echo $row['Name']; ?></td>
                                     <td><?php echo $row['Category']; ?></td>
                                     <td><?php echo $row['Measurement']; ?></td>
+                                    <td><?php echo $row['DofA']; ?></td>
                                     <?php
                                     if (isset($_SESSION['CT']) && ($_SESSION['CT']) != 0) { // If admin
                                         echo '<td>' . $row['Quantity'] . '</td>';
@@ -364,6 +373,12 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                 }
             });
         });
+    });
+
+    new DataTable('.table', {
+        order: [
+            [4, 'desc']
+        ]
     });
     // Function to trigger print when the button is clicked
     document.getElementById('printButton').addEventListener('click', function() {

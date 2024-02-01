@@ -6,12 +6,13 @@
     .nav-link {
         display: block;
         padding: 0.5rem 1rem;
-        color: rgba(0,0,0,.55);
+        color: rgba(0, 0, 0, .55);
         text-decoration: none;
-        transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
     }
 
-    .nav-link:focus, .nav-link:hover {
+    .nav-link:focus,
+    .nav-link:hover {
         color: var(--purple);
     }
 </style>
@@ -30,11 +31,17 @@ if ($_SESSION['CT'] == 1) {
                 <a class="nav-link" href="#additem"><span class="fas fa-plus"></span> Add Item</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#itemreq"><span class="fas fa-comment-dots"></span> Item Request</a>
+                <a class="nav-link" href="#itemreq"><span class="fas fa-comment-dots"></span>Cross-Chapter Request</a>
             </li>
-            <!-- <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><span class="fas fa-ban"></span> Disabled</a>
-            </li> -->
+
+
+            <li class="nav-item">
+                <a class="nav-link" href="#itemstrg"><span class="fa-solid fa-warehouse text-muted"></span> Item Location </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#itemcrit"><span class="fa-solid fa-triangle-exclamation text-muted"></span> Item Critical </a>
+            </li>
         </ul>
         <div id="content">
             <!--// *Content will be dynamically loaded here -->
@@ -48,6 +55,8 @@ if ($_SESSION['CT'] == 1) {
     $(document).ready(function() {
         // Function to load content based on the hash in the URL
         function loadContent(route) {
+
+
             $.ajax({
                 url: './includes/load_content.php', // Replace with your PHP script URL
                 method: 'POST',
