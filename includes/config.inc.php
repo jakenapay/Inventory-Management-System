@@ -4,6 +4,12 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 $database = "ims";
+
+// for hostinger
+$servername = "localhost";
+$username = "u981678995_root";
+$password = "Ilovedevconkids1";
+$database = "u981678995_ims";
 try {
     // Create a PDO connection
     $pdo = new PDO("mysql:host=$servername;dbname=$database;charset=utf8", $username, $password);
