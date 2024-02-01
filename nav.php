@@ -51,7 +51,7 @@ $totalIDs = $result['total_ids'];
 
                 <?php if ($_SESSION['CT'] == 1) { ?>
                     <li class="nav-item">
-                        <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'adminItemList.php')) ? 'active' : ''; ?>" href="adminItemList.php">Request Item</a>
+                        <a class="nav-link <?php echo (($_SESSION['active_tab'] === 'adminItemList.php')) ? 'active' : ''; ?>" href="adminItemList.php">Request</a>
                     </li>
                 <?php } ?>
 
