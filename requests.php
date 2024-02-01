@@ -36,8 +36,12 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     <!-- Javascript for Datatables.net  -->
     <script>
         $(document).ready(function() {
-            $('table').DataTable();
+            $('table').DataTable({
+        "order": [[5, "desc"]]
+    });
         });
+        
+        
 
         $(function() {
             $('[data-toggle="tooltip"]').tooltip()

@@ -710,67 +710,142 @@ try {
 
             <?php if (($_SESSION['CT'] === 1)) { ?>
                 <div class="mt-5 row justify-content-center align-items-start mb-3">
+                    <!-- Users total requests count -->
                     <div class="col-sm-12 col-md-12 col-lg-6 mb-4">
-                        <div class="border rounded p-3">
-                            <p class="chart-title">Users Total Requests Count</p>
-                            <canvas id="chapterTransactionsChart" style="width: 100%;"></canvas>
-                        </div>
+                        <form action="print_page.php" method="get" target="_blank">
+                            <div class="border rounded p-3">
+                                <div class="row d-flex justify-content-between align-items-center">
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <p class="m-0 chart-title">Chapters Total Requests Count</p>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-end">
+                                        <input type="hidden" name="print" value="<?php echo password_hash('chaptersTotalRequestCount', PASSWORD_DEFAULT); ?>">
+                                        <button type="submit" class="btn btn-sm btnGreen text-white"><i class="text-white fa-solid fa-print" style="padding-left: 0;"></i>Print</button>
+                                    </div>
+                                </div>
+                                <canvas id="chapterTransactionsChart" style="width: 100%;"></canvas>
+                            </div>
+                        </form>
                     </div>
+                    <!-- Requested items by month -->
                     <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
-                        <div class="border rounded p-3">
-                            <p class="chart-title">Requested Items by Month</p>
-                            <canvas id="lineChart1" style="width: 100%;"></canvas>
-                        </div>
+                        <form action="print_page.php" method="get" target="_blank">
+                            <div class="border rounded p-3">
+                                <div class="row d-flex justify-content-between align-items-center">
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <p class="m-0 chart-title">Requested Items by Month</p>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-end">
+                                        <input type="hidden" name="print" value="<?php echo password_hash('requestedItemsByMonth', PASSWORD_DEFAULT); ?>">
+                                        <button type="submit" class="btn btn-sm btnGreen text-white"><i class="text-white fa-solid fa-print" style="padding-left: 0;"></i>Print</button>
+                                    </div>
+                                </div>
+                                <canvas id="lineChart1" style="width: 100%;"></canvas>
+                            </div>
+                        </form>
                     </div>
+                    <!-- Most requested items -->
                     <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
-                        <div class="border rounded p-3">
-                            <p class="chart-title">Most Requested Items</p>
-                            <canvas id="barChart1" style="width: 100%;"></canvas>
-                        </div>
+                        <form action="print_page.php" method="get" target="_blank">
+                            <div class="border rounded p-3">
+                                <div class="row d-flex justify-content-between align-items-center">
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <p class="m-0 chart-title">Most Requested Items</p>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-end">
+                                        <input type="hidden" name="print" value="<?php echo password_hash('mostRequestedItems', PASSWORD_DEFAULT); ?>">
+                                        <button type="submit" class="btn btn-sm btnGreen text-white"><i class="text-white fa-solid fa-print" style="padding-left: 0;"></i>Print</button>
+                                    </div>
+                                </div>
+                                <canvas id="barChart1" style="width: 100%;"></canvas>
+                            </div>
+                        </form>
                     </div>
+                    <!-- Your top items -->
                     <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
-                        <div class="border rounded p-3">
-                            <p class="chart-title">Your Top Items</p>
-                            <canvas id="barChart2" style="width: 100%;"></canvas>
-                        </div>
+                        <form action="print_page.php" method="get" target="_blank">
+                            <div class="border rounded p-3">
+                                <div class="row d-flex justify-content-between align-items-center">
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <p class="m-0 chart-title">Your Top Items</p>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-end">
+                                        <input type="hidden" name="print" value="<?php echo password_hash('yourTopItems', PASSWORD_DEFAULT); ?>">
+                                        <button type="submit" class="btn btn-sm btnGreen text-white"><i class="text-white fa-solid fa-print" style="padding-left: 0;"></i>Print</button>
+                                    </div>
+                                </div>
+                                <canvas id="barChart2" style="width: 100%;"></canvas>
+                            </div>
+                        </form>
                     </div>
+                    <!-- Chapter total transactions -->
                     <div class="col-sm-12 col-md-12 col-lg-4 mb-4">
-                        <div class="border rounded p-3">
-                            <p class="chart-title">Chapters Total Transactions</p>
-                            <canvas id="radarChart" style="width: 100%;"></canvas>
-                        </div>
+                        <form action="print_page.php" method="get" target="_blank">
+                            <div class="border rounded p-3">
+                                <div class="row d-flex justify-content-between align-items-center">
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <p class="m-0 chart-title">Chapters Total Transactions</p>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-end">
+                                        <input type="hidden" name="print" value="<?php echo password_hash('chaptersTotalTransactions', PASSWORD_DEFAULT); ?>">
+                                        <button type="submit" class="btn btn-sm btnGreen text-white"><i class="text-white fa-solid fa-print" style="padding-left: 0;"></i>Print</button>
+                                    </div>
+                                </div>
+                                <canvas id="radarChart" style="width: 100%;"></canvas>
+                            </div>
+                        </form>
                     </div>
+                    <!-- Users total requests count -->
                     <div class="col-sm-12 col-md-12 col-lg-4 mb-4">
-                        <div class="border rounded p-3">
-                            <p class="chart-title">Users Total Requests Count</p>
-                            <canvas id="donutChart" style="width: 100%;"></canvas>
-                        </div>
+                        <form action="print_page.php" method="get" target="_blank">
+                            <div class="border rounded p-3">
+                                <div class="row d-flex justify-content-between align-items-center">
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <p class="m-0 chart-title">Users Total Requests Count</p>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-end">
+                                        <input type="hidden" name="print" value="<?php echo password_hash('usersTotalRequestsCount', PASSWORD_DEFAULT); ?>">
+                                        <button type="submit" class="btn btn-sm btnGreen text-white"><i class="text-white fa-solid fa-print" style="padding-left: 0;"></i>Print</button>
+                                    </div>
+                                </div>
+                                <canvas id="donutChart" style="width: 100%;"></canvas>
+                            </div>
+                        </form>
                     </div>
+                    <!-- Item Percentage -->
                     <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
-                        <div class="border rounded p-3">
-                            <p class="chart-title">Item Percentage</p>
-                            <canvas id="pieChart1" style="width: 100%;"></canvas>
-                        </div>
+                        <form action="print_page.php" method="get" target="_blank">
+                            <div class="border rounded p-3">
+                                <div class="row d-flex justify-content-between align-items-center">
+                                    <div class="col-12 col-md-6 col-lg-6">
+                                        <p class="m-0 chart-title">Item Percentage</p>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-6 d-flex justify-content-end">
+                                        <input type="hidden" name="print" value="<?php echo password_hash('itemPercentage', PASSWORD_DEFAULT); ?>">
+                                        <button type="submit" class="btn btn-sm btnGreen text-white"><i class="text-white fa-solid fa-print" style="padding-left: 0;"></i>Print</button>
+                                    </div>
+                                </div>
+                                <canvas id="pieChart1" style="width: 100%;"></canvas>
+                            </div>
+                        </form>
                     </div>
-
-
                 </div>
             <?php } ?>
             <?php
-    // Check if the user is an admin
-    $isAdmin = ($_SESSION['CT'] === 1);
+            // Check if the user is an admin
+            $isAdmin = ($_SESSION['CT'] === 1);
 
-    // If the user is not an admin, include landing-page.php
-    if (!$isAdmin) {
-        include 'landing-page.php';
-    }
-    ?>
+            // If the user is not an admin, include landing-page.php
+            if (!$isAdmin) {
+                include 'landing-page.php';
+            }
+            ?>
         </div>
         <br>
     </div>
 
 
-    
+
 </body>
 
 

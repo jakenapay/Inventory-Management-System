@@ -1,0 +1,19 @@
+/* #printButton {
+  display: none;
+  visibility: hidden;
+}
+
+#savePdfButton {
+  display: none;
+  visibility: hidden;
+} */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+body {
+  font-family: var(--mainFont);
+}
+
+.title {
+    font-weight: 500;
+    font-size: 1rem;
+}
