@@ -342,8 +342,6 @@
                 }
             }
 
-
-
             ?>
 
           <!DOCTYPE html>
@@ -400,6 +398,10 @@
           <body id="body">
 
               <?php $graphToPrint = isset($_GET['print']) ? $_GET['print'] : null; ?>
+<?php
+              if (password_verify('printAll', $graphToPrint)) {
+                echo 'print all';
+            }?>
               <div id="wrapper" style="padding-top: 2rem;" class="pmx-5">
                   <!-- BUTTONS -->
                   <div class="mx-5" style="padding-bottom: 2rem;">
@@ -612,7 +614,6 @@
                               <p class="text-muted text-sm">DevconKids Inventory &copy; <?php echo date("Y"); ?> | <?php echo date("F j, Y H:i:s"); ?></p>
                           </footer>
                       </div>
-
 
                   <?php } else if (password_verify('usersTotalRequestsCount', $graphToPrint)) { ?>
                       <!-- 7 -->

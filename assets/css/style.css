@@ -114,6 +114,14 @@ body.login-page {
   padding: 2px 5px;
 }
 
+.btnFloat {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+  z-index: 99;
+}
+
 .btnPurple {
   border: 1px solid var(--purple);
   background-color: var(--purple);

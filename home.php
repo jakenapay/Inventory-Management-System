@@ -709,6 +709,10 @@ try {
             </div>
 
             <?php if (($_SESSION['CT'] === 1)) { ?>
+                <form action="print_page.php" method="get" target="_blank">
+                    <input type="hidden" name="print" value="<?php echo password_hash('printAll', PASSWORD_DEFAULT); ?>">
+                    <button type="submit" class="btn btn-sm btnGreen btnFloat text-white"><i class="text-white fa-solid fa-print" style="padding-left: 0;"></i>Print All</button>
+                </form>
                 <div class="mt-5 row justify-content-center align-items-start mb-3">
                     <!-- Users total requests count -->
                     <div class="col-sm-12 col-md-12 col-lg-6 mb-4">
