@@ -398,10 +398,7 @@
           <body id="body">
 
               <?php $graphToPrint = isset($_GET['print']) ? $_GET['print'] : null; ?>
-<?php
-              if (password_verify('printAll', $graphToPrint)) {
-                echo 'print all';
-            }?>
+
               <div id="wrapper" style="padding-top: 2rem;" class="pmx-5">
                   <!-- BUTTONS -->
                   <div class="mx-5" style="padding-bottom: 2rem;">
@@ -414,34 +411,34 @@
                   <?php if (password_verify('requestedItemsByMonth', $graphToPrint)) { ?>
                       <!-- 2 -->
                       <div class="mx-5">
-                          <h4 class="title">Insights: Approved and Returned Items Over Time</h3>
-                              <p>
-                                  The month with the highest number of accepted requests is: <?php echo $highestMonthAccepted; ?><br>
-                                  The month with the highest number of returned items is: <?php echo $highestMonthReturned; ?>
-                              </p>
-                              <table border="1">
-                                  <thead>
+                          <h3 class="title">Insights: Approved and Returned Items Over Time</h3>
+                          <p>
+                              The month with the highest number of accepted requests is: <?php echo $highestMonthAccepted; ?><br>
+                              The month with the highest number of returned items is: <?php echo $highestMonthReturned; ?>
+                          </p>
+                          <table border="1">
+                              <thead>
+                                  <tr>
+                                      <th>Month</th>
+                                      <th>Accepted</th>
+                                      <th>Returned</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <?php foreach ($dataPoints as $dataPoint) : ?>
                                       <tr>
-                                          <th>Month</th>
-                                          <th>Accepted</th>
-                                          <th>Returned</th>
+                                          <td><?php echo $dataPoint['label']; ?></td>
+                                          <td><?php echo $dataPoint['y']; ?></td>
+                                          <td><?php echo $dataPoint['returned']; ?></td>
                                       </tr>
-                                  </thead>
-                                  <tbody>
-                                      <?php foreach ($dataPoints as $dataPoint) : ?>
-                                          <tr>
-                                              <td><?php echo $dataPoint['label']; ?></td>
-                                              <td><?php echo $dataPoint['y']; ?></td>
-                                              <td><?php echo $dataPoint['returned']; ?></td>
-                                          </tr>
-                                      <?php endforeach; ?>
-                                  </tbody>
-                              </table>
-                              <!-- Footer -->
-                              <footer>
-                                  <br>
-                                  <p class="text-muted text-sm">DevconKids Inventory &copy; <?php echo date("Y"); ?> | <?php echo date("F j, Y H:i:s"); ?></p>
-                              </footer>
+                                  <?php endforeach; ?>
+                              </tbody>
+                          </table>
+                          <!-- Footer -->
+                          <footer>
+                              <br>
+                              <p class="text-muted text-sm">DevconKids Inventory &copy; <?php echo date("Y"); ?> | <?php echo date("F j, Y H:i:s"); ?></p>
+                          </footer>
                       </div>
 
                   <?php } else if (password_verify('mostRequestedItems', $graphToPrint)) { ?>
@@ -667,8 +664,299 @@
                           </footer>
                       </div>
 
-                  <?php }; ?>
+                  <?php } else if (password_verify('printAll', $graphToPrint)) { ?>
+                      <div class="mx-5">
+                          <?php
+                            try {
+                                $sql = "SELECT item_name, item_quantity FROM items";
+                                $stmt = $pdo->query($sql);
+                                $itemsData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                            } catch (PDOException $e) {
+                                echo "Error: " . $e->getMessage();
+                            }
 
+                            // Function to determine remarks based on quantity
+                            function getRemarks($quantity)
+                            {
+                                if ($quantity === 0) {
+                                    return 'Out of Stock';
+                                } elseif ($quantity > 50) {
+                                    return 'High Stock';
+                                } elseif ($quantity <= 20) {
+                                    return 'Low Stock';
+                                } else {
+                                    return 'Normal Stock';
+                                }
+                            }
+
+                            // Function to determine Bootstrap text color class based on quantity
+                            function getQuantityColorClass($quantity)
+                            {
+                                if ($quantity === 0) {
+                                    return 'text-danger'; // Red text
+                                } elseif ($quantity > 50) {
+                                    return 'text-success'; // Green text
+                                } elseif ($quantity <= 20) {
+                                    return 'text-warning'; // Yellow text
+                                } else {
+                                    return 'text-success'; // Green text for normal stock
+                                }
+                            }
+                            ?>
+
+                          <!-- Display the data in the specified format -->
+                          <h3 class="title">Insights: Items Stock Overview</h3>
+                          <?php
+                            try {
+                                // Your SQL query to fetch low-stock items
+                                $sql = "SELECT item_name, item_quantity FROM items WHERE item_quantity <= 20";
+                                // Prepare and execute the query
+                                $stmt = $pdo->prepare($sql);
+                                $stmt->execute();
+
+                                // Fetch the results as an associative array
+                                $lowStockItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                // Display summary paragraph for low-stock items
+                                echo '<h3 class="title">Low Stock Items Summary</h3>';
+                                if (!empty($lowStockItems)) {
+                                    echo '<p class="text-muted">';
+                                    echo 'The following items are currently low in stock (quantity less than or equal to 20): ';
+                                    foreach ($lowStockItems as $item) {
+
+
+                                        echo '<strong class="text-capitalize">' . $item['item_name'] . '</strong>, ';
+                                    }
+                                    echo 'consider restocking these items to avoid shortages.';
+                                    echo '</p>';
+                                } else {
+                                    echo '<p>No low-stock items found.</p>';
+                                }
+                            } catch (Exception $e) {
+                                // Handle exceptions, e.g., log the error or display a user-friendly message
+                                echo '<p>Error: ' . $e->getMessage() . '</p>';
+                            }
+                            ?>
+
+
+                          <table border="1">
+                              <thead>
+                                  <tr>
+                                      <th>Item Name</th>
+                                      <th>Quantity</th>
+                                      <th>Remarks</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <?php foreach ($itemsData as $item) : ?>
+                                      <tr>
+                                          <td><?php echo $item['item_name']; ?></td>
+                                          <td class=""><?php echo $item['item_quantity']; ?></td>
+                                          <td class="<?php echo getQuantityColorClass($item['item_quantity']); ?>"><?php echo getRemarks($item['item_quantity']); ?></td>
+                                      </tr>
+                                  <?php endforeach; ?>
+                                  <!-- Summary Row -->
+                                  <tr>
+                                      <td><strong>Total</strong></td>
+                                      <td class=""><strong><?php echo array_sum(array_column($itemsData, 'item_quantity')); ?></strong></td>
+                                      <td></td> <!-- Leave the Remarks column empty for the total row -->
+                                  </tr>
+                              </tbody>
+                          </table>
+
+                          <!-- itemPercentage -->
+                          <h2 class="title mt-5">Insights: Item Percentage</h2>
+                          <p>This is the percentage of the items in terms of category</p>
+                          <?php if (is_array($itemPercentageData)) : ?>
+                              <table border="1">
+                                  <thead>
+                                      <tr>
+                                          <th>Item Category</th>
+                                          <th>No. of Items</th>
+                                          <th>Percentage</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <?php
+                                        $totalItems = 0;
+                                        $totalPercentage = 0;
+
+                                        foreach ($itemPercentageData as $item) :
+                                            $totalItems += $item['total_items'];
+                                            $totalPercentage += $item['percentage'];
+                                        ?>
+                                          <tr>
+                                              <td><?php echo $item['category_name']; ?></td>
+                                              <td><?php echo $item['total_items']; ?></td>
+                                              <td><?php echo $item['percentage']; ?>%</td>
+                                          </tr>
+                                      <?php endforeach; ?>
+                                      <!-- Total Percentage Row -->
+                                      <tr>
+                                          <td><strong>Total</strong></td>
+                                          <td><strong><?php echo $totalItems; ?></strong></td>
+                                          <td><strong><?php echo $totalPercentage; ?>%</strong></td>
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          <?php else : ?>
+                              <p>No Data Found.</p>
+                          <?php endif; ?>
+
+                          <!-- requestedItemsByMonth -->
+                          <h3 class="title mt-5">Insights: Approved and Returned Items Over Time</h3>
+                          <p>
+                              The month with the highest number of accepted requests is: <?php echo $highestMonthAccepted; ?><br>
+                              The month with the highest number of returned items is: <?php echo $highestMonthReturned; ?>
+                          </p>
+                          <table border="1">
+                              <thead>
+                                  <tr>
+                                      <th>Month</th>
+                                      <th>Accepted</th>
+                                      <th>Returned</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <?php foreach ($dataPoints as $dataPoint) : ?>
+                                      <tr>
+                                          <td><?php echo $dataPoint['label']; ?></td>
+                                          <td><?php echo $dataPoint['y']; ?></td>
+                                          <td><?php echo $dataPoint['returned']; ?></td>
+                                      </tr>
+                                  <?php endforeach; ?>
+                                  <!-- Summary Row -->
+                                  <tr>
+                                      <td><strong>Total</strong></td>
+                                      <td><strong><?php echo array_sum(array_column($dataPoints, 'y')); ?></strong></td>
+                                      <td><strong><?php echo array_sum(array_column($dataPoints, 'returned')); ?></strong></td>
+                                  </tr>
+                              </tbody>
+                          </table>
+
+                          <!-- mostRequestedItems -->
+                          <h2 class="title mt-5">Insights: Most Requested Items</h2>
+                          <?php
+                            $maxRequestsItem = null;
+                            $maxRequests = 0;
+
+                            foreach ($barChartDataPoints as $dataPoint) {
+                                // Check if the current item has more requests than the current max
+                                if ($dataPoint['y'] > $maxRequests) {
+                                    $maxRequests = $dataPoint['y'];
+                                    $maxRequestsItem = $dataPoint['label'];
+                                }
+                            }
+                            ?>
+                          <p>Items with the highest number of requests, such as "<strong><?php echo $maxRequestsItem; ?></strong>", are likely to be restocked more frequently.</p>
+                          <table border="1">
+                              <thead>
+                                  <tr>
+                                      <th>Item</th>
+                                      <th>Requests</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <?php foreach ($barChartDataPoints as $dataPoint) : ?>
+                                      <tr>
+                                          <td><?php echo $dataPoint['label']; ?></td>
+                                          <td><?php echo $dataPoint['y']; ?></td>
+                                      </tr>
+                                  <?php endforeach; ?>
+
+                                  <!-- Total Row -->
+                                  <tr>
+                                      <td><strong>Total</strong></td>
+                                      <td><strong><?php echo array_sum(array_column($barChartDataPoints, 'y')); ?></strong></td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                          <!-- yourTopItems -->
+                          <h2 class="title mt-5">Insights: Most Requested Items by You</h2>
+                          <?php
+                            $maxRequestsItemTwo = null;
+                            $maxRequestsTwo = 0;
+
+                            foreach ($barChartTwoDataPoints as $dataPoint) {
+                                // Check if the current item has more requests than the current max
+                                if ($dataPoint['y'] > $maxRequestsTwo) {
+                                    $maxRequestsTwo = $dataPoint['y'];
+                                    $maxRequestsItemTwo = $dataPoint['label'];
+                                }
+                            }
+                            ?>
+
+                          <p>Items with the highest number of requests by you, such as "<strong><?php echo $maxRequestsItemTwo; ?></strong>", are likely to be restocked more frequently.</p>
+                          <table border="1">
+                              <thead>
+                                  <tr>
+                                      <th>Item</th>
+                                      <th>Requests</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <?php foreach ($barChartTwoDataPoints as $dataPoint) : ?>
+                                      <tr>
+                                          <td><?php echo $dataPoint['label']; ?></td>
+                                          <td><?php echo $dataPoint['y']; ?></td>
+                                      </tr>
+                                  <?php endforeach; ?>
+
+                                  <!-- Total Row -->
+                                  <tr>
+                                      <td><strong>Total</strong></td>
+                                      <td><strong><?php echo array_sum(array_column($barChartTwoDataPoints, 'y')); ?></strong></td>
+                                  </tr>
+                              </tbody>
+                          </table>
+
+                          <!-- chaptersTotalTransactions -->
+                          <?php
+                            $maxTransactionsChapter = null;
+                            $maxTransactionsCount = 0;
+
+                            foreach ($chapterTotalTransactions as $dataPoint) {
+                                // Check if the current chapter has more transactions than the current max
+                                if ($dataPoint['y'] > $maxTransactionsCount) {
+                                    $maxTransactionsCount = $dataPoint['y'];
+                                    $maxTransactionsChapter = $dataPoint['label'];
+                                }
+                            }
+                            ?>
+
+                          <h2 class="title mt-5">Insights: Chapters Total Transaction Count</h2>
+                          <p>The chapter with the most total transaction count as of <?php echo date("F j, Y H:i:s"); ?> is the chapter "<strong><?php echo $maxTransactionsChapter; ?></strong>".</p>
+                          <table border="1">
+                              <thead>
+                                  <tr>
+                                      <th>Chapter/Branch</th>
+                                      <th>Total Request Count</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <?php foreach ($chapterTotalTransactions as $dataPoint) : ?>
+                                      <tr>
+                                          <td><?php echo $dataPoint['label']; ?></td>
+                                          <td><?php echo $dataPoint['y']; ?></td>
+                                      </tr>
+                                  <?php endforeach; ?>
+
+                                  <!-- Total Row -->
+                                  <tr>
+                                      <td><strong>Total</strong></td>
+                                      <td><strong><?php echo array_sum(array_column($chapterTotalTransactions, 'y')); ?></strong></td>
+                                  </tr>
+                              </tbody>
+                          </table>
+
+
+                          <!-- Footer -->
+                          <footer>
+                              <br>
+                              <p class="text-muted text-sm">DevconKids Inventory &copy; <?php echo date("Y"); ?> | <?php echo date("F j, Y H:i:s"); ?></p>
+                          </footer>
+                      </div>
+                  <?php }; ?>
               </div>
               <script>
                   function hideButtons() {
@@ -723,61 +1011,89 @@
                   }
 
 
-                  $(document).ready(function() {
-                      var printableContent;
-
-                      // Your AJAX request example
-                      $.ajax({
-                          url: 'print_page.php', // Replace with the actual PHP file or endpoint
-                          type: 'GET',
-                          dataType: 'html',
-                          success: function(response) {
-                              // Save the response for later use
-                              printableContent = response;
-                          },
-                          error: function(error) {
-                              console.error('Error:', error);
+                  // Event listener for keydown event on the document
+                  document.addEventListener('keydown', function(event) {
+                      // Check if Ctrl key and 'P' key are pressed simultaneously
+                      if (event.ctrlKey && event.key === 'p') {
+                          // Hide the button (replace 'savePdfButton' with the actual ID of your button)
+                          var savePdfButton = document.getElementById('savePdfButton');
+                          var printButton = document.getElementById('printButton');
+                          if (printButton && savePdfButton) {
+                              printButton.style.display = 'none';
+                              savePdfButton.style.display = 'none';
                           }
-                      });
-
-                      // Event listener for the print button
-                      $('#printButton').on('click', function() {
-                          // Hide both buttons
-                          $('#printButton, #savePdfButton').hide();
-
-                          // Check if printableContent is loaded
-                          if (printableContent) {
-                              // Print the saved content
-                              printContent(printableContent);
-                          } else {
-                              console.error('Printable content is not loaded yet.');
-                          }
-                      });
-
-                      // Event listener for afterprint
-                      window.addEventListener('afterprint', function() {
-                          // Remove the wrapper after printing
-                          $('#printWrapper').remove();
-
-                          // Show both buttons after printing is done
-                          $('#printButton, #savePdfButton').show();
-                      });
-
-                      // Function to print the content
-                      function printContent(content) {
-                          // Create a wrapper element
-                          var wrapper = $('<div id="printWrapper"></div>');
-
-                          // Append the content to the wrapper
-                          wrapper.html(content);
-
-                          // Append the wrapper to the body
-                          $('body').append(wrapper);
-
-                          // Trigger the print action
-                          window.print();
                       }
                   });
-              </script>
 
+                  function printPage() {
+                      window.print();
+                  }
+
+                  var printButton = document.getElementById('printButton'); // Replace 'printButton' with the actual ID of your button
+                  var savePdfButton = document.getElementById('savePdfButton'); // Replace 'printButton' with the actual ID of your button
+                  if (printButton) {
+                      printButton.addEventListener('click', function() {
+                          savePdfButton.style.display = 'none';
+                          printPage();
+                      });
+                  }
+
+
+
+                  //   $(document).ready(function() {
+                  //       var printableContent;
+
+                  //       // Your AJAX request example
+                  //       $.ajax({
+                  //           url: 'print_page.php', // Replace with the actual PHP file or endpoint
+                  //           type: 'GET',
+                  //           dataType: 'html',
+                  //           success: function(response) {
+                  //               // Save the response for later use
+                  //               printableContent = response;
+                  //           },
+                  //           error: function(error) {
+                  //               console.error('Error:', error);
+                  //           }
+                  //       });
+
+                  //       // Event listener for the print button
+                  //       $('#printButton').on('click', function() {
+                  //           // Hide both buttons
+                  //           $('#printButton, #savePdfButton').hide();
+
+                  //           // Check if printableContent is loaded
+                  //           if (printableContent) {
+                  //               // Print the saved content
+                  //               printContent(printableContent);
+                  //           } else {
+                  //               console.error('Printable content is not loaded yet.');
+                  //           }
+                  //       });
+
+                  //       // Event listener for afterprint
+                  //       window.addEventListener('afterprint', function() {
+                  //           // Remove the wrapper after printing
+                  //           $('#printWrapper').remove();
+
+                  //           // Show both buttons after printing is done
+                  //           $('#printButton, #savePdfButton').show();
+                  //       });
+
+                  //       // Function to print the content
+                  //       function printContent(content) {
+                  //           // Create a wrapper element
+                  //           var wrapper = $('<div id="printWrapper"></div>');
+
+                  //           // Append the content to the wrapper
+                  //           wrapper.html(content);
+
+                  //           // Append the wrapper to the body
+                  //           $('body').append(wrapper);
+
+                  //           // Trigger the print action
+                  //           window.print();
+                  //       }
+                  //   });
+              </script>
           </body>
