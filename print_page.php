@@ -1062,10 +1062,21 @@
                   var savePdfButton = document.getElementById('savePdfButton'); // Replace 'printButton' with the actual ID of your button
                   if (printButton) {
                       printButton.addEventListener('click', function() {
+                          // Hide buttons
                           savePdfButton.style.display = 'none';
+                          printButton.style.display = 'none';
+
+                          // Call your printPage function here
                           printPage();
+
+                          // Bring back and unset display for buttons after a delay of 5 seconds
+                          setTimeout(function() {
+                              savePdfButton.style.display = 'unset';
+                              printButton.style.display = 'unset';
+                          }, 1000);
                       });
                   }
+
 
 
 
