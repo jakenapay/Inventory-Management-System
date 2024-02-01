@@ -8,6 +8,10 @@ if (isset($_POST['route'])) {
         include '../components/additem.php';
     } elseif ($route === '#itemreq') {
         include '../components/requestitem.php';
+    } elseif ($route === '#itemstrg') {
+        include '../components/itemlocation.php';
+    }elseif($route === '#itemcrit'){
+        include '../components/criticaltable.php';
     } else {
         include '../components/itemTable.php';
     }

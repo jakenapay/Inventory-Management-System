@@ -47,9 +47,9 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             $('#myInput').trigger('focus')
         });
 
-        // setTimeout(function() {
-        //     document.getElementById("msg").style.display = "none"; // hide the element after 3 seconds
-        // }, 5000);
+        setTimeout(function() {
+            document.getElementById("msg").style.display = "none"; // hide the element after 3 seconds
+        }, 5000);
     </script>
 </head>
 
@@ -330,10 +330,9 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                         <h6>Is the User Returning This Item?</h6>
                         <p>
                             <span>
-                                <small>Note: <br>
-                                    Wait 3 Sec to Click approve Button
-                                    to Avoid Data Traffic
-                                </small>
+                                <sub>Note:
+                                    Wait 3 Sec to Click approve button
+                                </sub>
                             </span>
                         </p>
                     </div>
