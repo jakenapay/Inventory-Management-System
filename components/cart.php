@@ -130,6 +130,9 @@
     <script>
         const user_id = document.getElementById("user_id").value;
         var itemId;
+
+
+
         //displaying cart info in modal
         document.addEventListener('DOMContentLoaded', function() {
             const itemButtons = document.querySelectorAll('.item-btn');
@@ -164,8 +167,8 @@
                                 <p> 
                                 <input type="number" min="0" id="item-id" value="${itemId}" hidden>
                                     Item Description: <span id="item-desc">${description}</span> </br>
-                                    <sub> Stocks: <span id="item-stoc">${quantity}</span> </sub> <br>
-                                    <div><input  id="item-quan" type="number" min="0" max="${quantity}"></div>
+                                    <sub> Stocks: <small id="item-stoc">${quantity}</small> </sub> <br>
+                                    <input  id="item-quan" type="number"  min="1" max="${quantity}" oninput="validateInput(this)">
                                 </p>
                             </li>
                         </ul>
@@ -176,12 +179,31 @@
                 });
             });
         });
+     
+
+        function validateInput(input) {
+            // Parse the input value as a float and round down to the nearest integer
+          
+            var inputValue = Math.floor(parseFloat(input.value));
+            var itemQuantityFromPHP = parseInt(document.getElementById('item-stoc').innerText);
+            // Set the max attribute of the input based on the quantity
+            input.max = itemQuantityFromPHP;
+
+            // Validate for a positive whole number and against the specified range
+            if (isNaN(inputValue) || inputValue < 1 || inputValue > itemQuantityFromPHP) {
+                // If not valid, set the input value to the minimum allowed value (1)
+                input.value = 0;
+            } else {
+                // Set the input value to the rounded down value
+                input.value = inputValue;
+            }
+        }
+
         //checkout button - for checkout the item
         $('.checkout-btn').click(function() {
             const itemQuan = document.getElementById("item-quan").value;
             const nameItem = document.getElementById("itemName").value;
             const userem = document.getElementById("user_em").value;
-
             console.log(nameItem)
             console.log(userem)
             console.log(itemQuan)
@@ -193,12 +215,12 @@
                     itemQ: itemQuan,
                     userID: user_id,
                     nameItem: nameItem,
-                    userem : userem
+                    userem: userem
                 },
                 success: function(response) {
                     if (response) {
                         // if success lagay yung PHP MAILER DITO
-                       location.reload();
+                        location.reload();
                     }
                 }
             });

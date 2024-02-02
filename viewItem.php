@@ -206,12 +206,17 @@ if ($itemId !== null) {
         var maxAllowedValue = itemQuantityFromPHP;
 
         // Parse the input value as an integer
-        var inputValue = parseInt(input.value);
+        var inputValue = Math.floor(parseFloat(input.value));
 
         // Check if the input value exceeds the maximum allowed value
         if (inputValue > maxAllowedValue) {
             // If exceeded, set the input value to the maximum allowed value
             input.value = maxAllowedValue;
+        } else if (isNaN(inputValue) || inputValue < 1 || inputValue > itemQuantityFromPHP) {
+            input.value = 1;
+        } else {
+
+            input.value = inputValue;
         }
     }
 
@@ -219,7 +224,6 @@ if ($itemId !== null) {
         var itemQuan = document.getElementById('counter-value').value;
         var userEM = document.getElementById('userEmail').value;
         var itemName = document.getElementById('itemName').value;
-
 
         $.ajax({
             type: "POST",
@@ -330,7 +334,7 @@ if ($itemId !== null) {
             success: function(response) {
                 if (response) {
                     alert(response)
-                    location .reload();
+                    location.reload();
                 }
             }
         });

@@ -155,9 +155,9 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                 }
 
                                 // Generate a short random string of numbers with a length of 6 to 7
-                                
+
                                 $shortRandomNumberString = generateShortRandomNumberString(rand(6, 7));
-                                echo  "Generated UUID: ". $shortRandomNumberString;
+                                echo  "Generated UUID: " . $shortRandomNumberString;
                                 ?>
                                 <!-- Name -->
                                 <div class="col-md-12 py-1">
@@ -267,18 +267,40 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                     <label for="item_description">Description</label>
                                     <textarea name="item_description" id="item_description" cols="3" rows="1" class="form-control form-control-sm" placeholder="Description"></textarea>
                                 </div>
-                                <div class="mb-2 mt-2"></div>
+
 
                                 <!-- item location -->
+                                <?php
+                                $chapter = $_SESSION['CH'];
+                                $sql = "SELECT * FROM item_location WHERE chapter = $chapter ";
+
+                                $stmt = $pdo->prepare($sql);
+                                $stmt->execute();
+                                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                ?>
+
+
                                 <div class="col-md-6 py-1">
                                     <label for="item_location">Item Location</label>
-                                    <input type="text" min="0" class="form-control form-control-sm" id="item_location" name="item_location" placeholder="Item Location" required>
+                                    <select name="itemContainer" class="form-select form-select-sm" id="itemContainer" onchange="getSelectedValue()">
+                                        <option value="">Select</option>
+                                        <?php
+                                        foreach ($result as $row) { ?>
+                                            <option value="<?php echo $row['container_name'] ?>"><?php echo $row['container_name'] ?></option>
+                                        <?php }
+                                        ?>
+                                    </select>
                                 </div>
 
                                 <!-- item item_condition -->
                                 <div class="col-md-6 py-1">
                                     <label for="item_condition">Item Condition</label>
-                                    <input type="text" min="0" class="form-control form-control-sm" id="item_condition" name="item_condition" placeholder="Item Condition" required>
+                                    <select name="itemCondition" class="form-select form-select-sm" id="item_condition" onchange="getSelectedValue()">
+                                        <option value="">Select</option>
+                                        <option value="Good">Good</option>
+                                        <option value="Damage">Damage</option>
+                                    </select>
                                 </div>
 
                                 <!-- item item_cost -->

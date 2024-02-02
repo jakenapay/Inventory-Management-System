@@ -294,7 +294,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                                                     <td>
                                                     <?php
                                                     if ($row['isReturned'] == 0) {
-                                                        echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['ID'] . '" title="Returng"><i class="fa-solid fa-check"></i></a>';
+                                                        echo '<a href="http://" class="approve-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#approveModal" data-item-id="' . $row['ID'] . '" title="Return"><i class="fa-solid fa-check"></i></a>';
                                                         // echo '<a href="http://" class="decline-btn" target="" rel="noopener noreferrer" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#declineModal" data-item-id="' . $row['ID'] . '" title="Decline"><i class="fa-solid fa-x"></i></a>';
                                                     } else {
                                                     }
@@ -324,7 +324,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             <form action="includes/requests.inc.php" method="post">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title font-weight-bold" id="exampleModalLabel">Approve Requested Item</h6>
+                        <h6 class="modal-title font-weight-bold" id="exampleModalLabel">Item Return?</h6>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>

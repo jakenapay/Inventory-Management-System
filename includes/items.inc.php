@@ -23,8 +23,8 @@ if (isset($_POST['add-item-btn'])) {
     $chapter = $_POST['item_chapter'];
     $description = $_POST['item_description'];
     $cost = $_POST['item_cost'];
-    $location = $_POST['item_location'];
-    $condition = $_POST['item_condition'];
+    $location = $_POST['itemContainer'];
+    $condition = $_POST['itemCondition'];
 
     $UUID = $_POST['item_unique_id'];
 

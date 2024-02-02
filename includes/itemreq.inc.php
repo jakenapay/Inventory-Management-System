@@ -8,6 +8,11 @@ use PHPMailer\PHPMailer\Exception;
 //Load Composer's autoloader
 require '../vendor/autoload.php';
 
+require("../phpmailer/src/Exception.php");
+require("../phpmailer/src/PHPMailer.php");
+require("../phpmailer/src/SMTP.php");
+
+
 
 
 
@@ -40,7 +45,7 @@ if (isset($_POST['userID'])) {
         if ($stmt->execute()) {
             try {
 
-                $mail = new PHPMailer(true);                      
+                $mail = new PHPMailer(true);
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
