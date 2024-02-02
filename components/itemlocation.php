@@ -27,6 +27,17 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <style> 
+    .btnGreen {
+        border: 1px solid var(--green);
+        background-color: var(--green);
+        font-size: 0.9rem;
+        padding: 2px 5px;
+    }
+
+
+    </style>
+
     <!-- Headers and other attachments/CDN -->
     <script>
         $(document).ready(function() {
@@ -193,7 +204,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
             </select>
         </form>
 
-        <button id="printButton">Print Page</button>
+        <button id="printButton" class="mt-2 btn btn-sm btnGreen text-white">Print Table</button>
     </div>
 
     <table class="table" id="dTable">

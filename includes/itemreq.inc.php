@@ -43,6 +43,19 @@ if (isset($_POST['userID'])) {
         $stmt->bindValue(5, $due_date_str, PDO::PARAM_STR);
 
         if ($stmt->execute()) {
+
+            try {
+                $auditMessage = "item request";
+                $query = "INSERT INTO `audit`(`audit_user_id`, `audit _action`) VALUES (:audituser,:auditaction)";
+                $res = $pdo->prepare($query);
+                // Bind values to the placeholders
+                $res->bindParam(":audituser", $user_id);
+                $res->bindParam(":auditaction", $auditMessage);
+                $res->execute();
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+                header("location: ../items.php?m=" . $e->getMessage() . ""); // Failed
+            }
             try {
 
                 $mail = new PHPMailer(true);

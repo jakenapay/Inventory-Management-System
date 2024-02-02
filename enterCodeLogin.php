@@ -1,16 +1,20 @@
 <?php
 include 'includes/config.inc.php';
 
+//library to use phpmailer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 if (!isset($_GET['email'])) {
-    header("location: enterCode.php");
+    header("location: index.php");
     exit();
 }
 
-if (isset($_POST['enter-code-btn'])) {
+if (isset($_POST['enter-code-login-btn'])) {
 
     // check if empty user email
     if (empty($_POST['code'])) {
-        header("location: enterCode.php?m=ef");
+        header("location: enterCodeLogin.php?m=ef");
         exit();
     }
 
@@ -32,7 +36,7 @@ if (isset($_POST['enter-code-btn'])) {
             $code_db = $row['user_code'];
             $email_db = $row['user_email'];
         } else {
-            header("location: enterCode.php?m=404");
+            header("location: enterCodeLogin.php?m=404");
             exit();
         }
     } catch (PDOException $e) {
@@ -43,7 +47,21 @@ if (isset($_POST['enter-code-btn'])) {
 
     // code matching
     if ($code == $code_db) {
-        header("location: newPassword.php?email=$email&code=$code");
+        try {
+            $admin = $_SESSION['EM'];
+            $logMessage = "logged in";
+            $query = "INSERT INTO `logs`(`log_user_email`, `log_action`) VALUES (:loguser,:logaction)";
+            $res = $pdo->prepare($query);
+            // Bind values to the placeholders
+            $res->bindParam(":loguser", $admin);
+            $res->bindParam(":logaction", $logMessage);
+            $res->execute();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            header("location: ../home.php?m=" . $e->getMessage() . ""); // Failed
+        }
+
+        header("location: home.php");
         exit();
     } else {
         header("location: enterCode.php?email=$email&m=wrongcode");
@@ -87,19 +105,14 @@ if (isset($_POST['enter-code-btn'])) {
             <div class="col-md-8 col-lg-6 col-sm-12">
                 <div id="login-box">
                     <img id="image-devcon" src="https://uploads-ssl.webflow.com/6492dd5d65d1855cb14a6692/6494571343918c14057fe090_DEVCON%20Kids%20Logo%20Horizontal.png" alt="DevCon Kids Image" loading="lazy">
-                    <p class="main-title">Forgot Password \ Enter Code</p>
+                    <p class="main-title">Log in \ Enter Code</p>
                     <hr>
                     <form action="" method="post">
                         <?php include 'includes/message.inc.php'; ?>
                         <!-- <p class="labels">Code</p> -->
                         <input required class="userInput" id="code" name="code" type="text">
 
-                        <button id="enter-code-btn" class="button w-100" name="enter-code-btn" type="submit">Submit</button>
-                        <div class="text-center mt-4">
-                            <div class="labels m-0">
-                                Already have an account?<a href="index.php" id="label" class="labels-button">Login Here</a>
-                            </div>
-                        </div>
+                        <button id="enter-code-btn" class="button w-100" name="enter-code-login-btn" type="submit">Submit</button>
                     </form>
                 </div>
             </div>

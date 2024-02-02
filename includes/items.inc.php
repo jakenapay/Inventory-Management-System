@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require '../vendor/autoload.php';
+//require '../vendor/autoload.php';
 
 
 
@@ -72,7 +72,7 @@ if (isset($_POST['add-item-btn'])) {
     $image_final_name = 'IMG_' . $image_new_name;
     $folder = '../images/items/';
     move_uploaded_file($tmp_img_name, $folder . $image_final_name);
-    // $uniqueItemId = $name . "-" . substr(md5(uniqid(rand(), true)), 0, rand(3, 5));
+    $uniqueItemId = $name . "-" . substr(md5(uniqid(rand(), true)), 0, rand(3, 5));
 
     $item_barcode = "item" . time() . ".png";
     $barcodePath = "../images/barcode/" . $item_barcode;
@@ -85,7 +85,7 @@ if (isset($_POST['add-item-btn'])) {
 
 
 
-    $sql = "INSERT INTO `items` (`item_name`,`unique_item_id` ,`item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_description`, `item_image` , `item_condition`, `item_location`, `item_cost`, `barcode_img`) VALUES (:value1, :value2, :value3, :value4, :value5, :value6, :value7 , :value8 , :value9 ,:value10, :value11, :value12); ";
+    $sql = "INSERT INTO `items` (`item_name`,`unique_item_id` ,`item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_description`, `item_image` , `item_condition`, `item_location`, `item_cost`, `barcode_image`) VALUES (:value1, :value2, :value3, :value4, :value5, :value6, :value7 , :value8 , :value9 ,:value10, :value11 ,:value12); ";
     $stmt = $pdo->prepare($sql);
 
     // Bind values to the placeholders
@@ -104,6 +104,19 @@ if (isset($_POST['add-item-btn'])) {
 
     try {
         $stmt->execute();
+
+        try {
+            $auditMessage = "item add";
+            $query = "INSERT INTO `audit`(`audit_user_id`, `audit _action`) VALUES (:audituser,:auditaction)";
+            $res = $pdo->prepare($query);
+            // Bind values to the placeholders
+            $res->bindParam(":audituser", $admin);
+            $res->bindParam(":auditaction", $auditMessage);
+            $res->execute();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            header("location: ../items.php?m=" . $e->getMessage() . ""); // Failed
+        }
         header("location: ../items.php?m=ia"); // Record inserted successfully
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
@@ -197,7 +210,7 @@ if (isset($_POST['add-item-btn'])) {
         </div>
         <div class="col-md-6 py-1">
             <img src="images/items/' . $image . '" loading="lazy" class="img-thumbnail img-fluid" alt="Image">
-            <img  src="images/barcode/'. $barcodeimg .'" id="barcode" loading="lazy" class="img-thumbnail img-fluid" alt="Image">
+            <img  src="images/barcode/' . $barcodeimg . '" id="barcode" loading="lazy" class="img-thumbnail img-fluid" alt="Image">
         </div>
         ';
 

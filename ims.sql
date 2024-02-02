@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Feb 01, 2024 at 01:24 PM
--- Server version: 10.6.16-MariaDB-cll-lve
--- PHP Version: 7.2.34
+-- Host: 127.0.0.1
+-- Generation Time: Feb 02, 2024 at 11:01 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,8 +18,35 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `u981678995_ims`
+-- Database: `ims`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `audit`
+--
+
+CREATE TABLE `audit` (
+  `audit_id` int(11) NOT NULL,
+  `audit_user_id` int(11) NOT NULL,
+  `audit _action` varchar(30) NOT NULL,
+  `audit_time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `audit`
+--
+
+INSERT INTO `audit` (`audit_id`, `audit_user_id`, `audit _action`, `audit_time`) VALUES
+(2, 1, '0', '2024-02-02 04:14:33'),
+(3, 1, '0', '2024-02-02 04:15:46'),
+(4, 1, 'add item', '2024-02-02 04:16:39'),
+(5, 1, 'add item', '2024-02-02 04:17:51'),
+(6, 1, 'item add', '2024-02-02 04:32:51'),
+(7, 1, 'item restock', '2024-02-02 04:38:19'),
+(8, 1, 'item request', '2024-02-02 04:41:01'),
+(9, 1, 'item return', '2024-02-02 04:44:56');
 
 -- --------------------------------------------------------
 
@@ -78,8 +105,8 @@ CREATE TABLE `chapters` (
 --
 
 INSERT INTO `chapters` (`chapter_id`, `chapter_name`, `chapter_address`) VALUES
-(1, 'Manila', 'Blablabla, Manila, Philippines'),
-(2, 'Cagayan De Oro', 'blablabla, Cagayan De Oro, Philippines'),
+(1, 'Manila', 'Manila, Philippines'),
+(2, 'Cagayan De Oro', 'Cagayan De Oro, Philippines'),
 (3, 'Cebu', 'Cebu, Philippines'),
 (4, 'Davao', 'Davao, Philippines'),
 (5, 'Iligan', 'Iligan, Philippines'),
@@ -170,7 +197,8 @@ INSERT INTO `history` (`history_id`, `history_item_id`, `history_quantity`, `his
 (31, 32, 1, 4, 'approved', '2024-01-31 01:38:16', 1, '2024-01-31 9:38:16', '2024-02-03'),
 (32, 5, 1, 4, 'approved', '2024-02-01 10:17:02', 1, '2024-02-01 6:17:02', '2024-02-03'),
 (33, 32, 1, 4, 'approved', '2024-02-01 10:17:23', 1, '2024-02-01 6:17:23', '2024-02-05'),
-(34, 39, 1, 1, 'approved', '2024-02-01 13:18:24', 0, '', '2024-02-04');
+(34, 39, 1, 1, 'approved', '2024-02-01 13:18:24', 0, '', '2024-02-04'),
+(35, 31, 1, 1, 'approved', '2024-02-02 04:44:56', 1, '2024-02-02 12:44:56', '2024-02-05');
 
 --
 -- Triggers `history`
@@ -230,7 +258,7 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`item_id`, `unique_item_id`, `item_name`, `item_category`, `item_measure`, `item_quantity`, `item_chapter`, `item_status`, `item_description`, `item_image`, `item_condition`, `item_location`, `item_cost`, `barcode_img`, `date_acquired`) VALUES
-(1, '335733', 'Galaxy Tab A Tablet', 1, 3, 138, 3, 'enabled', '4gb 256gb color black', 'IMG_65b6ef174c0736.96179317.jpg', '', 'Container 1', '', '', '2024-02-01 10:13:28'),
+(1, '335733', 'Galaxy Tab A Tablet', 1, 3, 139, 3, 'enabled', '4gb 256gb color black', 'IMG_65b6ef174c0736.96179317.jpg', '', 'Container 1', '', '', '2024-02-02 04:38:19'),
 (2, '2792718', 'A4 Bond Paper', 3, 2, 2, 2, 'enabled', 'A4 Hardcopy', 'IMG_65b6ef565740b1.02912169.jpg', '', 'Container 2', '', '', '2024-01-31 12:21:43'),
 (4, '976760', 'ID Lace version 5', 3, 3, 27, 4, 'enabled', 'Version 5, Black & Orange', 'IMG_65b6f234396e25.48633346.jpg', '', 'Container 3', '', '', '2024-02-01 13:07:02'),
 (5, '7542994', 'Jumping wires long', 3, 1, 30, 4, 'enabled', 'Rainbow colors', 'IMG_65b6ef8adbd544.13403523.jpg', '', 'Container 4', '', '', '2024-02-01 10:17:02'),
@@ -239,7 +267,7 @@ INSERT INTO `items` (`item_id`, `unique_item_id`, `item_name`, `item_category`, 
 (27, '2485134', 'laptop with charger', 1, 3, 6, 4, 'enabled', 'laptop with charger', 'IMG_65b5cc928ee556.54555165.jpg', 'good', 'Container 1', '43,000', '', '2024-02-01 13:06:19'),
 (28, '266957', 'pull up banner', 3, 3, 11, 1, 'enabled', 'dev kids - Pull Up Banner', 'IMG_65b6187b83ef60.26505028.jpg', 'good', 'Container 2', '3000', '', '2024-02-01 13:06:52'),
 (29, '648385', 'glue gun', 3, 3, 5, 1, 'enabled', 'Glue Gun', 'IMG_65b6217c798772.96700470.jpg', 'good', 'Container 1', '120', './images/barcode/item1706434940.png', '2024-01-31 12:22:10'),
-(31, '607550', 'papers ', 2, 1, 17, 1, 'enabled', 'Papers ', 'IMG_65b62479317950.06778313.jpg', 'good', 'Container 3', '50', 'item1706435705.png', '2024-02-01 13:06:08'),
+(31, '607550', 'papers ', 2, 1, 17, 1, 'enabled', 'Papers ', 'IMG_65b62479317950.06778313.jpg', 'good', 'Container 3', '50', 'item1706435705.png', '2024-02-02 04:44:56'),
 (32, '088981', 'Memory Card', 1, 3, 13, 4, 'enabled', '128gb . SanDisk', 'IMG_65b62cd616d248.80556829.jpg', 'good', 'Container 3', '1000', 'item1706437846.png', '2024-02-01 13:06:47'),
 (33, '792957', 'camera', 1, 3, 6, 1, 'enabled', 'SONY', 'IMG_65b62db46270a0.80610743.jpg', 'good', 'Container 4', '40000', 'item1706438068.png', '2024-02-01 13:06:58'),
 (34, '172154', 'ballpen', 3, 3, 12, 4, 'enabled', 'Panda Ballpen Black', 'IMG_65b9c8e2d17a45.91293172.jpg', 'good', 'container 1', '10', 'item1706674402.png', '2024-01-31 04:15:49'),
@@ -247,7 +275,15 @@ INSERT INTO `items` (`item_id`, `unique_item_id`, `item_name`, `item_category`, 
 (36, '564921', 'Gel Ink Pen ', 3, 3, 12, 4, 'enabled', 'Gell Ink Pen - Black', 'IMG_65b9ccb183c296.66663381.jpg', 'good', 'container 4', '10', 'item1706675377.png', '2024-02-01 13:06:43'),
 (37, '9310182', 'Ipad ', 1, 3, 2, 4, 'enabled', 'IPAD - 128gb', 'IMG_65b9d3e6e3c0d9.72434804.jpg', 'good', 'container 1', '40000', 'item1706677222.png', '2024-02-01 10:13:28'),
 (38, '4035754', 'Cup', 2, 1, 1, 1, 'enabled', 'Paper Cup', 'IMG_65bb991cc0ea69.70912256.jpeg', 'Good', 'Cabinet 1', '80', 'item1706793244.png', '2024-02-01 13:14:04'),
-(39, '4035754', 'Notebook', 3, 3, 0, 1, 'enabled', 'Notebook for notes', 'IMG_65bb99fd6da422.04554679.jpeg', 'Good', 'Cabinet 1', '80', 'item1706793245.png', '2024-02-01 13:18:24');
+(39, '4035754', 'Notebook', 3, 3, 0, 1, 'enabled', 'Notebook for notes', 'IMG_65bb99fd6da422.04554679.jpeg', 'Good', 'Cabinet 1', '80', 'item1706793245.png', '2024-02-01 13:18:24'),
+(40, '235840', 'Hotdog', 1, 2, 1, 4, 'enabled', 'asdasdasdad', 'IMG_65bc6c29a412c7.85623425.jpg', 'Good', 'Container 1', '10', '', '2024-02-02 04:14:33'),
+(41, '192417', 'A4 Bond Paper', 1, 1, 1, 1, 'enabled', 'asdasdad', 'IMG_65bc6c72ab4193.11447684.jpg', 'Good', 'Container 1', '10', '', '2024-02-02 04:15:46'),
+(42, '9244178', 'Sticker', 3, 1, 1, 4, 'enabled', 'sticker', 'IMG_65bc6ca7178690.41426209.jpg', 'Good', 'Container 1', '10', '', '2024-02-02 04:16:39'),
+(43, '4299035', 'tesada', 1, 3, 23, 1, 'enabled', 'sad', 'IMG_65bc6cefa95408.34164631.jpg', 'Good', 'Container 1', '10', '', '2024-02-02 04:17:51'),
+(44, '8937920', 'test', 3, 1, 1, 1, 'enabled', 'test', 'IMG_65bc6f2c82d734.46388741.jpg', 'Good', 'Container 1', '10', '', '2024-02-02 04:27:24'),
+(45, '119777', 'test ', 1, 1, 5, 1, 'enabled', 'test', 'IMG_65bc6fa7266f70.86726896.jpg', 'Good', 'Container 2', '10', '', '2024-02-02 04:29:27'),
+(46, '497724', 'test 2', 3, 1, 29, 1, 'enabled', 'test 2', 'IMG_65bc70154e7aa8.51787622.jpg', 'Good', 'Container 2', '10', '', '2024-02-02 04:31:17'),
+(47, '400773', 'test ', 2, 1, 1, 1, 'enabled', 'test1', 'IMG_65bc707331b088.59568147.jpg', 'Good', 'Container 2', '10', '', '2024-02-02 04:32:51');
 
 -- --------------------------------------------------------
 
@@ -355,10 +391,22 @@ INSERT INTO `item_location` (`location_id`, `location_name`, `container_name`, `
 
 CREATE TABLE `logs` (
   `log_id` int(11) NOT NULL,
-  `log_user` int(11) NOT NULL,
-  `log_type` enum('modify','return','request','add','') NOT NULL,
-  `log_date` date NOT NULL
+  `log_user_email` varchar(255) NOT NULL,
+  `log_action` varchar(255) NOT NULL,
+  `log_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `logs`
+--
+
+INSERT INTO `logs` (`log_id`, `log_user_email`, `log_action`, `log_date`) VALUES
+(1, 'jakemantesnapay@gmail.com', 'logged in', '2024-02-02 05:00:54'),
+(2, 'jakemantesnapay@gmail.com', 'logged out', '2024-02-02 05:02:17'),
+(3, 'jakemantesnapay@gmail.com', 'logged in', '2024-02-02 05:02:20'),
+(4, 'jakemantesnapay@gmail.com', 'logged out', '2024-02-02 05:02:29'),
+(5, 'jakemantesnapay@gmail.com', 'logged out', '2024-02-02 05:21:48'),
+(6, 'deguzmanjayar9@gmail.com', 'logged out', '2024-02-02 05:23:33');
 
 -- --------------------------------------------------------
 
@@ -385,9 +433,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_firstname`, `user_lastname`, `user_email`, `user_password`, `user_category`, `user_chapter`, `user_image`, `user_status`, `user_position`, `user_code`) VALUES
-(1, 'Jake', 'Maangas', 'jakemantesnapay@gmail.com', '$2y$10$RIQWqDTz88hS713D1XbPIOAiicKGkmTpUr4FJnMSquvh4SbuGUj5S', 1, 1, 'IMG_65bb96ef251dc0.19518553.jpg', 'active', 'DEVCON Manila Main Admin', 0),
-(2, 'john moren', 'dinela', 'jmdinela@gmail.com', '$2y$10$1o24hhJ6ibvCFNhaoD9jaeQW9PS59s7lDV3f2MtS3Uv3bLNhLqtJm', 0, 2, 'IMG_6562cc23d0aa35.57042786.jpg', 'active', '', 0),
-(4, 'jay Ar', 'De Guzman', 'deguzmanjayar9@gmail.com', '$2y$10$j7dAlO.jJHJN4oScGaEZYeiP/TGC2.qOZoW/70ERoDWCYB7qugtw.', 1, 4, 'IMG_65b900f5db5930.59217230.png', 'active', '', 3293),
+(1, 'Jake', 'Maangas', 'jakemantesnapay@gmail.com', '$2y$10$RIQWqDTz88hS713D1XbPIOAiicKGkmTpUr4FJnMSquvh4SbuGUj5S', 1, 1, 'IMG_65bb96ef251dc0.19518553.jpg', 'active', 'DEVCON Manila Main Admin', 8348),
+(2, 'john moren', 'dinela', 'jmdinela@gmail.com', '$2y$10$1o24hhJ6ibvCFNhaoD9jaeQW9PS59s7lDV3f2MtS3Uv3bLNhLqtJm', 0, 2, 'IMG_6562cc23d0aa35.57042786.jpg', 'active', '', 9062),
+(4, 'jay Ar', 'De Guzman', 'deguzmanjayar9@gmail.com', '$2y$10$j7dAlO.jJHJN4oScGaEZYeiP/TGC2.qOZoW/70ERoDWCYB7qugtw.', 0, 4, 'IMG_65b900f5db5930.59217230.png', 'active', '', 3477),
 (5, 'Lee Angelo', 'Mollo', 'lamollo@gmail.com', '$2y$10$pzhfiX1L7fC723q5n6/xReHRBUrVLbdy2yuiOUsNG6Ay9Wjvr21Ey', 0, 4, 'IMG_6562d4d53d4b06.24348986.jpg', 'active', '', 0),
 (6, 'John Moren', 'Dinela', 'jmdnl@gmail.com', '$2y$10$BJxuBj104cTfQrnc1qZXFO/Qq6ZcjfKoZ24pZLYFOIQkLAI8s0hP.', 0, 1, 'defaultProfile.jpg', 'inactive', '', 0),
 (7, 'Jay Ar', 'De Guzman', 'jdg@gmail.com', '$2y$10$6EzlUhJvm1W3ZhSHd7BVqueSlkDXd56SVDZ1LKrDOhvlvcDS4V0EC', 0, 1, 'defaultProfile.jpg', 'active', '', 0);
@@ -395,6 +443,13 @@ INSERT INTO `users` (`user_id`, `user_firstname`, `user_lastname`, `user_email`,
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `audit`
+--
+ALTER TABLE `audit`
+  ADD PRIMARY KEY (`audit_id`),
+  ADD KEY `audit_user_id` (`audit_user_id`);
 
 --
 -- Indexes for table `category`
@@ -453,8 +508,7 @@ ALTER TABLE `item_location`
 -- Indexes for table `logs`
 --
 ALTER TABLE `logs`
-  ADD PRIMARY KEY (`log_id`),
-  ADD KEY `log_user` (`log_user`);
+  ADD PRIMARY KEY (`log_id`);
 
 --
 -- Indexes for table `users`
@@ -467,6 +521,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `audit`
+--
+ALTER TABLE `audit`
+  MODIFY `audit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -490,19 +550,19 @@ ALTER TABLE `ctochistory`
 -- AUTO_INCREMENT for table `history`
 --
 ALTER TABLE `history`
-  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `history_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `items_category`
 --
 ALTER TABLE `items_category`
-  MODIFY `item_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `item_category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `items_unit_of_measure`
@@ -520,7 +580,7 @@ ALTER TABLE `item_location`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -531,6 +591,12 @@ ALTER TABLE `users`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `audit`
+--
+ALTER TABLE `audit`
+  ADD CONSTRAINT `audit_ibfk_1` FOREIGN KEY (`audit_user_id`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `history`
@@ -546,12 +612,6 @@ ALTER TABLE `items`
   ADD CONSTRAINT `items_ibfk_1` FOREIGN KEY (`item_category`) REFERENCES `items_category` (`item_category_id`),
   ADD CONSTRAINT `items_ibfk_2` FOREIGN KEY (`item_measure`) REFERENCES `items_unit_of_measure` (`item_uom_id`),
   ADD CONSTRAINT `items_ibfk_3` FOREIGN KEY (`item_chapter`) REFERENCES `chapters` (`chapter_id`);
-
---
--- Constraints for table `logs`
---
-ALTER TABLE `logs`
-  ADD CONSTRAINT `logs_ibfk_1` FOREIGN KEY (`log_user`) REFERENCES `users` (`user_id`);
 
 --
 -- Constraints for table `users`

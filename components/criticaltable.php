@@ -79,7 +79,7 @@
                                 <tr>
                                     <th>UUID</th>
                                     <th>Item Name</th>
-                                    <th>Location Name</th>
+                                    <th>Quantity</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -95,7 +95,7 @@
                                     // Loop through the results
                                     foreach ($result as $row) { ?>
                                         <tr>
-                                             <td class="text-capitalize"><?php echo $row['item_id']; ?></td>
+                                             <td class="text-capitalize"><?php echo $row['unique_item_id']; ?></td>
                                             <td class="text-capitalize"><?php echo $row['item_name']; ?></td>
                                             <td class="text-capitalize"><?php echo $row['item_quantity']; ?></td> 
                                         </tr>

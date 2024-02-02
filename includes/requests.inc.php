@@ -32,7 +32,20 @@ if(isset($_POST['approve-request-item-btn'])) { // For approving a request
         $stmt->bindParam(':requestId', $requestId, PDO::PARAM_INT);
         $stmt->bindParam(':dateReturn', $formattedTimestamp, PDO::PARAM_STR);
         // Execute the statement
-        $stmt->execute();
+        if($stmt->execute()){
+            try {
+                $auditMessage = "item return";
+                $query = "INSERT INTO `audit`(`audit_user_id`, `audit _action`) VALUES (:audituser,:auditaction)";
+                $res = $pdo->prepare($query);
+                // Bind values to the placeholders
+                $res->bindParam(":audituser", $userId);
+                $res->bindParam(":auditaction", $auditMessage);
+                $res->execute();
+            } catch (PDOException $e) {
+                echo "Error: " . $e->getMessage();
+                header("location: ../items.php?m=" . $e->getMessage() . ""); // Failed
+            }
+        }
 
         // Updated successfully
         header("location: ../requests.php?m=us");
