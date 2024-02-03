@@ -15,7 +15,9 @@ if (isset($_POST['route'])) {
     }elseif($route === '#itemcateg'){
         include '../components/itemcategory.php';
     }elseif($route === '#chapters'){
-        include '../components/chapters.php';    
+        include '../components/chapters.php';
+    }elseif($route === '#audit'){
+        include '../components/audit.php';
     } else {
         include '../components/itemTable.php';
     }

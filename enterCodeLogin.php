@@ -1,6 +1,6 @@
 <?php
 include 'includes/config.inc.php';
-
+session_start();
 //library to use phpmailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
@@ -48,9 +48,9 @@ if (isset($_POST['enter-code-login-btn'])) {
     // code matching
     if ($code == $code_db) {
         try {
-            $admin = $_SESSION['EM'];
+            $admin = $_SESSION['ID'];
             $logMessage = "logged in";
-            $query = "INSERT INTO `logs`(`log_user_email`, `log_action`) VALUES (:loguser,:logaction)";
+            $query = "INSERT INTO `audit`(`audit_user_id`, `audit _action`) VALUES (:loguser,:logaction)";
             $res = $pdo->prepare($query);
             // Bind values to the placeholders
             $res->bindParam(":loguser", $admin);
@@ -58,7 +58,7 @@ if (isset($_POST['enter-code-login-btn'])) {
             $res->execute();
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
-            header("location: ../home.php?m=" . $e->getMessage() . ""); // Failed
+            header("location: index.php?m=" . $e->getMessage() . ""); // Failed
         }
 
         header("location: home.php");
