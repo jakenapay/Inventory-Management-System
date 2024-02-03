@@ -4,6 +4,7 @@ include 'includes/config.inc.php';
 //library to use phpmailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+session_start();
 
 if (!isset($_GET['email'])) {
     header("location: index.php");
@@ -108,7 +109,10 @@ if (isset($_POST['enter-code-login-btn'])) {
                     <p class="main-title">Log in \ Enter Code</p>
                     <hr>
                     <form action="" method="post">
-                        <?php include 'includes/message.inc.php'; ?>
+                        <?php include 'includes/message.inc.php';
+                            echo $_SESSION['ID'];
+
+                        ?>
                         <!-- <p class="labels">Code</p> -->
                         <input required class="userInput" id="code" name="code" type="text">
 

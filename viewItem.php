@@ -11,6 +11,8 @@ if (!isset($_SESSION['ID']) and ($_SESSION['ID'] == '')) {
 
 // To determine which is active page in nav bar
 $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
+
+
 ?>
 
 

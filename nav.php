@@ -1,5 +1,6 @@
 <?php
 // Get the user's image to show in the navigation bar
+
 try {
     $stmt = $pdo->prepare("SELECT user_image FROM users WHERE user_id = :id");
     $stmt->bindParam(':id', $_SESSION['ID'], PDO::PARAM_INT);
