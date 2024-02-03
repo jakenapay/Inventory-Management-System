@@ -50,6 +50,10 @@ if ($_SESSION['CT'] == 1) {
             <li class="nav-item">
                 <a class="nav-link" href="#chapters"><span class="fa-solid fa-city text-muted"></span> Chapters </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#audit"><span class="fa-solid fa-book text-muted"></span> Audit </a>
+            </li>
         </ul>
         <div id="content">
             <!--// *Content will be dynamically loaded here -->

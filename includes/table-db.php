@@ -47,7 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["tableData"])) {
                 $update_query->execute();
 
                 try {
-
                     $admin = $_SESSION['ID'];
                     $auditMessage = "item restock";
                     $query = "INSERT INTO `audit`(`audit_user_id`, `audit _action`) VALUES (:audituser,:auditaction)";

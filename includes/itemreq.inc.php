@@ -54,7 +54,7 @@ if (isset($_POST['userID'])) {
                 $res->execute();
             } catch (PDOException $e) {
                 echo "Error: " . $e->getMessage();
-                header("location: ../items.php?m=" . $e->getMessage() . ""); // Failed
+                header("location: ../items.php#itemreq?m=" . $e->getMessage() . ""); // Failed
             }
             try {
 
