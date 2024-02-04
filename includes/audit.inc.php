@@ -21,10 +21,10 @@ if (isset($_POST['fromDate'])) {
         echo '
     <thead>
         <tr>
-            <th scope="col">audit_id</th>
-            <th scope="col">user_id</th>
-            <th scope="col">action</th>
-            <th scope="col">datetime</th>
+            <th scope="col">Audit ID</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Action</th>
+            <th scope="col">Date & Time</th>
           
         </tr>
     </thead>

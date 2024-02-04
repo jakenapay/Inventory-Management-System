@@ -121,9 +121,9 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                         <input type="hidden" id="session_chapter" value="<?php echo $_SESSION['CH'] ?>">
                         <input type="date" name="from_date" id="from_date">
                         <input type="date" name="to_date" id="to_date">
-                        <button class="btn btn-success btn-sm bn_reset">Reset</button>
-                        <button class="btn btn-success btn-sm bn_generate">Generate</button>
-                        <button class="btn btn-success btn-sm" id="printAudit">Print</button>
+                        <button class="btn btnGreen btn-success btn-sm bn_reset">Reset</button>
+                        <button class="btn btnGreen btn-success btn-sm bn_generate">Generate</button>
+                        <button class="btn btnGreen btn-success btn-sm" id="printAudit">Print</button>
                     </div>
 
 
@@ -177,7 +177,7 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
         // Open a new window and print the table content
         var printWindow = window.open('', '_blank');
         printWindow.document.write('<html><head><title>Print</title></head><body>');
-        printWindow.document.write('<style>table { border-collapse: collapse; width: 100%; } th, td { border: 1px solid #dddddd; text-align: left; padding: 8px; } th { background-color: #f2f2f2; }</style>');
+        printWindow.document.write('<style>table { border-collapse: collapse; width: 100%; } th, td { border: 1px solid #dddddd; text-align: left; padding: 8px; } th { background-color: #f2f2f2; } table{ text-transform: capitalize; }</style>');
         printWindow.document.write(document.getElementById("tblData").outerHTML);
         printWindow.document.write('</body></html>');
         printWindow.document.close();
