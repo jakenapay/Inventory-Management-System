@@ -1,5 +1,9 @@
 <?php
 include 'includes/config.inc.php';
+
+
+echo session_name();
+
 session_start();
 // Check if there's an id, if it has, then it's logged in
 // If there's no id, head back to login page
@@ -11,7 +15,6 @@ if (!isset($_SESSION['ID']) and ($_SESSION['ID'] == '')) {
 // To determine which is active page in nav bar
 $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 
-echo "Session Name: " . session_name();
 ?>
 
 <!-- FOR CHARTS -->

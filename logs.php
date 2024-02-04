@@ -31,10 +31,9 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 
 <body>
 
-    <?php include 'nav.php';?>
+    <?php include 'nav.php'; ?>
 
     <div id="wrapper">
-        <div class="section"></div>
     </div>
 
     <!-- Optional JavaScript -->
@@ -46,3 +45,32 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
 </body>
 
 </html>
+
+<script>
+    $('.bn_generate').click(function() {
+
+        const fromDate = document.getElementById('from_date').value;
+        const toDate = document.getElementById('to_date').value;
+
+        const chapter = document.getElementById('session_chapter').value;
+        console.log(chapter);
+        $.ajax({
+            type: "post",
+            url: "./includes/audit.inc.php",
+            data: {
+                fromDate: fromDate,
+                toDate: toDate,
+                chapter: chapter
+            },
+            dataType: "dataType",
+            success: function(response) {
+
+                if (response) {
+                    $('#tbtData').html(response);
+                }
+
+            }
+        });
+
+    })
+</script>
