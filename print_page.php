@@ -692,6 +692,53 @@
                           </footer>
                       </div>
 
+                  <?php } else if (password_verify('printAudit', $graphToPrint)) { ?>
+                      <!-- 7 -->
+                      <div class="mx-5">
+                          <h2 class="title">Insights: Audits</h2>
+                          <!-- <p class="summary"></p> -->
+                          <table class="border-1">
+                              <thead>
+                                  <tr>
+                                      <th>Audit ID</th>
+                                      <th>Name</th>
+                                      <th>Action</th>
+                                      <th>Date & Time</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <!-- SELECT ALL CHAPTERS -->
+                                  <?php
+                                    $sql = "SELECT a.audit_id, CONCAT(u.user_firstname, ' ', u.user_lastname) AS user_name, a.* FROM `audit` AS a INNER JOIN users AS u ON u.user_id = a.audit_user_id;";
+                                    try {
+                                        $stmt = $pdo->prepare($sql);
+                                        $stmt->execute();
+                                        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                                        // Loop through the results
+                                        foreach ($result as $row) { ?>
+                                          <tr>
+                                              <td class="text-capitalize"><?php echo $row['audit_id']; ?></td>
+                                              <td class="text-capitalize"><?php echo $row['user_name']; ?></td>
+                                              <td class="text-capitalize"><?php echo $row['audit _action']; ?></td>
+                                              <td class="text-capitalize"><?php echo $row['audit_time']; ?></td>
+                                          </tr>
+                                  <?php }
+                                    } catch (PDOException $e) {
+                                        echo "Error: " . $e->getMessage();
+                                        header("location: ../items.php#audit?m=" . $e->getMessage() . ""); // Failed
+                                        exit();
+                                    }
+                                    ?>
+                              </tbody>
+                          </table>
+
+                          <!-- Footer -->
+                          <footer>
+                              <br>
+                              <p class="text-muted text-sm">DevconKids Inventory &copy; <?php echo date("Y"); ?> | <?php echo date("F j, Y H:i:s"); ?></p>
+                          </footer>
+                      </div>
                   <?php } else if (password_verify('printAll', $graphToPrint)) { ?>
                       <div class="mx-5">
                           <?php
