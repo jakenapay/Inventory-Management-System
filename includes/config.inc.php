@@ -20,7 +20,29 @@ try {
     // TIMEZONE IS SET FOR MANILA PH
     date_default_timezone_set("Asia/Manila");
     $now = date("Y-m-d H:i:s");
+    
 } catch (PDOException $e) {
     // Handle connection errors
     die("Connection failed: " . $e->getMessage());
+}
+
+// GET THE SUBDOMAIN IF ADMIN OR USER
+if (!function_exists('getSubdomain')) {
+    function getSubdomain()
+    {
+        $host = $_SERVER['HTTP_HOST'];
+
+        // Split the host into parts
+        $parts = explode('.', $host);
+
+        // Check if there is a subdomain (at least two parts)
+        if (count($parts) >= 3) {
+            // Extract the subdomain
+            $subdomain = $parts[0];
+            return $subdomain;
+        } else {
+            // No subdomain
+            return '';
+        }
+    }
 }

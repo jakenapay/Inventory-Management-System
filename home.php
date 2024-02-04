@@ -1,8 +1,10 @@
 <?php
 include 'includes/config.inc.php';
+// Get the subdomain from the current URL
+// Display the subdomain
+// $subdomain = getSubdomain();
+// echo $subdomain;
 
-
-echo session_name();
 
 session_start();
 // Check if there's an id, if it has, then it's logged in
@@ -11,10 +13,8 @@ if (!isset($_SESSION['ID']) and ($_SESSION['ID'] == '')) {
     header("location: index.php");
     exit();
 }
-
 // To determine which is active page in nav bar
 $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
-
 ?>
 
 <!-- FOR CHARTS -->
