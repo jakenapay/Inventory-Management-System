@@ -66,6 +66,16 @@ $_SESSION['active_tab'] = basename($_SERVER['SCRIPT_FILENAME']);
                     <div class="col-12 col-md-6 col-6">
                         <h3 class="m-0 font-weight-light title-chapter">Audits</h3>
                     </div>
+                    <div class="col-12 col-md-6 col-6">
+                        <div class="nav-item nav-link d-flex justify-content-end">
+                            <form action="print_page.php" method="get" target="_blank">
+                                <input type="hidden" name="print" value="<?php echo password_hash('printAudit', PASSWORD_DEFAULT); ?>">
+                                <button type="submit" class="btn btn-success btnGreen btn-sm">
+                                    <i class="fa-solid fa-print addIcon"></i>Print Audits
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <hr>
                 <div class="table-responsive">
